@@ -2,7 +2,7 @@
 Contributors: DerN3rd (WMS N@W)
 Donate link: https://n3rds.work/spendenaktionen/unterstuetze-unsere-psource-free-werke/
 Tags: newsletter
-Requires at least: 3.7
+Requires at least: 4.7
 Tested up to: 5.6
 Stable tag: 2.8.5
 Requires PHP: 7.0
