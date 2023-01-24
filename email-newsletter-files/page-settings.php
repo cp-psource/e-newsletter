@@ -93,7 +93,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <?php _e( 'Vorschaumail an:', 'email-newsletter' ) ?>
                                 </th>
                                 <td>
-                                    <input type="text" class="regular-text" name="settings[preview_email]" value="<?php echo isset($this->settings['preview_email']) ? esc_attr($this->settings['preview_email']) : $this->settings['from_email'];?>" />
+                                    <?php 
+                                    $preview_email = filter_input(INPUT_POST, 'settings[preview_email]', FILTER_VALIDATE_EMAIL);
+                                    if (!$preview_email) {
+                                        $preview_email = $this->settings['from_email'];
+                                    }
+                                    ?>
+                                    <input type="text" class="regular-text" name="settings[preview_email]" value="<?php echo esc_attr($preview_email);?>" />
                                     <span class="description"><?php _e( 'Standard-E-Mail-Adresse, an die Vorschauen gesendet werden sollen.', 'email-newsletter' ) ?></span>
                                 </td>
                             </tr>
@@ -169,7 +175,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                            <tr valign="top">
                                 <th scope="row">
-                                    <?php _e( 'WordPress-Benutzerregistrierung:', 'email-newsletter' ) ?>
+                                    <?php _e( 'ClassicPress-Benutzerregistrierung:', 'email-newsletter' ) ?>
                                 </th>
                                 <td>
                                     <?php
@@ -180,7 +186,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         <option value="1"<?php selected( $this->settings['wp_user_register_subscribe'], 1); ?>><?php _e( 'Abonnieren', 'email-newsletter' ) ?></option>
                                         <option value="0"<?php selected( $this->settings['wp_user_register_subscribe'], 0); ?>><?php _e( 'Deaktivieren', 'email-newsletter' ) ?></option>
                                     </select>
-                                    <span class="description"><?php _e( 'Wähle ob Benutzer, die sich (mit WordPress) auf Deiner Website registrieren, automatisch den Newsletter abonnieren.', 'email-newsletter' ) ?></span>
+                                    <span class="description"><?php _e( 'Wähle ob Benutzer, die sich (mit ClassicPress) auf Deiner Website registrieren, automatisch den Newsletter abonnieren.', 'email-newsletter' ) ?></span>
                                 </td>
                             </tr>
 
@@ -230,7 +236,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         <label id="tip_wpmail">
                                             <input type="radio" name="settings[outbound_type]" value="wpmail" class="email_out_type" <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'wpmail') ? 'checked="checked"' : '';?> /><?php echo _e( 'WP Mail', 'email-newsletter' );?>
                                         </label>
-                                        <?php $tips->bind_tip(__( "Diese Methode verwendet Standardfunktionen für WordPress-E-Mails zum Senden von Newslettern und E-Mails. Du kannst andere Plugins zum Senden von E-Mails verwenden, aber möglicherweise funktioniert die Absprungprüfung nicht mehr.", 'email-newsletter' ), '#tip_wpmail'); ?>
+                                        <?php $tips->bind_tip(__( "Diese Methode verwendet Standardfunktionen für ClassicPress-E-Mails zum Senden von Newslettern und E-Mails. Du kannst andere Plugins zum Senden von E-Mails verwenden, aber möglicherweise funktioniert die Absprungprüfung nicht mehr.", 'email-newsletter' ), '#tip_wpmail'); ?>
  
                                     </td>
                                 </tr>
@@ -493,7 +499,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </ul>
                             <p><?php _e('Der wie folgt konfigurierte Shortcode würde beispielsweise die Kontrollkästchen für die Gruppenauswahl ausblenden, den Benutzer automatisch Gruppen mit den angegebenen IDs abonnieren und nach dem Namen des Besuchers fragen.'); ?>
                                 <p><code>[enewsletter_subscribe show_name="1" show_groups="0" subscribe_to_groups="1,5"]</code></p>
-                            <p><?php _e('Verwende den Shortcode, um das Abonnementformular zu einem Post- oder Seiteninhalt hinzuzufügen oder es sogar in benutzerdefinierte Seitenvorlagen mit zu integrieren'); ?> <a href="https://developer.wordpress.org/reference/functions/do_shortcode/" target="_blank">Mehr zur do_shortcode Funktion</a>.</p>
+                            <p><?php _e('Verwende den Shortcode, um das Abonnementformular zu einem Post- oder Seiteninhalt hinzuzufügen oder es sogar in benutzerdefinierte Seitenvorlagen mit zu integrieren'); ?> <a href="https://developer.ClassicPress.org/reference/functions/do_shortcode/" target="_blank">Mehr zur do_shortcode Funktion</a>.</p>
                             <p><?php _e('Verwende den folgenden Shortcode, um die Bestätigungsmeldung <em>abonniert</em> auf der Seite anzuzeigen, die unter <strong>Allgemeine Einstellungen -> ID für abonnierte Seiten</strong> definiert ist.'); ?></p>
                             <p><code>[enewsletter_subscribe_message]</code></p>
                             <p><?php _e('Verwende den folgenden Shortcode, um die Bestätigungsmeldung <em>abgemeldet</em> auf der Seite anzuzeigen, die unter <strong>Allgemeine Einstellungen -> Seiten-ID abbestellen</strong> definiert ist.'); ?></p>
@@ -503,7 +509,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <p><?php _e('Wie Du Hilfe und Support erhältst, erfährst Du hier.','email-newsletter'); ?></p>
                         <div class="shortcode-help">
                             <p><?php _e('Auf unserer PS-eNewsletter Projektseite findest Du alle Hilfreichen Ressourcen.'); ?></p>
-                            <iframe style="width: 100%; min-height:600px" src="https://n3rds.work/piestingtal_source/psenewsletter-wordpress-newsletter-ohne-drittanbieter/" title="PS-eNewsletter Projektseite"></iframe>
+                            <iframe style="width: 100%; min-height:600px" src="https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-ohne-drittanbieter/" title="PS-eNewsletter Projektseite"></iframe>
                         </div>
                     </div>
                     <?php if ( ! isset( $mode ) || "install" != $mode ): ?>

@@ -1,8 +1,7 @@
 <?php
 class Builder_TinyMCE_Control extends WP_Customize_Control {
 	public $type = 'tinymce';
-	
-	
+
 	public function render_content() {
 		global $enewsletter_tinymce;
 		?>

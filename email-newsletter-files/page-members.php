@@ -71,7 +71,7 @@
     <div class="wrap">
         <h2><?php _e( 'Abonnenten', 'email-newsletter' ) ?></h2>
         <p><?php _e( 'Auf dieser Seite verwaltest Du Newsletter Abonnenten.', 'email-newsletter' ) ?></p>
-        <p><?php _e( 'Hinweis: Änderungen an Abonnenten werden nicht mit WordPress-Benutzern synchronisiert, sondern umgekehrt.', 'email-newsletter' ) ?></p>
+        <p><?php _e( 'Hinweis: Änderungen an Abonnenten werden nicht mit ClassicPress-Benutzern synchronisiert, sondern umgekehrt.', 'email-newsletter' ) ?></p>
 
         <p class="slide">
             <?php if(current_user_can('add_newsletter_member') || current_user_can('import_newsletter_members')) { ?>

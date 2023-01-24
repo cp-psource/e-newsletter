@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: PS-eNewsletter
-Plugin URI: https://n3rds.work/piestingtal_source/psenewsletter-wordpress-newsletter-ohne-drittanbieter/
-Description: Das ultimative Newsletter Plugin für WordPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem WordPress-Dashboard managen und versenden.
+Plugin URI: https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-ohne-drittanbieter/
+Description: Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.
 Natürlich mit der großartigen Piestingtal.Source Kompatibilität.
 Version: 2.8.5
 Text Domain: email-newsletter
@@ -10,7 +10,7 @@ Author: Webmasterservice N3rds@Work,
 Author URI: https://n3rds.work
 
 
-Copyright 2018-2022 WMS N3rds@Work (https://n3rds.work), Corecode von WPMUDEV (eNewsletter)
+Copyright 2018-2023 WMS N3rds@Work (https://n3rds.work), Corecode von WPMUDEV (eNewsletter)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by

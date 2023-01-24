@@ -929,7 +929,7 @@ class Email_Newsletter_Builder  {
 	}
 
 	// Anything that isnt a text input has to have its own function because
-	// WordPress only gives us the $default value to match in the filter
+	// ClassicPress only gives us the $default value to match in the filter
 	function get_builder_template($default) {
 		return $this->get_customizer_theme();
 	}
