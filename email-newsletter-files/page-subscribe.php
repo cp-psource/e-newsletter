@@ -1,24 +1,25 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
-}?>
+}
+?>
 <?php
     $current_user = wp_get_current_user();
 
     $settings = $this->settings;
 
-    $member_id = $this->get_members_by_wp_user_id( $current_user->data->ID );
+    $member = $this->get_members_by_wp_user_id( $current_user->data->ID );
+    $member_id = isset($member['member_id']) ? $member['member_id'] : null;
 
-    $member_data = $this->get_member( $member_id );
-
-    if ( "" != $member_data['unsubscribe_code'] ) {
-        $groups = $this->get_groups();
-        $member_groups = $this->get_memeber_groups( $member_id );
-        if ( ! is_array( $member_groups ) )
-            $member_groups = array();
-
+    if(!is_null($member_id)) {
+        $member_data = $this->get_member( $member_id );
+        if ( "" != $member_data['unsubscribe_code'] ) {
+            $groups = $this->get_groups();
+            $member_groups = $this->get_memeber_groups( $member_id );
+            if ( ! is_array( $member_groups ) )
+                $member_groups = array();
+        }
     }
-
     $only_public = (isset($settings['non_public_group_access']) && $settings['non_public_group_access'] == 'nobody') ? 1 : 0;
     $groups = $this->get_groups($only_public);
     $groups_echo = array();
@@ -33,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <h2><?php _e( 'Meine Newsletter Abonnements', 'email-newsletter' ) ?></h2>
         <p><?php _e( 'Auf dieser Seite kannst Du Newsletter abonnieren oder abbestellen', 'email-newsletter' ) ?></p>
         <?php
-        if ( "" != $member_data['unsubscribe_code']) {
+        if ( !is_null($member_id) && "" != $member_data['unsubscribe_code'] ) {
         ?>
         <form action="" method="post" name="subscribes_form" id="subscribes_form" >
             <input type="hidden" name="newsletter_action" id="newsletter_action" value="" />
