@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PS-eNewsletter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 14:04+0000\n"
+"POT-Creation-Date: 2023-01-24 14:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: DerN3rd <webmaster@n3rds@work>\n"
 "Language-Team: Deutsch\n"
@@ -18,47 +18,60 @@ msgstr ""
 
 #: email-newsletter-files/page-settings.php:275
 #: email-newsletter-files/page-settings.php:402
+msgctxt ""
+"(For security reasons, the saved password length does not match the preview.)"
 msgid ""
 " (Aus Sicherheitsgründen stimmt die gespeicherte Kennwortlänge nicht mit der "
 "Vorschau überein)"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:325
+msgctxt "(Disabled - Do not use CRON to send email)"
 msgid "('Deaktiviert' - Verwende CRON nicht zum Senden von E-Mails)"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:335
+msgctxt "(0 or blank for unlimited)"
 msgid "(0 oder leer für unlimitiert)"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:268
+msgctxt "(leave blank for none)"
 msgid "(leer lassen für keinen)"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:275
+msgctxt "(leave blank for none)"
 msgid "(leer lassen für keines)"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:86
+msgctxt ""
+"<a href=\"{VIEW_LINK}\" title=\"View email in browser\">View email in "
+"browser</a>"
 msgid ""
 "<a href=\"{VIEW_LINK}\" title=\"E-Mail im Browser anzeigen\">E-Mail im "
 "Browser anzeigen</a>"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:205
+msgctxt "Unsubscribe Page ID:"
 msgid "Abbestellen Seiten ID:"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:291
 #: email-newsletter-files/page-members.php:414
+msgctxt "Unsubscribed"
 msgid "Abbestellt"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:526
+msgctxt "CHANCEL"
 msgid "ABBRECHEN"
 msgstr ""
 
 #: email-newsletter-files/page-send-newsletter.php:218
+msgctxt "Cancel/Disable"
 msgid "Abbrechen/Deaktivieren"
 msgstr ""
 
@@ -68,28 +81,33 @@ msgstr ""
 #: email-newsletter-files/page-newsletters-dashboard.php:206
 #: email-newsletter-files/page-newsletters.php:82
 #: email-newsletter-files/page-send-newsletter.php:254
+msgctxt "Declined"
 msgid "Abgelehnt"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:289
+msgctxt "Rejected"
 msgid "Abgelehnte"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:475
 #: email-newsletter-files/page-newsletters-dashboard.php:276
+msgctxt "Unsubscribed"
 msgid "Abgemeldet"
 msgstr ""
 
 #: email-newsletter-files/page-subscribe.php:69
+msgctxt "save subscriptions"
 msgid "Abonnements speichern"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:142
+msgctxt "Add Subscriber"
 msgid "Abonnent hinzufügen"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:490
-msgid "Abonnent(en)"
+msgid "Abonnent(er)"
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:57

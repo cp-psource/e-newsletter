@@ -399,7 +399,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <th scope="row"><?php _e( 'POP3 Passwort:', 'email-newsletter' ) ?></th>
                                     <td>
                                         <input type="password" name="settings[bounce_password]" id="bounce_password" class="regular-text" value="<?php echo ( isset( $this->settings['bounce_password'] ) && '' != $this->settings['bounce_password'] ) ? '********' : ''; ?>" />
-                                        <span class="description"><?php _e( 'Passwort für den Zugriff auf dieses Bounce-E-Mail-Konto', 'email-newsletter' ); if(isset( $this->settings['bounce_password'] ) && '' != $this->settings['bounce_password']) _e( ' (Aus Sicherheitsgründen stimmt die gespeicherte Kennwortlänge nicht mit der Vorschau überein.)', 'email-newsletter' ); ?></span>
+                                        <span class="description"><?php _e( 'Passwort für den Zugriff auf dieses Bounce-E-Mail-Konto', 'email-newsletter' ); if(isset( $this->settings['bounce_password'] ) && '' != $this->settings['bounce_password']) _e( ' (Aus Sicherheitsgründen stimmt die gespeicherte Kennwortlänge nicht mit der Vorschau überein)', 'email-newsletter' ); ?></span>
                                     </td>
                                 </tr>
                                 <tr valign="top">

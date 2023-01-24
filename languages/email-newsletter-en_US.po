@@ -93,7 +93,7 @@ msgid "Abonnent hinzufügen"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:490
-msgid "Abonnent(er)"
+msgid "Abonnent(en)"
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:57

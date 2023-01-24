@@ -487,7 +487,7 @@
 
                 <div class="tablenav-pages">
                     <span class="displaying-num">
-                        <?php echo ( isset( $members_pagination ) ) ? $members_pagination['count'] : $count; ?> <?php _e( 'Abonnent(er)', 'email-newsletter' ) ?>
+                        <?php echo ( isset( $members_pagination ) ) ? $members_pagination['count'] : $count; ?> <?php _e( 'Abonnent(en)', 'email-newsletter' ) ?>
                         <?php _e( 'von', 'email-newsletter' ) ?>
                         <select name="per_page" id="per_page">
                             <option value="15" <?php echo ( 15 == $per_page ) ? 'selected' : ''; ?> >15</option>
