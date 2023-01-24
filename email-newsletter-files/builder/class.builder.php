@@ -774,7 +774,7 @@ class Email_Newsletter_Builder  {
 		$data = array();
 		$default = array(
 			'subject' => '',
-			'content_ecoded' => '',
+			'content_encoded' => '',
 			'contact_info' => base64_encode($email_newsletter->settings['contact_info']),
 			'from_name' => $email_newsletter->settings['from_name'],
 			'from_email' => $email_newsletter->settings['from_email'],
