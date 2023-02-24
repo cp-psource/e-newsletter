@@ -75,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <td>
                                     <textarea name="settings[contact_info]" class="contact-information" ><?php echo isset($this->settings['contact_info']) ? esc_textarea($this->settings['contact_info']) : "";?></textarea>
                                     <br />
-                                    <span class="description"><?php _e( 'Standardkontaktinformationen werden am Ende jeder E-Mail hinzugefügt.', 'email-newsletter' ) ?> <?php _e( 'It can be easily changed for each newsletter', 'email-newsletter' ) ?></span>
+                                    <span class="description"><?php _e( 'Standardkontaktinformationen werden am Ende jeder E-Mail hinzugefügt.', 'email-newsletter' ) ?> <?php _e( 'Sie kann für jeden Newsletter leicht geändert werden', 'email-newsletter' ) ?></span>
                                 </td>
                             </tr>
                             <tr valign="top">
@@ -234,7 +234,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<?php $tips->bind_tip(__( "Diese Methode verwendet PHP-Funktionen zum Versenden von Newslettern und E-Mails. Sei vorsichtig, da einige Hosts möglicherweise Einschränkungen für die Verwendung dieser Methode festlegen. Wenn Du die Einstellungen Deines Servers nicht bearbeiten kannst, empfehlen wir die Verwendung der SMTP-Methode, um optimale Ergebnisse zu erzielen!", 'email-newsletter' ), '#tip_php'); ?>
 
                                         <label id="tip_wpmail">
-                                            <input type="radio" name="settings[outbound_type]" value="wpmail" class="email_out_type" <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'wpmail') ? 'checked="checked"' : '';?> /><?php echo _e( 'WP Mail', 'email-newsletter' );?>
+                                            <input type="radio" name="settings[outbound_type]" value="wpmail" class="email_out_type" <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'wpmail') ? 'checked="checked"' : '';?> /><?php echo _e( 'CP Mail', 'email-newsletter' );?>
                                         </label>
                                         <?php $tips->bind_tip(__( "Diese Methode verwendet Standardfunktionen für ClassicPress-E-Mails zum Senden von Newslettern und E-Mails. Du kannst andere Plugins zum Senden von E-Mails verwenden, aber möglicherweise funktioniert die Absprungprüfung nicht mehr.", 'email-newsletter' ), '#tip_wpmail'); ?>
  

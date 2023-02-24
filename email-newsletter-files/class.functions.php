@@ -1104,8 +1104,8 @@ class Email_Newsletter_functions {
     		$sent_status = wp_mail( $email_to, $email_subject, $email_contents, $headers );
 
 	        if( !$sent_status ) {
-	            $this->write_log('WP Mail send email error');
-	            //return 'WP Mail send email error';
+	            $this->write_log('CP Mail send email error');
+	            //return 'CP Mail send email error';
 	        }
     	}
     	else {

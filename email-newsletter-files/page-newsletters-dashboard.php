@@ -174,7 +174,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <thead>
                     <tr>
                         <th class="members-wp manage-column column-name">
-                            <?php _e( 'WP ID', 'email-newsletter' ) ?>
+                            <?php _e( 'CP ID', 'email-newsletter' ) ?>
                         </th>
                         <th class="members-email manage-column column-name">
 

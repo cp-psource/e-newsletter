@@ -224,7 +224,7 @@ if ( !class_exists('Ui', false) ):
 					$details = $this->formatManualCheckErrors(get_site_transient($this->manualCheckErrorTransient));
 					delete_site_transient($this->manualCheckErrorTransient);
 				} else {
-					$message = sprintf(__('Unbekannter PSOURCE-UPDATTER-Status "%s"', 'email-newsletter'), $status);
+					$message = sprintf(__('Unbekannter PSOURCE-UPDATER-Status "%s" "%s"', 'email-newsletter'), $status);
 					$noticeClass = 'error notice-error';
 				}
 

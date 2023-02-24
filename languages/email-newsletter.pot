@@ -757,7 +757,7 @@ msgid "Installieren"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:78
-msgid "It can be easily changed for each newsletter"
+msgid "Sie kann für jeden Newsletter leicht geändert werden"
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:89
@@ -920,7 +920,7 @@ msgid "Pausieren und per WP-CRON versenden"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:499
-msgid "per page."
+msgid "pro Seite."
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:232
@@ -952,7 +952,7 @@ msgid "Registrierte Benutzer"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:159
-msgid "Sample File"
+msgid "Beispieldatei"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:348
@@ -1116,7 +1116,7 @@ msgid "Keine neuere Version von %s im PSOURCE REPO gefunden."
 msgstr ""
 
 #: psource/psource-plugin-update/Puc/v5p0/Vcs/PluginUpdateChecker.php:98
-msgid "There is no changelog available."
+msgid "Ein Änderungsprotokoll ist nicht verfügbar."
 msgstr ""
 
 #: email-newsletter-files/class.wp_widgets.php:71
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:227
 #, php-format
-msgid "Unbekannter PSOURCE-UPDATTER-Status \"%s\""
+msgid "Unbekannter PSOURCE-UPDATER-Status "%s" \"%s\""
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:346
@@ -1242,11 +1242,11 @@ msgstr ""
 
 #: email-newsletter-files/page-members.php:309
 #: email-newsletter-files/page-newsletters-dashboard.php:177
-msgid "WP ID"
+msgid "CP ID"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:237
-msgid "WP Mail"
+msgid "CP Mail"
 msgstr ""
 
 #: email-newsletter-files/page-send-newsletter.php:145
