@@ -487,7 +487,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
                     <div id="tabs-5" class="tab">
                         <h3><?php _e( 'Shortcode Benutzung', 'email-newsletter' ) ?></h3>
-                        <p><?php _e('Hier erfährst Du, wie Du Deinn Posts, Seiten und Themenvorlagen E-Newsletter-Shortcodes hinzufügst.','email-newsletter'); ?></p>
+                        <p><?php _e('Hier erfährst Du, wie Du Deinen Beiträgen, Seiten und Themenvorlagen E-Newsletter-Shortcodes hinzufügst.','email-newsletter'); ?></p>
                         <div class="shortcode-help">
                             <p><?php _e('Mit dem folgenden Shortcode kannst Du das Anmeldeformular überall dort einfügen, wo Du es benötigst.'); ?></p>
                             <p><code>[enewsletter_subscribe]</code></p>

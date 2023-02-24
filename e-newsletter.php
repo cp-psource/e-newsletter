@@ -4,7 +4,8 @@ Plugin Name: PS-eNewsletter
 Plugin URI: https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-ohne-drittanbieter/
 Description: Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.
 Natürlich mit der großartigen Piestingtal.Source Kompatibilität.
-Version: 2.8.5
+Version: 2.8.6
+Domain Path: /languages
 Text Domain: email-newsletter
 Author: Webmasterservice N3rds@Work,
 Author URI: https://n3rds.work
@@ -776,7 +777,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
     function init() {
 
         //load translation files
-        load_plugin_textdomain( 'email-newsletter', false, dirname( plugin_basename( __FILE__ ) ) . '/email-newsletter-files/languages/' );
+        load_plugin_textdomain( 'email-newsletter', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
         //public actions of the plugin
         if ( isset( $_REQUEST['newsletter_action'] ) && !defined('DOING_AJAX') ) {
@@ -2671,7 +2672,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
                         'value' => get_date_from_gmt(date('Y-m-d H:i:s', $member['join_date'])),
                     ),
                     array(
-                        'name' => __( 'Groups', 'appointments' ),
+                        'name' => __( 'Gruppen', 'appointments' ),
                         'value' => implode(', ', $member_groups),
                     ),
                 ),

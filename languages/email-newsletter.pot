@@ -649,7 +649,7 @@ msgstr ""
 
 #: email-newsletter-files/page-settings.php:490
 msgid ""
-"Hier erfährst Du, wie Du Deinn Posts, Seiten und Themenvorlagen E-Newsletter-"
+"Hier erfährst Du, wie Du Deinen Beiträgen, Seiten und Themenvorlagen E-Newsletter-"
 "Shortcodes hinzufügst."
 msgstr ""
 
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:227
 #, php-format
-msgid "Unbekannter PSOURCE-UPDATER-Status "%s" \"%s\""
+msgid "Unbekannter PSOURCE-UPDATER-Status \"%s\""
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:346
