@@ -11,6 +11,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Datenschutzkonformer Newsletter für ClassicPress zum Selbsthosten - Keine Drittanbieterdienste, keine Abokosten, keine Datenschutz-Sorgen!
 
+Data protection compliant newsletter for ClassicPress for self-hosting - no third-party services, no subscription costs, no data protection worries!
+
 == Description ==
 
 = DEUTSCH =
@@ -57,8 +59,8 @@ to improve.
 
 [POWERED BY PSOURCE](https://n3rds.work/)
 
-[Projektseite](https://n3rds.work/piestingtal_source/psenewsletter-classicpress-newsletter-ohne-drittanbieter/)
-[GitHub](https://github.com/piestingtal-source/ps-newsletter)
+[Projektseite](https://n3rds.work/cp_psource/psenewsletter-dsgvo-konformer-newsletter/)
+[GitHub](https://github.com/cp-psource/ps-newsletter)
 
 == Mehr PSOURCE ==
 
@@ -78,7 +80,7 @@ Please feel free to add [TRANSLATIONS](https://crowdin.com/project/psenewsletter
 
 = Make PSeNewsletter better =
 
-Feedback, bug reports and improvement suggestions, code optimizations, all welcome on our [Git platform](https://github.com/piestingtal-source/ps-newsletter)
+Feedback, bug reports and improvement suggestions, code optimizations, all welcome on our [Git platform](https://github.com/cp-psource/ps-newsletter)
 
 
 = Hilf uns / Support Us=

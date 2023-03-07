@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: PS-eNewsletter
-Plugin URI: https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-ohne-drittanbieter/
+Plugin URI: https://n3rds.work/cp_psource/psenewsletter-dsgvo-konformer-newsletter/
+Donate link: https://n3rds.work/spendenaktionen/unterstuetze-unsere-psource-free-werke/
 Description: Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.
-Natürlich mit der großartigen Piestingtal.Source Kompatibilität.
 Version: 2.8.6
 Domain Path: /languages
 Text Domain: email-newsletter
