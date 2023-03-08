@@ -96,30 +96,34 @@ Make a [donation via bank transfer or PayPal](https://n3rds.work/spendenaktionen
 
 == ChangeLog ==
 
-= 2.8.7 = DerN3rd =
+= 2.8.8 =
+
+* Fix: Undefined variable $mode
+
+= 2.8.7 =
 
 * Now CP-PowerSource
 
-= 2.8.6 = DerN3rd =
+= 2.8.6 =
 
 * PSource Updater 1.2
 * Securityfix Vorschaumail
 * English Translation
 * Readme Overhaul
 
-= 2.8.5 = DerN3rd =
+= 2.8.5 =
 
 * PhP 8.1 Getestet
 * PO Datei hinzugefügt
 * TinyMCE Fix für ClassicPress ab 5.4
 
-= 2.8.4 = DerN3rd =
+= 2.8.4 =
 
 * Hilferessource eingefügt
 * Textkorrekturen
 * PSOURCE Updater
 
-= 2.8.3 = DerN3rd =
+= 2.8.3 =
 
 * Fix Deprecated .click()
 * Fix Deprecated jQuery.parseJSON
@@ -127,19 +131,19 @@ Make a [donation via bank transfer or PayPal](https://n3rds.work/spendenaktionen
 * Fix Deprecated .unbind / .bind
 * Fix array offset
 
-= 2.8.2 = DerN3rd =
+= 2.8.2 =
 
 * Weitere Security-Fixes
 * Plugin Auto-Update hinzugefügt
 
-= 2.8.1 = DerN3rd=
+= 2.8.1 =
 
 * Quellcode weiter erneuert
 * Sicherheitsfixes eingefügt
 * Textausgaben optimiert
 * Für neue (responsive) E-Mail Vorlagen vorbereitet
 
-= 2.8.0 = DerN3rd =
+= 2.8.0 =
 
 * Updated: Deutsche Übersetzungen
 * Fixed: Einige Probleme mit ClassicPress 5

@@ -4,12 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }?>
 <?php
     $page_title =  __( 'eNewsletter Einstellungen', 'email-newsletter' );
-
+    $mode = '';
+    
     if ( !$this->settings ) {
         $page_title =  __( 'eNewsletter Plugin Installation', 'email-newsletter' );
         $mode = "install";
     }
-
+    
     $default_tab = isset($mode) ? 'tabs-2' : 'tabs-1';
 
 	global $email_newsletter;
