@@ -2,9 +2,9 @@
 
 **Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.**
 
-## PS-eNewsletter bringt professionelle Newsletter-Erstellung und Abonnentenverwaltung in WordPress.
+## PS-eNewsletter bringt professionelle Newsletter-Erstellung und Abonnentenverwaltung in ClassicPress.
 
-Denken Sie an all das Geld, das Sie sparen, wenn Sie auf den E-Mail-Dienst eines Drittanbieters verzichten.
+Denke an all das Geld, das Du sparst, wenn Du auf den E-Mail-Dienst eines Drittanbieters verzichtest.
 
 ![7 professionell gestaltete Vorlagen enthalten.](http://premium.wpmudev.org/wp-content/uploads/2011/05/e-templates-735x470.jpg)
 
@@ -12,62 +12,57 @@ Denken Sie an all das Geld, das Sie sparen, wenn Sie auf den E-Mail-Dienst eines
 
 ### Einfache Newsletter-Erstellung
 
-Verwenden Sie den bekannten WordPress-Theme-Anpasser, um eine E-Mail-Vorlage und einen Layoutinhalt auszuwählen. Sehen Sie sich genau an, wie Ihre Nachricht aussehen wird, bevor Sie auf „Senden“ klicken. Wählen Sie aus den professionell erstellten Vorlagen oder erstellen Sie Ihre eigenen.
+Verwende den bekannten ClassicPress-Customizer, um eine E-Mail-Vorlage und einen Layoutinhalt auszuwählen. Sieh Dir genau an, wie Deine Nachricht aussehen wird, bevor Du auf „Senden“ klickst. Wähle aus den professionell erstellten Vorlagen oder erstelle Deine eigenen.
 
 ![Layout erstaunlich aussehender Newsletter wirklich schnell.](http://premium.wpmudev.org/wp-content/uploads/2011/05/color-pick-735x470.jpg)
 
-  Gestalten Sie fantastisch aussehende Newsletter sehr schnell.
+  Gestalte fantastisch aussehende Newsletter sehr schnell.
 
-### Fügen Sie eine persönliche Note hinzu
+### Füge eine persönliche Note hinzu
 
-Verwenden Sie Datenerstellungs-Tags, um Mitgliederdaten in Ihre E-Mails zu integrieren und so Newsletter zu personalisieren. Peppen Sie Ihr Design mit Kopfzeilen und Hintergrundbildern auf und behalten Sie die volle Kontrolle über die Farben.
+Verwende Datenerstellungs-Tags, um Mitgliederdaten in Deine E-Mails zu integrieren und so Newsletter zu personalisieren. Peppe Dein Design mit Kopfzeilen und Hintergrundbildern auf und behalte die volle Kontrolle über die Farben.
 
 ### Abonnenten einfach hinzufügen und verwalten
 
-Betten Sie Abonnementformulare mithilfe eines Widgets oder eines Shortcodes ein. Sammeln Sie einfach eine E-Mail-Adresse oder konfigurieren Sie die Erfassung eines Vornamens und lassen Sie Abonnenten die Gruppe auswählen, der sie beitreten möchten. PS-eNewsletter unterstützt die empfohlene Double-Opt-In-Methode zum Abonnieren und ermöglicht Ihnen die Einrichtung einer „Willkommens“-E-Mail, die automatisch an alle neuen Abonnenten gesendet wird, zusammen mit benutzerdefinierten Seiten zum Abonnieren und Abbestellen.
+Bette Abonnementformulare mithilfe eines Widgets oder eines Shortcodes ein. Sammel einfach eine E-Mail-Adresse oder konfiguriere die Erfassung eines Vornamens und lasse Abonnenten die Gruppe auswählen, der sie beitreten möchten. PS-eNewsletter unterstützt die empfohlene Double-Opt-In-Methode zum Abonnieren und ermöglicht die Einrichtung einer „Willkommens“-E-Mail, die automatisch an alle neuen Abonnenten gesendet wird, zusammen mit benutzerdefinierten Seiten zum Abonnieren und Abbestellen.
 
 ![Gesendete E-Mails verwalten und als Vorlagen für zukünftige Newsletter verwenden.](http://premium.wpmudev.org/wp-content/uploads/2011/05/send-email-735x470.jpg)
 
-  Verwalten Sie gesendete E-Mails und verwenden Sie sie als Vorlagen für zukünftige Newsletter.
+  Verwalte gesendete E-Mails und verwende sie als Vorlagen für zukünftige Newsletter.
 
 ### Newsletter versenden
 
-Um einen Newsletter zu versenden, wählen Sie einfach die entsprechenden Empfänger aus, klicken Sie auf „Senden“ und verfolgen Sie den Fortschritt anhand der Fortschrittsleiste. Verfolgen Sie Newsletter-Ergebnisse, verbessern Sie Inhalte und verwenden Sie die Schaltfläche „Klonen“, um das Newsletter-Layout für zukünftige E-Mails zu beschleunigen. 
+Um einen Newsletter zu versenden, wähle einfach die entsprechenden Empfänger aus, klicke auf „Senden“ und verfolge den Fortschritt anhand der Fortschrittsleiste. Verfolge Newsletter-Ergebnisse, verbessere Inhalte und verwende die Schaltfläche „Klonen“, um das Newsletter-Layout für zukünftige E-Mails zu beschleunigen. 
 
-## Verwendung
-
-### **Für den Anfang:**
-
-Lesen Sie zunächst den Abschnitt [Plugins installieren](../wpmu-manual/installing-regular-plugins-on-wpmu/) in unserem umfassenden [WordPress- und WordPress-Multisite-Handbuch](https://premium.wpmudev.org/manuals/) ), wenn Sie neu bei WordPress sind.
 
 ### **Installieren:**
 
-1\. Laden Sie die Plugin-Datei 2\ herunter. Entpacken Sie die Datei in einen Ordner auf Ihrer Festplatte 3\. Laden Sie den Ordner **_/e-newsletter/_** und seinen gesamten Inhalt in den Ordner **/wp-content/plugins/** auf Ihrer Website 4\ hoch. Melden Sie sich bei Ihrem Admin-Panel für WordPress oder Multisite an und aktivieren Sie das Plugin. Nach der Installation und Aktivierung sehen Sie einen neuen Menüpunkt in Ihrem Admin-Bereich: eNewsletter.
+Melde Dich bei Deinem Admin-Panel für ClassicPress oder Multisite an und aktiviere das Plugin. Nach der Installation und Aktivierung siehst Du einen neuen Menüpunkt in Deinem Admin-Bereich: eNewsletter.
 
 ![e-newsletter-2590-menu](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-2590-menu.png)
 
 ### Erste Schritte
 
-Als Erstes sollten Sie Ihre Einstellungen konfigurieren. Klicken Sie auf den Untermenüpunkt Einstellungen. Es gibt drei Registerkarten, die Ihre Aufmerksamkeit sofort erfordern:
+Als Erstes solltest Du Deine Einstellungen konfigurieren. Klicke auf den Untermenüpunkt Einstellungen. Es gibt drei Registerkarten, die Deine Aufmerksamkeit sofort erfordern:
 
-![Allgemeine Einstellungen – Ihre Standardeinstellungen.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-general-settings21.png)
+![Allgemeine Einstellungen – Deine Standardeinstellungen.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-general-settings21.png)
 
-  Allgemeine Einstellungen – Ihre Standardeinstellungen.
+  Allgemeine Einstellungen – Deine Standardeinstellungen.
 
  
-![Einstellungen für ausgehende E-Mails – wie Ihre Newsletter versendet werden.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-outgoing21.png)
+![Einstellungen für ausgehende E-Mails – wie Deine Newsletter versendet werden.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-outgoing21.png)
 
-  Einstellungen für ausgehende E-Mails – wie Ihre Newsletter versendet werden.
+  Einstellungen für ausgehende E-Mails – wie Deine Newsletter versendet werden.
 
 
-![Bounce-Einstellungen – So gehen Sie mit E-Mails um, die zurückgesendet werden.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-bounce21.png)
+![Bounce-Einstellungen – So gehst Du mit E-Mails um, die zurückgesendet werden.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-bounce21.png)
 
   Bounce-Einstellungen – wie mit E-Mails umgegangen wird, die zurückgesendet werden.
 
-  Die allgemeinen Einstellungen sind ziemlich einfach. Um Ihnen die Einrichtung der Registerkarten „Ausgehende Einstellungen“ und „Bounce-Einstellungen“ zu erleichtern, finden Sie hier einige praktische Links für die Standard-SMTP- und POP-Einstellungen, wenn Sie Gmail, Yahoo oder Hotmail verwenden:
+  Die allgemeinen Einstellungen sind ziemlich einfach. Um Dir die Einrichtung der Registerkarten „Ausgehende Einstellungen“ und „Bounce-Einstellungen“ zu erleichtern, findest Du hier einige praktische Links für die Standard-SMTP- und POP-Einstellungen, wenn Du Gmail, Yahoo oder Hotmail verwendest:
 
 * Gmail: [https://support.google.com/mail/answer/13287?hl=en](https://support.google.com/mail/answer/13287?hl=en)
-* Zusätzliche Informationen, wenn Sie [Google Apps for Business](https://support.google.com/a/answer/176600?hl=en) verwenden oder deren [SMTP-Relay-Dienst](https://) verwenden müssen. support.google.com/a/answer/2956491?hl=de).
+* Zusätzliche Informationen, wenn Du [Google Apps for Business](https://support.google.com/a/answer/176600?hl=en) verwendest oder deren [SMTP-Relay-Dienst](https://support.google.com/a/answer/2956491?hl=de) verwenden musst.
 * _GoDaddy-Benutzer beachten:_ Wenn Sie bei GoDaddy hosten und Google Apps for Business für Ihre E-Mails verwenden, funktionieren die oben genannten Einstellungen für Gmail möglicherweise nicht richtig. Einzelheiten und empfohlene Einstellungen finden Sie in [diesem Forumsbeitrag](https://premium.wpmudev.org/forums/topic/e-newsletter-not-sending-test-email#post-898374).
 * Yahoo: [http://help.yahoo.com/kb/index?page=content&y=PROD_MAIL_ML&locale=en_GB&id=SLN4724](http://help.yahoo.com/kb/index?page=content&y=PROD_MAIL_ML&locale=en_GB&id =SLN4724)
 * Hotmail (live.com): [http://windows.microsoft.com/en-CA/windows/outlook/send-receive-from-app](http://windows.microsoft.com/en-CA/ Windows/Outlook/Send-Receive-from-App)
@@ -88,7 +83,7 @@ Wenn Sie die Webmail-Dienste Ihres Hosts nutzen, können Sie die benötigten Ein
 
 ### Erstellen eines Newsletters
 
-Nachdem Sie nun alles in den Einstellungen konfiguriert haben, können wir einen Newsletter erstellen! Klicken Sie in Ihrem eNewsletter-Menü auf „Newsletter erstellen“. Sie sehen den Newsletter-Builder, der die WordPress-Anpassungsfunktion nutzt, um Ihnen die Arbeit wirklich zu erleichtern. Es wird auch in Echtzeit aktualisiert!
+Nachdem Sie nun alles in den Einstellungen konfiguriert haben, können wir einen Newsletter erstellen! Klicken Sie in Ihrem eNewsletter-Menü auf „Newsletter erstellen“. Sie sehen den Newsletter-Builder, der die ClassicPress-Anpassungsfunktion nutzt, um Ihnen die Arbeit wirklich zu erleichtern. Es wird auch in Echtzeit aktualisiert!
 
 ![Vollständig anpassbare Vorlagen mit dem WYSIWYG-Builder.](https://premium.wpmudev.org/wp-content/uploads/2011/05/e-newsletter-builder.png)
 
@@ -129,13 +124,13 @@ Wenn Sie bereit sind, einen Newsletter zu versenden, klicken Sie einfach auf die
 * Alle aktiven Mitglieder
 * Ausgewählte Newsletter-Gruppen
 * Abonnenten auf ausgewählten Mitgliedschafts-Zugriffsebenen
-* Abonnenten mit bestimmten WordPress-Benutzerrollen
+* Abonnenten mit bestimmten ClassicPress-Benutzerrollen
 * Administratoren aller Netzwerkseiten
 
-Wenn Sie „Alle aktiven Mitglieder“ auswählen, wird Ihr Newsletter an alle gesendet, die sich in jeder Gruppe angemeldet haben. Mit _eNewsletter Groups_ können Sie nur an Abonnenten ausgewählter Gruppen senden. Die Option „Membership Plugin Levels“ wird nur angezeigt, wenn auf Ihrer Website unser [Membership](https://premium.wpmudev.org/project/membership/ „WordPress Membership Plugin – WPMU DEV“) Plugin aktiv ist. Hier können Sie auswählen, ob Sie Ihren Newsletter an Abonnenten mit bestimmten Mitgliedschaftszugangsebenen senden möchten. Wählen Sie beliebige _WordPress-Benutzerrollen_ aus, um den Newsletter an alle Abonnenten mit diesen ausgewählten Rollen auf Ihrer Website zu senden. Wenn Sie das Kontrollkästchen „Admins aller Sites“ aktivieren, wird Ihr Newsletter an alle Subsite-Administratoren in Ihrem Netzwerk gesendet. Beachten Sie, dass mit dieser Option Ihr Newsletter an alle Subsite-Administratoren gesendet wird, unabhängig davon, ob diese abonniert sind oder nicht. Sie können die Benutzer filtern, die Ihren Newsletter erhalten sollen, sodass diejenigen, die ihn bereits erhalten haben, ihn nicht noch einmal erhalten. Sie können auch festlegen, dass ein Newsletter nur an ausgewählte Benutzer erneut gesendet wird, deren vorheriger Versand zurückgesendet wurde. Abschließend haben Sie 3 Möglichkeiten, Ihren Newsletter zu versenden:
+Wenn Sie „Alle aktiven Mitglieder“ auswählen, wird Ihr Newsletter an alle gesendet, die sich in jeder Gruppe angemeldet haben. Mit _eNewsletter Groups_ können Sie nur an Abonnenten ausgewählter Gruppen senden. Die Option „Membership Plugin Levels“ wird nur angezeigt, wenn auf Ihrer Website unser [Membership](https://premium.wpmudev.org/project/membership/ „ClassicPress Membership Plugin – WPMU DEV“) Plugin aktiv ist. Hier können Sie auswählen, ob Sie Ihren Newsletter an Abonnenten mit bestimmten Mitgliedschaftszugangsebenen senden möchten. Wählen Sie beliebige _ClassicPress-Benutzerrollen_ aus, um den Newsletter an alle Abonnenten mit diesen ausgewählten Rollen auf Ihrer Website zu senden. Wenn Sie das Kontrollkästchen „Admins aller Sites“ aktivieren, wird Ihr Newsletter an alle Subsite-Administratoren in Ihrem Netzwerk gesendet. Beachten Sie, dass mit dieser Option Ihr Newsletter an alle Subsite-Administratoren gesendet wird, unabhängig davon, ob diese abonniert sind oder nicht. Sie können die Benutzer filtern, die Ihren Newsletter erhalten sollen, sodass diejenigen, die ihn bereits erhalten haben, ihn nicht noch einmal erhalten. Sie können auch festlegen, dass ein Newsletter nur an ausgewählte Benutzer erneut gesendet wird, deren vorheriger Versand zurückgesendet wurde. Abschließend haben Sie 3 Möglichkeiten, Ihren Newsletter zu versenden:
 
 * Klicken Sie auf die große blaue Schaltfläche „Newsletter jetzt senden“, um ihn sofort an alle Personen zu senden, die Sie oben ausgewählt haben.
-* Klicken Sie auf die Schaltfläche „Im Hintergrund senden“, damit WordPress sich über CRON darum kümmert, während Sie sich um andere Geschäfte kümmern.
+* Klicken Sie auf die Schaltfläche „Im Hintergrund senden“, damit ClassicPress sich über CRON darum kümmert, während Sie sich um andere Geschäfte kümmern.
 * Klicken Sie auf den Link „Bearbeiten“, um das Formular zu öffnen, in dem Sie Ihren Newsletter für ein bestimmtes Datum und eine bestimmte Uhrzeit planen können.
 
 ### Gruppen-Mailinglisten
@@ -198,8 +193,8 @@ Ja! Sie können Ihre eigenen benutzerdefinierten Newsletter-Themen erstellen. Ko
 
 Ja, da ist noch mehr! Sie können die folgenden Data-Builder-Tags (Makros) entweder im Newsletter-Builder oder in Ihren benutzerdefinierten Designvorlagen verwenden.
 
-* „{FIRST_NAME}“ zeigt den WordPress-Vornamen des Benutzers im Newsletter an
-* „{USER_NAME}“ zeigt den WordPress-Benutzernamen des Benutzers im Newsletter an
+* „{FIRST_NAME}“ zeigt den ClassicPress-Vornamen des Benutzers im Newsletter an
+* „{USER_NAME}“ zeigt den ClassicPress-Benutzernamen des Benutzers im Newsletter an
 * „{TO_EMAIL}“ zeigt die E-Mail-Adresse an, an die der Newsletter gesendet wurde
 * „{VIEW_LINK}“ zeigt den Link zum Anzeigen des Newsletters in einem Browser an
 * „{DATE}“ zeigt das Datum an, an dem der Newsletter gesendet wurde
