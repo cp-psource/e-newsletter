@@ -1071,8 +1071,10 @@ class Email_Newsletter extends Email_Newsletter_functions {
 
             return array('action' => 'subscribed', 'error' => false, 'message' => __( 'Du hast Dich erfolgreich angemeldet!', 'email-newsletter' ), 'data' => array('member_id' => $member_id, 'unsubscribe_code' => $result['unsubscribe_code'], 'subscribe_groups' => $subscribe_groups));
         }
-        else
-            return array('action' => 'subscribed', 'error' => true, 'message' => __( 'Beim Abonnieren ist ein Fehler aufgetreten!', 'email-newsletter' ), 'data' => array('member_id' => $member_id, 'unsubscribe_code' => $result['unsubscribe_code']));
+        else 
+        
+        return array('action' => 'subscribed', 'error' => true, 'message' => __( 'Beim Abonnieren ist ein Fehler aufgetreten!', 'email-newsletter' ), 'data' => array('member_id' => $member_id, 'unsubscribe_code' => $result['unsubscribe_code']));
+        
     }
 
     /**
