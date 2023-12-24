@@ -102,7 +102,8 @@ Make a [donation via bank transfer or PayPal](https://n3rds.work/spendenaktionen
 * Fix: Deprecated $.parseJSON()
 * Fix: Deprecated .toggle()
 * Fix: Deprecated .submit()
-* Fix: Deprecated .mouseover(), .mouseup(), .mouseout() 
+* Fix: Deprecated .mouseover(), .mouseup(), .mouseout()
+* Fix: Deprecated jQuery.isFunction() 
 
 = 2.8.7 =
 
