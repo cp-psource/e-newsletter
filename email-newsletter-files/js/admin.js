@@ -319,7 +319,7 @@ jQuery( document ).ready( function() {
     jQuery('a.edit-timestamp').on("click", function() {
         if (jQuery('#timestampdiv').is(":hidden")) {
             jQuery('#timestampdiv').slideDown('fast');
-            jQuery('#mm').focus();
+            jQuery('#mm').trigger("focus");
             jQuery(this).hide();
         }
         return false;
