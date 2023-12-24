@@ -100,6 +100,7 @@ Make a [donation via bank transfer or PayPal](https://n3rds.work/spendenaktionen
 
 * Fix: Undefined variable $mode
 * Fix: Deprecated $.parseJSON()
+* Fix: Deprecated.toggle()
 
 = 2.8.7 =
 
