@@ -445,11 +445,11 @@ $(".psource-help-trigger")
 <?php } ?>
 		return false;
 	})
-	.mouseover(function (e) {
+	.on("mouseover", function (e) {
 		open_tooltip($(this));
 		
 	})
-	.mouseout(close_tooltip)
+	.on("mouseout", close_tooltip)
 ;
 	
 	

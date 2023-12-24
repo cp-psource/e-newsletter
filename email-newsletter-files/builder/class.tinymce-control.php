@@ -34,7 +34,7 @@ class Builder_TinyMCE_Control extends WP_Customize_Control {
 				jQuery('#accordion-section-builder_email_content h3').click(function(){
 					resize_start();
 				});
-				jQuery("body").mouseup(function() {
+				jQuery("body").on("mouseup", function() {
 				    clearInterval(resize);
 				});
 
