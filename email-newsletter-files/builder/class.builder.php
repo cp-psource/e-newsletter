@@ -425,18 +425,6 @@ class Email_Newsletter_Builder  {
 			#customize-footer-actions {
 				min-width: 550px;
 			}
-<<<<<<< HEAD
-=======
-			.mce-flow-layout-item.mce-last {
-   				/*display: none;*/
-			}
-			div#mceu_12 {
-    			display: none;
-			}
-			div.mce-menubar {
-    			display: none;
-			}
->>>>>>> 648402706d58ef87aa5695ed21e520bdc43eb941
 		</style>
 		<?php
 	}
