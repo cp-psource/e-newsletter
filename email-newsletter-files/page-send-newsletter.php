@@ -63,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     jQuery( '#send_cron' ).on("click",  function () {
                         pause = 1;
-                        jQuery( '#sending_form' ).submit();
+                        jQuery( '#sending_form' ).trigger("submit");
                     });
 
                     jQuery( '#send_cancel' ).on("click",  function () {
