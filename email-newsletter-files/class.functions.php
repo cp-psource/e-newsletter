@@ -43,28 +43,28 @@ class Email_Newsletter_functions {
 	function get_default_builder_var($type='') {
 		switch($type) {
 			case 'bg_color':
-				$return = (defined('BUILDER_DEFAULT_BG_COLOR') ? BUILDER_DEFAULT_BG_COLOR : '' );
+				$return = (defined('PSEN_BUILDER_DEFAULT_BG_COLOR') ? PSEN_BUILDER_DEFAULT_BG_COLOR : '' );
 				break;
 			case 'bg_image':
-				$return = (defined('BUILDER_DEFAULT_BG_IMAGE') ? BUILDER_DEFAULT_BG_IMAGE : '' );
+				$return = (defined('PSEN_BUILDER_DEFAULT_BG_IMAGE') ? PSEN_BUILDER_DEFAULT_BG_IMAGE : '' );
 				break;
 			case 'link_color':
-				$return = (defined('BUILDER_DEFAULT_LINK_COLOR') ? BUILDER_DEFAULT_LINK_COLOR : '' );
+				$return = (defined('PSEN_BUILDER_DEFAULT_LINK_COLOR') ? PSEN_BUILDER_DEFAULT_LINK_COLOR : '' );
 				break;
 			case 'email_title':
-				$return = (defined('BUILDER_DEFAULT_EMAIL_TITLE') ? BUILDER_DEFAULT_EMAIL_TITLE : '' );
+				$return = (defined('PSEN_BUILDER_DEFAULT_EMAIL_TITLE') ? PSEN_BUILDER_DEFAULT_EMAIL_TITLE : '' );
 				break;
 			case 'header_image':
-				$return = (defined('BUILDER_DEFAULT_HEADER_IMAGE') ? BUILDER_DEFAULT_HEADER_IMAGE : '' );
+				$return = (defined('PSEN_BUILDER_DEFAULT_HEADER_IMAGE') ? PSEN_BUILDER_DEFAULT_HEADER_IMAGE : '' );
 				break;
 			case 'body_color':
-				$return = (defined('BUILDER_DEFAULT_BODY_COLOR') ? BUILDER_DEFAULT_BODY_COLOR : '' );
+				$return = (defined('PSEN_BUILDER_DEFAULT_BODY_COLOR') ? PSEN_BUILDER_DEFAULT_BODY_COLOR : '' );
 				break;
             case 'title_color':
-                $return = (defined('BUILDER_DEFAULT_TITLE_COLOR') ? BUILDER_DEFAULT_TITLE_COLOR : '' );
+                $return = (defined('PSEN_BUILDER_DEFAULT_TITLE_COLOR') ? PSEN_BUILDER_DEFAULT_TITLE_COLOR : '' );
                 break;
             case 'alternative_color':
-                $return = (defined('BUILDER_DEFAULT_ALTERNATIVE_COLOR') ? BUILDER_DEFAULT_ALTERNATIVE_COLOR : '' );
+                $return = (defined('PSEN_BUILDER_DEFAULT_ALTERNATIVE_COLOR') ? PSEN_BUILDER_DEFAULT_ALTERNATIVE_COLOR : '' );
                 break;
 			default:
 				$return = '';

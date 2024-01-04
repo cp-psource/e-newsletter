@@ -506,7 +506,7 @@ class Email_Newsletter_Builder  {
 		//pharse theme settings
 		$possible_settings = array('BG_COLOR', 'BG_IMAGE', 'HEADER_IMAGE', 'LINK_COLOR', 'BODY_COLOR', 'ALTERNATIVE_COLOR', 'TITLE_COLOR', 'EMAIL_TITLE' );
 		foreach ($possible_settings as $possible_setting)
-			if(defined('BUILDER_DEFAULT_'.$possible_setting))
+			if(defined('PSEN_BUILDER_DEFAULT_'.$possible_setting))
 				$this->settings[] = $possible_setting;
 
 
@@ -839,7 +839,7 @@ class Email_Newsletter_Builder  {
 
         if($builder_id && $data['newsletter_template'] != $current_theme) {
             $exclude = array('branding_html');
-            if($meta['email_title'] != BUILDER_DEFAULT_EMAIL_TITLE)
+            if($meta['email_title'] != PSEN_BUILDER_DEFAULT_EMAIL_TITLE)
                 $exclude[] = 'email_title';
 
             $email_newsletter->delete_newsletter_meta($builder_id, $exclude, 1 );
@@ -893,7 +893,7 @@ class Email_Newsletter_Builder  {
 
         if(isset($data['template']) && $data['template'] != $current_theme) {
             $exclude = array('branding_html');
-            if(isset($meta['email_title']) && $meta['email_title'] != BUILDER_DEFAULT_EMAIL_TITLE)
+            if(isset($meta['email_title']) && $meta['email_title'] != PSEN_BUILDER_DEFAULT_EMAIL_TITLE)
                 $exclude[] = 'email_title';
 
             $email_newsletter->delete_newsletter_meta($builder_id, $exclude, 1 );
