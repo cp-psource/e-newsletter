@@ -96,6 +96,10 @@ Make a [donation via bank transfer or PayPal](https://n3rds.work/spendenaktionen
 
 == ChangeLog ==
 
+= 2.8.9 =
+
+* Textoptimierungen
+
 = 2.8.8 =
 
 * Fix: Undefined variable $mode

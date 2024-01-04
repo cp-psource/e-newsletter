@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
     <div class="wrap">
-        <h2><?php _e( 'Newsletter senden:', 'email-newsletter' ) ?> "<?php echo htmlspecialchars( $newsletter_data['subject'] );?>" <a href="?page=newsletters&amp;newsletter_builder_action=edit_newsletter&amp;newsletter_id=<?php echo $newsletter_data['newsletter_id'];?>&amp;template=<?php echo $newsletter_data['template'];?>&amp;return=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" class="add-new-h2"><?php _e( 'Bearbeiten', 'email-newsletter' ) ?></a></h2>
+        <h2><?php _e( 'Newsletter senden:', 'email-newsletter' ) ?> <?php echo htmlspecialchars( $newsletter_data['subject'] );?> <a href="?page=newsletters&amp;newsletter_builder_action=edit_newsletter&amp;newsletter_id=<?php echo $newsletter_data['newsletter_id'];?>&amp;template=<?php echo $newsletter_data['template'];?>&amp;return=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" class="add-new-h2"><?php _e( 'Bearbeiten', 'email-newsletter' ) ?></a></h2>
 
         <p><?php _e( 'Auf dieser Seite kannst Du Newsletter an die ausgewählten Gruppen senden.', 'email-newsletter' ) ?></p>
 

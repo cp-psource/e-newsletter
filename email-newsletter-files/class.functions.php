@@ -699,7 +699,7 @@ class Email_Newsletter_functions {
             $count = $this->get_global_wp_user_ids();
             $count = count($count);
             if($count) {
-                $targets['site_admins'][] = '<label><input type="checkbox" name="target[site_admins]" value="yes"> <strong>'.__( 'Administratoren aller Websites', 'email-newsletter' ).'</strong> ('.$count.')</input></label>';
+                $targets['site_admins'][] = '<label><input type="checkbox" name="target[site_admins]" value="yes"> <strong>'.__( 'Administratoren aller Webseiten', 'email-newsletter' ).'</strong> ('.$count.')</input></label>';
             }
         }
 
