@@ -4,7 +4,7 @@ Donate link: https://n3rds.work/spendenaktionen/unterstuetze-unsere-psource-free
 Tags: newsletter
 Requires at least: 4.7
 Tested up to: 5.6
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

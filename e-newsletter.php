@@ -4,14 +4,14 @@ Plugin Name: PS-eNewsletter
 Plugin URI: https://n3rds.work/cp_psource/psenewsletter-dsgvo-konformer-newsletter/
 Donate link: https://n3rds.work/spendenaktionen/unterstuetze-unsere-psource-free-werke/
 Description: Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.
-Version: 2.8.7
+Version: 2.8.8
 Domain Path: /languages
 Text Domain: email-newsletter
 Author: Webmasterservice N3rds@Work,
 Author URI: https://n3rds.work
 
 
-Copyright 2018-2023 WMS N3rds@Work (https://n3rds.work), Corecode von WPMUDEV (eNewsletter)
+Copyright 2018-2024 WMS N3rds@Work (https://n3rds.work), Corecode von WPMUDEV (eNewsletter)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
@@ -41,6 +41,7 @@ $MyUpdateChecker = PucFactory::buildUpdateChecker(
 require_once( 'email-newsletter-files/class.functions.php' );
 require_once( 'email-newsletter-files/builder/class.builder.php' );
 include_once( 'email-newsletter-files/class.wp_widgets.php' );
+
 /**
 * Plugin main class
 **/
@@ -64,13 +65,13 @@ class Email_Newsletter extends Email_Newsletter_functions {
     var $debug;
 
     /**
-     * PHP 5 constructor
+     * PHP 7+ constructor
      **/
-    function __construct() {
+    public function __construct() {
         global $wpdb;
 
 
-        $this->plugin_ver = 2.87;
+        $this->plugin_ver = '2.8.8';
 
         //enable or disable debugging
         $this->debug = 0;
