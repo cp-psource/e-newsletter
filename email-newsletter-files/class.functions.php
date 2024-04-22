@@ -43,28 +43,28 @@ class Email_Newsletter_functions {
 	function get_default_builder_var($type='') {
 		switch($type) {
 			case 'bg_color':
-				$return = (defined('PSEN_BUILDER_DEFAULT_BG_COLOR') ? PSEN_BUILDER_DEFAULT_BG_COLOR : '' );
+				$return = (defined('BUILDER_DEFAULT_BG_COLOR') ? BUILDER_DEFAULT_BG_COLOR : '' );
 				break;
 			case 'bg_image':
-				$return = (defined('PSEN_BUILDER_DEFAULT_BG_IMAGE') ? PSEN_BUILDER_DEFAULT_BG_IMAGE : '' );
+				$return = (defined('BUILDER_DEFAULT_BG_IMAGE') ? BUILDER_DEFAULT_BG_IMAGE : '' );
 				break;
 			case 'link_color':
-				$return = (defined('PSEN_BUILDER_DEFAULT_LINK_COLOR') ? PSEN_BUILDER_DEFAULT_LINK_COLOR : '' );
+				$return = (defined('BUILDER_DEFAULT_LINK_COLOR') ? BUILDER_DEFAULT_LINK_COLOR : '' );
 				break;
 			case 'email_title':
-				$return = (defined('PSEN_BUILDER_DEFAULT_EMAIL_TITLE') ? PSEN_BUILDER_DEFAULT_EMAIL_TITLE : '' );
+				$return = (defined('BUILDER_DEFAULT_EMAIL_TITLE') ? BUILDER_DEFAULT_EMAIL_TITLE : '' );
 				break;
 			case 'header_image':
-				$return = (defined('PSEN_BUILDER_DEFAULT_HEADER_IMAGE') ? PSEN_BUILDER_DEFAULT_HEADER_IMAGE : '' );
+				$return = (defined('BUILDER_DEFAULT_HEADER_IMAGE') ? BUILDER_DEFAULT_HEADER_IMAGE : '' );
 				break;
 			case 'body_color':
-				$return = (defined('PSEN_BUILDER_DEFAULT_BODY_COLOR') ? PSEN_BUILDER_DEFAULT_BODY_COLOR : '' );
+				$return = (defined('BUILDER_DEFAULT_BODY_COLOR') ? BUILDER_DEFAULT_BODY_COLOR : '' );
 				break;
             case 'title_color':
-                $return = (defined('PSEN_BUILDER_DEFAULT_TITLE_COLOR') ? PSEN_BUILDER_DEFAULT_TITLE_COLOR : '' );
+                $return = (defined('BUILDER_DEFAULT_TITLE_COLOR') ? BUILDER_DEFAULT_TITLE_COLOR : '' );
                 break;
             case 'alternative_color':
-                $return = (defined('PSEN_BUILDER_DEFAULT_ALTERNATIVE_COLOR') ? PSEN_BUILDER_DEFAULT_ALTERNATIVE_COLOR : '' );
+                $return = (defined('BUILDER_DEFAULT_ALTERNATIVE_COLOR') ? BUILDER_DEFAULT_ALTERNATIVE_COLOR : '' );
                 break;
 			default:
 				$return = '';
@@ -252,28 +252,22 @@ class Email_Newsletter_functions {
     /**
      * Get member id of wp user
      **/
-    function get_members_by_wp_user_id($wp_user_id, $blog_id = '', $subscribed = 0) {
+    function get_members_by_wp_user_id( $wp_user_id, $blog_id = '', $subscribed = 0 ) {
         global $wpdb;
 
-        if (1 < $blog_id)
+        if ( 1 < $blog_id )
             $tb_prefix = $wpdb->base_prefix . $blog_id . '_';
         else
             $tb_prefix = $wpdb->base_prefix;
 
-        if ($subscribed)
+        if($subscribed)
             $subscribed = " AND unsubscribe_code != ''";
         else
             $subscribed = "";
 
-        $member = $wpdb->get_row($wpdb->prepare("SELECT member_id FROM {$this->tb_prefix}enewsletter_members WHERE wp_user_id = %d" . $subscribed, $wp_user_id), "ARRAY_A");
-
-        // Check if $member is not null before accessing 'member_id'
-        if ($member !== null && isset($member['member_id'])) {
-            return $member['member_id'];
-        }
-
-        // Return a default value or handle the case where $member is null
-        return null;
+        $member = $wpdb->get_row( $wpdb->prepare( "SELECT member_id FROM {$this->tb_prefix}enewsletter_members WHERE wp_user_id = %d".$subscribed, $wp_user_id ), "ARRAY_A" );
+        //return $member['member_id'];
+        return isset($member['member_id']) && is_array($member['member_id']) ? count($member['member_id']) : 0;
     }
 
     /**
@@ -699,7 +693,7 @@ class Email_Newsletter_functions {
             $count = $this->get_global_wp_user_ids();
             $count = count($count);
             if($count) {
-                $targets['site_admins'][] = '<label><input type="checkbox" name="target[site_admins]" value="yes"> <strong>'.__( 'Administratoren aller Webseiten', 'email-newsletter' ).'</strong> ('.$count.')</input></label>';
+                $targets['site_admins'][] = '<label><input type="checkbox" name="target[site_admins]" value="yes"> <strong>'.__( 'Administratoren aller Websites', 'email-newsletter' ).'</strong> ('.$count.')</input></label>';
             }
         }
 

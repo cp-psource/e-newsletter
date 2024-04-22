@@ -11,7 +11,7 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action" ).val( "create_group" );
-        jQuery( "#create_group" ).trigger("submit");
+        jQuery( "#create_group" ).submit();
     });
 
     var group_name      = "";
@@ -64,14 +64,14 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action2" ).val( "edit_group" );
-        jQuery( "#edit_group" ).trigger("submit");
+        jQuery( "#edit_group" ).submit();
     };
 
 
     jQuery.fn.deleteGroup = function ( id ) {
         jQuery( "#newsletter_action2" ).val( "delete_group" );
         jQuery( "#group_id" ).val( id );
-        jQuery( "#edit_group" ).trigger("submit");
+        jQuery( "#edit_group" ).submit();
     };
 
 
@@ -85,7 +85,7 @@ jQuery( document ).ready( function() {
             return false;
         }
         jQuery( "#newsletter_action2" ).val( 'add_member' );
-        jQuery( "#add_new_member" ).trigger("submit");
+        jQuery( "#add_new_member" ).submit();
 
     });
 
@@ -97,7 +97,7 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action2" ).val( 'import_members' );
-        jQuery( "#add_new_member" ).trigger("submit");
+        jQuery( "#add_new_member" ).submit();
 
     });
 
@@ -112,7 +112,7 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action" ).val( jQuery( "#some_action" ).val() );
-        jQuery( "#form_members" ).trigger("submit");
+        jQuery( "#form_members" ).submit();
         return false;
     });
 
@@ -130,7 +130,7 @@ jQuery( document ).ready( function() {
     jQuery( "#per_page" ).on( "change", function() {
         jQuery( "#newsletter_action" ).val( '' );
         jQuery( "#members_per_page" ).val(jQuery(this).val());
-        jQuery( "#form_members" ).trigger("submit");
+        jQuery( "#form_members" ).submit();
         return false;
     });
 
@@ -204,14 +204,14 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action" ).val( "edit_member" );
-        jQuery( "#form_members" ).trigger("submit");
+        jQuery( "#form_members" ).submit();
     };
 
     jQuery.fn.deleteMember = function ( id ) {
         if (confirm(enewsletter.confirm)) {
             jQuery( "#newsletter_action" ).val( "delete_member" );
             jQuery( "#member_id" ).val( id );
-            jQuery( "#form_members" ).trigger("submit");
+            jQuery( "#form_members" ).submit();
         }
     };
 
@@ -219,7 +219,7 @@ jQuery( document ).ready( function() {
         if ( enewsletter.save_groups == jQuery( "#change_button_" + id ).val() ) {
             jQuery( "#newsletter_action" ).val( "change_group" );
             jQuery( "#member_id" ).val( id );
-            jQuery( "#form_members" ).trigger("submit");
+            jQuery( "#form_members" ).submit();
             return;
         }
         jQuery( "body" ).css( "cursor", "wait" );
@@ -270,7 +270,7 @@ jQuery( document ).ready( function() {
 
     jQuery( '#add_cron' ).on("click",  function() {
         cron = 1;
-        jQuery( '#send_form' ).trigger("submit");
+        jQuery( '#send_form' ).submit();
     });
 
 
@@ -319,7 +319,7 @@ jQuery( document ).ready( function() {
     jQuery('a.edit-timestamp').on("click", function() {
         if (jQuery('#timestampdiv').is(":hidden")) {
             jQuery('#timestampdiv').slideDown('fast');
-            jQuery('#mm').trigger("focus");
+            jQuery('#mm').focus();
             jQuery(this).hide();
         }
         return false;
@@ -381,7 +381,7 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action" ).val( "save_settings" );
-        jQuery( "#settings_form" ).trigger("submit");
+        jQuery( "#settings_form" ).submit();
     });
 
     //install plugin data
@@ -392,7 +392,7 @@ jQuery( document ).ready( function() {
         }
 
         jQuery( "#newsletter_action" ).val( "install" );
-        jQuery( "#settings_form" ).trigger("submit");
+        jQuery( "#settings_form" ).submit();
         return false;
     });
 
@@ -401,7 +401,7 @@ jQuery( document ).ready( function() {
     //uninstall plugin data
     jQuery( "#uninstall_yes" ).on("click",  function() {
         jQuery( "#newsletter_action" ).val( "uninstall" );
-        jQuery( "#settings_form" ).trigger("submit");
+        jQuery( "#settings_form" ).submit();
         return false;
 
     });
@@ -498,14 +498,14 @@ jQuery( document ).ready( function() {
     //save subscribes
     jQuery( "#save_subscribes" ).on("click",  function() {
         jQuery( "#newsletter_action" ).val( 'save_subscribes' );
-        jQuery( "#subscribes_form" ).trigger("submit");
+        jQuery( "#subscribes_form" ).submit();
 
     });
 
     //unsubscribe
     jQuery( "#unsubscribe" ).on("click",  function() {
         jQuery( "#newsletter_action" ).val( 'unsubscribe' );
-        jQuery( "#subscribes_form" ).trigger("submit");
+        jQuery( "#subscribes_form" ).submit();
 
     });
 });

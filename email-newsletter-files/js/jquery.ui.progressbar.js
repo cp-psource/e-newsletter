@@ -88,24 +88,22 @@ $.widget( "ui.progressbar", {
 	_refreshValue: function() {
 		var value = this.value();
 		var percentage = this._percentage();
-	
+
 		if ( this.oldValue !== value ) {
 			this.oldValue = value;
 			this._trigger( "change" );
 		}
-	
-		if (value > this.min) {
-			this.valueDiv.show();
-		} else {
-			this.valueDiv.hide();
-		}
-	
+
 		this.valueDiv
+			.toggle( value > this.min )
 			.toggleClass( "ui-corner-right", value === this.options.max )
-			.animate({
-				width : percentage.toFixed(0) + "%"
-			}, "slow" );
-	
+//			.width( percentage.toFixed(0) + "%" );
+
+
+        this.valueDiv.animate({
+            width : percentage.toFixed(0) + "%"
+            }, "slow" );
+
 		this.element.attr( "aria-valuenow", value );
 	}
 });

@@ -31,10 +31,10 @@ class Builder_TinyMCE_Control extends WP_Customize_Control {
 				jQuery('#accordion-section-builder_email_content').on('mousedown', '.mce-i-resize, #content_tinymce_resize', function(){
 					resize_start();
 				});
-				jQuery('#accordion-section-builder_email_content h3').on("click", function(){
+				jQuery('#accordion-section-builder_email_content h3').click(function(){
 					resize_start();
 				});
-				jQuery("body").on("mouseup", function() {
+				jQuery("body").mouseup(function() {
 				    clearInterval(resize);
 				});
 

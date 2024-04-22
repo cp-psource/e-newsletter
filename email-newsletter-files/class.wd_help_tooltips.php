@@ -421,7 +421,7 @@ function close_tooltip () {
 $(function () {
 	
 // Populate and place bound tips
-$.each(JSON.parse('<?php echo $selectors; ?>'), function (tip_id, selector) {
+$.each($.parseJSON('<?php echo $selectors; ?>'), function (tip_id, selector) {
 	var $tip = $("#" + tip_id);
 	if (!$tip.length) return true;
 	
@@ -445,11 +445,11 @@ $(".psource-help-trigger")
 <?php } ?>
 		return false;
 	})
-	.on("mouseover", function (e) {
+	.mouseover(function (e) {
 		open_tooltip($(this));
 		
 	})
-	.on("mouseout", close_tooltip)
+	.mouseout(close_tooltip)
 ;
 	
 	

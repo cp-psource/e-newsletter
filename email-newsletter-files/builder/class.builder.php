@@ -338,18 +338,17 @@ class Email_Newsletter_Builder  {
 						//make sure it is set
 						var set_val = setInterval(function () {
 							if(jQuery('[data-customize-setting-link="template"]').val() == new_theme) {
-					        	jQuery("#save").trigger("click");
+					        	jQuery("#save").click();
 					        	clearInterval(set_val);
 					        }
 					    },100);
 					}
 				});
 
-				wp.customize.bind('saved', () => {
-					const newTheme = jQuery('[data-customize-setting-link="template"]').val();
-					if (currentTheme !== newTheme) {
-						window.location.href = window.location.href.replace('theme=' + currentTheme, 'theme=' + newTheme);
-					}
+				wp.customize.bind( 'saved', function() {
+					var new_theme = jQuery('[data-customize-setting-link="template"]').val();
+					if(current_theme != new_theme)
+						window.location.href = window.location.href.replace('theme='+current_theme,'theme='+new_theme);
 				});
 			});
 
@@ -425,6 +424,18 @@ class Email_Newsletter_Builder  {
 			#customize-footer-actions {
 				min-width: 550px;
 			}
+<<<<<<< HEAD
+=======
+			.mce-flow-layout-item.mce-last {
+   				/*display: none;*/
+			}
+			div#mceu_12 {
+    			display: none;
+			}
+			div.mce-menubar {
+    			display: none;
+			}
+>>>>>>> 648402706d58ef87aa5695ed21e520bdc43eb941
 		</style>
 		<?php
 	}
@@ -506,7 +517,7 @@ class Email_Newsletter_Builder  {
 		//pharse theme settings
 		$possible_settings = array('BG_COLOR', 'BG_IMAGE', 'HEADER_IMAGE', 'LINK_COLOR', 'BODY_COLOR', 'ALTERNATIVE_COLOR', 'TITLE_COLOR', 'EMAIL_TITLE' );
 		foreach ($possible_settings as $possible_setting)
-			if(defined('PSEN_BUILDER_DEFAULT_'.$possible_setting))
+			if(defined('BUILDER_DEFAULT_'.$possible_setting))
 				$this->settings[] = $possible_setting;
 
 
@@ -763,7 +774,7 @@ class Email_Newsletter_Builder  {
 		$data = array();
 		$default = array(
 			'subject' => '',
-			'content_ecoded' => '',
+			'content_encoded' => '',
 			'contact_info' => base64_encode($email_newsletter->settings['contact_info']),
 			'from_name' => $email_newsletter->settings['from_name'],
 			'from_email' => $email_newsletter->settings['from_email'],
@@ -839,7 +850,7 @@ class Email_Newsletter_Builder  {
 
         if($builder_id && $data['newsletter_template'] != $current_theme) {
             $exclude = array('branding_html');
-            if($meta['email_title'] != PSEN_BUILDER_DEFAULT_EMAIL_TITLE)
+            if($meta['email_title'] != BUILDER_DEFAULT_EMAIL_TITLE)
                 $exclude[] = 'email_title';
 
             $email_newsletter->delete_newsletter_meta($builder_id, $exclude, 1 );
@@ -893,7 +904,7 @@ class Email_Newsletter_Builder  {
 
         if(isset($data['template']) && $data['template'] != $current_theme) {
             $exclude = array('branding_html');
-            if(isset($meta['email_title']) && $meta['email_title'] != PSEN_BUILDER_DEFAULT_EMAIL_TITLE)
+            if(isset($meta['email_title']) && $meta['email_title'] != BUILDER_DEFAULT_EMAIL_TITLE)
                 $exclude[] = 'email_title';
 
             $email_newsletter->delete_newsletter_meta($builder_id, $exclude, 1 );
@@ -1064,106 +1075,98 @@ class Email_Newsletter_Builder  {
 		$admin_url = admin_url('admin-ajax.php');
 		?><script type="text/javascript">
 			( function( $ ){
-				<?php if (in_array('EMAIL_TITLE', $this->settings)) : ?>
-					wp.customize('email_title', (value) => {
-						value.bind((to) => {
-							$('[data-builder="email_title"]').html(to ? to : '');
+				<?php if( in_array('EMAIL_TITLE',$this->settings)) : ?>
+					wp.customize('email_title',function( value ) {
+						value.bind(function(to) {
+							$('[data-builder="email_title"]').html( to ? to : '' );
 						});
 					});
 				<?php endif; ?>
-				wp.customize('email_content', (value) => {
-					value.bind((to) => {
-						const data = {
+				wp.customize('email_content',function( value ) {
+					value.bind(function(to) {
+						var data = {
 							action: 'builder_do_shortcodes',
 							content: to
-						};
-
-						$.post('<?php echo $admin_url; ?>', data, (response) => {
-							if (response !== '0') {
-								$('[data-builder="email_content"]').html(response);
+						}
+						$.post('<?php echo $admin_url; ?>', data, function(response) {
+							if(response != '0') {
+								$('[data-builder="email_content"]').html( response );
 							}
 						});
+
 					});
 				});
-				wp.customize('from_name', (value) => {
-					value.bind((to) => {
-						$('[data-builder="from_name"]').html(to ? to : '');
+				wp.customize('from_name',function( value ) {
+					value.bind(function(to) {
+						$('[data-builder="from_name"]').html( to ? to : '' );
 					});
 				});
-
-				wp.customize('from_email', (value) => {
-					value.bind((to) => {
-						$('[data-builder="from_email"]').html(to ? to : '');
+				wp.customize('from_email',function( value ) {
+					value.bind(function(to) {
+						$('[data-builder="from_email"]').html( to ? to : '' );
 					});
 				});
-
-				wp.customize('branding_html', (value) => {
-					value.bind((to) => {
-						$('[data-builder="branding_html"]').html(to ? to : '');
+				wp.customize('branding_html',function( value ) {
+					value.bind(function(to) {
+						$('[data-builder="branding_html"]').html( to ? to : '' );
 					});
 				});
-
-				wp.customize('contact_info', (value) => {
-					value.bind((to) => {
-						$('[data-builder="contact_info"]').html(to ? to : '');
+				wp.customize('contact_info',function( value ) {
+					value.bind(function(to) {
+						$('[data-builder="contact_info"]').html( to ? to : '' );
 					});
 				});
-				<?php if (in_array('BG_COLOR', $this->settings)) : ?>
-					wp.customize('bg_color', (value) => {
-						value.bind((to) => {
-							$('[data-builder="bg"]').css('background-color', to ? to : '');
+				<?php if( in_array('BG_COLOR',$this->settings)) : ?>
+					wp.customize('bg_color',function( value ) {
+						value.bind(function(to) {
+							$('[data-builder="bg"]').css( 'background-color', to ? to : '' );
 						});
 					});
 				<?php endif; ?>
-
-				<?php if (in_array('LINK_COLOR', $this->settings)) : ?>
-					wp.customize('link_color', (value) => {
-						value.bind((to) => {
-							$('a[href]').css('color', to ? to : '');
+				<?php if( in_array('LINK_COLOR',$this->settings)) : ?>
+					wp.customize('link_color',function( value ) {
+						value.bind(function(to) {
+							$('a[href]').css( 'color', to ? to : '' );
 						});
 					});
 				<?php endif; ?>
-
-				<?php if (in_array('BODY_COLOR', $this->settings)) : ?>
-					wp.customize('body_color', (value) => {
-						value.bind((to) => {
-							$('[data-builder="body_color"]').css('color', to ? to : '');
+				<?php if( in_array('BODY_COLOR',$this->settings)) : ?>
+					wp.customize('body_color',function( value ) {
+						value.bind(function(to) {
+							$('[data-builder="body_color"]').css( 'color', to ? to : '' );
 						});
 					});
 				<?php endif; ?>
-
-				<?php if (in_array('ALTERNATIVE_COLOR', $this->settings)) : ?>
-					wp.customize('alternative_color', (value) => {
-						value.bind((to) => {
-							$('[data-builder="alternative_color"]').css('color', to ? to : '');
+				<?php if( in_array('ALTERNATIVE_COLOR',$this->settings)) : ?>
+					wp.customize('alternative_color',function( value ) {
+						value.bind(function(to) {
+							$('[data-builder="alternative_color"]').css( 'color', to ? to : '' );
 						});
 					});
 				<?php endif; ?>
-
-				<?php if (in_array('TITLE_COLOR', $this->settings)) : ?>
-					wp.customize('title_color', (value) => {
-						value.bind((to) => {
-							$('[data-builder="title_color"]').css('color', to ? to : '');
+				<?php if( in_array('TITLE_COLOR',$this->settings)) : ?>
+					wp.customize('title_color',function( value ) {
+						value.bind(function(to) {
+							$('[data-builder="title_color"]').css( 'color', to ? to : '' );
 						});
 					});
 				<?php endif; ?>
+				<?php if( in_array('BG_IMAGE',$this->settings)) : ?>
+					wp.customize('bg_image',function( value ) {
 
-				<?php if (in_array('BG_IMAGE', $this->settings)) : ?>
-					wp.customize('bg_image', (value) => {
-						value.bind((to) => {
-							$('[data-builder="bg"]').css('background-image', 'url(' + to + ')');
+						value.bind(function(to) {
+							$('[data-builder="bg"]').css( 'background-image', 'url(' + to + ')');
 						});
 					});
 				<?php endif; ?>
+				<?php if( in_array('HEADER_IMAGE',$this->settings)) : ?>
+					wp.customize('header_image',function( value ) {
 
-				<?php if (in_array('HEADER_IMAGE', $this->settings)) : ?>
-					wp.customize('header_image', (value) => {
-						value.bind((to) => {
-							$('[data-builder="header_image"]').html('<img src="' + to + '" />');
+						value.bind(function(to) {
+							$('[data-builder="header_image"]').html( '<img src="' + to + '" />');
 						});
 					});
 				<?php endif; ?>
-
 			} )( jQuery )
 		</script>
 	<?php

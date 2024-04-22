@@ -1,19 +1,19 @@
 <?php
 /* You can define default values for things like Background Colors and Link Colors */
 
-define('PSEN_BUILDER_DEFAULT_BG_COLOR','#e5e5e5');
+define('BUILDER_DEFAULT_BG_COLOR','#e5e5e5');
 
-define('PSEN_BUILDER_DEFAULT_BG_IMAGE','');
+define('BUILDER_DEFAULT_BG_IMAGE','');
 
-define('PSEN_BUILDER_DEFAULT_LINK_COLOR','#999999');
+define('BUILDER_DEFAULT_LINK_COLOR','#999999');
 
-define('PSEN_BUILDER_DEFAULT_BODY_COLOR', '#222222');
+define('BUILDER_DEFAULT_BODY_COLOR', '#222222');
 
-define('PSEN_BUILDER_DEFAULT_TITLE_COLOR', '#000000');
+define('BUILDER_DEFAULT_TITLE_COLOR', '#000000');
 
-define('PSEN_BUILDER_DEFAULT_ALTERNATIVE_COLOR', '#aaaaaa');
+define('BUILDER_DEFAULT_ALTERNATIVE_COLOR', '#aaaaaa');
 
-define('PSEN_BUILDER_DEFAULT_EMAIL_TITLE', 'Mein neuer Newsletter');
+define('BUILDER_DEFAULT_EMAIL_TITLE', 'Mein neuer Newsletter');
 
 
 /* You can define settings for this template here */
