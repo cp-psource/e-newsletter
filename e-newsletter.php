@@ -226,6 +226,17 @@ class Email_Newsletter extends Email_Newsletter_functions {
         add_action( 'wp_ajax_confirm_subscibe', array( &$this, 'confirm_subscibe_ajax' ) );
         add_action( 'wp_ajax_nopriv_newsletter_unsubscribe', array( &$this, 'unsubscribe_ajax' ) );
         add_action( 'wp_ajax_newsletter_unsubscribe', array( &$this, 'unsubscribe_ajax' ) );
+
+        // Fügen Sie den TinyMCE-Editor-Code hier ein
+        function enqueue_plugin_scripts() {
+            // Laden Sie das TinyMCE-Skript
+            wp_enqueue_script('tinymce', plugin_dir_url(__FILE__) . 'email-newsletter-files/tinymce/tinymce.min.js', array(), false, true);
+
+            // Laden Sie das Initialisierungsskript für TinyMCE
+            wp_enqueue_script('init-tinymce', plugin_dir_url(__FILE__) . 'email-newsletter-files/tinymce/init-tinymce.js', array('tinymce'), false, true);
+        }
+        add_action('admin_enqueue_scripts', 'enqueue_plugin_scripts');
+        
     }
 
     /**
