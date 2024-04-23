@@ -1,9 +1,6 @@
 jQuery( document ).ready( function() {
 
-
     //Groups page
-
-
     jQuery( "#add_group" ).on("click",  function() {
         if ( "" == jQuery( "#group_name" ).val() ) {
             alert( 'Please write Group name' );
@@ -56,7 +53,6 @@ jQuery( document ).ready( function() {
         }
     };
 
-
     jQuery.fn.saveGroup = function ( ) {
         if ( "" == jQuery( "#edit_group_name" ).val() ) {
             alert( 'Please write Group name' );
@@ -67,16 +63,13 @@ jQuery( document ).ready( function() {
         jQuery( "#edit_group" ).submit();
     };
 
-
     jQuery.fn.deleteGroup = function ( id ) {
         jQuery( "#newsletter_action2" ).val( "delete_group" );
         jQuery( "#group_id" ).val( id );
         jQuery( "#edit_group" ).submit();
     };
 
-
     //members page
-
 
     //Add new member
     jQuery( "#add_member" ).on("click",  function() {
@@ -101,7 +94,6 @@ jQuery( document ).ready( function() {
 
     });
 
-
     //Some actions
     jQuery( "#apply" ).on("click",  function() {
         if ( -1 == jQuery( "#some_action" ).val() ) {
@@ -117,7 +109,7 @@ jQuery( document ).ready( function() {
     });
 
     //show/hide select box of groups list
-    jQuery( "#some_action" ).change( function() {
+    jQuery( "#some_action" ).on( "change", function() {
         if ( 'add_members_group' == jQuery( "#some_action" ).val() || 'delete_members_group' == jQuery( "#some_action" ).val() ) {
             jQuery( "#list_group_id" ).show();
         } else {
@@ -125,9 +117,8 @@ jQuery( document ).ready( function() {
         }
     });
 
-
     //change per page count
-    jQuery( "#per_page" ).change( function() {
+    jQuery( "#per_page" ).on( "change", function() {
         jQuery( "#newsletter_action" ).val( '' );
         jQuery( "#members_per_page" ).val(jQuery(this).val());
         jQuery( "#form_members" ).submit();
@@ -274,7 +265,7 @@ jQuery( document ).ready( function() {
     });
 
 
-    jQuery( '#send_form' ).submit( function() {
+    jQuery( '#send_form' ).on( 'submit', function() {
         error = '1';
 
         if ( true == jQuery( "input[name='all_members']" ).prop( 'checked' ) )
@@ -319,7 +310,7 @@ jQuery( document ).ready( function() {
     jQuery('a.edit-timestamp').on("click", function() {
         if (jQuery('#timestampdiv').is(":hidden")) {
             jQuery('#timestampdiv').slideDown('fast');
-            jQuery('#mm').focus();
+            //jQuery('#mm').focus();
             jQuery(this).hide();
         }
         return false;
@@ -475,7 +466,7 @@ jQuery( document ).ready( function() {
     }
 
     set_out_option();
-    jQuery( '.email_out_type' ).change( function() {
+    jQuery( '.email_out_type' ).on( "change", function() {
         set_out_option();
         if( jQuery( this )[0].checked ){
             jQuery( '.email_out' ).hide();
@@ -483,7 +474,7 @@ jQuery( document ).ready( function() {
         }
     });
 
-    jQuery('table.permissionTable thead .check-column input:checkbox').change(function() {
+    jQuery('table.permissionTable thead .check-column input:checkbox').on( "change", function() {
         if(jQuery(this).is(':checked')) {
             jQuery(this).parents('table').find('.check-column input:checkbox').not(jQuery(this)).prop('checked','checked');
         } else {

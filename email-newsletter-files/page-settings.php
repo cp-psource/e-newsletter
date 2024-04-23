@@ -503,7 +503,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <p><?php _e('Wie Du Hilfe und Support erhältst, erfährst Du hier.','email-newsletter'); ?></p>
                         <div class="shortcode-help">
                             <p><?php _e('Auf unserer PS-eNewsletter Projektseite findest Du alle Hilfreichen Ressourcen.'); ?></p>
-                            <iframe style="width: 100%; min-height:600px" src="https://n3rds.work/piestingtal_source/psenewsletter-wordpress-newsletter-ohne-drittanbieter/" title="PS-eNewsletter Projektseite"></iframe>
+                            <iframe style="width: 100%; min-height:600px" src="https://cp-psource.github.io/ps-newsletter/" title="PS-eNewsletter Projektseite"></iframe>
                         </div>
                     </div>
                     <?php if ( ! isset( $mode ) || "install" != $mode ): ?>

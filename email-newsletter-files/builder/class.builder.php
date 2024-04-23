@@ -372,7 +372,7 @@ class Email_Newsletter_Builder  {
 				min-height: 200px;
 			}
 			#customize-control-email_content {
-				width:95%;
+				width:96%;
 			}
 			.wp-full-overlay-sidebar {
 				min-width:550px;
