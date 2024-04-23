@@ -1,6 +1,6 @@
 jQuery( document ).ready( function() {
 
-    jQuery("#subscribes_form").on( "submit", function() {
+    jQuery("#subscribes_form").submit(function() {
         event.preventDefault(); //disable default behavior
     });
     jQuery("#subscribes_form .enewletter_widget_submit").on("click", function(event){

@@ -3,39 +3,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PS-eNewsletter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 14:04+0000\n"
+"POT-Creation-Date: 2022-12-03 04:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: DerN3rd <webmaster@n3rds@work>\n"
-"Language-Team: Deutsch\n"
-"Language: \n"
+"Last-Translator: DerN3rd <webmaster@n3rds.work>\n"
+"Language-Team: WMS N@W\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.3; wp-4.9.22\n"
+"X-Loco-Version: 2.6.3; wp-6.1.1\n"
 "X-Domain: email-newsletter"
 
-#: email-newsletter-files/page-settings.php:275
-#: email-newsletter-files/page-settings.php:402
+#: email-newsletter-files/page-settings.php:269
 msgid ""
 " (Aus Sicherheitsgründen stimmt die gespeicherte Kennwortlänge nicht mit der "
 "Vorschau überein)"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:325
+#: email-newsletter-files/page-settings.php:396
+msgid ""
+" (Aus Sicherheitsgründen stimmt die gespeicherte Kennwortlänge nicht mit der "
+"Vorschau überein.)"
+msgstr ""
+
+#: email-newsletter-files/page-settings.php:319
 msgid "('Deaktiviert' - Verwende CRON nicht zum Senden von E-Mails)"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:335
+#: email-newsletter-files/page-settings.php:329
 msgid "(0 oder leer für unlimitiert)"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:268
+#: email-newsletter-files/page-settings.php:262
 msgid "(leer lassen für keinen)"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:275
+#: email-newsletter-files/page-settings.php:269
 msgid "(leer lassen für keines)"
 msgstr ""
 
@@ -45,7 +50,7 @@ msgid ""
 "Browser anzeigen</a>"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:205
+#: email-newsletter-files/page-settings.php:199
 msgid "Abbestellen Seiten ID:"
 msgstr ""
 
@@ -54,7 +59,7 @@ msgstr ""
 msgid "Abbestellt"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:526
+#: email-newsletter-files/page-settings.php:520
 msgid "ABBRECHEN"
 msgstr ""
 
@@ -80,7 +85,7 @@ msgstr ""
 msgid "Abgemeldet"
 msgstr ""
 
-#: email-newsletter-files/page-subscribe.php:69
+#: email-newsletter-files/page-subscribe.php:68
 msgid "Abonnements speichern"
 msgstr ""
 
@@ -89,7 +94,7 @@ msgid "Abonnent hinzufügen"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:490
-msgid "Abonnent(en)"
+msgid "Abonnent(er)"
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:57
@@ -116,11 +121,11 @@ msgstr ""
 msgid "Abonniere automatisch folgende Gruppen:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:186
+#: email-newsletter-files/page-settings.php:180
 msgid "Abonnieren"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:195
+#: email-newsletter-files/page-settings.php:189
 msgid "Abonnieren Seiten-ID:"
 msgstr ""
 
@@ -144,11 +149,11 @@ msgstr ""
 msgid "Aktiviere Theme"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:116
+#: email-newsletter-files/page-settings.php:110
 msgid "Aktivieren:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:322
+#: email-newsletter-files/page-settings.php:316
 msgid "Aktiviert"
 msgstr ""
 
@@ -164,11 +169,11 @@ msgstr ""
 msgid "Alle Aktiven Abonnenten"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:540
+#: email-newsletter-files/page-settings.php:534
 msgid "Alle Einstellungen speichern"
 msgstr ""
 
-#: email-newsletter-files/page-subscribe.php:70
+#: email-newsletter-files/page-subscribe.php:69
 msgid "Alle Newsletter abbestellen"
 msgstr ""
 
@@ -180,7 +185,7 @@ msgstr ""
 msgid "Allgemeine Einstellungen"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:599
+#: email-newsletter-files/builder/class.builder.php:593
 msgid "Alternative Textfarbe"
 msgstr ""
 
@@ -196,7 +201,7 @@ msgstr ""
 msgid "Anwenden"
 msgstr ""
 
-#: email-newsletter-files/page-subscribe.php:35
+#: email-newsletter-files/page-subscribe.php:34
 msgid "Auf dieser Seite kannst Du Newsletter abonnieren oder abbestellen"
 msgstr ""
 
@@ -209,8 +214,8 @@ msgstr ""
 msgid "Auf dieser Seite verwaltest Du Newsletter Abonnenten."
 msgstr ""
 
-#: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:130
-msgid "Auf neuere Version prüfen"
+#: psource/psource-plugin-update/Puc/v4p10/Plugin/Ui.php:128
+msgid "Auf Updates prüfen"
 msgstr ""
 
 #: email-newsletter-files/page-send-newsletter.php:315
@@ -235,29 +240,29 @@ msgid "Beitrittsdatum"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:42
-#: email-newsletter-files/page-settings.php:435
+#: email-newsletter-files/page-settings.php:429
 msgid "Benutzerberechtigungen"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:395
+#: email-newsletter-files/page-settings.php:389
 msgid ""
 "Benutzername für dieses Bounce-E-Mail-Konto (normalerweise identisch mit der "
 "oben angegebenen E-Mail-Adresse) "
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:448
+#: email-newsletter-files/page-settings.php:442
 msgid "Berechtigung"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:120
+#: email-newsletter-files/page-settings.php:114
 msgid "Betreff angeben."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:118
+#: email-newsletter-files/page-settings.php:112
 msgid "Betreff:"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:532
+#: email-newsletter-files/builder/class.builder.php:526
 msgid "Bilder"
 msgstr ""
 
@@ -267,7 +272,7 @@ msgid ""
 "href=\"{CONFIRM_SUBSCRIPTION}\">HIER</a>."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:361
+#: email-newsletter-files/page-settings.php:355
 msgid ""
 "Bitte aktiviere die PHP-Erweiterung \"IMAP\", damit Bounce funktioniert."
 msgstr ""
@@ -278,19 +283,19 @@ msgid ""
 "werden."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:524
+#: email-newsletter-files/page-settings.php:518
 msgid "Bitte bestätige das endgültige Löschen all Deiner Newsletter-Daten"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:119
+#: email-newsletter-files/page-settings.php:113
 msgid "Bitte bestätige deine Email"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:356
+#: email-newsletter-files/page-settings.php:350
 msgid "Bounce Einstellungen"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:722
+#: email-newsletter-files/builder/class.builder.php:716
 msgid "Bounce Email"
 msgstr ""
 
@@ -298,7 +303,7 @@ msgstr ""
 msgid "Bounce-Einstellungen"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:732
+#: email-newsletter-files/builder/class.builder.php:726
 msgid "Branding HTML/Text"
 msgstr ""
 
@@ -306,15 +311,11 @@ msgstr ""
 msgid "Branding:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:178
-msgid "ClassicPress-Benutzerregistrierung:"
-msgstr ""
-
-#: email-newsletter-files/builder/class.builder.php:650
+#: email-newsletter-files/builder/class.builder.php:644
 msgid "Content"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:587
+#: email-newsletter-files/builder/class.builder.php:581
 msgid "Content Textfarbe"
 msgstr ""
 
@@ -322,11 +323,11 @@ msgstr ""
 msgid "CRON"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:314
+#: email-newsletter-files/page-settings.php:308
 msgid "CRON Email Versand:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:310
+#: email-newsletter-files/page-settings.php:304
 msgid "CRON Email Versandeinstellungen"
 msgstr ""
 
@@ -336,21 +337,21 @@ msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Das ultimative Newsletter Plugin für ClassicPress. Keine "
-"Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-"
-"Dashboard managen und versenden."
+"Das ultimative Newsletter Plugin für WordPress. Keine Drittanbieterdienste "
+"oder Abo-Kosten, Newsletter direkt aus dem WordPress-Dashboard managen und "
+"versenden."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:520
+#: email-newsletter-files/page-settings.php:514
 msgid "Daten löschen"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:160
-#: email-newsletter-files/page-settings.php:187
+#: email-newsletter-files/page-settings.php:154
+#: email-newsletter-files/page-settings.php:181
 msgid "Deaktivieren"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:323
+#: email-newsletter-files/page-settings.php:317
 msgid "Deaktiviert"
 msgstr ""
 
@@ -363,19 +364,19 @@ msgid "Deine Newsletter Anmeldung"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:45
-#: email-newsletter-files/page-settings.php:517
+#: email-newsletter-files/page-settings.php:511
 msgid "Deinstallieren"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:381
+#: email-newsletter-files/page-settings.php:375
 msgid "Der Hostname für das POP3-Konto, z. B.: mail."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:261
+#: email-newsletter-files/page-settings.php:255
 msgid "Der Hostname für das SMTP-Konto, z. B.: Mail."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:388
+#: email-newsletter-files/page-settings.php:382
 msgid "Der Standardwert ist 110 oder 995 bei aktiviertem SSL"
 msgstr ""
 
@@ -398,7 +399,7 @@ msgid ""
 "als Link. Zum Deaktivieren leer lassen."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:234
+#: email-newsletter-files/page-settings.php:228
 msgid ""
 "Diese Methode verwendet PHP-Funktionen zum Versenden von Newslettern und E-"
 "Mails. Sei vorsichtig, da einige Hosts möglicherweise Einschränkungen für "
@@ -407,12 +408,11 @@ msgid ""
 "Methode, um optimale Ergebnisse zu erzielen!"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:239
+#: email-newsletter-files/page-settings.php:233
 msgid ""
-"Diese Methode verwendet Standardfunktionen für ClassicPress-E-Mails zum "
-"Senden von Newslettern und E-Mails. Du kannst andere Plugins zum Senden von "
-"E-Mails verwenden, aber möglicherweise funktioniert die Absprungprüfung "
-"nicht mehr."
+"Diese Methode verwendet Standardfunktionen für WordPress-E-Mails zum Senden "
+"von Newslettern und E-Mails. Du kannst andere Plugins zum Senden von E-Mails "
+"verwenden, aber möglicherweise funktioniert die Absprungprüfung nicht mehr."
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:13
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Diese Seite enthält die Liste aller Newsletter."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:113
+#: email-newsletter-files/page-settings.php:107
 msgid "Doppel Opt In:"
 msgstr ""
 
@@ -431,7 +431,7 @@ msgstr ""
 msgid "Du hast nicht gespeicherte Daten in diesem Newsletter."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:146
+#: email-newsletter-files/page-settings.php:140
 msgid "Du hast noch keine Abonnentengruppen erstellt."
 msgstr ""
 
@@ -439,17 +439,17 @@ msgstr ""
 msgid "E-Mail im Browser anzeigen:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:374
+#: email-newsletter-files/page-settings.php:368
 msgid ""
 "E-Mail-Adresse, an die standardmäßig Bounce-E-Mails gesendet werden "
 "(möglicherweise vom Server überschrieben)"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:222
+#: email-newsletter-files/page-settings.php:216
 msgid "E-Mail-Versandmethode:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:330
+#: email-newsletter-files/page-settings.php:324
 msgid "Einschränkungen:"
 msgstr ""
 
@@ -457,7 +457,7 @@ msgstr ""
 msgid "Einstellen"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:646
+#: email-newsletter-files/builder/class.builder.php:640
 msgid "Einstellungen"
 msgstr ""
 
@@ -465,7 +465,7 @@ msgstr ""
 msgid "Einstellungen für ausgehende E-Mails"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:217
+#: email-newsletter-files/page-settings.php:211
 msgid "Einstellungen für ausgehende SMTP-E-Mails"
 msgstr ""
 
@@ -477,25 +477,25 @@ msgstr ""
 msgid "Email Addresse"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:371
+#: email-newsletter-files/page-settings.php:365
 msgid "Email Addresse:"
 msgstr ""
 
 #: email-newsletter-files/page-newsletters-dashboard.php:103
 #: email-newsletter-files/page-newsletters.php:64
-#: email-newsletter-files/builder/class.builder.php:707
+#: email-newsletter-files/builder/class.builder.php:701
 msgid "Email Betreff"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:727
+#: email-newsletter-files/builder/class.builder.php:721
 msgid "Email Inhalt"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:637
+#: email-newsletter-files/builder/class.builder.php:631
 msgid "Email Titel"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:336
+#: email-newsletter-files/page-settings.php:330
 msgid "Emails pro"
 msgstr ""
 
@@ -524,6 +524,10 @@ msgstr ""
 msgid "Erstellungsdatum"
 msgstr ""
 
+#: psource/psource-plugin-update/Puc/v4p10/Vcs/PluginUpdateChecker.php:98
+msgid "Es ist kein Änderungsprotokoll verfügbar."
+msgstr ""
+
 #: email-newsletter-files/builder/class.builder.php:31
 msgid ""
 "Etwas stimmt nicht, wir können nicht feststellen, was Du versuchst zu tun."
@@ -540,7 +544,7 @@ msgid ""
 "\t{CONFIRM_SUBSCRIPTION}"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:565
+#: email-newsletter-files/builder/class.builder.php:559
 msgid "Farben"
 msgstr ""
 
@@ -548,7 +552,7 @@ msgstr ""
 msgid "Fortfahren"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:199
+#: email-newsletter-files/page-settings.php:193
 msgid ""
 "Füge die ID der Seite hinzu, welche Du nach dem Abonnieren des Benutzers "
 "anzeigen möchtest. Du kannst den Shortcode [enewsletter_subscribe_message] "
@@ -622,7 +626,7 @@ msgstr ""
 msgid "Gruppen:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:468
+#: email-newsletter-files/page-settings.php:462
 msgid "Gruppenberechtigungen"
 msgstr ""
 
@@ -647,40 +651,40 @@ msgid ""
 "Hi {FIRST_NAME},<br> Vielen Dank, dass Du unseren Newsletter abonniert hast."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:490
+#: email-newsletter-files/page-settings.php:484
 msgid ""
-"Hier erfährst Du, wie Du Deinen Beiträgen, Seiten und Themenvorlagen E-Newsletter-"
+"Hier erfährst Du, wie Du Deinn Posts, Seiten und Themenvorlagen E-Newsletter-"
 "Shortcodes hinzufügst."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:518
+#: email-newsletter-files/page-settings.php:512
 msgid ""
 "Hier kannst Du alle mit dem Plugin verknüpften Daten aus der Datenbank "
 "löschen, betrifft auch Deine Maillisten und Adressen."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:436
+#: email-newsletter-files/page-settings.php:430
 msgid ""
 "Hier kannst Du die gewünschten Berechtigungen für jede Benutzerrolle auf "
 "Deiner Webseite festlegen"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:367
+#: email-newsletter-files/page-settings.php:361
 msgid ""
 "Hiermit wird gesteuert, wie Bounce-E-Mails vom System verarbeitet werden. "
 "Bitte erstelle ein neues separates POP3-E-Mail-Konto, um Bounce-E-Mails zu "
 "verarbeiten. Gib diese POP3-E-Mail-Details unten ein."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:508
+#: email-newsletter-files/page-settings.php:502
 msgid "Hilfe & Support"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:575
+#: email-newsletter-files/builder/class.builder.php:569
 msgid "Hintergrundfarbe"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:251
+#: email-newsletter-files/page-settings.php:245
 msgid ""
 "Hinweis 2: Für die PHP-Mail-Methode solltest Du unter \"Von E-Mail\" nur E-"
 "Mails mit einer für Deinen Server konfigurierten Domäne verwenden (z.B: "
@@ -701,7 +705,7 @@ msgid ""
 "Ohne Überschriften."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:250
+#: email-newsletter-files/page-settings.php:244
 msgid ""
 "Hinweis: Für die SMTP-Methode solltest Du unter \"Von E-Mail\" nur E-Mails "
 "verwenden, die sich auf Deinen SMTP-Server beziehen!"
@@ -709,7 +713,7 @@ msgstr ""
 
 #: email-newsletter-files/page-members.php:74
 msgid ""
-"Hinweis: Änderungen an Abonnenten werden nicht mit ClassicPress-Benutzern "
+"Hinweis: Änderungen an Abonnenten werden nicht mit WordPress-Benutzern "
 "synchronisiert, sondern umgekehrt."
 msgstr ""
 
@@ -719,11 +723,11 @@ msgstr ""
 
 #. URI of the plugin
 msgid ""
-"https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-"
+"https://n3rds.work/piestingtal_source/psenewsletter-wordpress-newsletter-"
 "ohne-drittanbieter/"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:527
+#: email-newsletter-files/page-settings.php:521
 msgid "ICH BESTÄTIGE"
 msgstr ""
 
@@ -732,7 +736,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:209
+#: email-newsletter-files/page-settings.php:203
 msgid ""
 "ID der Seite hinzufügen, die angezeigt werden soll, nachdem der Benutzer "
 "sich abgemeldet hat. Du kannst den Shortcode "
@@ -752,12 +756,12 @@ msgstr ""
 msgid "Importiere Abonnenten:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:538
+#: email-newsletter-files/page-settings.php:532
 msgid "Installieren"
 msgstr ""
 
 #: email-newsletter-files/page-settings.php:78
-msgid "Sie kann für jeden Newsletter leicht geändert werden"
+msgid "It can be easily changed for each newsletter"
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:89
@@ -789,11 +793,11 @@ msgstr ""
 msgid "Kontakt Informationen:"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:737
+#: email-newsletter-files/builder/class.builder.php:731
 msgid "Kontaktinformation"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:624
+#: email-newsletter-files/builder/class.builder.php:618
 msgid "Linkfarbe"
 msgstr ""
 
@@ -801,7 +805,7 @@ msgstr ""
 msgid "Liste der Gruppen:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:521
+#: email-newsletter-files/page-settings.php:515
 msgid "Lösche alle Plugin-Daten aus der Datenbank."
 msgstr ""
 
@@ -817,11 +821,11 @@ msgstr ""
 msgid "Massenaktionen"
 msgstr ""
 
-#: email-newsletter-files/page-subscribe.php:34
+#: email-newsletter-files/page-subscribe.php:33
 msgid "Meine Newsletter Abonnements"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:229
+#: email-newsletter-files/page-settings.php:223
 msgid ""
 "Mit der SMTP-Methode kannst Du Deinen SMTP-Server (oder Google Mail, Yahoo, "
 "Hotmail usw.) zum Senden von Newslettern und E-Mails verwenden. Dies ist "
@@ -830,7 +834,7 @@ msgid ""
 "die schwarze Liste gesetzt zu werden"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:344
+#: email-newsletter-files/page-settings.php:338
 msgid "Monat"
 msgstr ""
 
@@ -854,8 +858,8 @@ msgid "Name"
 msgstr ""
 
 #: email-newsletter-files/page-groups.php:91
-#: email-newsletter-files/page-settings.php:293
-#: email-newsletter-files/page-settings.php:415
+#: email-newsletter-files/page-settings.php:287
+#: email-newsletter-files/page-settings.php:409
 msgid "Nein"
 msgstr ""
 
@@ -868,7 +872,7 @@ msgid "Neuen Newsletter erstellen"
 msgstr ""
 
 #: email-newsletter-files/class.wp_widgets.php:48
-#: email-newsletter-files/page-subscribe.php:79
+#: email-newsletter-files/page-subscribe.php:78
 msgid "Newsletter abonnieren"
 msgstr ""
 
@@ -893,11 +897,11 @@ msgstr ""
 msgid "Newsletters"
 msgstr ""
 
-#: email-newsletter-files/page-subscribe.php:48
+#: email-newsletter-files/page-subscribe.php:47
 msgid "Newsletters:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:480
+#: email-newsletter-files/page-settings.php:474
 msgid "Niemand"
 msgstr ""
 
@@ -905,7 +909,7 @@ msgstr ""
 msgid "Ohne Gruppe"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:402
+#: email-newsletter-files/page-settings.php:396
 msgid "Passwort für den Zugriff auf dieses Bounce-E-Mail-Konto"
 msgstr ""
 
@@ -920,26 +924,26 @@ msgid "Pausieren und per WP-CRON versenden"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:499
-msgid "pro Seite."
+msgid "per page."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:232
+#: email-newsletter-files/page-settings.php:226
 msgid "PHP Mail"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:392
+#: email-newsletter-files/page-settings.php:386
 msgid "POP3 Benutzername:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:378
+#: email-newsletter-files/page-settings.php:372
 msgid "POP3 Host:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:399
+#: email-newsletter-files/page-settings.php:393
 msgid "POP3 Passwort:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:385
+#: email-newsletter-files/page-settings.php:379
 msgid "POP3 Port"
 msgstr ""
 
@@ -947,15 +951,15 @@ msgstr ""
 msgid "PS-eNewsletter"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:479
+#: email-newsletter-files/page-settings.php:473
 msgid "Registrierte Benutzer"
 msgstr ""
 
 #: email-newsletter-files/page-members.php:159
-msgid "Beispieldatei"
+msgid "Sample File"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:348
+#: email-newsletter-files/page-settings.php:342
 msgid "Sekunde(n) zwischen jeder E-Mail"
 msgstr ""
 
@@ -974,7 +978,7 @@ msgstr ""
 #: email-newsletter-files/page-newsletters.php:146
 #: email-newsletter-files/page-send-newsletter.php:37
 #: email-newsletter-files/page-send-newsletter.php:77
-#: email-newsletter-files/page-settings.php:333
+#: email-newsletter-files/page-settings.php:327
 msgid "Senden"
 msgstr ""
 
@@ -987,7 +991,7 @@ msgstr ""
 msgid "Senden:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:489
+#: email-newsletter-files/page-settings.php:483
 msgid "Shortcode Benutzung"
 msgstr ""
 
@@ -995,31 +999,31 @@ msgstr ""
 msgid "Shortcodes & Hilfe"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:407
+#: email-newsletter-files/page-settings.php:401
 msgid "Sicheres POP3?:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:286
+#: email-newsletter-files/page-settings.php:280
 msgid "Sicheres SMTP?"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:226
+#: email-newsletter-files/page-settings.php:220
 msgid "SMTP (empfohlen)"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:272
+#: email-newsletter-files/page-settings.php:266
 msgid "SMTP Passwort:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:279
+#: email-newsletter-files/page-settings.php:273
 msgid "SMTP Port"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:258
+#: email-newsletter-files/page-settings.php:252
 msgid "SMTP-Ausgangsserver"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:265
+#: email-newsletter-files/page-settings.php:259
 msgid "SMTP-Benutzername:"
 msgstr ""
 
@@ -1027,28 +1031,28 @@ msgstr ""
 msgid "So schnell wie möglich."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:294
-#: email-newsletter-files/page-settings.php:416
+#: email-newsletter-files/page-settings.php:288
+#: email-newsletter-files/page-settings.php:410
 msgid "SSL"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:282
+#: email-newsletter-files/page-settings.php:276
 msgid "Standard ist 25.  Gmail benutzt 465 oder 587"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:249
+#: email-newsletter-files/page-settings.php:243
 msgid "Standard-E-Mail-Adresse \"von\" beim Versenden von Newslettern."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:103
+#: email-newsletter-files/page-settings.php:97
 msgid "Standard-E-Mail-Adresse, an die Vorschauen gesendet werden sollen."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:172
+#: email-newsletter-files/page-settings.php:166
 msgid "Standard-Newsletter, der im Benutzerabonnement gesendet wird."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:108
+#: email-newsletter-files/page-settings.php:102
 msgid "Standardeinstellungen für das Abonnieren/Abbestellen von Benutzern"
 msgstr ""
 
@@ -1056,13 +1060,13 @@ msgstr ""
 msgid "Standardeinstellungen für Informationen"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:150
+#: email-newsletter-files/page-settings.php:144
 msgid ""
 "Standardgruppen, zu denen Benutzer nach dem Abonnement hinzugefügt werden "
 "sollen (auch wenn im Abonnement-Widget nichts ausgewählt ist)."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:126
+#: email-newsletter-files/page-settings.php:120
 msgid "Standardgruppen:"
 msgstr ""
 
@@ -1078,7 +1082,7 @@ msgstr ""
 msgid "Statistiken für aktuelle Abonnenten:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:342
+#: email-newsletter-files/page-settings.php:336
 msgid "Stunde"
 msgstr ""
 
@@ -1086,57 +1090,51 @@ msgstr ""
 msgid "Suche Abonnenten"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:343
+#: email-newsletter-files/page-settings.php:337
 msgid "Tag"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:303
-#: email-newsletter-files/page-settings.php:423
+#: email-newsletter-files/page-settings.php:297
+#: email-newsletter-files/page-settings.php:417
 msgid "Test Verbindung"
 msgstr ""
 
-#: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:221
+#: psource/psource-plugin-update/Puc/v4p10/Plugin/Ui.php:213
 #, php-format
 msgctxt "the plugin title"
-msgid ""
-"Entschuldige, es konnte nicht festgestellt werden, ob Updates für %s "
-"verfügbar sind."
+msgid "Das %s-Plugin ist laut PSource Server auf dem neuesten Stand."
 msgstr ""
 
-#: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:219
+#: psource/psource-plugin-update/Puc/v4p10/Plugin/Ui.php:215
 #, php-format
 msgctxt "the plugin title"
-msgid "Im PSOURCE REPO ist eine <b>neuere Version von %s</b> verfügbar!."
+msgid "Eine neue Version des %s-Plugins ist auf dem PSource Server verfügbar."
 msgstr ""
 
-#: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:217
+#: psource/psource-plugin-update/Puc/v4p10/Plugin/Ui.php:217
 #, php-format
 msgctxt "the plugin title"
-msgid "Keine neuere Version von %s im PSOURCE REPO gefunden."
-msgstr ""
-
-#: psource/psource-plugin-update/Puc/v5p0/Vcs/PluginUpdateChecker.php:98
-msgid "Ein Änderungsprotokoll ist nicht verfügbar."
+msgid "Es konnte nicht festgestellt werden, ob Updates für %s verfügbar sind."
 msgstr ""
 
 #: email-newsletter-files/class.wp_widgets.php:71
 msgid "Titel"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:612
+#: email-newsletter-files/builder/class.builder.php:606
 msgid "Titel Textfarbe"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:295
+#: email-newsletter-files/page-settings.php:289
 msgid "TLS"
 msgstr ""
 
-#: psource/psource-plugin-update/Puc/v5p0/Plugin/Ui.php:227
+#: psource/psource-plugin-update/Puc/v4p10/Plugin/Ui.php:223
 #, php-format
-msgid "Unbekannter PSOURCE-UPDATER-Status \"%s\""
+msgid "Unbekannter Update-Status \"%s\""
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:346
+#: email-newsletter-files/page-settings.php:340
 msgid "und warte"
 msgstr ""
 
@@ -1148,15 +1146,15 @@ msgstr ""
 msgid "Von .csv Datei:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:245
+#: email-newsletter-files/page-settings.php:239
 msgid "Von der Email Adresse:"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:717
+#: email-newsletter-files/builder/class.builder.php:711
 msgid "Von Email"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:712
+#: email-newsletter-files/builder/class.builder.php:706
 msgid "Von Name"
 msgstr ""
 
@@ -1165,7 +1163,7 @@ msgid "Vorheriges Senden:"
 msgstr ""
 
 #: email-newsletter-files/page-newsletters.php:71
-#: email-newsletter-files/builder/class.builder.php:702
+#: email-newsletter-files/builder/class.builder.php:696
 msgid "Vorlage"
 msgstr ""
 
@@ -1177,11 +1175,11 @@ msgstr ""
 msgid "Vorname:"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:742
+#: email-newsletter-files/builder/class.builder.php:736
 msgid "Vorschau an E-Mail senden (zuerst speichern)"
 msgstr ""
 
-#: email-newsletter-files/builder/class.builder.php:654
+#: email-newsletter-files/builder/class.builder.php:648
 #: email-newsletter-files/builder/class.preview-control.php:11
 msgid "Vorschau senden"
 msgstr ""
@@ -1210,29 +1208,29 @@ msgstr ""
 msgid "Weiter Senden"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:120
+#: email-newsletter-files/page-settings.php:114
 msgid ""
 "Wenn diese Option aktiviert ist, erhalten Abonnenten eine Bestätigungs-E-"
 "Mail mit dem konfigurierten Betreff, um Newsletter zu abonnieren (nur für "
 "nicht registrierte Benutzer). RECHTLICH DRINGEND EMPFOHLEN!"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:509
+#: email-newsletter-files/page-settings.php:503
 msgid "Wie Du Hilfe und Support erhältst, erfährst Du hier."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:156
+#: email-newsletter-files/page-settings.php:150
 msgid "Willkommens Newsletter:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:424
+#: email-newsletter-files/page-settings.php:418
 msgid ""
 "Wir senden eine Test-E-Mail an die Bounce-Adresse und versuchen, diese E-"
 "Mail zu lesen und danach zu löschen (dieser Teil ist möglicherweise nicht "
 "möglich)."
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:304
+#: email-newsletter-files/page-settings.php:298
 msgid "Wir senden Test-E-Mails an die konfigurierte E-Mail-Adresse."
 msgstr ""
 
@@ -1240,20 +1238,24 @@ msgstr ""
 msgid "Wirf einen Blick auf Deine Newsletter-Berichte."
 msgstr ""
 
-#: email-newsletter-files/page-members.php:309
-#: email-newsletter-files/page-newsletters-dashboard.php:177
-msgid "CP ID"
+#: email-newsletter-files/page-settings.php:172
+msgid "WordPress-Benutzerregistrierung:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:237
-msgid "CP Mail"
+#: email-newsletter-files/page-members.php:309
+#: email-newsletter-files/page-newsletters-dashboard.php:177
+msgid "WP ID"
+msgstr ""
+
+#: email-newsletter-files/page-settings.php:231
+msgid "WP Mail"
 msgstr ""
 
 #: email-newsletter-files/page-send-newsletter.php:145
 msgid "Wähle aus an welche Gruppen Du senden möchtest:"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:482
+#: email-newsletter-files/page-settings.php:476
 msgid ""
 "Wähle aus, welcher Benutzertyp nicht öffentliche Gruppen abonnieren kann. "
 "<small>Beachte dass Benutzer weiterhin zu allen Arten von Gruppen auf der "
@@ -1261,14 +1263,14 @@ msgid ""
 "</small>"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:297
+#: email-newsletter-files/page-settings.php:291
 msgid "Wähle den optionalen Verbindungstyp"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:189
+#: email-newsletter-files/page-settings.php:183
 msgid ""
-"Wähle ob Benutzer, die sich (mit ClassicPress) auf Deiner Website "
-"registrieren, automatisch den Newsletter abonnieren."
+"Wähle ob Benutzer, die sich (mit WordPress) auf Deiner Website registrieren, "
+"automatisch den Newsletter abonnieren."
 msgstr ""
 
 #: email-newsletter-files/page-members.php:80
@@ -1296,6 +1298,6 @@ msgstr ""
 msgid "Öffentliche Benutzer können dieser Gruppe beitreten"
 msgstr ""
 
-#: email-newsletter-files/page-settings.php:472
+#: email-newsletter-files/page-settings.php:466
 msgid "Öffentlicher Gruppenzugriff:"
 msgstr ""

@@ -372,7 +372,7 @@ class Email_Newsletter_Builder  {
 				min-height: 200px;
 			}
 			#customize-control-email_content {
-				width:auto;
+				width:95%;
 			}
 			.wp-full-overlay-sidebar {
 				min-width:550px;
@@ -424,18 +424,15 @@ class Email_Newsletter_Builder  {
 			#customize-footer-actions {
 				min-width: 550px;
 			}
-<<<<<<< HEAD
-=======
 			.mce-flow-layout-item.mce-last {
    				/*display: none;*/
 			}
 			div#mceu_12 {
-    			display: none;
+    			display: block;
 			}
 			div.mce-menubar {
     			display: none;
 			}
->>>>>>> 648402706d58ef87aa5695ed21e520bdc43eb941
 		</style>
 		<?php
 	}
@@ -774,7 +771,7 @@ class Email_Newsletter_Builder  {
 		$data = array();
 		$default = array(
 			'subject' => '',
-			'content_encoded' => '',
+			'content_ecoded' => '',
 			'contact_info' => base64_encode($email_newsletter->settings['contact_info']),
 			'from_name' => $email_newsletter->settings['from_name'],
 			'from_email' => $email_newsletter->settings['from_email'],
@@ -929,7 +926,7 @@ class Email_Newsletter_Builder  {
 	}
 
 	// Anything that isnt a text input has to have its own function because
-	// ClassicPress only gives us the $default value to match in the filter
+	// WordPress only gives us the $default value to match in the filter
 	function get_builder_template($default) {
 		return $this->get_customizer_theme();
 	}

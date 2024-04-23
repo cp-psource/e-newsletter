@@ -71,7 +71,7 @@
     <div class="wrap">
         <h2><?php _e( 'Abonnenten', 'email-newsletter' ) ?></h2>
         <p><?php _e( 'Auf dieser Seite verwaltest Du Newsletter Abonnenten.', 'email-newsletter' ) ?></p>
-        <p><?php _e( 'Hinweis: Änderungen an Abonnenten werden nicht mit ClassicPress-Benutzern synchronisiert, sondern umgekehrt.', 'email-newsletter' ) ?></p>
+        <p><?php _e( 'Hinweis: Änderungen an Abonnenten werden nicht mit WordPress-Benutzern synchronisiert, sondern umgekehrt.', 'email-newsletter' ) ?></p>
 
         <p class="slide">
             <?php if(current_user_can('add_newsletter_member') || current_user_can('import_newsletter_members')) { ?>
@@ -156,7 +156,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                       <span class="description"><?php _e( 'Hinweis: Die Datei sollte die nächsten Spalten enthalten: E-Mail (erforderlich), Vorname (nicht erforderlich), Nachname (nicht erforderlich). Ohne Überschriften.', 'email-newsletter' ) ?> <a href="<?php echo $this->plugin_url.'/email-newsletter-files/sample.csv'; ?>"><?php _e( 'Beispieldatei', 'email-newsletter' ) ?></a></span>
+                                       <span class="description"><?php _e( 'Hinweis: Die Datei sollte die nächsten Spalten enthalten: E-Mail (erforderlich), Vorname (nicht erforderlich), Nachname (nicht erforderlich). Ohne Überschriften.', 'email-newsletter' ) ?> <a href="<?php echo $this->plugin_url.'/email-newsletter-files/sample.csv'; ?>"><?php _e( 'Sample File', 'email-newsletter' ) ?></a></span>
                                     </td>
                                 </tr>
                                 <tr id="import_file_line">
@@ -306,12 +306,12 @@
                             <input type="checkbox">
                         </th>
                         <th class="members-wp manage-column column-name">
-                            <?php _e( 'CP ID', 'email-newsletter' ) ?>
+                            <?php _e( 'WP ID', 'email-newsletter' ) ?>
                         </th>
                         <th class="members-email manage-column column-name <?php echo (isset($arg['orderby']) && "member_email" == $arg['orderby']) ? 'sorted ' . $arg['order'] : 'sortable desc';?>">
                             <?php $url = add_query_arg( array('orderby' => 'member_email'), $url_orginal ); ?>
                             <a href="<?php echo $url; ?>">
-                                <span><?php _e( 'Email Addresse', 'email-newsletter' ) ?>   </span>
+                                <span><?php _e( 'Email Address', 'email-newsletter' ) ?>   </span>
                                 <span class="sorting-indicator"></span>
                             </a>
                         </th>
@@ -487,7 +487,7 @@
 
                 <div class="tablenav-pages">
                     <span class="displaying-num">
-                        <?php echo ( isset( $members_pagination ) ) ? $members_pagination['count'] : $count; ?> <?php _e( 'Abonnent(en)', 'email-newsletter' ) ?>
+                        <?php echo ( isset( $members_pagination ) ) ? $members_pagination['count'] : $count; ?> <?php _e( 'Abonnent(er)', 'email-newsletter' ) ?>
                         <?php _e( 'von', 'email-newsletter' ) ?>
                         <select name="per_page" id="per_page">
                             <option value="15" <?php echo ( 15 == $per_page ) ? 'selected' : ''; ?> >15</option>
@@ -496,7 +496,7 @@
                             <option value="100" <?php echo ( 100 == $per_page ) ? 'selected' : ''; ?> >100</option>
                             <option value="all" <?php echo ( 'all' == $per_page ) ? 'selected' : ''; ?> ><?php _e( 'Alle', 'email-newsletter' ) ?></option>
                         </select>
-                        <?php _e( 'pro Seite.', 'email-newsletter' ) ?>
+                        <?php _e( 'per page.', 'email-newsletter' ) ?>
                     </span>
 
                     <?php

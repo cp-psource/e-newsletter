@@ -267,7 +267,7 @@ class Email_Newsletter_functions {
 
         $member = $wpdb->get_row( $wpdb->prepare( "SELECT member_id FROM {$this->tb_prefix}enewsletter_members WHERE wp_user_id = %d".$subscribed, $wp_user_id ), "ARRAY_A" );
         //return $member['member_id'];
-        return isset($member['member_id']) && is_array($member['member_id']) ? count($member['member_id']) : 0;
+        return isset($member['member_id']) ? count($member['member_id']) :0;
     }
 
     /**
@@ -684,7 +684,7 @@ class Email_Newsletter_functions {
         if($roles) {
             $roles = $this->get_roles();
             foreach ($roles as $role_id => $role) {
-                $targets['roles']['name'] = __( 'ClassicPress-Benutzerrollen', 'email-newsletter' );
+                $targets['roles']['name'] = __( 'WordPress-Benutzerrollen', 'email-newsletter' );
                 $targets['roles'][] = '<label><input type="checkbox" name="target[roles][]" value="'.$role_id.'"> '.$role['name'].'</input></label>';
             }
         }
@@ -1104,8 +1104,8 @@ class Email_Newsletter_functions {
     		$sent_status = wp_mail( $email_to, $email_subject, $email_contents, $headers );
 
 	        if( !$sent_status ) {
-	            $this->write_log('CP Mail send email error');
-	            //return 'CP Mail send email error';
+	            $this->write_log('WP Mail send email error');
+	            //return 'WP Mail send email error';
 	        }
     	}
     	else {

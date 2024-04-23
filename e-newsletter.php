@@ -1,17 +1,16 @@
 <?php
 /*
 Plugin Name: PS-eNewsletter
-Plugin URI: https://n3rds.work/cp_psource/psenewsletter-dsgvo-konformer-newsletter/
-Donate link: https://n3rds.work/spendenaktionen/unterstuetze-unsere-psource-free-werke/
-Description: Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.
+Plugin URI: https://n3rds.work/piestingtal_source/psenewsletter-wordpress-newsletter-ohne-drittanbieter/
+Description: Das ultimative Newsletter Plugin für WordPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem WordPress-Dashboard managen und versenden.
+Natürlich mit der großartigen Piestingtal.Source Kompatibilität.
 Version: 2.8.7
-Domain Path: /languages
 Text Domain: email-newsletter
-Author: Webmasterservice N3rds@Work,
-Author URI: https://n3rds.work
+Author: PSOURCE
+Author URI: https://github.com/cp-psource
 
 
-Copyright 2018-2023 WMS N3rds@Work (https://n3rds.work), Corecode von WPMUDEV (eNewsletter)
+Copyright 2018-2024 PSOURCE (https://github.com/cp-psource)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
@@ -26,17 +25,29 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Es tut uns leid, aber Du kannst nicht direkt auf diese Datei zugreifen.' );
 }
 
-require 'psource/psource-plugin-update/psource-plugin-updater.php';
-use Psource\PluginUpdateChecker\v5\PucFactory;
-$MyUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://n3rds.work//wp-update-server/?action=get_metadata&slug=ps-newsletter', 
-	__FILE__, 
-	'ps-newsletter' 
+/**
+ * @@@@@@@@@@@@@@@@@ PS UPDATER 1.3 @@@@@@@@@@@
+ **/
+require 'psource/psource-plugin-update/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+ 
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/cp-psource/ps-newsletter',
+	__FILE__,
+	'ps-newsletter'
 );
+ 
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('master');
+
+/**
+ * @@@@@@@@@@@@@@@@@ ENDE PS UPDATER 1.3 @@@@@@@@@@@
+ **/
 
 require_once( 'email-newsletter-files/class.functions.php' );
 require_once( 'email-newsletter-files/builder/class.builder.php' );
@@ -226,17 +237,6 @@ class Email_Newsletter extends Email_Newsletter_functions {
         add_action( 'wp_ajax_confirm_subscibe', array( &$this, 'confirm_subscibe_ajax' ) );
         add_action( 'wp_ajax_nopriv_newsletter_unsubscribe', array( &$this, 'unsubscribe_ajax' ) );
         add_action( 'wp_ajax_newsletter_unsubscribe', array( &$this, 'unsubscribe_ajax' ) );
-
-        // Fügen Sie den TinyMCE-Editor-Code hier ein
-        function enqueue_plugin_scripts() {
-            // Laden Sie das TinyMCE-Skript
-            wp_enqueue_script('tinymce', plugin_dir_url(__FILE__) . 'email-newsletter-files/tinymce/tinymce.min.js', array(), false, true);
-
-            // Laden Sie das Initialisierungsskript für TinyMCE
-            wp_enqueue_script('init-tinymce', plugin_dir_url(__FILE__) . 'email-newsletter-files/tinymce/init-tinymce.js', array('tinymce'), false, true);
-        }
-        add_action('admin_enqueue_scripts', 'enqueue_plugin_scripts');
-        
     }
 
     /**
@@ -788,7 +788,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
     function init() {
 
         //load translation files
-        load_plugin_textdomain( 'email-newsletter', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        load_plugin_textdomain( 'email-newsletter', false, dirname( plugin_basename( __FILE__ ) ) . '/email-newsletter-files/languages/' );
 
         //public actions of the plugin
         if ( isset( $_REQUEST['newsletter_action'] ) && !defined('DOING_AJAX') ) {
@@ -2683,7 +2683,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
                         'value' => get_date_from_gmt(date('Y-m-d H:i:s', $member['join_date'])),
                     ),
                     array(
-                        'name' => __( 'Gruppen', 'appointments' ),
+                        'name' => __( 'Groups', 'appointments' ),
                         'value' => implode(', ', $member_groups),
                     ),
                 ),
