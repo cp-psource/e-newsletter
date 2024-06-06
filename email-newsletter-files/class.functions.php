@@ -249,26 +249,30 @@ class Email_Newsletter_functions {
         return  $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->tb_prefix}enewsletter_members WHERE member_email = '%s'", $email ), "ARRAY_A" );
     }
 
-    /**
-     * Get member id of wp user
-     **/
     function get_members_by_wp_user_id( $wp_user_id, $blog_id = '', $subscribed = 0 ) {
         global $wpdb;
-
+    
         if ( 1 < $blog_id )
             $tb_prefix = $wpdb->base_prefix . $blog_id . '_';
         else
             $tb_prefix = $wpdb->base_prefix;
-
+    
         if($subscribed)
             $subscribed = " AND unsubscribe_code != ''";
         else
             $subscribed = "";
-
+    
         $member = $wpdb->get_row( $wpdb->prepare( "SELECT member_id FROM {$this->tb_prefix}enewsletter_members WHERE wp_user_id = %d".$subscribed, $wp_user_id ), "ARRAY_A" );
-        //return $member['member_id'];
-        return isset($member['member_id']) ? count($member['member_id']) :0;
-    }
+        
+        // Überprüfen, ob ein Mitglied gefunden wurde
+        if(isset($member['member_id'])) {
+            // Mitglied gefunden, daher wird 1 zurückgegeben
+            return 1;
+        } else {
+            // Kein Mitglied gefunden, daher wird 0 zurückgegeben
+            return 0;
+        }
+    }    
 
     /**
      * Get all members of Group
