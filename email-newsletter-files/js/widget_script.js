@@ -2,8 +2,6 @@ jQuery(document).ready(function() {
     // Submit-Event für das Formular abfangen
     jQuery("#subscribes_form").on("submit", function(event) {
         event.preventDefault(); // Standardverhalten des Formulars deaktivieren
-
-        // Füge hier deinen weiteren JavaScript-Code hinzu, der nach dem Absenden des Formulars ausgeführt werden soll
     });
 
     // Click-Event für den Button abfangen
