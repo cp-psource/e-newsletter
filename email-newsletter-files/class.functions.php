@@ -1587,24 +1587,24 @@ class Email_Newsletter_functions {
                     if(strpos($contents_parts['header'].$contents_parts['content'],'<body') === false && strpos($contents_parts['content'].$contents_parts['footer'],'</body>') === false) {
                         $body_header = '<body>';
                         $body_footer = '</body>';
-                    }
-                    else
+                    } else {
                         $body_header = $body_footer = '';
+                    }
 
                     $contents_parts['header'] = '
-                        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                        <!DOCTYPE html>
+                        <html lang="de">
                         <head>
-                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                            <meta charset="UTF-8">
                             <title>{EMAIL_TITLE}</title>
                             <style type="text/css">
                                 {DEFAULT_STYLE_HEADER}
                                 {STYLE_HEADER}
                             </style>
-
                             {HEADER}
-                        </head>'.$body_header.$contents_parts['header'];
+                        </head>' . $body_header . $contents_parts['header'];
 
-                    $contents_parts['footer'] = $contents_parts['footer'].$body_footer.'
+                    $contents_parts['footer'] = $contents_parts['footer'] . $body_footer . '
                         </html>';
                 }
 

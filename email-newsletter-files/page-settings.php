@@ -150,17 +150,26 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <?php _e( 'Willkommens Newsletter:', 'email-newsletter' ) ?>
                                 </th>
                                 <td>
+                                <?php
+                                    // Definiere $mode, wenn es noch nicht definiert ist
+                                    if (!isset($mode)) {
+                                        $mode = '';
+                                    }
+                                    ?>
                                     <select name="settings[subscribe_newsletter]">
-                                        <option value=""><?php _e( 'Deaktivieren', 'email-newsletter' ) ?></option>
+                                        <option value=""><?php _e( 'Deaktivieren', 'email-newsletter' ); ?></option>
                                         <?php
+                                        // Nutze $mode, um die Newsletter abzurufen
                                         $newsletters = ($mode != 'install') ? $this->get_newsletters() : 0;
 
-                                        if($newsletters)
-                                            foreach( $newsletters as $key => $newsletter ) {
-                                                if (strlen($newsletter['subject']) > 30)
-                                                $newsletter['subject'] = substr($newsletter['subject'], 0, 27) . '...';
-                                                echo '<option value="'.$newsletter['newsletter_id'].'" '.selected( $this->settings['subscribe_newsletter'], $newsletter['newsletter_id'], false).'>'.$newsletter['newsletter_id'].': '.$newsletter['subject'].'</option>';
+                                        if ($newsletters) {
+                                            foreach ($newsletters as $key => $newsletter) {
+                                                if (strlen($newsletter['subject']) > 30) {
+                                                    $newsletter['subject'] = substr($newsletter['subject'], 0, 27) . '...';
+                                                }
+                                                echo '<option value="' . $newsletter['newsletter_id'] . '" ' . selected($this->settings['subscribe_newsletter'], $newsletter['newsletter_id'], false) . '>' . $newsletter['newsletter_id'] . ': ' . $newsletter['subject'] . '</option>';
                                             }
+                                        }
                                         ?>
                                     </select>
                                     <span class="description"><?php _e( 'Standard-Newsletter, der im Benutzerabonnement gesendet wird.', 'email-newsletter' ) ?></span>
