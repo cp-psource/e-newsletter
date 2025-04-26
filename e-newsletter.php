@@ -111,25 +111,24 @@ class Email_Newsletter extends Email_Newsletter_functions {
         $this->settings = $this->get_settings();
 
         // Setup all plugin capabilities
-        $this->capabilities['create_newsletter'] = __('Newsletter erstellen','email-newsletter');
-        $this->capabilities['save_newsletter'] = __('Newsletter bearbeiten','email-newsletter');
-        $this->capabilities['send_newsletter'] = __('Newsletter senden','email-newsletter');
-        $this->capabilities['delete_newsletter'] = __('Newsletter löschen','email-newsletter');
-        $this->capabilities['create_newsletter_group'] = __('Newsletter-Gruppen erstellen','email-newsletter');
-        $this->capabilities['edit_newsletter_group'] = __('Newsletter-Gruppen bearbeiten','email-newsletter');
-        $this->capabilities['delete_newsletter_group'] = __('Newsletter-Gruppen löschen','email-newsletter');
-        $this->capabilities['change_newsletter_group'] = __('Newsletter-Gruppen ändern','email-newsletter');
-        $this->capabilities['view_newsletter_members'] = __('Newsletter-Abonnenten anzeigen','email-newsletter');
-        $this->capabilities['add_newsletter_member'] = __('Newsletter-Abonnenten hinzufügen','email-newsletter');
-        $this->capabilities['edit_newsletter_member'] = __('Newsletter-Abonnenten bearbeiten','email-newsletter');
-        $this->capabilities['delete_newsletter_member'] = __('Newsletter-Abonnenten löschen','email-newsletter');
-        $this->capabilities['add_members_group'] = __('Abonnenten zur Gruppe hinzufügen','email-newsletter');
-        $this->capabilities['delete_members_group'] = __('Abonnenten aus Gruppe löschen','email-newsletter');
-        $this->capabilities['save_newsletter_settings'] = __('Newsletter-Einstellungen Speichern','email-newsletter');
-        $this->capabilities['view_newsletter_dashboard'] = __('Dashboard-Seite anzeigen','email-newsletter');
-        $this->capabilities['import_newsletter_members'] = __('Abonnenten importieren','email-newsletter');
-        $this->capabilities['install_newsletter'] = __('Erstinstallation','email-newsletter');
-        $this->capabilities['uninstall_newsletter'] = __('Deinstalliere alle Newsletter-Daten','email-newsletter');
+        $this->capabilities['create_newsletter'] = 'Newsletter erstellen';
+        $this->capabilities['save_newsletter'] = 'Newsletter bearbeiten';
+        $this->capabilities['send_newsletter'] = 'Newsletter senden';
+        $this->capabilities['delete_newsletter'] = 'Newsletter löschen';
+        $this->capabilities['create_newsletter_group'] = 'Newsletter-Gruppen erstellen';
+        $this->capabilities['edit_newsletter_group'] = 'Newsletter-Gruppen bearbeiten';
+        $this->capabilities['delete_newsletter_group'] = 'Newsletter-Gruppen löschen';
+        $this->capabilities['change_newsletter_group'] = 'Newsletter-Gruppen ändern';
+        $this->capabilities['view_newsletter_members'] = 'Newsletter-Abonnenten anzeigen';
+        $this->capabilities['edit_newsletter_member'] = 'Newsletter-Abonnenten bearbeiten';
+        $this->capabilities['delete_newsletter_member'] = 'Newsletter-Abonnenten löschen';
+        $this->capabilities['add_members_group'] = 'Abonnenten zur Gruppe hinzufügen';
+        $this->capabilities['delete_members_group'] = 'Abonnenten aus Gruppe löschen';
+        $this->capabilities['save_newsletter_settings'] = 'Newsletter-Einstellungen Speichern';
+        $this->capabilities['view_newsletter_dashboard'] = 'Dashboard-Seite anzeigen';
+        $this->capabilities['import_newsletter_members'] = 'Abonnenten importieren';
+        $this->capabilities['install_newsletter'] = 'Erstinstallation';
+        $this->capabilities['uninstall_newsletter'] = 'Deinstalliere alle Newsletter-Daten';
 
         //Activate/deactivate actions
         register_activation_hook( $this->plugin_dir . 'e-newsletter.php', array( &$this, 'do_activation' ) );
