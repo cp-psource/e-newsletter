@@ -425,7 +425,7 @@ class Email_Newsletter_Builder  {
 				min-width: 550px;
 			}
 			.mce-flow-layout-item.mce-last {
-   				/*display: none;*/
+   				display: none;
 			}
 			div#mceu_12 {
     			display: block;
