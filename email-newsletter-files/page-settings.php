@@ -93,7 +93,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <?php _e( 'Vorschaumail an:', 'email-newsletter' ) ?>
                                 </th>
                                 <td>
-                                    <input type="text" class="regular-text" name="settings[preview_email]" value="<?php echo isset($this->settings['preview_email']) ? esc_attr($this->settings['preview_email']) : $this->settings['from_email'];?>" />
+                                    <input type="text" class="regular-text" name="settings[preview_email]" value="<?php echo (is_array($this->settings) && isset($this->settings['preview_email'])) ? esc_attr($this->settings['preview_email']) : (is_array($this->settings) && isset($this->settings['from_email']) ? $this->settings['from_email'] : ''); ?>" />
                                     <span class="description"><?php _e( 'Standard-E-Mail-Adresse, an die Vorschauen gesendet werden sollen.', 'email-newsletter' ) ?></span>
                                 </td>
                             </tr>
@@ -124,7 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     $groups = !isset($mode) ? $this->get_groups() : 0;
 
                                     if ( $groups ) {
-                                        $this->settings['subscribe_groups'] = isset($this->settings['subscribe_groups']) ? explode(',', $this->settings['subscribe_groups']) : array();
+                                        $this->settings['subscribe_groups'] = (is_array($this->settings) && isset($this->settings['subscribe_groups'])) ? explode(',', $this->settings['subscribe_groups']) : array();
                                     ?>
                                         <?php foreach( $groups as $group ) : ?>
                                             <label for="member[groups_id][]">
@@ -160,7 +160,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         <option value=""><?php _e( 'Deaktivieren', 'email-newsletter' ); ?></option>
                                         <?php
                                         // Nutze $mode, um die Newsletter abzurufen
-                                        $newsletters = ($mode != 'install') ? $this->get_newsletters() : 0;
+                                        $newsletters = ($mode != 'install' && is_callable([$this, 'get_newsletters'])) ? $this->get_newsletters() : 0;
 
                                         if ($newsletters) {
                                             foreach ($newsletters as $key => $newsletter) {
@@ -512,7 +512,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <p><?php _e('Wie Du Hilfe und Support erhältst, erfährst Du hier.','email-newsletter'); ?></p>
                         <div class="shortcode-help">
                             <p><?php _e('Auf unserer PS-eNewsletter Projektseite findest Du alle Hilfreichen Ressourcen.'); ?></p>
-                            <iframe style="width: 100%; min-height:600px" src="https://cp-psource.github.io/ps-newsletter/" title="PS-eNewsletter Projektseite"></iframe>
+                            <iframe style="width: 100%; min-height:600px" src="https://cp-psource.github.io/e-newsletter/" title="PS-eNewsletter Projektseite"></iframe>
                         </div>
                     </div>
                     <?php if ( ! isset( $mode ) || "install" != $mode ): ?>

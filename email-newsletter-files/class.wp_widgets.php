@@ -3,8 +3,8 @@
 class e_newsletter_subscribe extends WP_Widget {
     //constructor
     function __construct() {
-        $widget_ops = array( 'description' => __( 'Ermöglicht Personen, Deine Newsletter-Datenbank zu abonnieren.') );
-        parent::__construct( false, __( 'Newsletter: Abonnieren' ), $widget_ops );
+        $widget_ops = array( 'description' => 'Ermöglicht Personen, Deine Newsletter-Datenbank zu abonnieren.' );
+        parent::__construct( false, 'Newsletter: Abonnieren', $widget_ops );
     }
 
     /** @see WP_Widget::widget */
@@ -45,7 +45,7 @@ class e_newsletter_subscribe extends WP_Widget {
         if ( isset( $instance['title'] ) )
             $title = esc_attr( $instance['title'] );
         else
-            $title = __( 'Newsletter abonnieren', 'email-newsletter' );
+            $title = 'Newsletter abonnieren';
 
         if ( isset( $instance['name'] ) )
             $name = esc_attr( $instance['name'] );

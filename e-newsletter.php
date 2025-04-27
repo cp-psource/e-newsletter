@@ -373,22 +373,21 @@ class Email_Newsletter extends Email_Newsletter_functions {
             wp_enqueue_script( 'enewsletter-script' );
 
             $admin_js_options = array(
-                'edit' => __( 'Bearbeiten', 'email-newsletter' ),
-                'close' => __( 'Schließen', 'email-newsletter' ),
-                'save' => __( 'Speichern', 'email-newsletter' ),
-                'write_email' => __( 'Bitte schreibe eine E-Mailadresse des Abonnents', 'email-newsletter' ),
-                'show_add_member' => __( 'Öffne Formular für neue Abonnenten/Importe an', 'email-newsletter' ),
-                'hide_add_member' => __( 'Blende die neuen Abonnenten-/Importformulare aus', 'email-newsletter' ),
-                'show_export_member' => __( 'Öffne Formular für Abonnentenexport an', 'email-newsletter' ),
-                'hide_export_member' => __( 'Blende das Formular für Exportmitglieder aus', 'email-newsletter' ),
-                'proper_email' => __( 'Bitte verwende die richtige E-Mail', 'email-newsletter' ),
-                'proper_email' => __( 'Bitte verwende die richtige E-Mail', 'email-newsletter' ),
-                'confirm' => __( 'Bist Du Dir sicher?', 'email-newsletter' ),
-                'save_groups' => __( 'Gruppen speichern', 'email-newsletter' ),
-                'change_groups' => __( 'Gruppen ändern', 'email-newsletter' ),
-                'select_members' => __( 'Wähle Abonnenten aus.', 'email-newsletter' ),
+                'edit' => 'Bearbeiten',
+                'close' => 'Schließen',
+                'save' => 'Speichern',
+                'write_email' => 'Bitte schreibe eine E-Mailadresse des Abonnents',
+                'show_add_member' => 'Öffne Formular für neue Abonnenten/Importe an',
+                'hide_add_member' => 'Blende die neuen Abonnenten-/Importformulare aus',
+                'show_export_member' => 'Öffne Formular für Abonnentenexport an',
+                'hide_export_member' => 'Blende das Formular für Exportmitglieder aus',
+                'proper_email' => 'Bitte verwende die richtige E-Mail',
+                'confirm' => 'Bist Du Dir sicher?',
+                'save_groups' => 'Gruppen speichern',
+                'change_groups' => 'Gruppen ändern',
+                'select_members' => 'Wähle Abonnenten aus.',
                 'settings_tab' => (isset($_GET['tab'])) ? $_GET['tab'] : (!$this->settings ? 'tabs-2' : 'tabs-1'),
-                'smtp_warning' => __( 'Bitte schreibe SMTP Outgoing Server oder wähle eine andere Sendemethode!', 'email-newsletter' )
+                'smtp_warning' => 'Bitte schreibe SMTP Outgoing Server oder wähle eine andere Sendemethode!'
             );
             wp_localize_script( 'enewsletter-script', 'enewsletter', $admin_js_options );
         }
@@ -433,7 +432,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
             $subscribe_code = get_query_var( 'subscribe_code' );
 
             if ( $subscribe_code != md5( "sometext123" . $member_id ) )
-                $message = __( 'Fehler: Falsche Abonnementdaten!', 'email-newsletter' );
+                $message = 'Fehler: Falsche Abonnementdaten!';
 
             $member_data = $this->get_member( $member_id );
             if($member_data) {
@@ -452,14 +451,14 @@ class Email_Newsletter extends Email_Newsletter_functions {
                     }
 
                     $subscribed = 1;
-                    $message = __( 'Erfolgreiches Abonnement!', 'email-newsletter' );
+                    $message = 'Erfolgreiches Abonnement!';
                 }
                 else {
-                    $message = __( 'Abonnent bereits abonniert!', 'email-newsletter' );
+                    $message = 'Abonnent bereits abonniert!';
                 }
             }
             else {
-                $message = __( 'Beim Abonnieren ist ein Problem aufgetreten!', 'email-newsletter' );
+                $message = 'Beim Abonnieren ist ein Problem aufgetreten!';
             }
 
             if(isset($this->settings['subscribe_page_id']) && is_numeric($this->settings['subscribe_page_id']) && get_post($this->settings['subscribe_page_id']))
