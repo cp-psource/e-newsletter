@@ -314,8 +314,8 @@ msgid "Branding:"
 msgstr "Branding:"
 
 #: email-newsletter-files/page-settings.php:178
-msgid "ClassicPress-Benutzerregistrierung:"
-msgstr "ClassicPress user registration:"
+msgid "WordPress-Benutzerregistrierung:"
+msgstr "WordPress user registration:"
 
 #: email-newsletter-files/builder/class.builder.php:650
 msgid "Content"
@@ -343,13 +343,13 @@ msgstr "The default branding HTML/text is inserted at the top of each email."
 
 #. Description of the plugin
 msgid ""
-"Das ultimative Newsletter Plugin für ClassicPress. Keine "
-"Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-"
+"Das ultimative Newsletter Plugin für WordPress. Keine "
+"Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem WordPress-"
 "Dashboard managen und versenden."
 msgstr ""
-"The ultimate newsletter plugin for ClassicPress. No third-party services or "
+"The ultimate newsletter plugin for WordPress. No third-party services or "
 "subscription costs, manage and send newsletters directly from the "
-"ClassicPress dashboard."
+"WordPress dashboard."
 
 #: email-newsletter-files/page-settings.php:520
 msgid "Daten löschen"
@@ -425,12 +425,12 @@ msgstr ""
 
 #: email-newsletter-files/page-settings.php:239
 msgid ""
-"Diese Methode verwendet Standardfunktionen für ClassicPress-E-Mails zum "
+"Diese Methode verwendet Standardfunktionen für WordPress-E-Mails zum "
 "Senden von Newslettern und E-Mails. Du kannst andere Plugins zum Senden von "
 "E-Mails verwenden, aber möglicherweise funktioniert die Absprungprüfung "
 "nicht mehr."
 msgstr ""
-"This method uses standard ClassicPress email features to send newsletters "
+"This method uses standard WordPress email features to send newsletters "
 "and emails. You can use other plugins to send emails, but the bounce check "
 "may not work anymore."
 
@@ -751,10 +751,10 @@ msgstr ""
 
 #: email-newsletter-files/page-members.php:74
 msgid ""
-"Hinweis: Änderungen an Abonnenten werden nicht mit ClassicPress-Benutzern "
+"Hinweis: Änderungen an Abonnenten werden nicht mit WordPress-Benutzern "
 "synchronisiert, sondern umgekehrt."
 msgstr ""
-"Note: Changes to subscribers are not synchronized with ClassicPress users, "
+"Note: Changes to subscribers are not synchronized with WordPress users, "
 "but vice versa."
 
 #. Author URI of the plugin
@@ -763,10 +763,10 @@ msgstr "https://n3rds.work"
 
 #. URI of the plugin
 msgid ""
-"https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-"
+"https://n3rds.work/piestingtal_source/psenewsletter-WordPress-newsletter-"
 "ohne-drittanbieter/"
 msgstr ""
-"https://n3rds.work/piestingtal_source/psenewsletter-ClassicPress-newsletter-"
+"https://n3rds.work/piestingtal_source/psenewsletter-WordPress-newsletter-"
 "ohne-drittanbieter/"
 
 #: email-newsletter-files/page-settings.php:527
@@ -1332,10 +1332,10 @@ msgstr "Choose the optional connection type"
 
 #: email-newsletter-files/page-settings.php:189
 msgid ""
-"Wähle ob Benutzer, die sich (mit ClassicPress) auf Deiner Website "
+"Wähle ob Benutzer, die sich (mit WordPress) auf Deiner Website "
 "registrieren, automatisch den Newsletter abonnieren."
 msgstr ""
-"Choose whether users who register (with ClassicPress) on your website "
+"Choose whether users who register (with WordPress) on your website "
 "automatically subscribe to the newsletter."
 
 #: email-newsletter-files/page-members.php:80

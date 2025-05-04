@@ -72,7 +72,7 @@ zu verbessern.
 
 * PhP 8.1 Getestet
 * PO Datei hinzugefügt
-* TinyMCE Fix für ClassicPress ab 5.4
+* TinyMCE Fix für WordPress ab 5.4
 
 = 2.8.4 =
 
@@ -103,5 +103,5 @@ zu verbessern.
 = 2.8.0 =
 
 * Updated: Deutsche Übersetzungen
-* Fixed: Einige Probleme mit ClassicPress 5
+* Fixed: Einige Probleme mit WordPress 5
 * Updated: Quelltext modernisiert
