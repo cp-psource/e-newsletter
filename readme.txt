@@ -1,9 +1,9 @@
-=== PS Newsletter ===
+=== PS eNewsletter ===
 Contributors: DerN3rd (PSOURCE)
 Tags: newsletter
 Requires at least: 3.7
 Tested up to: 5.6
-Stable tag: 2.8.9
+Stable tag: 2.9.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,13 +31,18 @@ anstehende Events, damit Sie eine Teilnahme buchen können und dannach laufend �
 Wir lieben OpenSource, wenn Du Vorschläge oder Idee hast, so teile uns diese doch mit, wir bemühen uns stehts unsere Plugins und Themes 
 zu verbessern.
 
-[POWERED BY PSOURCE](https://n3rds.work/psource_kategorien/psource-plugins/)
+[POWERED BY PSOURCE](https://github.com/cp-psource)
 
 [Projektseite](https://cp-psource.github.io/ps-newsletter/)
 [GitHub](https://github.com/piestingtal-source/ps-newsletter)
 
 
 == ChangeLog ==
+
+= 2.9.0 =
+
+* Major Bugfixes
+* New Docs
 
 = 2.8.9 =
 
