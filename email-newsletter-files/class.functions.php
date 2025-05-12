@@ -249,30 +249,25 @@ class Email_Newsletter_functions {
         return  $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->tb_prefix}enewsletter_members WHERE member_email = '%s'", $email ), "ARRAY_A" );
     }
 
+    /**
+     * Get member id of wp user
+     **/
     function get_members_by_wp_user_id( $wp_user_id, $blog_id = '', $subscribed = 0 ) {
         global $wpdb;
-    
+
         if ( 1 < $blog_id )
             $tb_prefix = $wpdb->base_prefix . $blog_id . '_';
         else
             $tb_prefix = $wpdb->base_prefix;
-    
+
         if($subscribed)
             $subscribed = " AND unsubscribe_code != ''";
         else
             $subscribed = "";
-    
+
         $member = $wpdb->get_row( $wpdb->prepare( "SELECT member_id FROM {$this->tb_prefix}enewsletter_members WHERE wp_user_id = %d".$subscribed, $wp_user_id ), "ARRAY_A" );
-        
-        // Überprüfen, ob ein Mitglied gefunden wurde
-        if(isset($member['member_id'])) {
-            // Mitglied gefunden, daher wird 1 zurückgegeben
-            return 1;
-        } else {
-            // Kein Mitglied gefunden, daher wird 0 zurückgegeben
-            return 0;
-        }
-    }    
+        return $member['member_id'];
+    }
 
     /**
      * Get all members of Group
@@ -640,7 +635,7 @@ class Email_Newsletter_functions {
             foreach ($groups as $group) {
                 $count = count( $this->get_members_of_group( $group['group_id'], '', 1 ) );
                 if($count) {
-                    $targets['groups']['name'] = __( 'Newsletter Gruppen', 'email-newsletter' );
+                    $targets['groups']['name'] = __( 'eNewsletter Groups', 'email-newsletter' );
                     $targets['groups'][] = '<label><input type="checkbox" name="target[groups][]" value="'.$group['group_id'].'"> '.$group['group_name'].' ('.$count.')</input></label>';
                 }
             }
@@ -653,7 +648,7 @@ class Email_Newsletter_functions {
                 $memberships = $api->list_memberships();
                 if (count($memberships)) {
                     $targets['m2'] = array();
-                    $targets['m2']['name'] = __( 'PS-Mitgliedschaften Abonnenten', 'email-newsletter' );
+                    $targets['m2']['name'] = __( 'Membership 2 Subscribers', 'email-newsletter' );
                     foreach ($memberships as $membership) {
                         $count = $this->get_members_of_membership2($membership->id, 1);
                         $targets['m2'][] = sprintf(
@@ -671,7 +666,7 @@ class Email_Newsletter_functions {
                 foreach ($membership_levels as $membership_level) {
                     $count = $this->get_members_of_membership($membership_level, 1);
                     if($count) {
-                        $targets['membership_levels']['name'] = __( 'PS-Mitgliedschaften Plugin Level', 'email-newsletter' );
+                        $targets['membership_levels']['name'] = __( 'Membership Plugin Levels', 'email-newsletter' );
                         $targets['membership_levels'][] = '<label><input type="checkbox" name="target[membership_levels][]" value="'.$membership_level['id'].'"> '.$membership_level['level_title'].' ('.$count.')</input></label>';
                     }
                 }
@@ -688,7 +683,7 @@ class Email_Newsletter_functions {
         if($roles) {
             $roles = $this->get_roles();
             foreach ($roles as $role_id => $role) {
-                $targets['roles']['name'] = __( 'WordPress-Benutzerrollen', 'email-newsletter' );
+                $targets['roles']['name'] = __( 'WordPress User Roles', 'email-newsletter' );
                 $targets['roles'][] = '<label><input type="checkbox" name="target[roles][]" value="'.$role_id.'"> '.$role['name'].'</input></label>';
             }
         }
@@ -697,7 +692,7 @@ class Email_Newsletter_functions {
             $count = $this->get_global_wp_user_ids();
             $count = count($count);
             if($count) {
-                $targets['site_admins'][] = '<label><input type="checkbox" name="target[site_admins]" value="yes"> <strong>'.__( 'Administratoren aller Websites', 'email-newsletter' ).'</strong> ('.$count.')</input></label>';
+                $targets['site_admins'][] = '<label><input type="checkbox" name="target[site_admins]" value="yes"> <strong>'.__( 'Admins of all sites', 'email-newsletter' ).'</strong> ('.$count.')</input></label>';
             }
         }
 
@@ -985,13 +980,13 @@ class Email_Newsletter_functions {
     }
 
     /**
-     * Fügt einige Punkte für CRON hinzu
+     * Add some periods for CRON
      **/
     function add_new_cron_time( $schedules ) {
 
         $schedules['2mins'] = array(
             'interval' => 2*60,
-            'display' => __('alle 2 Minuten')
+            'display' => __('every 2 min')
         );
 
         return $schedules;
@@ -1223,9 +1218,9 @@ class Email_Newsletter_functions {
 
         //Translate template default elements
         $default_texts = array(
-            'From' => __( 'Von', 'email-newsletter' ),
-            'Nicht mehr interessiert?' => __( 'Nicht mehr interessiert?', 'email-newsletter' ),
-            'Newsletter abbestellen.' => __( 'Newsletter abmelden.', 'email-newsletter' )
+            'From' => __( 'From', 'email-newsletter' ),
+            'Not interested anymore?' => __( 'Not interested anymore?', 'email-newsletter' ),
+            'Unsubscribe Instantly.' => __( 'Unsubscribe Instantly.', 'email-newsletter' )
         );
         foreach ($default_texts as $text => $translation) {
             $contents = str_replace( $text, $translation, $contents );
@@ -1311,7 +1306,7 @@ class Email_Newsletter_functions {
         );
         $contents = $this->make_email_values($visuals_prepare, $contents, $newsletter_id);
 
-        //dom walker zum Hinzufügen von Klassen, um die Kompatibilität sicherzustellen
+        //dom walker to add classes to ensure compability
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->loadHTML($contents);
         $imgs = $dom->getElementsByTagName('img');
@@ -1381,7 +1376,7 @@ class Email_Newsletter_functions {
     }
 
     /**
-     * E-Mail personalisieren
+     * Personalize email
      **/
     function personalise_email_body( $contents, $member_id, $wp_only_user_id, $join_date, $unsubscribe_code, $send_id, $changes = array() ) {
         if($member_id)
@@ -1391,7 +1386,7 @@ class Email_Newsletter_functions {
         else
             $id = 0;
 
-        //Richtet Permalinks ein
+        //Set up permalinks
         $changes['OPENED_TRACKER'] = '<div style="font-size: 0px; line-height:0px; visibility: hidden;"><img src="' . admin_url('admin-ajax.php?action=check_email_opened&send_id=' . $send_id . '&member_id=' . $member_id . '&wp_only_user_id=' . $wp_only_user_id) . '" width="1" height="1"/></div>';
         $unsubscribe_url = add_query_arg( array('unsubscribe_page' => '1', 'unsubscribe_code' => $unsubscribe_code, 'unsubscribe_member_id' => $id), home_url() );
         $changes['UNSUBSCRIBE_URL'] = $unsubscribe_url;
@@ -1400,7 +1395,7 @@ class Email_Newsletter_functions {
 
         $changes = apply_filters( 'email_newsletter/personalise_email_body', $changes, $member_id, $send_id );
 
-        //Wende alle dynamischen Replikate auf Inhalte an
+        //apply all dynamic replcements to content
         foreach ($changes as $key => $value) {
             if(!empty($value)) {
                 $contents = str_replace( "{".strtoupper($key)."}", $value, $contents );
@@ -1424,13 +1419,13 @@ class Email_Newsletter_functions {
             register_theme_directory($this->template_directory);
         }
 
-        //Fix für Schummel-Nachricht
+        //cheating message fix
         if($added)
             wp_clean_themes_cache();
     }
 
     /**
-     * Holt die Theme-Details
+     * Get theme details
      **/
     function get_selected_theme($theme_name, $newsletter_id = false) {
         global $wp_theme_directories;
@@ -1441,7 +1436,7 @@ class Email_Newsletter_functions {
         if($theme->exists()) {
             $template = $this->get_theme_dir_url($theme, $theme_name);
 
-            //Theme Optionen laden
+            //load theme options
             if($this->loaded_theme_options != $template['dir']) {
                 $this->loaded_theme_options = $template['dir'];
                 if(file_exists($template['dir'] . 'functions.php'))
@@ -1487,7 +1482,7 @@ class Email_Newsletter_functions {
     }
 
     /**
-     * Bereitet Inline-Stile vor
+     * Prepare inline styles
      **/
     function do_inline_styles($contents, $styles) {
         if($contents && $styles) {
@@ -1501,7 +1496,7 @@ class Email_Newsletter_functions {
     }
 
     /**
-     * Konvertiert Themenpseudovariablen
+     * Converts themes pseudo variables
      **/
     function make_email_values($prepare, $contents, $newsletter_id) {
         foreach ($prepare as $type => $values) {
@@ -1525,7 +1520,7 @@ class Email_Newsletter_functions {
     }
 
     /**
-     * Ruft die richtigen Teile des Newsletters ab
+     * Gets correct parts of newsletter
      **/
     function get_contents_elements($template_path, $get_html = 1, $get_styles = 1) {
         if($template_path) {
@@ -1581,30 +1576,30 @@ class Email_Newsletter_functions {
                         $contents_parts[$type] = '';
                 }
 
-            //Wenn der Header fehlt - repariere ihn!
+            //if head missing - fix it!
             if($get_html) {
                 if(strpos($contents_parts['header'].$contents_parts['content'],'<html') === false && strpos($contents_parts['content'].$contents_parts['footer'],'</html>') === false) {
                     if(strpos($contents_parts['header'].$contents_parts['content'],'<body') === false && strpos($contents_parts['content'].$contents_parts['footer'],'</body>') === false) {
                         $body_header = '<body>';
                         $body_footer = '</body>';
-                    } else {
-                        $body_header = $body_footer = '';
                     }
+                    else
+                        $body_header = $body_footer = '';
 
                     $contents_parts['header'] = '
-                        <!DOCTYPE html>
-                        <html lang="de">
+                        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
                         <head>
-                            <meta charset="UTF-8">
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                             <title>{EMAIL_TITLE}</title>
                             <style type="text/css">
                                 {DEFAULT_STYLE_HEADER}
                                 {STYLE_HEADER}
                             </style>
-                            {HEADER}
-                        </head>' . $body_header . $contents_parts['header'];
 
-                    $contents_parts['footer'] = $contents_parts['footer'] . $body_footer . '
+                            {HEADER}
+                        </head>'.$body_header.$contents_parts['header'];
+
+                    $contents_parts['footer'] = $contents_parts['footer'].$body_footer.'
                         </html>';
                 }
 
@@ -1831,10 +1826,10 @@ class Email_Newsletter_functions {
                 $message = '';
 
                 if ( 0 < $i )
-                    $message .=  __( 'Der Import wurde erfolgreich abgeschlossen,', 'email-newsletter' ) . ' ' . $i . ' ' . __( 'Abonnenten werden zu Gruppen hinzugefügt oder abonniert.', 'email-newsletter' );
+                    $message .=  __( 'Import is finished successfully,', 'email-newsletter' ) . ' ' . $i . ' ' . __( 'members are added or subscribed to group(s).', 'email-newsletter' );
 
                 if ( isset( $exist_members ) && is_array( $exist_members ) ) {
-                    $message .= '<br />' . __( 'Diese E-Mails sind bereits in der Abonnentenliste vorhanden:', 'email-newsletter' ) . '<br />';
+                    $message .= '<br />' . __( 'These emails already exist in member list:', 'email-newsletter' ) . '<br />';
                     $exist_members_count = count($exist_members);
                     $exist_members = array_slice($exist_members, 0, 40);
                     foreach($exist_members as $exist_member )
@@ -1842,11 +1837,11 @@ class Email_Newsletter_functions {
 
                     if($exist_members_count > 40)  {
                         $exist_members_count_left = $exist_members_count-40;
-                        $message .= __( '...und '.$exist_members_count_left.' mehr!', 'email-newsletter' ) . '<br />';
+                        $message .= __( '...and '.$exist_members_count_left.' more!', 'email-newsletter' ) . '<br />';
                     }
                 }
                 if ( isset( $incorrect_members ) && is_array( $incorrect_members ) ) {
-                    $message .= '<br />' . __( 'Diese E-Mails sind falsch:', 'email-newsletter' ) . '<br />';
+                    $message .= '<br />' . __( 'These emails are incorrect:', 'email-newsletter' ) . '<br />';
                     $incorrect_members_count = count($incorrect_members);
                     $incorrect_members = array_slice($incorrect_members, 0, 40);
                     foreach($incorrect_members as $incorrect_member )
@@ -1854,23 +1849,23 @@ class Email_Newsletter_functions {
 
                     if($incorrect_members_count > 40)  {
                         $incorrect_members_count_left = $incorrect_members_count-40;
-                        $message .= __( '...und '.$incorrect_members_count_left.' mehr!', 'email-newsletter' ) . '<br />';
+                        $message .= __( '...and '.$incorrect_members_count_left.' more!', 'email-newsletter' ) . '<br />';
                     }
                 }
 
                 if(empty($message)) {
-                    $message .= 'Import FEHLER: Nichts zu importieren';
+                    $message .= 'Import ERROR: Nothing to import';
                 }
 
                 wp_redirect( add_query_arg( array( 'page' => 'newsletters-members', 'updated' => 'true', 'message' => urlencode( $message ) ), 'admin.php' ) );
                 exit;
 
             } else {
-                wp_redirect( add_query_arg( array( 'page' => 'newsletters-members', 'updated' => 'true', 'message' => urlencode( __( 'Import FEHLER: Problem beim Hochladen der Datei!', 'email-newsletter' ) ) ), 'admin.php' ) );
+                wp_redirect( add_query_arg( array( 'page' => 'newsletters-members', 'updated' => 'true', 'message' => urlencode( __( 'Import ERROR: Problem with uploading of the file!', 'email-newsletter' ) ) ), 'admin.php' ) );
                 exit;
             }
         } else {
-            wp_redirect( add_query_arg( array( 'page' => 'newsletters-members', 'updated' => 'true', 'message' => urlencode( __( 'Import FEHLER: Bitte ändere die Berechtigung für den Ordner /wp-content/uploads/', 'email-newsletter' ) ) ), 'admin.php' ) );
+            wp_redirect( add_query_arg( array( 'page' => 'newsletters-members', 'updated' => 'true', 'message' => urlencode( __( 'Import ERROR: Please change permission for the folder /wp-content/uploads/', 'email-newsletter' ) ) ), 'admin.php' ) );
             exit;
         }
     }
@@ -2025,11 +2020,11 @@ class Email_Newsletter_functions {
 
         if ( isset($_REQUEST['mode']) && "install" == $_REQUEST['mode']) {
             // first setup of plugin
-            wp_redirect( add_query_arg( array( 'page' => 'newsletters-dashboard', 'updated' => 'true', 'message' => urlencode( __( 'Das Plugin ist installiert!', 'email-newsletter' ) ) ), 'admin.php' ) );
+            wp_redirect( add_query_arg( array( 'page' => 'newsletters-dashboard', 'updated' => 'true', 'message' => urlencode( __( 'The Plugin is installed!', 'email-newsletter' ) ) ), 'admin.php' ) );
             exit;
         } elseif($redirect == 1) {
             $newsletter_setting_page = (isset($_REQUEST['newsletter_setting_page'])) ? $_REQUEST['newsletter_setting_page'] : '';
-            wp_redirect( add_query_arg( array( 'page' => 'newsletters-settings', 'tab' => $newsletter_setting_page, 'updated' => 'true', 'message' => urlencode( __( 'Die Einstellungen wurden gespeichert!', 'email-newsletter' ) ) ), 'admin.php' ) );
+            wp_redirect( add_query_arg( array( 'page' => 'newsletters-settings', 'tab' => $newsletter_setting_page, 'updated' => 'true', 'message' => urlencode( __( 'The Settings are saved!', 'email-newsletter' ) ) ), 'admin.php' ) );
             exit;
         }
     }
@@ -2247,7 +2242,7 @@ class Email_Newsletter_functions {
         }
     }
 
-	function upgrade( $prev, $blog_id = ''  ) {
+	function upgrade( $blog_id = '', $prev ) {
 		global $wpdb;
 
 		if ( $this->is_plugin_active_for_network(plugin_basename($this->plugin_main_file)) ) {

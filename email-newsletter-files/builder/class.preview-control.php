@@ -8,9 +8,9 @@ class Builder_Preview_Control extends WP_Customize_Control {
 		?>
 		<span class="customize-control-title"><?php echo $this->label; ?></span>
 		<p><input id="previewEmail" type="text" <?php $this->link(); ?> value="<?php echo $default; ?>" placeholder="email@yourdomain.com" /></p>
-		<button id="sendPreview" style="width: 100%; text-align: center;" class="button button-primary" href="#"><?php _e('Vorschau senden','email-newsletter'); ?></button>
+		<button id="sendPreview" style="width: 100%; text-align: center;" class="button button-primary" href="#"><?php _e('Send Preview','email-newsletter'); ?></button>
 		<script type="text/javascript">
-			jQuery(function($) {
+			jQuery(document).ready( function($) {
 				var previewButton = $('#sendPreview'),
 					originalText = previewButton.text();
 
@@ -20,7 +20,7 @@ class Builder_Preview_Control extends WP_Customize_Control {
                         type: "POST",
                         url: ajaxurl,
                         beforeSend: function() {
-                        	previewButton.text("<?php _e('Senden...','email-newsletter') ?>").attr('disabled','disabled');
+                        	previewButton.text("<?php _e('Sending...','email-newsletter') ?>").attr('disabled','disabled');
                         },
                         data: {
                         	action: "send_email_preview",
@@ -28,7 +28,7 @@ class Builder_Preview_Control extends WP_Customize_Control {
                         	preview_email: $('#previewEmail').val(),
                         },
                         success: function(html){
-                        	previewButton.text("<?php _e('Senden...','email-newsletter') ?>");
+                        	previewButton.text("<?php _e('Sending...','email-newsletter') ?>");
                         	alert( html );
                             previewButton.text(originalText).removeProp('disabled');
                         },
@@ -45,8 +45,8 @@ class Builder_Preview_Control extends WP_Customize_Control {
 						var is_saved = true;
 
 					if(is_saved) {
-						if(confirm("<?php _e('Möchtest Du den Newsletter vor dem Versand speichern? Es wird benötigt, um die neuesten Änderungen zu sehen.','email-newsletter'); ?>")) {
-							jQuery("#save").trigger("click");
+						if(confirm("<?php _e('Do you want to save newsletter before sending? It is needed to see latest changes.','email-newsletter'); ?>")) {
+							jQuery("#save").click();
 							var fix = setInterval(function() {
 										if($("#save").is(":disabled")) {
 											sendpreview();

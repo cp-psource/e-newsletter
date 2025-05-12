@@ -15,7 +15,7 @@ define('BUILDER_DEFAULT_ALTERNATIVE_COLOR', '#007491');
 
 define('BUILDER_DEFAULT_TITLE_COLOR', '#007491');
 
-define('BUILDER_DEFAULT_EMAIL_TITLE', 'Mein neuer Newsletter');
+define('BUILDER_DEFAULT_EMAIL_TITLE', 'Default Email Title');
 
 
 /* You can define settings for this template here */

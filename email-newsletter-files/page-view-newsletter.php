@@ -1,8 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	die();
-}?>
-<?php
 $view_newsletter_code = get_query_var( 'view_newsletter_code' );
 $view_newsletter_send_id = get_query_var( 'view_newsletter_send_id' );
 

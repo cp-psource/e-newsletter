@@ -1,66 +1,35 @@
 <?php
 class Builder_TinyMCE_Control extends WP_Customize_Control {
 	public $type = 'tinymce';
-	
-	
+
 	public function render_content() {
-		global $enewsletter_tinymce;
 		?>
-		<span class="customize-control-title"><?php echo $this->label; ?></span>
-		<textarea id="<?php echo $this->id; ?>" style="display:none" <?php echo $this->link(); ?>><?php echo esc_textarea($this->value()); ?></textarea>
-		<?php
-		echo $enewsletter_tinymce;
-		?>
-		
+		<label>
+			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+			<textarea id="<?php echo esc_attr( $this->id ); ?>" style="width:98%;" rows="10"<?php echo $this->link(); ?>>
+				<?php echo esc_textarea( $this->value() ); ?>
+			</textarea>
+		</label>
+
 		<script type="text/javascript">
-			
-			jQuery(function () {
-				var content = 0;
-				// Our tinyMCE function to fire on every change
-				tinymce_check_changes = setInterval(function() {
-						var check_content = tinymce.activeEditor.getContent({format : 'raw'});
-						
-						if(check_content != content && check_content != '<p><br data-mce-bogus="1"></p>') {
-							content = check_content;
-
-							jQuery('#<?php echo $this->id; ?>').val(content).trigger('change');
-						}
-				}, 2000); 
-				tinymce.init({
-				selector: '#content_tinymce'
-			});
-  
-				//enables resizing of email content box
-				var resize;
-				var prev_emce_width = 0;
-				jQuery('#accordion-section-builder_email_content').on('mousedown', '.mce-i-resize, #content_tinymce_resize', function(){
-					resize_start();
-				});
-				jQuery('#accordion-section-builder_email_content h3').on("click", function(){
-					resize_start();
-				});
-				jQuery("body").on('mouseup', function() {
-				    clearInterval(resize);
-				});
-
-				function resize_start() {
-				    resize = setInterval(function() {
-						emce_width = jQuery('#content_tinymce_ifr').width()+65;
-						
-						if(emce_width >= '490' && emce_width != prev_emce_width) {
-						    jQuery('#customize-controls').css("-webkit-animation", "none");
-						    jQuery('#customize-controls').css("-moz-animation", "none");
-						    jQuery('#customize-controls').css("-ms-animation", "none");
-						    jQuery('#customize-controls').css("animation", "none");
-							prev_emce_width = emce_width;
-							jQuery('#customize-controls, #customize-footer-actions').css("width", emce_width+"px");
-							jQuery('.wp-full-overlay').css("margin-left", emce_width+"px");
-							jQuery('.wp-full-overlay-sidebar').css("margin-left", "-"+emce_width+"px");
-						}
-				    },50);	
+			jQuery(function($) {
+				if (tinymce.get('<?php echo esc_js( $this->id ); ?>')) {
+					tinymce.get('<?php echo esc_js( $this->id ); ?>').remove();
 				}
+
+				tinymce.init({
+					selector: '#<?php echo esc_js( $this->id ); ?>',
+					menubar: false,
+					toolbar: 'formatselect bold italic underline | bullist numlist | link code | forecolor backcolor | charmap',
+					plugins: 'lists link paste wordpress colorpicker textcolor charmap',
+					setup: function (editor) {
+						editor.on('change keyup', function () {
+							editor.save();
+							$('#<?php echo esc_js( $this->id ); ?>').trigger('change');
+						});
+					}
+				});
 			});
-		
 		</script>
 		<?php
 	}

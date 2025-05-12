@@ -3,8 +3,8 @@
 class e_newsletter_subscribe extends WP_Widget {
     //constructor
     function __construct() {
-        $widget_ops = array( 'description' => 'Ermöglicht Personen, Deine Newsletter-Datenbank zu abonnieren.' );
-        parent::__construct( false, 'Newsletter: Abonnieren', $widget_ops );
+        $widget_ops = array( 'description' => __( 'Allow people to subscribe to your newsletter database.') );
+        parent::__construct( false, __( 'eNewsletter: Subscribe' ), $widget_ops );
     }
 
     /** @see WP_Widget::widget */
@@ -45,7 +45,7 @@ class e_newsletter_subscribe extends WP_Widget {
         if ( isset( $instance['title'] ) )
             $title = esc_attr( $instance['title'] );
         else
-            $title = 'Newsletter abonnieren';
+            $title = __( 'Subscribe to our Newsletters', 'email-newsletter' );
 
         if ( isset( $instance['name'] ) )
             $name = esc_attr( $instance['name'] );
@@ -68,23 +68,23 @@ class e_newsletter_subscribe extends WP_Widget {
         }
         ?>
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Titel', 'email-newsletter' ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'email-newsletter' ) ?></label>
                 <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
             </p>
             <p>
                 <input id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>" type="checkbox" value="1" <?php echo $name ? ' checked' : '';?> />
-                <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e( 'Nach Namen fragen?', 'email-newsletter' ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e( 'Ask the name?', 'email-newsletter' ) ?></label>
             </p>
             <p>
                 <input id="<?php echo $this->get_field_id( 'groups' ); ?>" name="<?php echo $this->get_field_name( 'groups' ); ?>" type="checkbox" value="1" <?php echo $groups ? ' checked' : '';?> />
-                <label for="<?php echo $this->get_field_id( 'groups' ); ?>"><?php _e( 'Gruppen zeigen?', 'email-newsletter' ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'groups' ); ?>"><?php _e( 'Show Groups?', 'email-newsletter' ) ?></label>
             </p>
             <?php
             if(is_array($all_groups) && count($all_groups) > 0) {
                 $groups_html = implode('<br/>', $groups_html)
             ?>
                 <p>
-                    <?php _e( 'Abonniere automatisch folgende Gruppen:', 'email-newsletter' ) ?>
+                    <?php _e( 'Automatically subscribe to following groups:', 'email-newsletter' ) ?>
                 </p>
                 <p><?php echo $groups_html; ?></p>
 
@@ -94,5 +94,5 @@ class e_newsletter_subscribe extends WP_Widget {
 } // class e_newsletter_subscribe
 
 add_action( 'widgets_init', function() {
-	register_widget('e_newsletter_subscribe');
+	return register_widget("e_newsletter_subscribe");
 });

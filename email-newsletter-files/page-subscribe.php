@@ -1,8 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	die();
-}?>
-<?php
     $current_user = wp_get_current_user();
 
     $settings = $this->settings;
@@ -30,8 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
     <div class="wrap">
-        <h2><?php _e( 'Meine Newsletter Abonnements', 'email-newsletter' ) ?></h2>
-        <p><?php _e( 'Auf dieser Seite kannst Du Newsletter abonnieren oder abbestellen', 'email-newsletter' ) ?></p>
+        <h2><?php _e( 'My Subscriptions', 'email-newsletter' ) ?></h2>
+        <p><?php _e( 'At this page you can Subscribe or Unsubscribe to Newsletters', 'email-newsletter' ) ?></p>
         <?php
         if ( "" != $member_data['unsubscribe_code']) {
         ?>
@@ -65,8 +61,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             }
             ?>
 			<p class="submit">
-				<?php if ( $groups ) { ?><input class="button button-primary" type="button" id="save_subscribes" value="<?php _e( 'Abonnements speichern', 'email-newsletter' ) ?>" /><?php } ?>
-				<input class="button button-secondary" type="button" id="unsubscribe" value="<?php _e( 'Alle Newsletter abbestellen', 'email-newsletter' ) ?>" />
+				<?php if ( $groups ) { ?><input class="button button-primary" type="button" id="save_subscribes" value="<?php _e( 'Save Subscribes', 'email-newsletter' ) ?>" /><?php } ?>
+				<input class="button button-secondary" type="button" id="unsubscribe" value="<?php _e( 'Unsubscribe from all newsletters', 'email-newsletter' ) ?>" />
 			</p>
         </form>
         <?php
@@ -75,7 +71,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <form action="" method="post" name="" id="" >
             <p class="submit">
                 <input type="hidden" name="newsletter_action" id="subscribe" value="subscribe" />
-                <input class="button button-primary" type="submit" value="<?php _e( 'Newsletter abonnieren', 'email-newsletter' ) ?>" />
+                <input class="button button-primary" type="submit" value="<?php _e( 'Subscribe on Newsletters', 'email-newsletter' ) ?>" />
             </p>
         </form>
         <?php
