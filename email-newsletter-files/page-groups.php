@@ -93,7 +93,10 @@
                         </span>
                     </td>
                     <td>
-                        <?php echo count( $this->get_members_of_group( $group['group_id'], '', 1 ) ); ?>
+                        <?php 
+                        $members = $this->get_members_of_group( $group['group_id'], '', 1 );
+                        echo is_countable($members) ? count($members) : 0; 
+                        ?>
                     </td>
                     <td>
                         <input class="button button-secondary" type="button" id="edit_button_<?php echo $group['group_id'];?>" value="<?php _e( 'Edit', 'email-newsletter' ) ?>" onclick="jQuery(this).editGroup( <?php echo $group['group_id'];?> );" />

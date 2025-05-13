@@ -1,9 +1,9 @@
 jQuery( document ).ready( function() {
 
-    jQuery("#subscribes_form").submit(function() {
+    jQuery("#subscribes_form").on( "submit", function() {
         event.preventDefault(); //disable default behavior
     });
-    jQuery("#subscribes_form .enewletter_widget_submit").click(function(event){
+    jQuery("#subscribes_form .enewletter_widget_submit").on("click", function(event){
         var stop = 0;
 
         event.preventDefault(); //disable default behavior
@@ -58,7 +58,7 @@ jQuery( document ).ready( function() {
             };
 
             jQuery.post(email_newsletter_widget_scripts.ajax_url, data, function(data){ //post data to specified action trough special WP ajax page
-                data = jQuery.parseJSON(data);
+                data = JSON.parse(data);
 
                 if(typeof data.redirect !== 'undefined' && data.redirect)
                     window.location = data.redirect;
@@ -69,7 +69,7 @@ jQuery( document ).ready( function() {
 
                     if(typeof data.subscribe_groups !== "undefined") {
                         jQuery.each(data.subscribe_groups, function(index, value) {
-                            parent.find('.e_newsletter_groups_id_'+value).attr("checked", true);
+                            parent.find('.e_newsletter_groups_id_'+value).prop("checked", true);
                         });
                     }
                     if(typeof data.unsubscribe_code !== "undefined") {

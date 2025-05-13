@@ -363,7 +363,7 @@ function open_tooltip ($me) {
 <?php } ?>
 	
 	// IE safeguard
-	if ($.browser.msie) {
+	if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.userAgent.indexOf('Trident') !== -1) {
 		var $pointer_left = $tip.find(".wpmudev-left_pointer");
 		if ($pointer_left.length) $pointer_left.css("position", "absolute");
 	}
@@ -398,16 +398,15 @@ function open_tooltip ($me) {
  */
 function close_tooltip () {
 	if (!$("#wpmudev-tooltip").length) return false;
-	
-	// IE conditional alternate removal
-	if ($.browser.msie) {
+
+	// Alternative: rudimentäre IE-Erkennung
+	const isIE = /MSIE|Trident/.test(window.navigator.userAgent);
+
+	if (isIE) {
 		$("#wpmudev-tooltip").hide('fast');
 	} else {
-		// Not IE, do regular transparency animation
-		$("#wpmudev-tooltip")
-			.animate({
-				"opacity": 0
-			},
+		$("#wpmudev-tooltip").animate(
+			{ "opacity": 0 },
 			'fast',
 			function () {
 				$(this).remove();
@@ -421,7 +420,7 @@ function close_tooltip () {
 $(function () {
 	
 // Populate and place bound tips
-$.each($.parseJSON('<?php echo $selectors; ?>'), function (tip_id, selector) {
+$.each(JSON.parse('<?php echo $selectors; ?>'), function (tip_id, selector) {
 	var $tip = $("#" + tip_id);
 	if (!$tip.length) return true;
 	
@@ -438,18 +437,16 @@ $(".wpmudev-help").each(function () {
 });
 
 // Handle help requests
-$(".wpmudev-help-trigger")
-	.click(function (e) {
+$(".wpmudev-help-trigger").on("click", function (e) {
 <?php if ($this->_use_notice) { ?>
 		show_help_block($(this));
 <?php } ?>
 		return false;
 	})
-	.mouseover(function (e) {
-		open_tooltip($(this));
-		
-	})
-	.mouseout(close_tooltip)
+    .on("mouseover", function (e) {
+        open_tooltip($(this));
+    })
+    .on("mouseout", close_tooltip);
 ;
 	
 	

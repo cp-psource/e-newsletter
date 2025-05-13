@@ -4,7 +4,7 @@ Plugin Name: PS-eNewsletter
 Plugin URI: https://cp-psource.github.io/ps-newsletter/
 Description: Das ultimative Newsletter Plugin für WordPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem WordPress-Dashboard managen und versenden.
 Natürlich mit der großartigen Piestingtal.Source Kompatibilität.
-Version: 2.9.0
+Version: 2.9.1
 Text Domain: email-newsletter
 Author: PSOURCE
 Author URI: https://github.com/cp-psource
@@ -37,9 +37,9 @@ require 'psource/psource-plugin-update/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
  
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://github.com/cp-psource/ps-newsletter',
+	'https://github.com/cp-psource/e-newsletter',
 	__FILE__,
-	'ps-newsletter'
+	'e-newsletter'
 );
  
 //Set the branch that contains the stable release.
@@ -81,7 +81,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
         global $wpdb;
 
 
-        $this->plugin_ver = 2.88;
+        $this->plugin_ver = 2.91;
 
         //enable or disable debugging
         $this->debug = 0;

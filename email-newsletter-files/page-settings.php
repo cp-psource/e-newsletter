@@ -6,6 +6,7 @@
         $mode = "install";
     }
 
+    $mode = isset($mode) ? $mode : null; // Ensure $mode is defined
     $default_tab = isset($mode) ? 'tabs-2' : 'tabs-1';
 
 	global $email_newsletter;
@@ -89,7 +90,13 @@
                                     <?php _e( 'Preview mail:', 'email-newsletter' ) ?>
                                 </th>
                                 <td>
-                                    <input type="text" class="regular-text" name="settings[preview_email]" value="<?php echo isset($this->settings['preview_email']) ? esc_attr($this->settings['preview_email']) : $this->settings['from_email'];?>" />
+                                    <input type="text" class="regular-text" name="settings[preview_email]" value="<?php 
+                                    echo isset($this->settings['preview_email']) 
+                                        ? esc_attr($this->settings['preview_email']) 
+                                        : (isset($this->settings['from_email']) 
+                                        ? esc_attr($this->settings['from_email']) 
+                                        : ''); 
+                                        ?>" />
                                     <span class="description"><?php _e( 'Default email adress to send previews to.', 'email-newsletter' ) ?></span>
                                 </td>
                             </tr>
@@ -104,7 +111,7 @@
                                 </th>
                                 <td>
                                     <label for="settings[double_opt_in]"><?php _e( 'Enable:', 'email-newsletter' ) ?></label>
-                                    <input type="checkbox" name="settings[double_opt_in]" value="1" <?php checked('1',$this->settings['double_opt_in']); ?> />
+                                    <input type="checkbox" name="settings[double_opt_in]" value="1" <?php checked( '1', isset($this->settings['double_opt_in']) ? $this->settings['double_opt_in'] : '' ); ?> />                    
                                     <label for="settings[double_opt_in]"><?php _e( 'Subject:', 'email-newsletter' ) ?></label>
                                     <input type="text" class="regular-text" name="settings[double_opt_in_subject]" value="<?php echo (isset($this->settings['double_opt_in_subject']) && !empty($this->settings['double_opt_in_subject'])) ? esc_attr($this->settings['double_opt_in_subject']) : __( 'Please confirm your email', 'email-newsletter' ).' ('.get_bloginfo('name').')'; ?>" />
                                     <span class="description"><?php _e( 'If enabled, members will get confirmation email with configured subject to subscribe to newsletters (only for not registered users)', 'email-newsletter' ) ?>. <?php _e( 'Do not leave subject blank.', 'email-newsletter' ) ?></span>
@@ -148,7 +155,7 @@
                                 <td>
                                     <select name="settings[subscribe_newsletter]">
                                         <option value=""><?php _e( 'Disable', 'email-newsletter' ) ?></option>
-                                        <?php
+                                        $newsletters = (isset($mode) && $mode != 'install') ? $this->get_newsletters() : 0;
                                         $newsletters = ($mode != 'install') ? $this->get_newsletters() : 0;
 
                                         if($newsletters)
@@ -170,13 +177,23 @@
                                 <td>
                                     <?php
                                     if(!isset($this->settings['wp_user_register_subscribe']))
-                                        $this->settings['wp_user_register_subscribe'] = 1;
+                                    // Settings absichern
+                                    $this->settings = is_array($this->settings) ? $this->settings : [];
+
+                                    // Subscribe Groups vorbereiten
+                                    $this->settings['subscribe_groups'] = isset($this->settings['subscribe_groups']) && is_string($this->settings['subscribe_groups'])
+                                        ? explode(',', $this->settings['subscribe_groups'])
+                                        : [];
+
+                                    // Default für wp_user_register_subscribe
+                                    $wp_user_register_subscribe = isset($this->settings['wp_user_register_subscribe']) ? $this->settings['wp_user_register_subscribe'] : '';
                                     ?>
+
                                     <select name="settings[wp_user_register_subscribe]">
-                                        <option value="1"<?php selected( $this->settings['wp_user_register_subscribe'], 1); ?>><?php _e( 'Subscribe', 'email-newsletter' ) ?></option>
-                                        <option value="0"<?php selected( $this->settings['wp_user_register_subscribe'], 0); ?>><?php _e( 'Disable', 'email-newsletter' ) ?></option>
+                                        <option value="1" <?php selected($wp_user_register_subscribe, 1); ?>><?php _e('Subscribe', 'email-newsletter') ?></option>
+                                        <option value="0" <?php selected($wp_user_register_subscribe, 0); ?>><?php _e('Disable', 'email-newsletter') ?></option>
                                     </select>
-                                    <span class="description"><?php _e( 'Choose if user registering(with WordPress) to your site is automatically subscribed to newsletter.', 'email-newsletter' ) ?></span>
+                                    <span class="description"><?php _e('Choose if user registering(with WordPress) to your site is automatically subscribed to newsletter.', 'email-newsletter') ?></span>
                                 </td>
                             </tr>
 

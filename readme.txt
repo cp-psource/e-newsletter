@@ -3,7 +3,7 @@ Contributors: DerN3rd (PSOURCE)
 Tags: newsletter
 Requires at least: 3.7
 Tested up to: 5.6
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -38,6 +38,11 @@ zu verbessern.
 
 
 == ChangeLog ==
+
+= 2.9.1 =
+
+* Better Editor
+* Bugfixes
 
 = 2.9.0 =
 
