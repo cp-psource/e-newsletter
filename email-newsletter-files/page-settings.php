@@ -155,15 +155,16 @@
                                 <td>
                                     <select name="settings[subscribe_newsletter]">
                                         <option value=""><?php _e( 'Disable', 'email-newsletter' ) ?></option>
-                                        $newsletters = (isset($mode) && $mode != 'install') ? $this->get_newsletters() : 0;
-                                        $newsletters = ($mode != 'install') ? $this->get_newsletters() : 0;
-
-                                        if($newsletters)
+                                        <?php
+                                        $newsletters = (isset($mode) && $mode === 'install') ? 0 : $this->get_newsletters();
+                                        if($newsletters) {
                                             foreach( $newsletters as $key => $newsletter ) {
-                                                if (strlen($newsletter['subject']) > 30)
-                                                $newsletter['subject'] = substr($newsletter['subject'], 0, 27) . '...';
-                                                echo '<option value="'.$newsletter['newsletter_id'].'" '.selected( $this->settings['subscribe_newsletter'], $newsletter['newsletter_id'], false).'>'.$newsletter['newsletter_id'].': '.$newsletter['subject'].'</option>';
+                                                if (strlen($newsletter['subject']) > 30) {
+                                                    $newsletter['subject'] = substr($newsletter['subject'], 0, 27) . '...';
+                                                }
+                                                echo '<option value="'.esc_attr($newsletter['newsletter_id']).'" '.selected( isset($this->settings['subscribe_newsletter']) ? $this->settings['subscribe_newsletter'] : '', $newsletter['newsletter_id'], false).'>'.esc_html($newsletter['newsletter_id'].': '.$newsletter['subject']).'</option>';
                                             }
+                                        }
                                         ?>
                                     </select>
                                     <span class="description"><?php _e( 'Default newsletter that will be sent on user subscription.', 'email-newsletter' ) ?></span>

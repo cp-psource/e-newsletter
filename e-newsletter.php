@@ -243,7 +243,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
      *
      */
     function do_activation() {
-        global $email_builder;
+        global $email_builder, $wpdb; // $wpdb hinzufügen!
 
         //Update rewrite_rules
         flush_rewrite_rules( false );
@@ -266,6 +266,37 @@ class Email_Newsletter extends Email_Newsletter_functions {
         else {
             if ( wp_next_scheduled( $this->cron_send_name ) )
                 wp_clear_scheduled_hook( $this->cron_send_name );
+        }
+
+        // Kampagnen-Tabellen anlegen
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_campaigns = $wpdb->prefix . 'enewsletter_campaigns';
+        $table_steps = $wpdb->prefix . 'enewsletter_campaign_steps';
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+        $sql1 = "CREATE TABLE IF NOT EXISTS {$table_campaigns} (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            group_id BIGINT UNSIGNED NOT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+        ) $charset_collate;";
+
+        $sql2 = "CREATE TABLE IF NOT EXISTS {$table_steps} (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            campaign_id BIGINT UNSIGNED NOT NULL,
+            newsletter_id BIGINT UNSIGNED NOT NULL,
+            delay_days INT NOT NULL DEFAULT 0,
+            step_order INT NOT NULL DEFAULT 1
+        ) $charset_collate;";
+
+        dbDelta($sql1);
+        dbDelta($sql2);
+
+        //check if email builder is active
+        if ( class_exists( 'Email_Newsletter_Builder' ) ) {
+            $email_builder = new Email_Newsletter_Builder();
+            $email_builder->init();
         }
     }
 
@@ -2299,6 +2330,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
             add_submenu_page( $slug, __( 'Gruppen', 'email-newsletter' ), __( 'Gruppen', 'email-newsletter' ), 'edit_newsletter_group', 'newsletters-groups', array( &$this, 'member_groups_page' ) );
             add_submenu_page( $slug, __( 'Abonnenten', 'email-newsletter' ), __( 'Abonnenten', 'email-newsletter' ), 'view_newsletter_members', 'newsletters-members',  array( &$this, 'members_page' ) );
             add_submenu_page( $slug, __( 'Einstellungen', 'email-newsletter' ), __( 'Einstellungen', 'email-newsletter' ), 'save_newsletter_settings', 'newsletters-settings', array( &$this, 'settings_page' ) );
+            add_submenu_page( $slug, __( 'Kampagnen', 'email-newsletter' ), __( 'Kampagnen', 'email-newsletter' ), 'manage_options', 'newsletters-campaigns', array( $this, 'campaigns_page' ) );
 
             //menu for lowest level users
             add_submenu_page( $slug, __( 'Meine Abonnements', 'email-newsletter' ), __( 'Meine Abonnements', 'email-newsletter' ), 'read', 'newsletters-subscribes', array( &$this, 'newsletters_subscribe_page' ) );
@@ -2346,6 +2378,13 @@ class Email_Newsletter extends Email_Newsletter_functions {
      **/
     function members_page() {
         require_once( $this->plugin_dir . "email-newsletter-files/page-members.php" );
+    }
+
+    /**
+     *  Tempalate of the Campaigns page
+     **/
+    function campaigns_page() {
+        require_once( $this->plugin_dir . 'email-newsletter-files/page-campaign.php' );
     }
 
     /**

@@ -39,6 +39,11 @@ zu verbessern.
 
 == ChangeLog ==
 
+= 2.9.2 =
+
+* Fix: Bug Welcome-Letter
+* Added: Campaigns! (ALPHA)
+
 = 2.9.1 =
 
 * Better Editor
