@@ -3,7 +3,7 @@ Contributors: DerN3rd (PSOURCE)
 Tags: newsletter
 Requires at least: 3.7
 Tested up to: 5.6
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
