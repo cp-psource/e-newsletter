@@ -250,113 +250,93 @@ class Email_Newsletter_Builder  {
 
 		?>
 		<script type="text/javascript">
-			_wpCustomizeControlsL10n.save = _wpCustomizeControlsL10n.publish = _wpCustomizeControlsL10n.published = "<?php _e('Save Newsletter','email-newsletter'); ?>";
-			var activate_theme = "<?php _e('Activate Theme','email-newsletter'); ?>";
-			var current_theme = "<?php echo $this->get_customizer_theme(); ?>";
-			var wp_version = <?php echo floatval($wp_version); ?>;
+    _wpCustomizeControlsL10n.save = _wpCustomizeControlsL10n.publish = _wpCustomizeControlsL10n.published = "<?php _e('Save Newsletter','email-newsletter'); ?>";
+    var activate_theme = "<?php _e('Activate Theme','email-newsletter'); ?>";
+    var current_theme = "<?php echo $this->get_customizer_theme(); ?>";
+    var wp_version = <?php echo floatval($wp_version); ?>;
 
-			email_templates = [
-				<?php foreach($themes as $theme): ?>
-				{	"name": <?php echo json_encode($theme->get('Name')); ?>,
-					"description": <?php echo json_encode($theme->get('Description')); ?>,
-					"screenshot": <?php $template = $email_newsletter->get_theme_dir_url($theme, $theme->stylesheet); echo json_encode($template['url'].'screenshot.jpg'); ?>,
-					"stylesheet": <?php echo json_encode($theme->stylesheet); ?>,
-				},
-				<?php endforeach; ?>
-			];
-			email_templates.sort(function(a, b){
-				var aName = a.name.toLowerCase();
-				var bName = b.name.toLowerCase();
-				return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
-			});
+    email_templates = [
+        <?php foreach($themes as $theme): ?>
+        {	"name": <?php echo json_encode($theme->get('Name')); ?>,
+            "description": <?php echo json_encode($theme->get('Description')); ?>,
+            "screenshot": <?php $template = $email_newsletter->get_theme_dir_url($theme, $theme->stylesheet); echo json_encode($template['url'].'screenshot.jpg'); ?>,
+            "stylesheet": <?php echo json_encode($theme->stylesheet); ?>,
+        },
+        <?php endforeach; ?>
+    ];
+    email_templates.sort(function(a, b){
+        var aName = a.name.toLowerCase();
+        var bName = b.name.toLowerCase();
+        return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+    });
 
-			var current = jQuery('#customize-info .accordion-section-content');
-			var copy = jQuery('<div class="accordion-section-content">');
+    // EIN zentrales Accordion erzeugen
+    var section = jQuery('<div class="accordion-section"></div>');
+    section.append('<div class="accordion-section-title"><span class="preview-notice"><strong class="theme-name panel-title">Theme wählen/wechseln</strong></span></div>');
+    var content = jQuery('<div class="accordion-section-content" style="display:none;"></div>');
 
-			if(current.length > 0) {
-				current.html('');
-			}
-			else {
-				jQuery('#customize-info').append(copy.clone());
-				current = jQuery('#customize-info .accordion-section-content');
-			}
-			
-			jQuery.each(email_templates, function(i,e) {
-				var clone = copy.clone();
+    // Theme-Vorschauen einfügen
+    jQuery.each(email_templates, function(i, e) {
+        var themeBox = jQuery('<div class="theme-box" style="display:inline-block; margin:10px; width:220px; vertical-align:top; text-align:center; border:1px solid #eee; padding:10px; border-radius:4px;"></div>');
+        themeBox.append('<h3 style="font-size:16px; margin-bottom:5px;">' + e.name + "</h3>");
+        themeBox.append('<img src="' + e.screenshot + '" class="theme-screenshot" style="width:200px; height:auto; margin-bottom:5px;" />');
+        themeBox.append('<div class="theme-description" style="font-size:12px; min-height:40px;">' + e.description + '</div>');
+        if (e.stylesheet != current_theme) {
+            themeBox.append('<input type="button" value="' + activate_theme + '" class="button button-primary save activate_theme" style="margin-top:5px;">');
+        } else {
+            themeBox.append('<div style="margin-top:5px; color:green; font-weight:bold;">Aktiv</div>');
+        }
+        themeBox.data('theme', e);
+        content.append(themeBox);
+    });
 
-				if( e.stylesheet != current_theme ) {
-					clone.append('<h3>'+e.name+"</h3>");
-					clone.append('<input type="button" value="'+activate_theme+'" id="activate_theme" class="button button-primary save">');
-					clone.append('<img src="" class="theme-screenshot" />');
-					clone.append('<div class="theme-description"></div>');
+    section.append(content);
+    jQuery('#customize-info').append(section);
 
-					clone.find('img.theme-screenshot').attr('src',e.screenshot);
-					clone.find('.theme-description').text(e.description);
-					clone.data('theme',e);
+    // Accordion-Klick-Handler
+    jQuery('#customize-info').on('click', '.accordion-section-title', function() {
+        var parent = jQuery(this).closest('.accordion-section');
+        var content = parent.find('.accordion-section-content');
+        if (content.is(':visible')) {
+            content.slideUp();
+            parent.removeClass('open');
+        } else {
+            content.slideDown();
+            parent.addClass('open');
+        }
+    });
 
-					jQuery('#customize-info').append(clone);
-				} else {
-					// Use this opportunity to change the theme preview area
-					jQuery('#customize-info .preview-notice').html("<strong class='theme-name panel-title'>"+e.name+"</strong><?php _e('Choose template','email-newsletter'); ?>");
+    // Theme aktivieren
+    jQuery('#customize-info').on('click', '.activate_theme', function(event) {
+        var data = jQuery(this).closest('.theme-box').data('theme');
+        var new_theme = data.stylesheet;
 
-					current.addClass('current_theme');
-					current.append('<h3>'+e.name+"</h3>");
-					current.append('<img src="" class="theme-screenshot" />');
-					current.append('<div class="theme-description"></div>');
+        if (typeof new_theme != 'undefined') {
+            event.preventDefault();
 
-					current.find('img.theme-screenshot').attr('src',e.screenshot);
-					current.find('.theme-description').text(e.description);
-					current.data('theme',e);
+            jQuery('[data-customize-setting-link="template"]').val(new_theme);
+            jQuery('[data-customize-setting-link="template"]').trigger('change');
 
-					jQuery('#customize-info .accordion-section-title').after(current);
-				}
+            var set_val = setInterval(function () {
+                if (jQuery('[data-customize-setting-link="template"]').val() == new_theme) {
+                    jQuery("#save").click();
+                    clearInterval(set_val);
+                }
+            }, 100);
+        }
+    });
 
-			});
+    wp.customize.bind('saved', function() {
+        var new_theme = jQuery('[data-customize-setting-link="template"]').val();
+        if (current_theme != new_theme)
+            window.location.href = window.location.href.replace('theme=' + current_theme, 'theme=' + new_theme);
+    });
 
-			jQuery('#customize-info').on('click', '.accordion-section-title', function() {
-				var new_theme;
-				var parent = jQuery(this).parent();
-
-				if(wp_version >= 4.3) {
-					if(parent.hasClass('open'))
-						jQuery(this).parent().removeClass('open');
-					else
-						jQuery(this).parent().addClass('open');
-				}
-
-				jQuery('#customize-info #activate_theme').on('click', function(event) {
-					data = jQuery(this).parent().data('theme');
-					new_theme = data.stylesheet;
-
-					if( typeof new_theme != 'undefined') {
-						event.preventDefault();
-
-						// Use string replace to redirect the url
-						jQuery('[data-customize-setting-link="template"]').val(new_theme);
-						jQuery('[data-customize-setting-link="template"]').trigger('change');
-
-						//make sure it is set
-						var set_val = setInterval(function () {
-							if(jQuery('[data-customize-setting-link="template"]').val() == new_theme) {
-					        	jQuery("#save").click();
-					        	clearInterval(set_val);
-					        }
-					    },100);
-					}
-				});
-
-				wp.customize.bind( 'saved', function() {
-					var new_theme = jQuery('[data-customize-setting-link="template"]').val();
-					if(current_theme != new_theme)
-						window.location.href = window.location.href.replace('theme='+current_theme,'theme='+new_theme);
-				});
-			});
-
-			window.onbeforeunload = function() {
-				if(!jQuery("#save").is(":disabled"))
-					return "<?php _e('You have unsaved data in this newsletter.','email-newsletter'); ?>";
-			};
-		</script>
+    window.onbeforeunload = function() {
+        if (!jQuery("#save").is(":disabled"))
+            return "<?php _e('You have unsaved data in this newsletter.','email-newsletter'); ?>";
+    };
+</script>
 
 		<style type="text/css">
 			body {
@@ -423,6 +403,103 @@ class Email_Newsletter_Builder  {
 			}
 			#customize-footer-actions {
 				min-width: 550px;
+			}
+			#customize-info .accordion-section-content {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 32px;
+				padding: 24px 0;
+				background: #f5f5f5;
+				min-height: 360px;
+			}
+			.theme-box {
+				background: #fff;
+				border-radius: 12px;
+				box-shadow: 0 2px 8px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.08);
+				transition: box-shadow 0.2s, transform 0.2s;
+				width: 100% !important;
+				min-width: 220px;
+				margin: 0;
+				padding: 18px 16px 16px 16px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				position: relative;
+				border: none;
+			}
+			.theme-box:hover {
+				box-shadow: 0 6px 24px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.10);
+				transform: translateY(-2px) scale(1.03);
+			}
+			.theme-screenshot {
+				width: 100% !important;
+				max-width: 220px;
+				min-height: 160px;
+				border-radius: 8px;
+				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+				margin-bottom: 12px;
+				background: #eee;
+				object-fit: cover;
+			}
+			.theme-box h3 {
+				font-size: 1.1rem;
+				font-weight: 600;
+				margin: 0 0 8px 0;
+				color: #222;
+				letter-spacing: 0.01em;
+			}
+			.theme-description {
+				font-size: 0.97em;
+				color: #555;
+				margin-bottom: 16px;
+				min-height: 38px;
+			}
+			.theme-box .button,
+			.theme-box input[type="button"] {
+				background: #1976d2;
+				color: #fff;
+				border: none;
+				border-radius: 4px;
+				padding: 8px 18px;
+				font-size: 1em;
+				font-weight: 500;
+				box-shadow: 0 1px 2px rgba(25,118,210,0.08);
+				transition: background 0.2s;
+				margin-top: auto;
+				cursor: pointer;
+			}
+			.theme-box .button:hover,
+			.theme-box input[type="button"]:hover {
+				background: #1565c0;
+			}
+			.theme-box .button[disabled],
+			.theme-box input[type="button"][disabled] {
+				background: #bdbdbd;
+				cursor: not-allowed;
+			}
+			.theme-box .aktiv {
+				color: #388e3c;
+				font-weight: bold;
+				margin-top: 10px;
+			}
+			@media (max-width: 900px) {
+				#customize-info .accordion-section-content {
+					gap: 16px;
+				}
+				.theme-box {
+					max-width: 45vw;
+					min-width: 160px;
+				}
+			}
+			@media (max-width: 600px) {
+				#customize-info .accordion-section-content {
+					flex-direction: column;
+					align-items: center;
+				}
+				.theme-box {
+					max-width: 95vw;
+				}
 			}
 		</style>
 		<?php

@@ -231,21 +231,36 @@
                                     </th>
                                     <td>
                                         <label id="tip_smtp">
-                                            <input type="radio" name="settings[outbound_type]" id="smtp_method" value="smtp" class="email_out_type" <?php echo (!isset($this->settings['outbound_type']) || $this->settings['outbound_type'] == 'smtp') ? 'checked="checked"' : '';?> /><?php echo _e( 'SMTP (recommended)', 'email-newsletter' );?>
+                                            <input type="radio" name="settings[outbound_type]" id="smtp_method" value="smtp" class="email_out_type"
+                                                <?php
+                                                // In Multisite: SMTP immer vorauswählen, wenn kein Superadmin
+                                                if (is_multisite() && !is_super_admin()) {
+                                                    echo 'checked="checked"';
+                                                } else {
+                                                    echo (!isset($this->settings['outbound_type']) || $this->settings['outbound_type'] == 'smtp') ? 'checked="checked"' : '';
+                                                }
+                                                ?>
+                                            /><?php echo _e( 'SMTP (recommended)', 'email-newsletter' );?>
                                         </label>
+                                        <?php $tips->bind_tip(__("The SMTP method allows you to use your SMTP server (or Gmail, Yahoo, Hotmail etc. ) for sending newsletters and emails. It's usually the best choice, especially if your host has restrictions on sending email and to help you to avoid being blacklisted as a SPAM sender",'email-newsletter'), '#tip_smtp'); ?>
 
-										<?php $tips->bind_tip(__("The SMTP method allows you to use your SMTP server (or Gmail, Yahoo, Hotmail etc. ) for sending newsletters and emails. It's usually the best choice, especially if your host has restrictions on sending email and to help you to avoid being blacklisted as a SPAM sender",'email-newsletter'), '#tip_smtp'); ?>
+                                        <?php if ( !is_multisite() || is_super_admin() ) : ?>
+                                            <label id="tip_php">
+                                                <input type="radio" name="settings[outbound_type]" value="mail" class="email_out_type"
+                                                    <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'mail') ? 'checked="checked"' : '';?> /><?php echo _e( 'PHP mail', 'email-newsletter' );?>
+                                            </label>
+                                            <?php $tips->bind_tip(__( "This method uses php functions for sending newsletters and emails. Be careful because some hosts may set restrictions on using this method. If you can't edit settings of your server, we recommend to use the SMTP method for optimal results!", 'email-newsletter' ), '#tip_php'); ?>
 
-                                        <label id="tip_php">
-                                            <input type="radio" name="settings[outbound_type]" value="mail" class="email_out_type" <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'mail') ? 'checked="checked"' : '';?> /><?php echo _e( 'PHP mail', 'email-newsletter' );?>
-                                        </label>
-										<?php $tips->bind_tip(__( "This method uses php functions for sending newsletters and emails. Be careful because some hosts may set restrictions on using this method. If you can't edit settings of your server, we recommend to use the SMTP method for optimal results!", 'email-newsletter' ), '#tip_php'); ?>
-
-                                        <label id="tip_wpmail">
-                                            <input type="radio" name="settings[outbound_type]" value="wpmail" class="email_out_type" <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'wpmail') ? 'checked="checked"' : '';?> /><?php echo _e( 'WP mail', 'email-newsletter' );?>
-                                        </label>
-                                        <?php $tips->bind_tip(__( "This method uses default WordPress email related functions for sending newsletters and emails. It will let you use other plugins to send emails but may stop bounce checking from working.", 'email-newsletter' ), '#tip_wpmail'); ?>
- 
+                                            <label id="tip_wpmail">
+                                                <input type="radio" name="settings[outbound_type]" value="wpmail" class="email_out_type"
+                                                    <?php echo (isset($this->settings['outbound_type']) && $this->settings['outbound_type'] == 'wpmail') ? 'checked="checked"' : '';?> /><?php echo _e( 'WP mail', 'email-newsletter' );?>
+                                            </label>
+                                            <?php $tips->bind_tip(__( "This method uses default WordPress email related functions for sending newsletters and emails. It will let you use other plugins to send emails but may stop bounce checking from working.", 'email-newsletter' ), '#tip_wpmail'); ?>
+                                        <?php else : ?>
+                                            <div class="description" style="color:#888; margin-top:8px;">
+                                                <?php _e('Hinweis: In einer Multisite können nur Netzwerk-Administratoren die PHP- und WP-Mail Methoden auswählen. Für normale Seiten-Admins steht aus Sicherheitsgründen nur SMTP zur Verfügung.', 'email-newsletter'); ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <tr valign="top">

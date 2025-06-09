@@ -380,7 +380,6 @@ class Email_Newsletter extends Email_Newsletter_functions {
             wp_enqueue_script( 'jquery' );
 
             //including JS scripts
-            wp_enqueue_script( 'jquery-ui-tabs' );
             wp_enqueue_script( 'jquery-ui-core' );
 
             //including JS scripts for tooltips
