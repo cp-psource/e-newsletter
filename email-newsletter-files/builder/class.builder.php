@@ -576,6 +576,12 @@ class Email_Newsletter_Builder  {
 		global $builder_id, $email_newsletter;
 		$email_data = $email_newsletter->get_newsletter_data($builder_id);
 
+		// Sicherstellen, dass ein gültiger Newsletter geladen ist
+		if (empty($builder_id) || empty($email_data) || empty($email_data['template'])) {
+			// Abbrechen, wenn keine Daten vorhanden sind (z.B. bei Plugin-Aktivierung)
+			return;
+		}
+
 		$theme = $email_newsletter->get_selected_theme($email_data['template']);
 		$template_url  = $theme['url'];
 
@@ -789,22 +795,22 @@ class Email_Newsletter_Builder  {
 			'type'    => 'text',
 		) );
 		$instance->add_control( new Builder_TinyMCE_Control( $instance, 'email_content', array(
-			'label'   => __('Email Content','email-newsletter'),
+			'label'   => __('Email Inhalt','email-newsletter'),
 			'section' => 'builder_email_content',
 			'settings'   => 'email_content',
 		) ) );
 		$instance->add_control( new Builder_TextArea_Control( $instance, 'branding_html', array(
-			'label'   => __('Branding HTML/text','email-newsletter'),
+			'label'   => __('Branding HTML/Text','email-newsletter'),
 			'section' => 'builder_email_content',
 			'settings'   => 'branding_html',
 		) ) );
 		$instance->add_control( new Builder_TextArea_Control( $instance, 'contact_info', array(
-			'label'   => __('Contact Info','email-newsletter'),
+			'label'   => __('Kontakt Info','email-newsletter'),
 			'section' => 'builder_email_content',
 			'settings'   => 'contact_info',
 		) ) );
 		$instance->add_control( new Builder_Preview_Control($instance, 'email_preview', array(
-			'label'   => __('Send Preview To Email (Save First)','email-newsletter'),
+			'label'   => __('Vorschau per E-Mail senden (zuerst speichern)','email-newsletter'),
 			'section' => 'builder_preview',
 		) ) );
 

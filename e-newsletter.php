@@ -296,7 +296,7 @@ class Email_Newsletter extends Email_Newsletter_functions {
         //check if email builder is active
         if ( class_exists( 'Email_Newsletter_Builder' ) ) {
             $email_builder = new Email_Newsletter_Builder();
-            $email_builder->init();
+            //$email_builder->init();
         }
     }
 
@@ -380,19 +380,20 @@ class Email_Newsletter extends Email_Newsletter_functions {
             wp_enqueue_script( 'jquery' );
 
             //including JS scripts
-            wp_enqueue_script( 'jquery-ui-core' );
+            wp_register_script( 'jquery_tooltips', $this->plugin_url . 'email-newsletter-files/js/core.min.js' );
+            wp_enqueue_script( 'jquery_ui_core' );
 
             //including JS scripts for tooltips
             wp_register_script( 'jquery_tooltips', $this->plugin_url . 'email-newsletter-files/js/jquery.tools.min.js' );
             wp_enqueue_script( 'jquery_tooltips' );
 
             //including JS scripts for progressbar
-            //wp_register_script( 'jquery_ui_widget', $this->plugin_url . 'email-newsletter-files/js/ui.widget.js' );
-            wp_enqueue_script( 'jquery-ui-widget' );
+            wp_register_script( 'jquery_ui_widget', $this->plugin_url . 'email-newsletter-files/js/ui.widget.js' );
+            wp_enqueue_script( 'jquery_ui_widget' );
 
             //including JS scripts for progressbar
-            //wp_register_script( 'jquery_progressbar', $this->plugin_url . 'email-newsletter-files/js/jquery.ui.progressbar.js' );
-            wp_enqueue_script( 'jquery-ui-progressbar' );
+            wp_register_script( 'jquery_progressbar', $this->plugin_url . 'email-newsletter-files/js/jquery.ui.progressbar.js' );
+            wp_enqueue_script( 'jquery_progressbar' );
 
             // Including CSS file
             wp_register_style( 'enewsletter-style', $this->plugin_url . 'email-newsletter-files/css/admin.css' );
