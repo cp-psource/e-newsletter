@@ -23,9 +23,40 @@ if (!$controls->is_action()) {
         <?php $controls->show(); ?>
 
         <p>
-            Create newsletter archive pages for your campaigns or automated newsletters.<br>
-            Please <a href="https://www.thenewsletterplugin.com/documentation/addons/extended-features/archive-extension/" target="_blank">refer
-                the official page</a> to know how to use the shortcode.
+            <strong>Newsletter-Archiv einbinden</strong><br>
+            Füge den folgenden Shortcode auf einer beliebigen WordPress-Seite ein, um ein Archiv aller gesendeten Newsletter anzuzeigen:
+        </p>
+        <div style="margin-bottom:10px;">
+            <input type="text" value="[newsletter_archive]" id="archive-shortcode" readonly style="width:220px; font-family:monospace;">
+            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('archive-shortcode').value)">Kopieren</button>
+        </div>
+
+        <p>
+            <strong>Beispiel für einen Einführungstext:</strong><br>
+            <code>
+                [newsletter_archive]<br>
+                Willkommen in unserem Newsletter-Archiv!<br>
+                [/newsletter_archive]
+            </code>
+            <br>
+            Der Einführungstext wird nur in der Listenansicht angezeigt.
+        </p>
+
+        <p>
+            <strong>Shortcode-Attribute:</strong><br>
+            <ul>
+                <li><code>max</code> – Maximale Anzahl der angezeigten Newsletter (z.B. <code>[newsletter_archive max="10" /]</code>)</li>
+                <li><code>list</code> – Nur Newsletter einer bestimmten Liste anzeigen (z.B. <code>[newsletter_archive list="1" /]</code>)</li>
+                <li><code>type</code> – Nur Newsletter eines bestimmten Typs anzeigen, z.B. für Automated Addon: <code>[newsletter_archive type="automated_1"]</code></li>
+                <li><code>show_date</code> – Datum anzeigen (<code>true</code> oder <code>false</code>)</li>
+                <li><code>separator</code> – Trennzeichen zwischen Datum und Titel (z.B. <code>[newsletter_archive separator=" | " /]</code>)</li>
+                <li><code>title</code> – Überschrift für die Liste als H2</li>
+            </ul>
+        </p>
+
+        <p>
+            <strong>Hinweis:</strong><br>
+            Bei Problemen mit der eingebetteten Ansicht (z.B. durch Page Builder oder Theme) kannst du in den Addon-Einstellungen einstellen, dass Newsletter in einem neuen Tab geöffnet werden.
         </p>
 
         <form action="" method="post">

@@ -32,7 +32,6 @@ if ($controls->is_action('copy')) {
 $forms = $forms->get_forms();
 
 $controls->warnings[] = 'Please note: this is an experimental feature that could change without notice.';
-$controls->messages = '<a href="https://forms.gle/bfvJECGdSPtsc2gdA" target="_blank">Here is a short survey</a> to let us know what you would see in the next version. Thank you!';
 ?>
 
 <div class="wrap tnp-emails tnp-emails-index" id="tnp-wrap">
