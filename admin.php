@@ -221,6 +221,19 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
         if (current_user_can('administrator')) {
             NewsletterMainAdmin::instance()->add_menu_page('main', __('Settings', 'newsletter'));
         }
+
+        global $newsletterInstasend;
+        add_submenu_page(
+            'newsletter_main_index',
+            'Instasend',
+            '<span class="tnp-side-menu">Instasend</span>',
+            'manage_options',
+            'newsletter_instasend_index',
+            function () use ($newsletterInstasend) {
+                $instasend = $newsletterInstasend;
+                require NEWSLETTER_DIR . '/includes/newsletter-instasend/index.php';
+            }
+        );
         
         add_submenu_page(
             'newsletter_main_index',

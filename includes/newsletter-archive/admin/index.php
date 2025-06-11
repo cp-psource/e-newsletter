@@ -23,40 +23,40 @@ if (!$controls->is_action()) {
         <?php $controls->show(); ?>
 
         <p>
-            <strong>Newsletter-Archiv einbinden</strong><br>
-            Füge den folgenden Shortcode auf einer beliebigen WordPress-Seite ein, um ein Archiv aller gesendeten Newsletter anzuzeigen:
+            <strong><?php _e('Embed the newsletter archive', 'newsletter'); ?></strong><br>
+            <?php _e('Add the following shortcode to any WordPress page to display an archive of all sent newsletters:', 'newsletter'); ?>
         </p>
         <div style="margin-bottom:10px;">
             <input type="text" value="[newsletter_archive]" id="archive-shortcode" readonly style="width:220px; font-family:monospace;">
-            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('archive-shortcode').value)">Kopieren</button>
+            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('archive-shortcode').value)"><?php _e('Copy', 'newsletter'); ?></button>
         </div>
 
         <p>
-            <strong>Beispiel für einen Einführungstext:</strong><br>
+            <strong><?php _e('Example with an introduction text:', 'newsletter'); ?></strong><br>
             <code>
                 [newsletter_archive]<br>
-                Willkommen in unserem Newsletter-Archiv!<br>
+                <?php _e('Welcome to our newsletter archive!', 'newsletter'); ?><br>
                 [/newsletter_archive]
             </code>
             <br>
-            Der Einführungstext wird nur in der Listenansicht angezeigt.
+            <?php _e('The introduction text is only shown in the list view.', 'newsletter'); ?>
         </p>
 
         <p>
-            <strong>Shortcode-Attribute:</strong><br>
+            <strong><?php _e('Shortcode attributes:', 'newsletter'); ?></strong><br>
             <ul>
-                <li><code>max</code> – Maximale Anzahl der angezeigten Newsletter (z.B. <code>[newsletter_archive max="10" /]</code>)</li>
-                <li><code>list</code> – Nur Newsletter einer bestimmten Liste anzeigen (z.B. <code>[newsletter_archive list="1" /]</code>)</li>
-                <li><code>type</code> – Nur Newsletter eines bestimmten Typs anzeigen, z.B. für Automated Addon: <code>[newsletter_archive type="automated_1"]</code></li>
-                <li><code>show_date</code> – Datum anzeigen (<code>true</code> oder <code>false</code>)</li>
-                <li><code>separator</code> – Trennzeichen zwischen Datum und Titel (z.B. <code>[newsletter_archive separator=" | " /]</code>)</li>
-                <li><code>title</code> – Überschrift für die Liste als H2</li>
+                <li><code>max</code> – <?php _e('Maximum number of newsletters to display (e.g. <code>[newsletter_archive max="10" /]</code>)', 'newsletter'); ?></li>
+                <li><code>list</code> – <?php _e('Show only newsletters sent to a specific list (e.g. <code>[newsletter_archive list="1" /]</code>)', 'newsletter'); ?></li>
+                <li><code>type</code> – <?php _e('Show only newsletters of a certain type, e.g. for Automated Addon: <code>[newsletter_archive type="automated_1"]</code>', 'newsletter'); ?></li>
+                <li><code>show_date</code> – <?php _e('Show the date (<code>true</code> or <code>false</code>)', 'newsletter'); ?></li>
+                <li><code>separator</code> – <?php _e('Separator between date and title (e.g. <code>[newsletter_archive separator=" | " /]</code>)', 'newsletter'); ?></li>
+                <li><code>title</code> – <?php _e('Title for the list as H2', 'newsletter'); ?></li>
             </ul>
         </p>
 
         <p>
-            <strong>Hinweis:</strong><br>
-            Bei Problemen mit der eingebetteten Ansicht (z.B. durch Page Builder oder Theme) kannst du in den Addon-Einstellungen einstellen, dass Newsletter in einem neuen Tab geöffnet werden.
+            <strong><?php _e('Note:', 'newsletter'); ?></strong><br>
+            <?php _e('If you have issues with the embedded view (for example, due to a page builder or theme), you can set the archive to open newsletters in a new tab in the addon settings.', 'newsletter'); ?>
         </p>
 
         <form action="" method="post">

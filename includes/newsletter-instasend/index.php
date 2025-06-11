@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
 @include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
-$logger = $this->get_admin_logger();
+//$logger = $instasend->get_admin_logger();
 
 if (!$controls->is_action()) {
     $controls->data = $this->options;
@@ -36,17 +36,24 @@ if (!$controls->is_action()) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <p>Welcome to Instasend the Newsletter addon to create newsletters directly from your post editing page.</p>
-            
-            
             <p>
-                Have any ideas, requests or comments? 
-                <a href="https://forms.gle/5gqkUiqkgeGM4qZU7" target="_blank">Leave your feedback: we're planning the Instasend future, take the chance to design it!</a>
+                <?php _e('Instasend adds a meta box to your posts, allowing you to instantly turn any published post into a newsletter.', 'newsletter'); ?>
             </p>
-            
-            <iframe width="800" height="450" src="https://www.youtube.com/embed/2BYCMU44va8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></iframe>
-            
             <p>
+                <?php _e('How it works:', 'newsletter'); ?>
+            </p>
+            <ul>
+                <li><?php _e('Create or edit your post as usual.', 'newsletter'); ?></li>
+                <li><?php _e('Save or publish the post.', 'newsletter'); ?></li>
+                <li><?php _e('In the Instasend meta box, click "Create Newsletter".', 'newsletter'); ?></li>
+                <li><?php _e('Optionally, choose whether to include the featured image.', 'newsletter'); ?></li>
+                <li><?php _e('Select if you want to send the full post or just the excerpt.', 'newsletter'); ?></li>
+                <li><?php _e('Click "Create".', 'newsletter'); ?></li>
+                <li><?php _e('You can now review, edit, and send your new newsletter as usual.', 'newsletter'); ?></li>
+            </ul>
+            <p>
+                <?php _e('Instasend makes it easy to share your latest content with your subscribers in just a few clicks!', 'newsletter'); ?>
+            </p>
              <?php //$controls->button_save('save') ?>
             </p>
         </form>

@@ -1156,15 +1156,17 @@ require_once NEWSLETTER_DIR . '/unsubscription/unsubscription.php';
 require_once NEWSLETTER_DIR . '/profile/profile.php';
 require_once NEWSLETTER_DIR . '/widget/standard.php';
 require_once NEWSLETTER_DIR . '/includes/newsletter-wpusers/wpusers.php';
-require_once NEWSLETTER_DIR . '/includes/newsletter-archive/archive.php';
-require_once NEWSLETTER_DIR . '/includes/newsletter-forms/forms.php';
-
 $wpusers = new NewsletterWpUsers($newsletter->version);
 $wpusers->init();
-
+require_once NEWSLETTER_DIR . '/includes/newsletter-archive/archive.php';
+require_once NEWSLETTER_DIR . '/includes/newsletter-forms/forms.php';
 global $newsletterForms;
 $newsletterForms = new \TNP\Forms\NewsletterForms($newsletter->version);
 $newsletterForms->init();
+require_once NEWSLETTER_DIR . '/includes/newsletter-instasend/instasend.php';
+global $newsletterInstasend;
+$newsletterInstasend = new NewsletterInstasend($newsletter->version);
+$newsletterInstasend->init();
 
 if (is_admin()) {
     require_once NEWSLETTER_DIR . '/admin.php';
