@@ -31,7 +31,7 @@ if ($controls->is_action('copy')) {
 
 $forms = $forms->get_forms();
 
-$controls->warnings[] = 'Please note: this is an experimental feature that could change without notice.';
+$controls->warnings[] = __('Please note: this is an experimental feature that could change without notice.', 'newsletter');
 ?>
 
 <div class="wrap tnp-emails tnp-emails-index" id="tnp-wrap">
@@ -42,7 +42,7 @@ $controls->warnings[] = 'Please note: this is an experimental feature that could
 
         <h2><?php _e('Forms', 'newsletter') ?></h2>
         <p>
-            Shortcodes can be used on posts, pages, and every widget area.
+            <?php _e('Shortcodes can be used on posts, pages, and every widget area.', 'newsletter'); ?>
         </p>
 
     </div>
@@ -54,7 +54,7 @@ $controls->warnings[] = 'Please note: this is an experimental feature that could
 
             <div class="tnp-buttons">
                 <?php $controls->button('add', 'New') ?>
-                <?php $controls->button_link('https://forms.gle/bfvJECGdSPtsc2gdA', 'Share your thoughts') ?>
+                <?php $controls->button_link('https://forms.gle/bfvJECGdSPtsc2gdA', __('Share your thoughts', 'newsletter')) ?>
             </div>
 
             <table class="widefat" style="width: 100%">
