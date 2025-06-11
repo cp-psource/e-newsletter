@@ -68,60 +68,11 @@ if (class_exists('NewsletterExtensions')) {
                     </tr>
 
                     <tr>
-                        <td>Leads Addon</td>
-                        <td>Popup</td>
-                        <td style="white-space: nowrap">
-                            <?php if (class_exists('NewsletterLeads')) { ?>
-                                <?php $controls->button_icon_configure('?page=newsletter_leads_index') ?>
-                            <?php } else { ?>
-                                <?php $controls->btn_link($extensions_url . '#newsletter-leads', 'Addon required', ['tertiary' => true, 'target' => '_blank']) ?>
-                            <?php } ?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Leads Addon</td>
-                        <td>Topbar</td>
-                        <td style="white-space: nowrap">
-                            <?php if (class_exists('NewsletterLeads')) { ?>
-                                <?php $controls->button_icon_configure('?page=newsletter_leads_topbar') ?>
-                            <?php } else { ?>
-                                <?php $controls->btn_link($extensions_url . '#newsletter-leads', 'Addon required', ['tertiary' => true, 'target' => '_blank']) ?>
-                            <?php } ?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Leads Addon</td>
-                        <td>Injection on posts' content</td>
-                        <td style="white-space: nowrap">
-                            <?php if (class_exists('NewsletterLeads')) { ?>
-                                <?php $controls->button_icon_configure('?page=newsletter_leads_inject') ?>
-                            <?php } else { ?>
-                                <?php $controls->btn_link($extensions_url . '#newsletter-leads', 'Addon required', ['tertiary' => true, 'target' => '_blank']) ?>
-                            <?php } ?>
-                        </td>
-                    </tr>
-
-
-                    <tr>
                         <td>WordPress</td>
                         <td>WP User Registration</td>
 
                         <td style="white-space: nowrap">
                            <?php $controls->button_icon_configure('?page=newsletter_wpusers_index') ?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>WordPress</td>
-                        <td>Comment form</td>
-                        <td style="white-space: nowrap">
-                            <?php if (class_exists('NewsletterComments')) { ?>
-                                <?php $controls->button_icon_configure('?page=newsletter_comments_index') ?>
-                            <?php } else { ?>
-                                <?php $controls->btn_link($extensions_url . '#newsletter-comments', 'Addon required', ['tertiary' => true, 'target' => '_blank']) ?>
-                            <?php } ?>
                         </td>
                     </tr>
 
@@ -151,8 +102,6 @@ if (class_exists('NewsletterExtensions')) {
 
                 </tbody>
             </table>
-
-            <p>Integrations with many other plugins are available on the addons page.<p>
 
         </form>
     </div>

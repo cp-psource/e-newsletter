@@ -36,11 +36,7 @@ if (class_exists('NewsletterLeads')) {
         <?php $controls->language_notice(); ?>
 
         <p>
-            Starting from the 2nd visit and after 5 seconds. It doesn't show up if the visitor is already subscribed.
-            When closed it shows up again after 30 days.
-        </p>
-        <p>
-            More options are available with the <a href="<?php echo esc_attr(Newsletter\Integrations::get_leads_url()) ?>" target="_blank">Leads Addon</a>.
+            <?php _e("Starting from the 2nd visit and after 5 seconds. It doesn't show up if the visitor is already subscribed. When closed it shows up again after 30 days.", 'newsletter'); ?>
         </p>
 
 

@@ -40,7 +40,7 @@ if (class_exists('NewsletterLeads')) {
         <?php $controls->language_notice(); ?>
 
         <p>
-            Injected after the content of each post. More options are available with the <a href="<?php echo esc_attr(Newsletter\Integrations::get_leads_url()) ?>" target="_blank">Leads Addon</a>.
+            <?php _e('Injected after the content of each post.', 'newsletter'); ?>
         </p>
 
         <form action="" method="post">
