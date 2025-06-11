@@ -244,7 +244,22 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             }
         );
 
-        //NewsletterMainAdmin::instance()->admin_after_menu(); // Special entries
+        global $newsletterForms;
+        add_submenu_page(
+            'newsletter_main_index',
+            'Forms',
+            '<span class="tnp-side-menu">Forms</span>',
+            'manage_options',
+            'newsletter_forms_index',
+            function () use ($newsletterForms) {
+                $forms = $newsletterForms;
+                if (isset($_GET['id'])) {
+                    require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/edit.php';
+                } else {
+                    require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/index.php';
+                }
+            }
+        );
     }
 }
 

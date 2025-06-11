@@ -7,7 +7,7 @@ require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
 $id = (int) $_GET['id'];
-$form = $this->get_form($id);
+$form = $forms->get_form($id);
 
 if (!$form) {
     die('Invalid form ID');
@@ -15,12 +15,12 @@ if (!$form) {
 
 if ($controls->is_action('save')) {
     $controls->data['id'] = $form->id;
-    $form = $this->save_form($controls->data);
+    $form = $forms->save_form($controls->data);
     $controls->add_toast_saved();
 }
 
 if ($controls->is_action('delete')) {
-    $this->delete_form($id);
+    $forms->delete_form($id);
     $controls->js_redirect('admin.php?page=newsletter_forms_index');
     return;
 }
@@ -124,6 +124,6 @@ if (!$controls->is_action()) {
 
 </div>
 <?php
-add_action('admin_footer', function () use ($form) {
-    echo '<div id="tnpfd-app" style="position: absolute; top: 0; left: 0; z-index: 10000; padding: 20px"><form-designer-dialog target="options-config" :debug="false" :config="', esc_attr(json_encode($this->get_builder_config($form))), '"></form-designer-dialog></div>';
+add_action('admin_footer', function () use ($form, $forms) {
+    echo '<div id="tnpfd-app" style="position: absolute; top: 0; left: 0; z-index: 10000; padding: 20px"><form-designer-dialog target="options-config" :debug="false" :config="', esc_attr(json_encode($forms->get_builder_config($form))), '"></form-designer-dialog></div>';
 }, 10000);

@@ -1157,9 +1157,14 @@ require_once NEWSLETTER_DIR . '/profile/profile.php';
 require_once NEWSLETTER_DIR . '/widget/standard.php';
 require_once NEWSLETTER_DIR . '/includes/newsletter-wpusers/wpusers.php';
 require_once NEWSLETTER_DIR . '/includes/newsletter-archive/archive.php';
+require_once NEWSLETTER_DIR . '/includes/newsletter-forms/forms.php';
 
 $wpusers = new NewsletterWpUsers($newsletter->version);
 $wpusers->init();
+
+global $newsletterForms;
+$newsletterForms = new \TNP\Forms\NewsletterForms($newsletter->version);
+$newsletterForms->init();
 
 if (is_admin()) {
     require_once NEWSLETTER_DIR . '/admin.php';
