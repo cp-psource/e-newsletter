@@ -1,16 +1,15 @@
 ---
 layout: psource-theme
-title: "PS-eNewsletter"
+title: "PS-eNewsletter Abonnement-Formulare und Shortcodes"
 ---
 
-<h2 align="center" style="color:#38c2bb;">📚 PS-eNewsletter</h2>
+<h2 align="center" style="color:#38c2bb;">📚 PS-eNewsletter Abonnement-Formulare und Shortcodes</h2>
 
 <div class="menu">
   <a href="https://github.com/cp-psource/e-newsletter/discussions" style="color:#38c2bb;">💬 Forum</a>
   <a href="https://github.com/cp-psource/e-newsletter/releases" style="color:#38c2bb;">📝 Download</a>
 </div>
 
-# Abonnement-Formulare und Shortcodes
 
 Hier findest du alles, was du über unsere Shortcodes wissen musst, um Anmeldeformulare auf deiner Website einzubauen.
 
@@ -111,7 +110,7 @@ Weitere Optionen:
 
 ---
 
-# Verwendung des `[newsletter_field]` Shortcodes
+## Verwendung des `[newsletter_field]` Shortcodes
 
 Für maximale Flexibilität kannst du Formulare selbst bauen:
 

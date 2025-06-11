@@ -18,10 +18,6 @@ title: "PS-eNewsletter"
 
 Denke an all das Geld, das Du sparst, wenn Du auf den E-Mail-Dienst eines Drittanbieters verzichtest. Auch werden keine Daten Deiner Benutzer an Dritte gesendet, Du hast die volle Kontrolle.
 
-![7 professionell gestaltete Vorlagen enthalten.](assets/images/e-templates-2-735x470-1.jpeg)
-
-  Enthält 7 professionell gestaltete Vorlagen.
-
 ### Einfache Newsletter-Erstellung
 
 Verwende den bekannten WordPress-Customizer, um eine E-Mail-Vorlage und einen Layoutinhalt auszuwählen. Sieh Dir genau an, wie Deine Nachricht aussehen wird, bevor Du auf „Senden“ klickst. Wähle aus den professionell erstellten Vorlagen oder erstelle Deine eigenen.
