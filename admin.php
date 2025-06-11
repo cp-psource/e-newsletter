@@ -222,6 +222,19 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             NewsletterMainAdmin::instance()->add_menu_page('main', __('Settings', 'newsletter'));
         }
 
+        global $newsletterLock;
+        add_submenu_page(
+            'newsletter_main_index',
+            'Locked Content',
+            '<span class="tnp-side-menu">Locked Content</span>',
+            'manage_options',
+            'newsletter_lock_index',
+            function () use ($newsletterLock) {
+                $lock = $newsletterLock;
+                require NEWSLETTER_DIR . '/includes/newsletter-lock/admin/index.php';
+            }
+        );
+
         global $newsletterInstasend;
         add_submenu_page(
             'newsletter_main_index',

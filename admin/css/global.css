@@ -10,10 +10,6 @@
     line-height: auto;
 }
 
-.tnp-side-menu {
-    color: #E67E22!important;
-}
-
 #wpadminbar #wp-admin-bar-newsletter .ab-icon:before {
     content: '\f465';
     top: 2px;

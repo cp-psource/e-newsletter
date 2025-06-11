@@ -1167,6 +1167,10 @@ require_once NEWSLETTER_DIR . '/includes/newsletter-instasend/instasend.php';
 global $newsletterInstasend;
 $newsletterInstasend = new NewsletterInstasend($newsletter->version);
 $newsletterInstasend->init();
+require_once NEWSLETTER_DIR . '/includes/newsletter-lock/lock.php';
+global $newsletterLock;
+$newsletterLock = new NewsletterLock($newsletter->version);
+$newsletterLock->init();
 
 if (is_admin()) {
     require_once NEWSLETTER_DIR . '/admin.php';
