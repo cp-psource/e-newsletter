@@ -67,7 +67,6 @@ if (!$controls->is_action()) {
             }
         }
 
-        Newsletter\Addons::clear();
         Newsletter\News::clear();
         update_option('newsletter_public_page_check', 0, false);
         

@@ -12,12 +12,8 @@ class NewsletterArchive {
     }
 
     function init() {
-        //parent::init();
 
         if (is_admin()) {
-            if (Newsletter::instance()->is_allowed()) {
-            }
-        } else {
             add_shortcode('newsletter_archive', array($this, 'shortcode_archive'));
         }
 

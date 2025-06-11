@@ -4,71 +4,54 @@
 
 defined('ABSPATH') || exit;
 
+if (!isset($controls) || !$controls) {
+    include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
+    $controls = new NewsletterControls();
+}
+
 $feeds = [];
-$feed = new stdClass();
-$feed->id = 1;
-$feed->last_time = time() - DAY_IN_SECONDS;
-$feed->sent = 12;
-$feed->data = [
-    'name' => 'Weekly wellness tips',
-    'enabled' => 1];
-$feed->email = new stdClass();
-$feed->email->status = 'sending';
-
-$feeds[] = $feed;
-$feed = new stdClass();
-$feed->id = 2;
-$feed->last_time = time() - MONTH_IN_SECONDS;
-$feed->sent = 4;
-$feed->email = new stdClass();
-$feed->email->status = 'sent';
-$feed->data = [
-    'name' => 'Last month activities summary',
-    'enabled' => 1];
-$feeds[] = $feed;
-$feed = new stdClass();
-$feed->id = 3;
-$feed->last_time = time() - WEEK_IN_SECONDS;
-$feed->email = new stdClass();
-$feed->email->status = 'sent';
-$feed->sent = 57;
-$feed->data = [
-    'name' => 'Next seven days meeting locations',
-    'enabled' => 1];
-
-$feeds[] = $feed;
+$channels = get_option('tnp_automated_channels', []);
+foreach ($channels as $channel) {
+    $feed = new stdClass();
+    $feed->id = $channel['id'];
+    $feed->data = $channel;
+    // Beispielwerte, ggf. anpassen:
+    $feed->last_time = isset($channel['last_time']) ? $channel['last_time'] : 0;
+    $feed->sent = isset($channel['sent']) ? $channel['sent'] : 0;
+    $feed->email = isset($channel['email']) ? (object)$channel['email'] : null;
+    $feeds[] = $feed;
+}
 
 NewsletterMainAdmin::instance()->set_completed_step('automated');
 ?>
-<script src="<?php echo plugins_url('e-newsletter') ?>/vendor/driver/driver.js.iife.js"></script>
-<link rel="stylesheet" href="<?php echo plugins_url('e-newsletter') ?>/vendor/driver/driver.css"/>
 
 <div class="wrap" id="tnp-wrap">
     <?php include NEWSLETTER_ADMIN_HEADER ?>
     <div id="tnp-heading">
-        <?php $controls->title_help('/addons/extended-features/automated-extension/') ?>
-        <h2>Automated Newsletters</h2>
+        <h2><?php esc_html_e('Automated Newsletters', 'newsletter'); ?></h2>
     </div>
     <div id="tnp-body">
         <?php $controls->show(); ?>
-        <p>This is only a demonstrative panel.</p>
+        <div class="tnp-description" style="margin-bottom: 1em;">
+            <?php esc_html_e('Automated channels allow you to send newsletters automatically based on your own schedule and content sources. Create, configure and manage recurring campaigns for your subscribers with just a few clicks.', 'newsletter'); ?>
+        </div>
 
         <form method="post" action="">
             <?php $controls->init(); ?>
 
             <div class="tnp-buttons">
-                <?php $controls->button('add', 'New channel') ?>
+                <?php $controls->button_link('?page=newsletter_main_automatededit', esc_html__('New channel', 'newsletter'), 'primary'); ?>
             </div>
 
             <table class="widefat" id="tnp-channels">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
+                        <th><?php esc_html_e('Id', 'newsletter'); ?></th>
+                        <th><?php esc_html_e('Name', 'newsletter'); ?></th>
                         <th><!--Status--></th>
-                        <th colspan="2">Last newsletter</th>
+                        <th colspan="2"><?php esc_html_e('Last newsletter', 'newsletter'); ?></th>
 
-                        <th>Sent</th>
+                        <th><?php esc_html_e('Sent', 'newsletter'); ?></th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -102,7 +85,7 @@ NewsletterMainAdmin::instance()->set_completed_step('automated');
 
                             <td style="white-space: nowrap" class="tnp-automated-actions">
 
-                                <?php $controls->button_icon_configure('?page=newsletter_main_automatededit') ?>
+                                <?php $controls->button_icon_configure('?page=newsletter_main_automatededit&id=' . $feed->id) ?>
                                 <?php $controls->button_icon_newsletters('?page=newsletter_main_automatednewsletters') ?>
                                 <?php $controls->button_icon_design('?page=newsletter_main_automatedtemplate') ?>
                             </td>
@@ -120,18 +103,3 @@ NewsletterMainAdmin::instance()->set_completed_step('automated');
         </form>
     </div>
 </div>
-<script>
-    const driver = window.driver.js.driver;
-
-const driverObj = driver({
-  showProgress: true,
-  steps: [
-    { element: '#tnp-channels', popover: { title: 'Channels', description: 'Every channel generates automatically newsletters with your site contents.', side: "left", align: 'start' }},
-    { element: '.tnp-buttons', popover: { title: 'Create', description: 'Create as many channel as you need with different templates and planning.', side: "left", align: 'start' }},
-    { element: '.tnp-automated-actions', popover: { title: 'Actions', description: 'Configure, change the template, check the generated newsletters of a channel.', side: "left", align: 'start' }},
-      { popover: { title: 'More...', description: 'Click on action buttons to see more.' } }
-  ]
-});
-
-driverObj.drive();
-    </script>

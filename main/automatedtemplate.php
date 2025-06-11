@@ -3,20 +3,45 @@
 
 defined('ABSPATH') || exit;
 
-$channel = new stdClass();
-$channel->id = 1;
-$channel->data = [
-    'name' => 'Weekly wellness tips',
-    'track' => 1,
-    'frequency' => 'weekly',
-    'day_1' => 1,
-];
+if (!isset($controls) || !$controls) {
+    include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
+    $controls = new NewsletterControls();
+}
 
-$email = new stdClass();
-$email->id = 1;
-$email->status = 'new';
-$email->subject = 'Week 3 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 4;
+// ID aus der URL holen
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$channels = get_option('tnp_automated_channels', []);
+if ($id && isset($channels[$id])) {
+    $channel = (object) $channels[$id];
+} else {
+    // Fallback: leerer Kanal
+    $channel = new stdClass();
+    $channel->id = 0;
+    $channel->data = [
+        'name' => '',
+        'track' => 1,
+        'frequency' => 'weekly',
+        'day_1' => 1,
+    ];
+}
+
+// Echte E-Mail-Daten laden
+$emails = get_option('tnp_automated_emails', []);
+$email = null;
+foreach ($emails as $e) {
+    if ($e['channel_id'] == $channel->id) {
+        $email = (object)$e;
+        break;
+    }
+}
+if (!$email) {
+    $email = new stdClass();
+    $email->id = 0;
+    $email->status = '';
+    $email->subject = '';
+    $email->send_on = 0;
+}
+
 TNP_Composer::prepare_controls($controls, $email);
 ?>
 <div class="wrap" id="tnp-wrap">

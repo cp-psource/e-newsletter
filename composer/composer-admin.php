@@ -364,7 +364,7 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
             $content .= '</div>';
         }
 
-        $content .= '<h3>Standard templates</h3>';
+        $content .= '<h3>' . __('Standard templates', 'newsletter') . '</h3>';
 
         $content .= '<div class="tnpc-preset-block">';
 

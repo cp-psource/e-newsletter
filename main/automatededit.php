@@ -9,16 +9,50 @@ global $wpdb;
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
-$channel = new stdClass();
-$channel->id = 1;
-$channel->data = [
-    'name'=> 'Weekly wellness tips',
-    'track' => 1,
-    'frequency' => 'weekly',
-    'day_1' => 1,
-];
+// Kanal-ID aus der URL holen
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$controls->data = $channel->data;
+// Kanäle laden
+$channels = get_option('tnp_automated_channels', []);
+
+// === HIER: Formularverarbeitung ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Werte aus dem Formular holen
+    $data = $controls->get_post_data();
+
+    // Neue ID vergeben, falls neu
+    if (!$id) {
+        $id = time(); // oder ein anderer eindeutiger Wert
+        $data['id'] = $id;
+    }
+
+    // Speichern/Überschreiben
+    $channels[$id] = $data;
+    update_option('tnp_automated_channels', $channels);
+
+    // Optional: Weiterleitung nach dem Speichern
+    wp_redirect(admin_url('admin.php?page=newsletter_main_automatedindex'));
+    exit;
+}
+// === ENDE Formularverarbeitung ===
+
+// Kanal suchen oder neuen anlegen
+if ($id && isset($channels[$id])) {
+    $channel = $channels[$id];
+} else {
+    // Neuer Kanal (leere Werte)
+    $channel = [
+        'id' => 0,
+        'name' => '',
+        'track' => 1,
+        'frequency' => 'weekly',
+        'day_1' => 1,
+        // ... weitere Felder ...
+    ];
+}
+
+// Daten an Controls übergeben
+$controls->data = $channel;
 
 ?>
 <script src="<?php echo plugins_url('e-newsletter') ?>/vendor/driver/driver.js.iife.js"></script>
@@ -213,15 +247,3 @@ $controls->data = $channel->data;
 
     </div>
 </div>
-<script>
-//    const driver = window.driver.js.driver;
-//
-//const driverObj = driver({
-//  showProgress: true,
-//  steps: [
-//    { element: '#tabs', popover: { title: 'Options and planning', description: 'Here you can configure the channel targeting, planning e some advanced options', side: "left", align: 'start' }},
-//  ]
-//});
-//
-//driverObj.drive();
-    </script>

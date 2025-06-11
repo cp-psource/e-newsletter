@@ -1,117 +1,81 @@
 <?php
-/* @var $this Newsletter */
-
 defined('ABSPATH') || exit;
 
-include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
-$controls = new NewsletterControls();
-$src = esc_attr(plugins_url('e-newsletter') . '/main/images/automated');
-NewsletterMainAdmin::instance()->set_completed_step('automated');
-?>
+class NewsletterAutomated {
+    static $instance;
 
-<style>
-<?php include __DIR__ . '/css/automation.css' ?>
-
-    .tnp-promo {
-        background-color: #fff;
-        max-width: 850px;
-    }
-    .tnp-promo td {
-        padding: 1rem;
-        font-size: 1.2rem;
-        line-height: 150%;
-        vertical-align: top;
-        text-align: left;
+    function __construct() {
+        self::$instance = $this;
     }
 
-    .tnp-promo td img {
-        max-width: 100%;
-        display: block;
-        border: 1px solid #ddd;
-        box-shadow: 0 0 5px #ccc;
+    function init() {
+        add_action('admin_menu', array($this, 'add_menu'));
     }
-    .tnp-promo-intro {
-        font-size: 1.3rem;
-        line-height: normal;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-        max-width: 850px;
+
+    function panel_newsletters() {
+        include NEWSLETTER_DIR . '/main/automatednewsletters.php';
     }
-    .tnp-promo-footer {
-        text-align: left;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
+
+    function panel_edit() {
+        include NEWSLETTER_DIR . '/main/automatededit.php';
     }
-</style>
 
-<div class="wrap" id="tnp-wrap">
+    function panel_index() {
+        include NEWSLETTER_DIR . '/main/automatedindex.php';
+    }
 
-    <?php include NEWSLETTER_DIR . '/tnp-header.php'; ?>
+    function panel() {
+        $this->panel_index();
+    }
 
-    <div id="tnp-heading">
-        <h2>Automated Newsletters (demo)</h2>
-    </div>
+    function add_menu() {
+        add_submenu_page(
+            'newsletter_main_index',
+            __('Automated', 'newsletter'),
+            '<span class="tnp-side-menu">Automated</span>',
+            'manage_options',
+            'newsletter_main_automated',
+            array($this, 'panel')
+        );
+        // Edit-Seite (versteckt)
+        add_submenu_page(
+            null,
+            __('Edit Automated Channel', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_automatededit',
+            array($this, 'panel_edit')
+        );
+        // Template-Seite (versteckt)
+        add_submenu_page(
+            null,
+            __('Automated Template', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_automatedtemplate',
+            array($this, 'panel_template')
+        );
+        // Newsletters-Seite (versteckt)
+        add_submenu_page(
+            null,
+            __('Automated Newsletters', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_automatednewsletters',
+            array($this, 'panel_newsletters')
+        );
+        // Index-Seite (versteckt, aber für Direktaufruf)
+        add_submenu_page(
+            null,
+            __('Automated Index', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_automatedindex',
+            array($this, 'panel_index')
+        );
+    }
 
-
-    <div id="tnp-body" >
-
-        <div class="tnp-notice">
-            To activate the Automated addon, insert a valid license on the Newsletter's Settings and
-            go to the Addons panel.
-        </div>
-
-        <div class="tnp-promo-intro">
-            The Automated addon generates automatically newsletters with fresh content from your site (articles, products, ...)
-            with a fully configurable scheduling.
-        </div>
-
-        <div class="tnp-promo-footer">
-            <a href="?page=newsletter_main_automatedindex" class="button-secondary">Surf some demo panels</a>
-            <a href="https://www.thenewsletterplugin.com/premium?utm_campaign=automated&utm_source=plugin" target="_blank" class="button-primary">Get it</a>
-        </div>
-
-        <table class="tnp-promo" scope="layout">
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/index.png">
-                </td>
-                <td width="40%">
-                    Create as many channels as you need, with different newsletter templates, planning and targeting.
-                </td>
-            </tr>
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/template.png">
-                </td>
-                <td width="40%">
-                    Design the newsletter template for each channel with our composer and add dynamic content blocks: they'll be updated
-                    at the right time with the right content.
-                </td>
-            </tr>
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/planning.png">
-                </td>
-                <td width="40%">
-                    Plan, for each channel, when you want the newsletter to be created and sent. No fresh content? Automated is smart enough to
-                    stop and wait for the next scheduled day.
-                </td>
-            </tr>
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/newsletters.png">
-                </td>
-                <td width="40%">
-                    For each channel you have the list of the generated newsletters and their statistics.
-                </td>
-            </tr>
-        </table>
-
-        <div class="tnp-promo-footer">
-            <a href="?page=newsletter_main_automatedindex" class="button-secondary">Surf some demo panels</a>
-            <a href="https://www.thenewsletterplugin.com/premium?utm_campaign=automated&utm_source=plugin" target="_blank" class="button-primary">Get it</a>
-        </div>
-
-    </div>
-
-</div>
+    function panel_template() {
+        include NEWSLETTER_DIR . '/main/automatedtemplate.php';
+    }
+}

@@ -2,64 +2,27 @@
 
 defined('ABSPATH') || exit;
 
-$channel = new stdClass();
-$channel->id = 1;
-$channel->data = [
-    'name' => 'Weekly wellness tips',
-    'track' => 1,
-    'frequency' => 'weekly',
-    'day_1' => 1,
-];
+if (!isset($controls) || !$controls) {
+    include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
+    $controls = new NewsletterControls();
+}
 
-$emails = [];
-
-$email = new stdClass();
-$email->id = 6;
-$email->status = 'sending';
-$email->subject = 'Week 6 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 1;
-
-$emails[] = $email;
-
-$email = new stdClass();
-$email->id = 5;
-$email->status = 'sent';
-$email->subject = 'Week 5 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 2;
-
-$emails[] = $email;
-
-$email = new stdClass();
-$email->id = 4;
-$email->status = 'sent';
-$email->subject = 'Week 4 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 3;
-
-$emails[] = $email;
-
-$email = new stdClass();
-$email->id = 3;
-$email->status = 'sent';
-$email->subject = 'Week 3 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 4;
-
-$emails[] = $email;
-
-$email = new stdClass();
-$email->id = 2;
-$email->status = 'sent';
-$email->subject = 'Week 2 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 5;
-
-$emails[] = $email;
-
-$email = new stdClass();
-$email->id = 1;
-$email->status = 'sent';
-$email->subject = 'Week 1 Welness Tips';
-$email->send_on = time() - WEEK_IN_SECONDS * 6;
-
-$emails[] = $email;
+// Channel-ID aus der URL holen
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$channels = get_option('tnp_automated_channels', []);
+if ($id && isset($channels[$id])) {
+    $channel = (object) $channels[$id];
+} else {
+    // Fallback: leerer Kanal
+    $channel = new stdClass();
+    $channel->id = 0;
+    $channel->data = [
+        'name' => '',
+        'track' => 1,
+        'frequency' => 'weekly',
+        'day_1' => 1,
+    ];
+}
 ?>
 <script src="<?php echo plugins_url('e-newsletter') ?>/vendor/driver/driver.js.iife.js"></script>
 <link rel="stylesheet" href="<?php echo plugins_url('e-newsletter') ?>/vendor/driver/driver.css"/>
@@ -122,18 +85,3 @@ $emails[] = $email;
     </div>
 
 </div>
-<script>
-    const driver = window.driver.js.driver;
-
-    const driverObj = driver({
-        showProgress: true,
-        steps: [
-            {element: '#tnp-automated-newsletters', popover: {title: 'Newsletter', description: 'The list of all generated newsletters.', side: "left", align: 'start'}},
-            {element: '.tnp-automated-status', popover: {title: 'Status', description: 'Check if the newsletter is goingin out or the delivery has been completed.', side: "left", align: 'start'}},
-            {element: '.tnp-automated-actions', popover: {title: 'Actions', description: 'Check the statistics, stop the delivery, view online or delete.', side: "left", align: 'start'}},
-
-        ]
-    });
-
-    driverObj.drive();
-</script>

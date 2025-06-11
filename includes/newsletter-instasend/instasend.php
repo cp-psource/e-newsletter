@@ -24,14 +24,12 @@ class NewsletterInstasend {
     function init() {
 
         if (is_admin()) {
-            if (Newsletter::instance()->is_allowed()) {
 
-                add_action('admin_enqueue_scripts', array($this, 'hook_admin_enqueue_scripts'));
-                add_action('add_meta_boxes', array($this, 'add_instasend_post_metabox'), 1);
+            add_action('admin_enqueue_scripts', array($this, 'hook_admin_enqueue_scripts'));
+            add_action('add_meta_boxes', array($this, 'add_instasend_post_metabox'), 1);
 
-                add_action('wp_ajax_instasend_create_newsletter', array($this, 'create_newsletter_ajax_hook'));
-                add_action('wp_ajax_instasend_delete_newsletter', array($this, 'delete_newsletter_ajax_hook'));
-            }
+            add_action('wp_ajax_instasend_create_newsletter', array($this, 'create_newsletter_ajax_hook'));
+            add_action('wp_ajax_instasend_delete_newsletter', array($this, 'delete_newsletter_ajax_hook'));
         }
     }
 
@@ -72,6 +70,7 @@ class NewsletterInstasend {
 	}
 
     public function add_instasend_post_metabox() {
+        error_log('Instasend: add_instasend_post_metabox called');
 
         add_meta_box(
                 'tnp-instasend-metabox', 'Instasend', array($this, 'metabox_html'), 'post', 'side', 'high', null //All actions are performed with ajax requests
@@ -98,7 +97,7 @@ class NewsletterInstasend {
         } else {
             ?>
             <p>
-                <a href="https://forms.gle/ZQGxXqPkGsaxtzKT8" target="_blank" style="text-decoration: none">Feel free to send us a feedback (opens in a new window)</a>
+                <?php _e('Create a newsletter from this post instantly. Use the options below to customize your newsletter draft.', 'newsletter'); ?>
             </p>
 
             <div class="tnp_metabox_section">
@@ -366,7 +365,6 @@ class NewsletterInstasend {
         ];
 
         try {
-
 
             $this->verify_nonce($data['nonce']);
             $this->verify_post_id($data['post_id']);

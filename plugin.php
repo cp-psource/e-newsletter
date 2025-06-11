@@ -1174,6 +1174,10 @@ $newsletterLock->init();
 
 if (is_admin()) {
     require_once NEWSLETTER_DIR . '/admin.php';
+    require_once NEWSLETTER_DIR . '/main/automated.php';
+    global $newsletterAutomated;
+    $newsletterAutomated = new NewsletterAutomated();
+    $newsletterAutomated->init();
 }
 
 

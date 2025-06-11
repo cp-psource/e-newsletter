@@ -33,15 +33,13 @@ class NewsletterImport extends NewsletterAddon {
         parent::init();
 
         if (is_admin()) {
-            if (Newsletter::instance()->is_allowed()) {
-                add_action('admin_menu', [$this, 'hook_admin_menu'], 100);
-                add_filter('newsletter_menu_subscribers', [$this, 'hook_newsletter_menu_subscribers']);
-                if (defined('DOING_AJAX') && DOING_AJAX) {
-                    add_action('wp_ajax_newsletter_import', [$this, 'hook_wp_ajax_newsletter_import']);
-	                add_action('wp_ajax_newsletter_import_mailpoet', [$this, 'hook_wp_ajax_newsletter_import_mailpoet']);
-                    add_action('wp_ajax_newsletter_import_restore', [$this, 'hook_wp_ajax_newsletter_import_restore']);
-                    add_action('wp_ajax_newsletter_import_export', [$this, 'hook_wp_ajax_newsletter_import_export']);
-                }
+            add_action('admin_menu', [$this, 'hook_admin_menu'], 100);
+            add_filter('newsletter_menu_subscribers', [$this, 'hook_newsletter_menu_subscribers']);
+            if (defined('DOING_AJAX') && DOING_AJAX) {
+                add_action('wp_ajax_newsletter_import', [$this, 'hook_wp_ajax_newsletter_import']);
+	            add_action('wp_ajax_newsletter_import_mailpoet', [$this, 'hook_wp_ajax_newsletter_import_mailpoet']);
+                add_action('wp_ajax_newsletter_import_restore', [$this, 'hook_wp_ajax_newsletter_import_restore']);
+                add_action('wp_ajax_newsletter_import_export', [$this, 'hook_wp_ajax_newsletter_import_export']);
             }
         }
     }

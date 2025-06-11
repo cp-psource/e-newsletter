@@ -53,7 +53,7 @@ $templates = NewsletterComposer::instance()->get_templates();
         </div>
 
 
-        <h3>Standard templates</h3>
+        <h3><?php _e('Standard templates', 'newsletter'); ?></h3>
 
         <div class="tnpc-preset-block">
 

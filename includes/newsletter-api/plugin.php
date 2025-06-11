@@ -70,10 +70,8 @@ class NewsletterApi extends NewsletterAddon {
         add_action('rest_api_init', [$this, 'hook_rest_api_init']);
 
         if (is_admin()) {
-            if (Newsletter::instance()->is_allowed()) {
-                add_action('admin_menu', [$this, 'hook_admin_menu'], 100);
-                add_filter('newsletter_menu_settings', [$this, 'hook_newsletter_menu_settings'], 1, 3);
-            }
+            add_action('admin_menu', [$this, 'hook_admin_menu'], 100);
+            add_filter('newsletter_menu_settings', [$this, 'hook_newsletter_menu_settings'], 1, 3);
         }
     }
 

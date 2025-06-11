@@ -15,9 +15,7 @@ class NewsletterLock {
 
     function init() {
         if (is_admin()) {
-            if (Newsletter::instance()->is_allowed()) {
-                add_filter('newsletter_menu_subscription', [$this, 'hook_newsletter_menu_subscription']);
-            }
+            add_filter('newsletter_menu_subscription', [$this, 'hook_newsletter_menu_subscription']);
         }
 
         add_action('newsletter_action', [$this, 'hook_newsletter_action'], 10, 2);

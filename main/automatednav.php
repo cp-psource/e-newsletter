@@ -1,7 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
 ?>
-<?php $controls->title_help('/addons/extended-features/automated-extension/') ?>
 <h2><?php echo esc_html($channel->data['name']) ?> (demo)</h2>
 <ul class="tnp-nav">
     <li class="<?php echo $_GET['page'] === ''?'active':''?>"><a href="?page=newsletter_main_automatedindex">&laquo;</a></li>
