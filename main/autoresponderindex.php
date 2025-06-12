@@ -5,27 +5,41 @@ defined('ABSPATH') || exit;
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
-$autoresponders = [];
+global $wpdb;
 
-$autoresponder = new stdClass();
-$autoresponder->id = 1;
-$autoresponder->name = 'Welcome email series';
-$autoresponder->list = 0;
-$autoresponder->status = 1;
-$autoresponder->subscribers = 346;
-$autoresponder->emails = [1, 2, 3];
-$autoresponder->list_name = 'Not linked to a list';
-$autoresponders[] = $autoresponder;
+if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
+    $wpdb->delete($wpdb->prefix . 'tnp_autoresponders', ['id' => intval($_GET['id'])]);
+    echo '<script>window.location = "' . admin_url('admin.php?page=newsletter_main_autoresponderindex') . '";</script>';
+    exit;
+}
 
-$autoresponder = new stdClass();
-$autoresponder->id = 2;
-$autoresponder->name = 'Yoga lessons';
-$autoresponder->list = 0;
-$autoresponder->status = 1;
-$autoresponder->subscribers = 3454;
-$autoresponder->emails = [1, 2, 3, 6, 7, 8, 9, 10];
-$autoresponder->list_name = 'Yoga news';
-$autoresponders[] = $autoresponder;
+if (isset($_GET['action']) && $_GET['action'] === 'copy' && isset($_GET['id'])) {
+    $ar = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}tnp_autoresponders WHERE id = %d", intval($_GET['id'])), ARRAY_A);
+    if ($ar) {
+        unset($ar['id']);
+        $ar['name'] .= ' (Copy)';
+        $wpdb->insert($wpdb->prefix . 'tnp_autoresponders', $ar);
+    }
+    echo '<script>window.location = "' . admin_url('admin.php?page=newsletter_main_autoresponderindex') . '";</script>';
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
+    $wpdb->insert(
+        $wpdb->prefix . 'tnp_autoresponders',
+        [
+            'name' => 'Neue Serie',
+            'description' => '',
+            'status' => 1,
+            'created_at' => current_time('mysql')
+        ]
+    );
+    // Nach dem Anlegen weiterleiten, damit kein doppeltes Anlegen bei Reload
+    wp_redirect(admin_url('admin.php?page=newsletter_main_autoresponderindex'));
+    exit;
+}
+
+$autoresponders = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}tnp_autoresponders ORDER BY id DESC");
 
 ?>
 
@@ -45,7 +59,7 @@ $autoresponders[] = $autoresponder;
             <?php $controls->init(); ?>
 
             <div class="tnp-buttons">
-                <?php $controls->button('add', 'Add new series') ?>
+                <button type="submit" name="add" class="button button-primary">Add new series</button>
             </div>
             <table class="widefat">
                 <thead>
@@ -62,28 +76,33 @@ $autoresponders[] = $autoresponder;
                 </thead>
 
                 <tbody>
-                    <?php foreach ($autoresponders as $autoresponder) { ?>
+                    <?php if (empty($autoresponders)) : ?>
                         <tr>
-                            <td><?php echo esc_html($autoresponder->id) ?></td>
-                            <td><?php echo esc_html($autoresponder->name) ?></td>
-                            <td><?php echo esc_html($autoresponder->list_name) ?></td>
-                            <td>
-                                <span class="tnp-led-<?php echo!empty($autoresponder->status) ? 'green' : 'gray' ?>">&#x2B24;</span>
-                            </td>
-                            <td><?php echo count($autoresponder->emails) ?></td>
-                            <td><?php echo $autoresponder->subscribers ?></td>
-
-                            <td style="white-space: nowrap">
-                                <?php $controls->button_icon_configure('?page=newsletter_main_autoresponderedit') ?>
-                                <?php $controls->button_icon_statistics('?page=newsletter_main_autoresponderstatistics') ?>
-                                <?php $controls->button_icon_subscribers('?page=newsletter_main_autoresponderusers') ?>
-                            </td>
-                            <td style="white-space: nowrap">
-                                <?php $controls->button_icon_copy($autoresponder->id); ?>
-                                <?php $controls->button_icon_delete($autoresponder->id); ?>
-                            </td>
+                            <td colspan="8">Keine Autoresponder-Serien gefunden.</td>
                         </tr>
-                    <?php } ?>
+                    <?php else : ?>
+                        <?php foreach ($autoresponders as $ar) : ?>
+                            <tr>
+                                <td><?php echo esc_html($ar->id); ?></td>
+                                <td><?php echo esc_html($ar->name); ?></td>
+                                <td><?php echo isset($ar->list_id) ? esc_html($ar->list_id) : '-'; ?></td>
+                                <td>
+                                    <span class="tnp-led-<?php echo !empty($ar->status) ? 'green' : 'gray'; ?>">&#x2B24;</span>
+                                </td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td style="white-space: nowrap">
+                                    <?php $controls->button_icon_configure('?page=newsletter_main_autoresponderedit&id=' . $ar->id) ?>
+                                    <?php $controls->button_icon_statistics('?page=newsletter_main_autoresponderstatistics&id=' . $ar->id) ?>
+                                    <?php $controls->button_icon_subscribers('?page=newsletter_main_autoresponderusers&id=' . $ar->id) ?>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <?php $controls->button_icon_copy($ar->id); ?>
+                                    <?php $controls->button_icon_delete($ar->id); ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
 
                 </tbody>
             </table>

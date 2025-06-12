@@ -1165,8 +1165,8 @@ class NewsletterControls {
         }
     }
 
-    function button_save() {
-        $this->btn('save', __('Save', 'newsletter'), ['icon' => 'fa-save']);
+    function button_save($label = 'Speichern') {
+        echo '<button type="submit" name="save" class="button-primary tnpc-button"><i class="fas fa-save"></i>&nbsp;' . esc_html($label) . '</button>';
     }
 
     function button_link_save($url) {
@@ -1181,8 +1181,9 @@ class NewsletterControls {
         $this->btn('copy', __('Duplicate', 'newsletter'), ['data' => $data, 'icon' => 'fa-copy', 'confirm' => true]);
     }
 
-    function button_icon_copy($data = '') {
-        $this->btn('copy', '', ['secondary' => true, 'data' => $data, 'icon' => 'fa-copy', 'confirm' => true, 'title' => __('Duplicate', 'newsletter')]);
+    function button_icon_copy($id) {
+        $url = admin_url('admin.php?page=newsletter_main_autoresponderindex&action=copy&id=' . intval($id));
+        echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: #0073aa; color: #fff;" title="' . esc_attr__('Duplicate', 'newsletter') . '"><i class="fas fa-copy"></i></a>';
     }
 
     /**
@@ -1193,13 +1194,9 @@ class NewsletterControls {
         $this->btn('delete', __('Delete', 'newsletter'), ['data' => $data, 'icon' => 'fa-times', 'confirm' => true, 'delete' => true]);
     }
 
-    function button_icon_delete($data = '', $attrs = []) {
-        //if (isset($attrs['secondary'])) {
-        //    $style = 'background-color: transparent; color: darkred !important;';
-        //} else {
-        $style = 'background-color: darkred; color: #ffffff';
-        //}
-        $this->btn('delete', '', ['data' => $data, 'icon' => 'fa-times', 'confirm' => true, 'title' => __('Delete', 'newsletter'), 'style' => $style]);
+    function button_icon_delete($id) {
+        $url = admin_url('admin.php?page=newsletter_main_autoresponderindex&action=delete&id=' . intval($id));
+        echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: darkred; color: #fff;" title="' . esc_attr__('Delete', 'newsletter') . '" onclick="return confirm(\'Wirklich löschen?\');"><i class="fas fa-times"></i></a>';
     }
 
     function button_icon_configure($url, $attrs = []) {

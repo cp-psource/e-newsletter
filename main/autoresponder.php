@@ -1,111 +1,93 @@
 <?php
-/* @var $this Newsletter */
-
 defined('ABSPATH') || exit;
 
-include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
-$controls = new NewsletterControls();
-$src = esc_attr(plugins_url('e-newsletter') . '/main/images/autoresponder');
-?>
+class NewsletterAutoresponder {
+    static $instance;
 
-<style>
-<?php include __DIR__ . '/css/automation.css' ?>
-
-    .tnp-promo {
-        background-color: #fff;
-        max-width: 850px;
-    }
-    .tnp-promo td {
-        padding: 1rem;
-        font-size: 1.2rem;
-        line-height: 150%;
-        vertical-align: top;
-        text-align: left;
+    function __construct() {
+        self::$instance = $this;
     }
 
-    .tnp-promo td img {
-        max-width: 100%;
-        display: block;
-        border: 1px solid #ddd;
-        box-shadow: 0 0 5px #ccc;
+    function init() {
+        add_action('admin_menu', array($this, 'add_menu'));
     }
-    .tnp-promo-intro {
-        font-size: 1.3rem;
-        line-height: normal;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-        max-width: 850px;
+
+    function panel_index() {
+        include NEWSLETTER_DIR . '/main/autoresponderindex.php';
     }
-    .tnp-promo-footer {
-        text-align: left;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
+
+    function panel_edit() {
+        include NEWSLETTER_DIR . '/main/autoresponderedit.php';
     }
-</style>
 
-<div class="wrap" id="tnp-wrap">
+    function panel() {
+        $this->panel_index();
+    }
 
-    <?php include NEWSLETTER_DIR . '/tnp-header.php'; ?>
+    function panel_subscribers() {
+        include NEWSLETTER_DIR . '/main/autoresponderusers.php';
+    }
 
-    <div id="tnp-heading">
-        <h2>Autoresponder/Email Series (demo)</h2>
-    </div>
+    function panel_statistics() {
+        include NEWSLETTER_DIR . '/main/autoresponderstatistics.php';
+    }
 
+    function panel_messages() {
+        include NEWSLETTER_DIR . '/main/autorespondermessages.php';
+    }
 
-    <div id="tnp-body" >
+    function panel_composer() {
+        include NEWSLETTER_DIR . '/main/autorespondercomposer.php';
+    }
 
-        <div class="tnp-notice">
-            To activate the Autoresponder Addon, insert a valid license on the Newsletter's Settings and
-            go to the Addons panel.
-        </div>
+    function add_menu() {
+        // Edit-Seite (versteckt)
+        add_submenu_page(
+            '',
+            __('Edit Autoresponder Series', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_autoresponderedit',
+            array($this, 'panel_edit')
+        );
+        // Subscribers-Seite (versteckt)
+        add_submenu_page(
+            '',
+            __('Autoresponder Subscribers', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_autoresponderusers',
+            array($this, 'panel_subscribers')
+        );
+        add_submenu_page(
+            '', // kein Parent, damit nicht sichtbar
+            __('Autoresponder Statistics', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_autoresponderstatistics',
+            array($this, 'panel_statistics')
+        );
+        add_submenu_page(
+            '', // kein Parent, damit nicht sichtbar
+            __('Autoresponder Messages', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_autorespondermessages',
+            array($this, 'panel_messages')
+        );
+        add_submenu_page(
+            '', // kein Parent, damit nicht sichtbar
+            __('Autoresponder Composer', 'newsletter'),
+            '',
+            'manage_options',
+            'newsletter_main_autorespondercomposer',
+            array($this, 'panel_composer')
+        );
+    }
+}
 
-        <div class="tnp-promo-intro">
-            The Autotresponder Addon manages email series sent to subscribers after the subscription or other events (purchases,
-            list change, ...).
-        </div>
-
-        <table class="tnp-promo" scope="layout">
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/index.png">
-                </td>
-                <td width="40%">
-                    Create as many series as you need, with different options and emails.
-                </td>
-            </tr>
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/messages.png">
-                </td>
-                <td width="40%">
-                    Add as many email series steps as you need. Every email can be created with our composer with
-                    a specific delay. For each email you can access the report page as for regular newsletters.
-                </td>
-            </tr>
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/statistics.png">
-                </td>
-                <td width="40%">
-                    You can have a costant overview on how the series is performing. How many subscribers for every
-                    steps, how many abandons and the reason.
-                </td>
-            </tr>
-            <tr>
-                <td width="60%">
-                    <img src="<?php echo $src ?>/subscribers.png">
-                </td>
-                <td width="40%">
-                    Dive deep to the single subscriber's details, stop or restart the series when required.
-                </td>
-            </tr>
-        </table>
-
-        <div class="tnp-promo-footer">
-            <a href="?page=newsletter_main_autoresponderindex" class="button-secondary">Surf some demo panels</a>
-            <a href="https://www.thenewsletterplugin.com/premium?utm_campaign=autoresponder&utm_source=plugin" target="_blank" class="button-primary">Get it</a>
-        </div>
-
-    </div>
-
-</div>
+// Initialisierung (z.B. in deiner Plugin-Hauptdatei)
+if (class_exists('NewsletterAutoresponder')) {
+    $GLOBALS['newsletter_autoresponder'] = new NewsletterAutoresponder();
+    $GLOBALS['newsletter_autoresponder']->init();
+}

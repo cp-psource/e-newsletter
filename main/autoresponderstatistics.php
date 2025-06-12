@@ -5,53 +5,53 @@ defined('ABSPATH') || exit;
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
-$autoresponder = new stdClass();
-$autoresponder->id = 1;
-$autoresponder->name = 'Welcome email series';
-$autoresponder->list = 0;
-$autoresponder->status = 1;
-$autoresponder->subscribers = 346;
-$autoresponder->emails = [1, 2, 3];
-$autoresponder->list_name = 'Not linked to a list';
+global $wpdb;
 
-$emails = [];
+// Autoresponder-ID aus GET holen
+$ar_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$email = new stdClass();
-$email->id = 6;
-$email->status = 'sending';
-$email->subject = 'What you should not miss at all';
-$email->send_on = time() - WEEK_IN_SECONDS * 1;
-$email->waiting = 89;
-$email->delay = '1 day(s)';
+// Autoresponder laden
+$autoresponder = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$wpdb->prefix}tnp_autoresponders WHERE id = %d", $ar_id
+));
 
-$emails[] = $email;
+// E-Mails der Serie laden
+$emails = $wpdb->get_results($wpdb->prepare(
+    "SELECT * FROM {$wpdb->prefix}tnp_autoresponder_emails WHERE autoresponder_id = %d ORDER BY step ASC", $ar_id
+));
 
-$email = new stdClass();
-$email->id = 5;
-$email->status = 'sent';
-$email->subject = 'Do you have the right habits?';
-$email->send_on = time() - WEEK_IN_SECONDS * 2;
-$email->waiting = 47;
-$email->delay = '5 day(s)';
+// Wartende Abonnenten pro E-Mail zählen
+$email_stats = [];
+$total_waiting = 0;
+foreach ($emails as $email) {
+    $waiting = $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_queue WHERE email_id = %d AND status = 'waiting'", $email->id
+    ));
+    $email_stats[] = [
+        'subject' => $email->subject,
+        'waiting' => $waiting,
+        'step' => $email->step,
+    ];
+    $total_waiting += $waiting;
+}
 
-$emails[] = $email;
+// Status-Übersicht (Beispiel)
+$status_stats = [
+    'completed' => $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_queue WHERE autoresponder_id = %d AND status = 'completed'", $ar_id
+    )),
+    'active' => $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_queue WHERE autoresponder_id = %d AND status = 'waiting'", $ar_id
+    )),
+    'abandoned' => $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_queue WHERE autoresponder_id = %d AND status = 'abandoned'", $ar_id
+    )),
+    'other' => $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_queue WHERE autoresponder_id = %d AND status NOT IN ('completed','waiting','abandoned')", $ar_id
+    )),
+];
 
-$email = new stdClass();
-$email->id = 4;
-$email->status = 'sent';
-$email->subject = 'Learn the good and the bad of those exercises';
-$email->send_on = time() - WEEK_IN_SECONDS * 3;
-$email->waiting = 34;
-$email->delay = '7 day(s)';
-
-$emails[] = $email;
 ?>
-<style>
-    .widefat {
-        min-width: 500px;
-    }
-</style>
-
 <div class="wrap" id="tnp-wrap">
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
     <div id="tnp-heading">
@@ -60,8 +60,6 @@ $emails[] = $email;
     <div id="tnp-body">
 
         <?php $controls->show(); ?>
-
-        <p>This is only a demonstrative panel.</p>
 
         <form method="post" action="">
             <?php $controls->init(); ?>
@@ -80,27 +78,19 @@ $emails[] = $email;
                                     <th><?php esc_html_e('Progress', 'newsletter'); ?></th>
                                     <th><?php esc_html_e('Subscribers', 'newsletter'); ?></th>
                                     <th><?php esc_html_e('Subject', 'newsletter'); ?></th>
-                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $total = 0; ?>
-                                <?php for ($i = 0; $i < count($emails); $i++) { ?>
-                                    <?php
-                                    $email = $emails[$i];
-                                    $total += $email->waiting;
-                                    ?>
+                                <?php foreach ($email_stats as $i => $stat): ?>
                                     <tr>
                                         <td><?php printf(esc_html__('Waiting to receive message %d', 'newsletter'), $i + 1); ?></td>
-                                        <td><?php echo esc_html($email->waiting); ?></td>
-                                        <td><?php echo esc_html($email->subject); ?></td>
-                                        <td><?php $controls->button_icon_statistics(''); ?></td>
+                                        <td><?php echo esc_html($stat['waiting']); ?></td>
+                                        <td><?php echo esc_html($stat['subject']); ?></td>
                                     </tr>
-                                <?php } ?>
+                                <?php endforeach; ?>
                                 <tr>
                                     <td><strong><?php esc_html_e('Total queued', 'newsletter'); ?></strong></td>
-                                    <td><strong><?php echo $total; ?></strong></td>
-                                    <td>&nbsp;</td>
+                                    <td><strong><?php echo esc_html($total_waiting); ?></strong></td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </tbody>
@@ -118,26 +108,26 @@ $emails[] = $email;
                             <tbody>
                                 <tr>
                                     <td><?php esc_html_e('Completed', 'newsletter'); ?></td>
-                                    <td>17</td>
+                                    <td><?php echo esc_html($status_stats['completed']); ?></td>
                                 </tr>
                                 <tr>
                                     <td><?php esc_html_e('Active', 'newsletter'); ?></td>
-                                    <td>347</td>
+                                    <td><?php echo esc_html($status_stats['active']); ?></td>
                                 </tr>
                                 <tr>
                                     <td><?php esc_html_e('Abandoned', 'newsletter'); ?></td>
-                                    <td>19</td>
+                                    <td><?php echo esc_html($status_stats['abandoned']); ?></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <?php esc_html_e('Other', 'newsletter'); ?><br>
                                         <small><?php esc_html_e('Missing user, errors', 'newsletter'); ?></small>
                                     </td>
-                                    <td>4</td>
+                                    <td><?php echo esc_html($status_stats['other']); ?></td>
                                 </tr>
                                 <tr>
                                     <td><strong><?php esc_html_e('Total', 'newsletter'); ?></strong></td>
-                                    <td><strong>387</strong></td>
+                                    <td><strong><?php echo array_sum($status_stats); ?></strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -145,7 +135,5 @@ $emails[] = $email;
                 </div>
             </div>
         </form>
-
     </div>
-
 </div>

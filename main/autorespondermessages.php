@@ -1,49 +1,57 @@
 <?php
 defined('ABSPATH') || exit;
 
-$autoresponder = new stdClass();
-$autoresponder->id = 1;
-$autoresponder->name = 'Welcome email series';
-$autoresponder->list = 0;
-$autoresponder->status = 1;
-$autoresponder->subscribers = 346;
-$autoresponder->emails = [1, 2, 3];
-$autoresponder->list_name = 'Not linked to a list';
-
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
-$emails = [];
+global $wpdb;
+error_log('Aktuelles Tabellenpräfix: ' . $wpdb->prefix);
+// Autoresponder-ID aus GET holen
+$ar_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$email = new stdClass();
-$email->id = 6;
-$email->status = 'sending';
-$email->subject = 'What you should not miss at all';
-$email->send_on = time() - WEEK_IN_SECONDS * 1;
-$email->waiting = 89;
-$email->delay = '1 day(s)';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_email']) && $ar_id) {
+    $result = $wpdb->insert(
+        $wpdb->prefix . 'tnp_autoresponder_emails',
+        [
+            'autoresponder_id' => $ar_id,
+            'subject' => __('Neue E-Mail', 'newsletter'),
+            'step' => $wpdb->get_var($wpdb->prepare(
+                "SELECT IFNULL(MAX(step),0)+1 FROM {$wpdb->prefix}tnp_autoresponder_emails WHERE autoresponder_id = %d", $ar_id
+            )),
+            'delay' => 0
+        ]
+    );
+    $new_email_id = $wpdb->insert_id;
 
-$emails[] = $email;
+    // Fehlerausgabe ergänzen:
+    if (!$result || !$new_email_id) {
+        echo '<div class="notice notice-error"><b>Fehler beim Anlegen der E-Mail:</b> ' . esc_html($wpdb->last_error) . '</div>';
+        error_log('Autoresponder E-Mail Insert-Fehler: ' . $wpdb->last_error);
+        return;
+    }
 
-$email = new stdClass();
-$email->id = 5;
-$email->status = 'sent';
-$email->subject = 'Do you have the right habits?';
-$email->send_on = time() - WEEK_IN_SECONDS * 2;
-$email->waiting = 47;
-$email->delay = '5 day(s)';
+    echo '<script>window.location = "' . admin_url('admin.php?page=newsletter_main_autorespondercomposer&id=' . $new_email_id) . '";</script>';
+    exit;
+}
 
-$emails[] = $email;
+// Autoresponder laden
+$autoresponder = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$wpdb->prefix}tnp_autoresponders WHERE id = %d", $ar_id
+));
 
-$email = new stdClass();
-$email->id = 4;
-$email->status = 'sent';
-$email->subject = 'Learn the good and the bad of those exercises';
-$email->send_on = time() - WEEK_IN_SECONDS * 3;
-$email->waiting = 34;
-$email->delay = '7 day(s)';
+// E-Mails der Serie laden
+$emails = $wpdb->get_results($wpdb->prepare(
+    "SELECT * FROM {$wpdb->prefix}tnp_autoresponder_emails WHERE autoresponder_id = %d ORDER BY step ASC", $ar_id
+));
 
-$emails[] = $email;
+// Für jede E-Mail: Wartende Abonnenten zählen (Beispiel)
+foreach ($emails as $email) {
+    $email->waiting = $wpdb->get_var($wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_queue WHERE email_id = %d AND status = 'waiting'", $email->id
+    ));
+    // Optional: Delay berechnen/anzeigen
+    $email->delay = $email->delay ?? '';
+}
 
 $debug = false;
 ?>
@@ -58,10 +66,7 @@ $debug = false;
 
         <?php $controls->show(); ?>
 
-        <p>This is only a demonstrative panel.</p>
-
         <form method="post" action="">
-
             <?php $controls->init(); ?>
 
             <table class="widefat" style="width: 100%">
@@ -81,16 +86,15 @@ $debug = false;
                 </thead>
 
                 <tbody>
-                    <?php for ($i = 0; $i < count($emails); $i++) { ?>
-                        <?php
-                        $email = $emails[$i];
-                        ?>
+                    <?php foreach ($emails as $i => $email) { ?>
                         <tr>
                             <td><?php echo $i + 1 ?></td>
+                            <?php if ($debug) { ?>
+                                <td><?php echo esc_html($email->id) ?></td>
+                            <?php } ?>
                             <td><?php echo esc_html($email->subject) ?></td>
                             <td><?php echo esc_html($email->delay) ?></td>
                             <td><?php echo esc_html($email->waiting); ?></td>
-
                             <td>
                                 <?php
                                 if ($i > 0) {
@@ -98,28 +102,26 @@ $debug = false;
                                 } else {
                                     echo '<span style="margin-left: 34px"></span>';
                                 }
-                                ?>
-                                <?php
-                                if ($i < ( count($emails) - 1 )) {
+                                if ($i < (count($emails) - 1)) {
                                     $controls->button_confirm('down', '↓', '', $i);
                                 }
                                 ?>
                             </td>
                             <td style="white-space: nowrap">
-                                <?php $controls->button_icon_edit('?page=newsletter_main_autorespondercomposer') ?>
-                                <?php $controls->button_icon_statistics('?page=newsletter_main_autorespondermessages') ?>
+                                <?php $controls->button_icon_edit('?page=newsletter_main_autorespondercomposer&id=' . $email->id) ?>
+                                <?php $controls->button_icon_statistics('?page=newsletter_main_autorespondermessages&id=' . $email->id) ?>
                             </td>
                             <td style="white-space: nowrap">
-                                <?php $controls->button_icon_copy($i); ?>
-                                <?php $controls->button_icon_delete($i); ?>
+                                <?php $controls->button_icon_copy($email->id); ?>
+                                <?php $controls->button_icon_delete($email->id); ?>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
-            <div class="tnp-buttons"><?php $controls->button('add', 'New email'); ?></div>
-
+            <div class="tnp-buttons">
+                <button type="submit" name="add_email" class="button button-primary"><?php esc_html_e('New email', 'newsletter'); ?></button>
+            </div>
         </form>
-
     </div>
 </div>

@@ -126,6 +126,8 @@ require_once NEWSLETTER_INCLUDES_DIR . '/module.php';
 require_once NEWSLETTER_INCLUDES_DIR . '/TNP.php';
 require_once NEWSLETTER_INCLUDES_DIR . '/cron.php';
 
+register_activation_hook(__FILE__, 'tnp_autoresponder_install');
+
 class Newsletter extends NewsletterModule {
 
     // Limits to respect to avoid memory, time or provider limits
@@ -327,6 +329,10 @@ class Newsletter extends NewsletterModule {
     function hook_activate() {
         include_once NEWSLETTER_INCLUDES_DIR . '/upgrade.php';
         update_option('newsletter_version', NEWSLETTER_VERSION);
+
+        if (function_exists('tnp_autoresponder_install')) {
+            tnp_autoresponder_install();
+        }
     }
 
     function first_install() {
@@ -1172,6 +1178,60 @@ global $newsletterLock;
 $newsletterLock = new NewsletterLock($newsletter->version);
 $newsletterLock->init();
 
+function tnp_autoresponder_install() {
+    global $wpdb;
+    $charset_collate = $wpdb->get_charset_collate();
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+    $sql1 = "CREATE TABLE {$wpdb->prefix}tnp_autoresponders (
+        id BIGINT(20) NOT NULL AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        list_id BIGINT(20) DEFAULT 0,
+        status TINYINT(1) DEFAULT 1,
+        keep_active TINYINT(1) DEFAULT 0,
+        language VARCHAR(10) DEFAULT '',
+        restart TINYINT(1) DEFAULT 0,
+        regenerate TINYINT(1) DEFAULT 0,
+        utm_campaign VARCHAR(255) DEFAULT '',
+        utm_source VARCHAR(255) DEFAULT '',
+        utm_medium VARCHAR(255) DEFAULT '',
+        utm_term VARCHAR(255) DEFAULT '',
+        utm_content VARCHAR(255) DEFAULT '',
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
+
+    $sql2 = "CREATE TABLE {$wpdb->prefix}tnp_autoresponder_emails (
+        id BIGINT(20) NOT NULL AUTO_INCREMENT,
+        autoresponder_id BIGINT(20) NOT NULL,
+        subject VARCHAR(255) NOT NULL,
+        content LONGTEXT,
+        step INT(11) DEFAULT 1,           -- <--- HIER
+        delay_hours INT(11) DEFAULT 0,
+        sort_order INT(11) DEFAULT 0,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    $sql3 = "CREATE TABLE {$wpdb->prefix}tnp_autoresponder_progress (
+        id BIGINT(20) NOT NULL AUTO_INCREMENT,
+        user_id BIGINT(20) NOT NULL,
+        autoresponder_id BIGINT(20) NOT NULL,
+        current_step INT(11) DEFAULT 0,
+        status VARCHAR(50) DEFAULT 'active',
+        last_sent DATETIME,
+        started_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    dbDelta($sql1);
+    dbDelta($sql2);
+    dbDelta($sql3);
+}
+
 if (is_admin()) {
     require_once NEWSLETTER_DIR . '/admin.php';
     require_once NEWSLETTER_DIR . '/main/automated.php';
@@ -1179,6 +1239,19 @@ if (is_admin()) {
     $newsletterAutomated = new NewsletterAutomated();
     $newsletterAutomated->init();
 }
+
+add_action('admin_init', function() {
+    global $wpdb;
+    $table = $wpdb->prefix . 'tnp_autoresponders';
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table'") != $table) {
+        if (function_exists('tnp_autoresponder_install')) {
+            tnp_autoresponder_install();
+            error_log('AUTORESPONDER INSTALL wurde ausgeführt!');
+        } else {
+            error_log('Funktion tnp_autoresponder_install NICHT gefunden!');
+        }
+    }
+});
 
 
 

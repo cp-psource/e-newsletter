@@ -12,6 +12,7 @@ require_once __DIR__ . '/system/system-admin.php';
 require_once __DIR__ . '/statistics/statistics-admin.php';
 require_once __DIR__ . '/profile/profile-admin.php';
 require_once __DIR__ . '/composer/composer-admin.php';
+require_once __DIR__ . '/main/autoresponder.php';
 
 class NewsletterAdmin extends NewsletterModuleAdmin {
 
@@ -140,7 +141,6 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
     }
 
     function hook_admin_enqueue_scripts() {
-        error_log('Newsletter: hook_admin_enqueue_scripts läuft!');
 
         $url = plugins_url('e-newsletter');
 
@@ -236,6 +236,17 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             function () use ($newsletterLock) {
                 $lock = $newsletterLock;
                 require NEWSLETTER_DIR . '/includes/newsletter-lock/admin/index.php';
+            }
+        );
+
+        add_submenu_page(
+            'newsletter_main_index',
+            __('Autoresponder', 'newsletter'),
+            '<span class="tnp-side-menu">Autoresponder</span>',
+            'manage_options',
+            'newsletter_main_autoresponderindex',
+            function () {
+                require_once NEWSLETTER_DIR . '/main/autoresponderindex.php';
             }
         );
 

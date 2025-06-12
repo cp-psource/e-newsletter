@@ -25,14 +25,12 @@ defined('ABSPATH') || exit;
         <?php if (!class_exists('NewsletterAutoresponder')) { ?>
 
             <p>
-                To create one or more email series the <a href="?page=newsletter_main_autoresponder">Autoresponder Addon</a> is required.
-            </p>
-
-
-        <?php } else { ?>
-
-            <p>
-                Configure your welcome/follow up series on the <a href="?page=newsletter_autoresponder_index">Autoresponder settings page</a>.
+                <?php
+                printf(
+                    esc_html__('Configure your welcome/follow series on the %s.', 'newsletter'),
+                    '<a href="?page=newsletter_main_autoresponderindex">' . esc_html__('Autoresponder settings page', 'newsletter') . '</a>'
+                );
+                ?>
             </p>
 
         <?php } ?>
