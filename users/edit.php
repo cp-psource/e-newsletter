@@ -118,223 +118,204 @@ function percentValue($value, $total) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-
-                <ul>
-                    <li><a href="#tabs-general"><?php esc_html_e('Main', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-preferences"><?php esc_html_e('Lists', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-profile"><?php esc_html_e('Custom fields', 'newsletter') ?></a></li>
-                    <li class="tnp-tabs-advanced"><a href="#tabs-other"><?php esc_html_e('Advanced', 'newsletter') ?></a></li>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-general"><?php esc_html_e('Main', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-preferences"><?php esc_html_e('Lists', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-profile"><?php esc_html_e('Custom fields', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-other"><?php esc_html_e('Advanced', 'newsletter') ?></button>
                     <?php if (NEWSLETTER_DEBUG) { ?>
-                        <li><a href="#tabs-meta">Meta</a></li>
+                        <button class="psource-tab" data-tab="tabs-meta">Meta</button>
                     <?php } ?>
-                </ul>
-
-                <div id="tabs-general" class="tnp-tab">
-
-                    <?php do_action('newsletter_users_edit_general', $user->id, $controls) ?>
-
-                    <table class="form-table">
-
-                        <tr>
-                            <th><?php esc_html_e('Email', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->text_email('email', 60); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('First name', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->text('name', 50); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Last name', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->text('surname', 50); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Gender', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->gender('sex'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Status', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->user_status() ?>
-                                <span class="description"><a href="?page=newsletter_users_logs&id=<?php echo esc_attr($user->id); ?>">Status change history</a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Language', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->language('language', __('None', 'newsletter')); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Test subscriber', 'newsletter'); ?>
-                                <br><?php $controls->help('https://www.thenewsletterplugin.com/documentation/subscribers#test-subscribers') ?></th>
-                            <td>
-                                <?php $controls->yesno('test'); ?>
-                            </td>
-                        </tr>
-
-                        <?php do_action('newsletter_user_edit_extra', $controls); ?>
-
-                    </table>
                 </div>
-
-                <div id="tabs-preferences" class="tnp-tab">
-                    <p>
-                        <a href="?page=newsletter_subscription_lists" target="_blank"><?php esc_html_e('Configure', 'newsletter') ?></a>
-                    </p>
-
-                    <table class="form-table">
-                        <tr>
-                            <th>
-                                <?php esc_html_e('Lists', 'newsletter') ?>
-                                <br>
-                                <?php $controls->help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-preferences') ?></th>
-                            <td>
-                                <?php $controls->preferences('list'); ?>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div id="tabs-profile" class="tnp-tab">
-
-                    <p>
-                        <a href="?page=newsletter_subscription_customfields" target="_blank"><?php esc_html_e('Configure', 'newsletter') ?></a>
-                    </p>
-
-                    <table class="widefat">
-                        <thead>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active tnp-tab" id="tabs-general">
+                        <?php do_action('newsletter_users_edit_general', $user->id, $controls) ?>
+                        <table class="form-table">
                             <tr>
-                                <th>#</th>
-                                <th><?php esc_html_e('Name', 'newsletter'); ?></th>
-                                <th><?php esc_html_e('Value', 'newsletter'); ?></th>
+                                <th><?php esc_html_e('Email', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->text_email('email', 60); ?>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($this->get_all_customfields() as $customfield) {
-                                echo '<tr><td>';
-                                echo (int) $customfield->id;
-                                echo '</td><td>';
-                                echo esc_html($customfield->name);
-                                echo '</td><td>';
-                                if ($customfield->is_text()) {
-                                    $controls->text('profile_' . $customfield->id, 70);
-                                } else {
-                                    $controls->select('profile_' . $customfield->id, $customfield->options);
-                                }
-                                echo '</td></tr>';
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div id="tabs-other" class="tnp-tab">
-
-                    <table class="form-table">
-                        <tr>
-                            <th>ID</th>
-                            <td>
-                                <?php $controls->value('id'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Created', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->echo_date(strtotime($controls->data['created'])); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Referrer', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->value('referrer'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('HTTP Referrer', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->value('http_referer'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Last activity', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->echo_date($controls->data['last_activity']); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('WP user ID', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->text('wp_user_id'); ?>
-                                <span class="description">ID of the WP user connected with this subscriber. Install
-                                    <a href="<?php echo esc_attr(\Newsletter\Integrations::get_addon_url('wpusers')); ?>">WP Users Addon</a> for automated integration.</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('IP address', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->value('ip'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Secret token', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->text('token', 50); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Profile URL', 'newsletter'); ?></th>
-                            <td>
-                                <?php $profile_url = NewsletterProfile::instance()->get_profile_url($user) ?>
-                                <a href='<?php echo esc_attr($profile_url) ?>' target="_blank"><?php echo esc_html($profile_url) ?></a>
-                                <?php if (NEWSLETTER_DEBUG) { ?>
-                                    <br>
-                                    <?php $profile_page_url = NewsletterProfile::instance()->get_profile_page_url($user) ?>
-                                    <a href='<?php echo esc_attr($profile_page_url) ?>' target="_blank"><?php echo esc_html($profile_page_url) ?></a>
-                                <?php } ?>
-                            </td>
-                        </tr>
-
-                    </table>
-                </div>
-
-                <?php if (NEWSLETTER_DEBUG) { ?>
-                    <div id="tabs-meta" class="tnp-tab">
-
+                            <tr>
+                                <th><?php esc_html_e('First name', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->text('name', 50); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Last name', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->text('surname', 50); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Gender', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->gender('sex'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Status', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->user_status() ?>
+                                    <span class="description"><a href="?page=newsletter_users_logs&id=<?php echo esc_attr($user->id); ?>">Status change history</a></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Language', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->language('language', __('None', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Test subscriber', 'newsletter'); ?>
+                                    <br><?php $controls->help('https://www.thenewsletterplugin.com/documentation/subscribers#test-subscribers') ?></th>
+                                <td>
+                                    <?php $controls->yesno('test'); ?>
+                                </td>
+                            </tr>
+                            <?php do_action('newsletter_user_edit_extra', $controls); ?>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel tnp-tab" id="tabs-preferences">
                         <p>
-                            Dump of the meta data only for debug.
+                            <a href="?page=newsletter_subscription_lists" target="_blank"><?php esc_html_e('Configure', 'newsletter') ?></a>
                         </p>
-
-                        <table class="widefat" style="width: auto">
+                        <table class="form-table">
+                            <tr>
+                                <th>
+                                    <?php esc_html_e('Lists', 'newsletter') ?>
+                                    <br>
+                                    <?php $controls->help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-preferences') ?></th>
+                                <td>
+                                    <?php $controls->preferences('list'); ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel tnp-tab" id="tabs-profile">
+                        <p>
+                            <a href="?page=newsletter_subscription_customfields" target="_blank"><?php esc_html_e('Configure', 'newsletter') ?></a>
+                        </p>
+                        <table class="widefat">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th><?php esc_html_e('Name', 'newsletter'); ?></th>
                                     <th><?php esc_html_e('Value', 'newsletter'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td>Welcome email ID</td>
-                                    <td>
-                                        <?php echo esc_html($this->get_user_meta($user->id, 'welcome_email_id')); ?>
-                                    </td>
-                                </tr>
-
+                                <?php
+                                foreach ($this->get_all_customfields() as $customfield) {
+                                    echo '<tr><td>';
+                                    echo (int) $customfield->id;
+                                    echo '</td><td>';
+                                    echo esc_html($customfield->name);
+                                    echo '</td><td>';
+                                    if ($customfield->is_text()) {
+                                        $controls->text('profile_' . $customfield->id, 70);
+                                    } else {
+                                        $controls->select('profile_' . $customfield->id, $customfield->options);
+                                    }
+                                    echo '</td></tr>';
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
-                <?php } ?>
-
+                    <div class="psource-tab-panel tnp-tab" id="tabs-other">
+                        <table class="form-table">
+                            <tr>
+                                <th>ID</th>
+                                <td>
+                                    <?php $controls->value('id'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Created', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->echo_date(strtotime($controls->data['created'])); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Referrer', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->value('referrer'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('HTTP Referrer', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->value('http_referer'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Last activity', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->echo_date($controls->data['last_activity']); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('WP user ID', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->text('wp_user_id'); ?>
+                                    <span class="description">ID of the WP user connected with this subscriber. Install
+                                        <a href="<?php echo esc_attr(\Newsletter\Integrations::get_addon_url('wpusers')); ?>">WP Users Addon</a> for automated integration.</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('IP address', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->value('ip'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Secret token', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->text('token', 50); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Profile URL', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $profile_url = NewsletterProfile::instance()->get_profile_url($user) ?>
+                                    <a href='<?php echo esc_attr($profile_url) ?>' target="_blank"><?php echo esc_html($profile_url) ?></a>
+                                    <?php if (NEWSLETTER_DEBUG) { ?>
+                                        <br>
+                                        <?php $profile_page_url = NewsletterProfile::instance()->get_profile_page_url($user) ?>
+                                        <a href='<?php echo esc_attr($profile_page_url) ?>' target="_blank"><?php echo esc_html($profile_page_url) ?></a>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <?php if (NEWSLETTER_DEBUG) { ?>
+                        <div class="psource-tab-panel tnp-tab" id="tabs-meta">
+                            <p>
+                                Dump of the meta data only for debug.
+                            </p>
+                            <table class="widefat" style="width: auto">
+                                <thead>
+                                    <tr>
+                                        <th><?php esc_html_e('Name', 'newsletter'); ?></th>
+                                        <th><?php esc_html_e('Value', 'newsletter'); ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Welcome email ID</td>
+                                        <td>
+                                            <?php echo esc_html($this->get_user_meta($user->id, 'welcome_email_id')); ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
 
             <p>

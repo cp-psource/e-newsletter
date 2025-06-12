@@ -76,149 +76,46 @@ if ($handle) {
             <?php $controls->init(); ?>
             <?php $controls->hidden('delimiter'); // From previous step ?>
 
-            <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-settings"><?php esc_html_e('Settings', 'newsletter-import') ?></a></li>
-                    <li><a href="#tabs-fields"><?php esc_html_e('Fields', 'newsletter-import') ?></a></li>
-                    <li><a href="#tabs-lists"><?php esc_html_e('Lists', 'newsletter-import') ?></a></li>
-                    <li><a href="#tabs-extra"><?php esc_html_e('Custom fields', 'newsletter-import') ?></a></li>
-                </ul>
-
-                <div id="tabs-settings">
-                    <table class="form-table">
-                        <tr>
-                            <th>When a subscriber is already present<br><small>Identified by it's email</small></th>
-                            <td>
-
-                                <?php $controls->select('mode', array('update' => 'Update', 'overwrite' => 'Overwrite', 'skip' => 'Skip')); ?>
-                                <p class="description">
-                                    <strong>Update</strong>: <?php esc_html_e('subscriber data will be updated, existing lists will be left untouched and new ones will be added.', 'newsletter') ?><br />
-                                    <strong>Overwrite</strong>: <?php esc_html_e('subscriber data will be cleared and set again', 'newsletter') ?><br />
-                                    <strong>Skip</strong>: <?php esc_html_e('subscriber won\'t be changed', 'newsletter') ?>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Import Subscribers As', 'newsletter') ?></th>
-                            <td>
-                                <?php
-                                $controls->select('import_as', [
-                                    'C' => __('Confirmed', 'newsletter'),
-                                    'S' => __('Not confirmed', 'newsletter'),
-                                    'U' => __('Unsubscribed', 'newsletter'),
-                                    'B' => __('Bounced', 'newsletter'),
-                                    TNP_User::STATUS_COMPLAINED => __('Complained', 'newsletter'),
-                                        ], 'Select...');
-                                ?>
-                                <br>
-                                <?php $controls->checkbox('override_status', __('Override status of existing users', 'newsletter')) ?>
-                            </td>
-                        </tr>
-                    </table>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-settings"><?php esc_html_e('Settings', 'newsletter-import') ?></button>
+                    <button class="psource-tab" data-tab="tabs-fields"><?php esc_html_e('Fields', 'newsletter-import') ?></button>
+                    <button class="psource-tab" data-tab="tabs-lists"><?php esc_html_e('Lists', 'newsletter-import') ?></button>
+                    <button class="psource-tab" data-tab="tabs-extra"><?php esc_html_e('Custom fields', 'newsletter-import') ?></button>
                 </div>
-
-                <div id="tabs-lists">
-                    <p>
-                        Lists can't be assigned using CSV fields.
-                    </p>
-                    <table class="form-table">
-
-                        <tr>
-                            <th><?php esc_html_e('Lists', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->preferences_group('lists', true); ?>
-                                <div class="hints">
-                                    Every created or updated subscriber will be associate with selected lists.
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div id="tabs-fields">
-                    <table class="widefat" style="width: auto">
-                        <thead>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-settings">
+                        <table class="form-table">
                             <tr>
-                                <th>Subscriber field</th>
-                                <th>CSV column</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Email</td>
-                                <td><?php $controls->select('email', $csv_fields) ?></td>
-                            </tr>
-                            <tr>
-                                <td>First name</td>
-                                <td><?php $controls->select('first_name', $csv_fields) ?></td>
-                            </tr>
-                            <tr>
-                                <td>Last name</td>
-                                <td><?php $controls->select('last_name', $csv_fields) ?></td>
-                            </tr>
-                            <tr>
-                                <td>Language</td>
+                                <th>When a subscriber is already present<br><small>Identified by it's email</small></th>
                                 <td>
-                                    <?php $controls->select('language', $csv_fields) ?>
-                                    <div class="description">
-                                        It should be 2 lowercase characters code (<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO 639-1</a>)
-                                        or the 2 lowercase characters code used by your multilanguage plugin.
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td>
-                                    <?php $controls->select('gender', $csv_fields) ?>
-                                    <div class="description">
-                                        It should be "f" or "m" or "n".
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>IP Address</td>
-                                <td><?php $controls->select('ip', $csv_fields) ?></td>
-                            </tr>
-                            <tr>
-                                <td>Country</td>
-                                <td>
-                                    <?php $controls->select('country', $csv_fields) ?>
+                                    <?php $controls->select('mode', array('update' => 'Update', 'overwrite' => 'Overwrite', 'skip' => 'Skip')); ?>
                                     <p class="description">
-                                        It should be the country <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1 alpha 2 code</a>
+                                        <strong>Update</strong>: <?php esc_html_e('subscriber data will be updated, existing lists will be left untouched and new ones will be added.', 'newsletter') ?><br />
+                                        <strong>Overwrite</strong>: <?php esc_html_e('subscriber data will be cleared and set again', 'newsletter') ?><br />
+                                        <strong>Skip</strong>: <?php esc_html_e('subscriber won\'t be changed', 'newsletter') ?>
                                     </p>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Region</td>
+                                <th><?php esc_html_e('Import Subscribers As', 'newsletter') ?></th>
                                 <td>
-                                    <?php $controls->select('region', $csv_fields) ?>
-                                    <p class="description">Can be a state, county, province and so on</p>
+                                    <?php
+                                    $controls->select('import_as', [
+                                        'C' => __('Confirmed', 'newsletter'),
+                                        'S' => __('Not confirmed', 'newsletter'),
+                                        'U' => __('Unsubscribed', 'newsletter'),
+                                        'B' => __('Bounced', 'newsletter'),
+                                        TNP_User::STATUS_COMPLAINED => __('Complained', 'newsletter'),
+                                            ], 'Select...');
+                                    ?>
+                                    <br>
+                                    <?php $controls->checkbox('override_status', __('Override status of existing users', 'newsletter')) ?>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>City</td>
-                                <td>
-                                    <?php $controls->select('city', $csv_fields) ?>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-
-                <div id="tabs-extra">
-                    <p><a href="?page=newsletter_subscription_customfields">Manage custom fields</a>.</p>
-                    <?php
-                    $profiles = Newsletter::instance()->get_profiles();
-                    ?>
-
-                    <?php if (empty($profiles)) { ?>
-                        <p style="font-weight: strong">
-                            There are not extra profile fields defined.
-                        </p>
-                    <?php } else { ?>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-fields">
                         <table class="widefat" style="width: auto">
                             <thead>
                                 <tr>
@@ -227,15 +124,109 @@ if ($handle) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($profiles as $profile) { ?>
-                                    <tr>
-                                        <td><?php echo esc_html($profile->name) ?></td>
-                                        <td><?php $controls->select('profile_' . $profile->id, $csv_fields) ?></td>
-                                    <?php } ?>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><?php $controls->select('email', $csv_fields) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>First name</td>
+                                    <td><?php $controls->select('first_name', $csv_fields) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Last name</td>
+                                    <td><?php $controls->select('last_name', $csv_fields) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Language</td>
+                                    <td>
+                                        <?php $controls->select('language', $csv_fields) ?>
+                                        <div class="description">
+                                            It should be 2 lowercase characters code (<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO 639-1</a>)
+                                            or the 2 lowercase characters code used by your multilanguage plugin.
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>
+                                        <?php $controls->select('gender', $csv_fields) ?>
+                                        <div class="description">
+                                            It should be "f" or "m" or "n".
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>IP Address</td>
+                                    <td><?php $controls->select('ip', $csv_fields) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>
+                                        <?php $controls->select('country', $csv_fields) ?>
+                                        <p class="description">
+                                            It should be the country <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">ISO 3166-1 alpha 2 code</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Region</td>
+                                    <td>
+                                        <?php $controls->select('region', $csv_fields) ?>
+                                        <p class="description">Can be a state, county, province and so on</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>
+                                        <?php $controls->select('city', $csv_fields) ?>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                    <?php } ?>
-
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-lists">
+                        <p>
+                            Lists can't be assigned using CSV fields.
+                        </p>
+                        <table class="form-table">
+                            <tr>
+                                <th><?php esc_html_e('Lists', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->preferences_group('lists', true); ?>
+                                    <div class="hints">
+                                        Every created or updated subscriber will be associate with selected lists.
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-extra">
+                        <p><a href="?page=newsletter_subscription_customfields">Manage custom fields</a>.</p>
+                        <?php
+                        $profiles = Newsletter::instance()->get_profiles();
+                        ?>
+                        <?php if (empty($profiles)) { ?>
+                            <p style="font-weight: strong">
+                                There are not extra profile fields defined.
+                            </p>
+                        <?php } else { ?>
+                            <table class="widefat" style="width: auto">
+                                <thead>
+                                    <tr>
+                                        <th>Subscriber field</th>
+                                        <th>CSV column</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($profiles as $profile) { ?>
+                                        <tr>
+                                            <td><?php echo esc_html($profile->name) ?></td>
+                                            <td><?php $controls->select('profile_' . $profile->id, $csv_fields) ?></td>
+                                        <?php } ?>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
 

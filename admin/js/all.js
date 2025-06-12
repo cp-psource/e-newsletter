@@ -399,24 +399,9 @@ function tnp_controls_init(config = {}) {
         jQuery(this).css("height", "400px");
     });
 
-    jQuery(".tnp-accordion").accordion({collapsible: true, heightStyle: "content"});
-    if (!config.nested) {
-        tabs = jQuery("#tabs").tabs({
-            active: config.tab,
-            activate: function (event, ui) {
-                jQuery.cookie(config.tab_name, ui.newTab.index(), {expires: 1});
-            }
-        });
-        jQuery(".tnp-tabs").tabs({
-            active: config.tab,
-            activate: function (event, ui) {
-                jQuery.cookie(config.tab_name, ui.newTab.index(), {expires: 1});
-            }
-        });
-    }
 }
 
-function tnp_fields_media_mini_select(el) {
+function tnp_fields_media_mini_select(el, event) {
     event.preventDefault();
 
     let name = jQuery(el).data("name");
@@ -440,7 +425,7 @@ function tnp_fields_media_mini_select(el) {
     }).open();
 }
 
-function tnp_fields_url_select(el) {
+function tnp_fields_url_select(el, event) {
     event.preventDefault();
 
     let field_id = jQuery(el).data("field");
@@ -459,7 +444,7 @@ function tnp_fields_url_select(el) {
     }).open();
 }
 
-function tnp_fields_media_mini_remove(name) {
+function tnp_fields_media_mini_remove(name, event) {
     event.preventDefault();
     event.stopPropagation();
     let $field = jQuery("#" + name + "_id");

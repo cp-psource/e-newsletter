@@ -145,181 +145,165 @@ if ($controls->is_action('change_status')) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-1"><?php esc_html_e('General', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-2"><?php esc_html_e('Lists', 'newsletter') ?></a></li>
-                </ul>
-
-                <div id="tabs-1">
-                    <table class="widefat" style="width: auto">
-                        <thead>
-                            <tr>
-                                <th><?php esc_html_e('Status', 'newsletter') ?></th>
-                                <th><?php esc_html_e('Total', 'newsletter') ?></th>
-                                <th><?php esc_html_e('Actions', 'newsletter') ?></th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td><?php esc_html_e('Total', 'newsletter') ?></td>
-                            <td>
-                                <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE); ?>
-                            </td>
-                            <td nowrap>
-                                <?php $controls->button_confirm_secondary('remove_all', __('Delete all', 'newsletter'), __('Are you sure you want to remove ALL subscribers?', 'newsletter')); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><?php esc_html_e('Confirmed', 'newsletter') ?></td>
-                            <td>
-                                <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='C'"); ?>
-                            </td>
-                            <td nowrap>
-                                <?php $controls->button_confirm_secondary('unconfirm_all', __('Unconfirm all', 'newsletter')); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><?php esc_html_e('Not comfirmed', 'newsletter') ?></td>
-                            <td>
-                                <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='S'"); ?>
-                            </td>
-                            <td nowrap>
-                                <?php $controls->button_confirm_secondary('remove_unconfirmed', __('Delete all', 'newsletter')); ?>
-                                <?php $controls->button_confirm_secondary('confirm_all', __('Confirm all', 'newsletter'), __('Are you sure you want to mark ALL subscribers as confirmed?', 'newsletter')); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><?php esc_html_e('Unsubscribed', 'newsletter') ?></td>
-                            <td>
-                                <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='U'"); ?>
-                            </td>
-                            <td>
-                                <?php $controls->button_confirm_secondary('remove_unsubscribed', __('Delete all', 'newsletter')); ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><?php esc_html_e('Bounced', 'newsletter') ?></td>
-                            <td>
-                                <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='B'"); ?>
-                            </td>
-                            <td>
-                                <?php $controls->button_confirm_secondary('remove_bounced', __('Delete all', 'newsletter')); ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><?php esc_html_e('Complained', 'newsletter') ?></td>
-                            <td>
-                                <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='P'"); ?>
-                            </td>
-                            <td>
-                                <?php $controls->button_confirm_secondary('remove_complained', __('Delete all', 'newsletter')); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <?php esc_html_e('Change status', 'newsletter') ?>
-                            </td>
-                            <td>
-                                <?php $controls->user_status('status_1'); ?>
-                                <?php esc_html_e('to', 'newsletter') ?>
-                                <?php $controls->user_status('status_2'); ?>
-                            </td>
-                            <td>
-                                <?php $controls->button_confirm_secondary('change_status', __('Change', 'newsletter')); ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <?php esc_html_e('Inactive since', 'newsletter') ?>
-                                <?php $controls->field_help('https://www.thenewsletterplugin.com/documentation/subscribers-and-management/subscribers/#inactive') ?>
-                            </td>
-                            <td>
-                                <?php
-                                $controls->select('inactive_time', array(
-                                    '3' => '3 ' . __('months', 'newsletter'),
-                                    '6' => '6 ' . __('months', 'newsletter'),
-                                    '12' => '1 ' . __('year', 'newsletter'),
-                                    '24' => '2 ' . __('years', 'newsletter'),
-                                    '36' => '3 ' . __('years', 'newsletter'),
-                                    '48' => '4 ' . __('years', 'newsletter'),
-                                    '60' => '5 ' . __('years', 'newsletter'),
-                                    '72' => '6 ' . __('years', 'newsletter'),
-                                    '84' => '7 ' . __('years', 'newsletter'),
-                                    '96' => '8 ' . __('years', 'newsletter'),
-                                    '108' => '9 ' . __('years', 'newsletter'),
-                                    '120' => '10 ' . __('years', 'newsletter')
-                                ))
-                                ?>
-                                add to
-                                <?php $controls->lists_select('list_inactive'); ?>
-
-                            </td>
-                            <td>
-                                <?php $controls->button_confirm_secondary('update_inactive', __('Update', 'newsletter')); ?>
-                            </td>
-                        </tr>
-
-                        <?php if ($this->is_multilanguage()) { ?>
-                            <tr>
-                                <td>Language</td>
-                                <td>
-                                    <?php esc_html_e('Set to', 'newsletter') ?>
-                                    <?php $controls->language('language', false) ?> <?php esc_html_e('subscribers without a language', 'newsletter') ?>
-                                </td>
-                                <td>
-                                    <?php $controls->btn('language', '&raquo;', ['confirm' => true]); ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </table>
-
-
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-1"><?php esc_html_e('General', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-2"><?php esc_html_e('Lists', 'newsletter') ?></button>
                 </div>
-
-
-                <div id="tabs-2">
-                    <table class="form-table">
-                        <tr>
-
-                            <td>
-                                <?php $controls->lists_select('list') ?>
-                                <?php $controls->button_confirm_secondary('list_add', 'Activate for everyone'); ?>
-                                <?php $controls->button_confirm_secondary('list_remove', 'Deactivate for everyone'); ?>
-                                <?php $controls->button_confirm_secondary('list_delete', 'Delete everyone in that list'); ?>
-                                <p class="description">
-                                    If you choose to <strong>delete</strong> users in a list, they will be
-                                    <strong>physically deleted</strong> from the database (no way back).
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <?php $controls->select('list_action', array('move' => 'Change', 'add' => 'Add')); ?>
-                                <?php esc_html_e('all subscribers in', 'newsletter') ?> <?php $controls->lists_select('list_1'); ?>
-                                <?php esc_html_e('to', 'newsletter') ?> <?php $controls->lists_select('list_2'); ?>
-                                <?php $controls->button_confirm_secondary('list_manage', '&raquo;'); ?>
-
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <?php esc_html_e('Add to list', 'newsletter') ?>
-                                <?php $controls->lists_select('list_3') ?> <?php esc_html_e('subscribers without a list', 'newsletter') ?>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-1">
+                        <table class="widefat" style="width: auto">
+                            <thead>
+                                <tr>
+                                    <th><?php esc_html_e('Status', 'newsletter') ?></th>
+                                    <th><?php esc_html_e('Total', 'newsletter') ?></th>
+                                    <th><?php esc_html_e('Actions', 'newsletter') ?></th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td><?php esc_html_e('Total', 'newsletter') ?></td>
+                                <td>
+                                    <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE); ?>
+                                </td>
+                                <td nowrap>
+                                    <?php $controls->button_confirm_secondary('remove_all', __('Delete all', 'newsletter'), __('Are you sure you want to remove ALL subscribers?', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php esc_html_e('Confirmed', 'newsletter') ?></td>
+                                <td>
+                                    <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='C'"); ?>
+                                </td>
+                                <td nowrap>
+                                    <?php $controls->button_confirm_secondary('unconfirm_all', __('Unconfirm all', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php esc_html_e('Not comfirmed', 'newsletter') ?></td>
+                                <td>
+                                    <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='S'"); ?>
+                                </td>
+                                <td nowrap>
+                                    <?php $controls->button_confirm_secondary('remove_unconfirmed', __('Delete all', 'newsletter')); ?>
+                                    <?php $controls->button_confirm_secondary('confirm_all', __('Confirm all', 'newsletter'), __('Are you sure you want to mark ALL subscribers as confirmed?', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php esc_html_e('Unsubscribed', 'newsletter') ?></td>
+                                <td>
+                                    <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='U'"); ?>
+                                </td>
+                                <td>
+                                    <?php $controls->button_confirm_secondary('remove_unsubscribed', __('Delete all', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php esc_html_e('Bounced', 'newsletter') ?></td>
+                                <td>
+                                    <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='B'"); ?>
+                                </td>
+                                <td>
+                                    <?php $controls->button_confirm_secondary('remove_bounced', __('Delete all', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php esc_html_e('Complained', 'newsletter') ?></td>
+                                <td>
+                                    <?php echo (int) $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='P'"); ?>
+                                </td>
+                                <td>
+                                    <?php $controls->button_confirm_secondary('remove_complained', __('Delete all', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php esc_html_e('Change status', 'newsletter') ?>
+                                </td>
+                                <td>
+                                    <?php $controls->user_status('status_1'); ?>
+                                    <?php esc_html_e('to', 'newsletter') ?>
+                                    <?php $controls->user_status('status_2'); ?>
+                                </td>
+                                <td>
+                                    <?php $controls->button_confirm_secondary('change_status', __('Change', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php esc_html_e('Inactive since', 'newsletter') ?>
+                                    <?php $controls->field_help('https://www.thenewsletterplugin.com/documentation/subscribers-and-management/subscribers/#inactive') ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $controls->select('inactive_time', array(
+                                        '3' => '3 ' . __('months', 'newsletter'),
+                                        '6' => '6 ' . __('months', 'newsletter'),
+                                        '12' => '1 ' . __('year', 'newsletter'),
+                                        '24' => '2 ' . __('years', 'newsletter'),
+                                        '36' => '3 ' . __('years', 'newsletter'),
+                                        '48' => '4 ' . __('years', 'newsletter'),
+                                        '60' => '5 ' . __('years', 'newsletter'),
+                                        '72' => '6 ' . __('years', 'newsletter'),
+                                        '84' => '7 ' . __('years', 'newsletter'),
+                                        '96' => '8 ' . __('years', 'newsletter'),
+                                        '108' => '9 ' . __('years', 'newsletter'),
+                                        '120' => '10 ' . __('years', 'newsletter')
+                                    ))
+                                    ?>
+                                    add to
+                                    <?php $controls->lists_select('list_inactive'); ?>
+                                </td>
+                                <td>
+                                    <?php $controls->button_confirm_secondary('update_inactive', __('Update', 'newsletter')); ?>
+                                </td>
+                            </tr>
+                            <?php if ($this->is_multilanguage()) { ?>
+                                <tr>
+                                    <td>Language</td>
+                                    <td>
+                                        <?php esc_html_e('Set to', 'newsletter') ?>
+                                        <?php $controls->language('language', false) ?> <?php esc_html_e('subscribers without a language', 'newsletter') ?>
+                                    </td>
+                                    <td>
+                                        <?php $controls->btn('language', '&raquo;', ['confirm' => true]); ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-2">
+                        <table class="form-table">
+                            <tr>
+                                <td>
+                                    <?php $controls->lists_select('list') ?>
+                                    <?php $controls->button_confirm_secondary('list_add', 'Activate for everyone'); ?>
+                                    <?php $controls->button_confirm_secondary('list_remove', 'Deactivate for everyone'); ?>
+                                    <?php $controls->button_confirm_secondary('list_delete', 'Delete everyone in that list'); ?>
+                                    <p class="description">
+                                        If you choose to <strong>delete</strong> users in a list, they will be
+                                        <strong>physically deleted</strong> from the database (no way back).
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php $controls->select('list_action', array('move' => 'Change', 'add' => 'Add')); ?>
+                                    <?php esc_html_e('all subscribers in', 'newsletter') ?> <?php $controls->lists_select('list_1'); ?>
+                                    <?php esc_html_e('to', 'newsletter') ?> <?php $controls->lists_select('list_2'); ?>
+                                    <?php $controls->button_confirm_secondary('list_manage', '&raquo;'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php esc_html_e('Add to list', 'newsletter') ?>
+                                    <?php $controls->lists_select('list_3') ?> <?php esc_html_e('subscribers without a list', 'newsletter') ?>
                                     <?php $controls->button_confirm_secondary('list_none', '&raquo;'); ?>
-                            </td>
-                        </tr>
-
-                    </table>
-
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-
             </div>
-
         </form>
     </div>
 

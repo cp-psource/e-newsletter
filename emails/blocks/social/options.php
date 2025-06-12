@@ -4,18 +4,31 @@
 /* @var $fields NewsletterFields */
 ?>
 
-<p>Social profiles can be configured on company info page.</p>
-<div class="tnp-accordion">
-    <h3><?php esc_html_e('Appearance', 'newsletter'); ?></h3>
-    <div>
-        <?php $fields->select('type', 'Type', ['1' => 'Round colored', '2' => 'Round monochrome', '3' => 'White logo', '4' => 'Black logo']) ?>
+<p><?php esc_html_e('Social profiles can be configured on company info page.', 'newsletter'); ?></p>
 
-        <?php $fields->select('width', 'Size', ['16' => '16 px', '24' => '24 px', '32' => '32 px']) ?>
+<div class="psource-accordion">
+    <div class="psource-accordion-item active">
+        <button class="psource-accordion-header"><?php esc_html_e('Appearance', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->select('type', __('Type', 'newsletter'), [
+                '1' => __('Round colored', 'newsletter'),
+                '2' => __('Round monochrome', 'newsletter'),
+                '3' => __('White logo', 'newsletter'),
+                '4' => __('Black logo', 'newsletter')
+            ]) ?>
 
+            <?php $fields->select('width', __('Size', 'newsletter'), [
+                '16' => '16 px',
+                '24' => '24 px',
+                '32' => '32 px'
+            ]) ?>
+        </div>
     </div>
 
-    <h3><?php esc_html_e('Commons', 'newsletter'); ?></h3>
-    <div>
-        <?php $fields->block_commons() ?>
+    <div class="psource-accordion-item">
+        <button class="psource-accordion-header"><?php esc_html_e('Commons', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->block_commons() ?>
+        </div>
     </div>
 </div>

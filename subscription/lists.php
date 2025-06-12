@@ -95,122 +95,114 @@ $panels = (int) (NEWSLETTER_LIST_MAX / 10) + (NEWSLETTER_LIST_MAX % 10 > 0 ? 1 :
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-                <ul>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
                     <?php for ($i = 0; $i < $panels; $i++) { ?>
-                        <li><a href="#tabs-general-<?php echo $i ?>"><?php esc_html_e('Lists', 'newsletter') ?> <?php echo $i * 10 + 1, '-', $i * 10 + 10 ?></a></li>
+                        <button class="psource-tab<?php if ($i === 0) echo ' active'; ?>" data-tab="tabs-general-<?php echo $i ?>">
+                            <?php esc_html_e('Lists', 'newsletter') ?> <?php echo $i * 10 + 1, '-', $i * 10 + 10 ?>
+                        </button>
                     <?php } ?>
                     <?php if (NEWSLETTER_DEBUG) { ?>
-                        <li><a href="#tabs-debug">Debug</a></li>
+                        <button class="psource-tab" data-tab="tabs-debug">Debug</button>
                     <?php } ?>
-                </ul>
-
-                <?php for ($j = 0; $j < $panels; $j++) { ?>
-                    <div id="tabs-general-<?php echo $j ?>">
-
-                        <?php $this->language_notice() ?>
-
-                        <table class="widefat" style="width: auto; max-width: 800px" scope="presentation">
-                            <thead>
-                                <tr>
-                                    <th style="vertical-align: top">#</th>
-                                    <th style="vertical-align: top"><?php esc_html_e('Name', 'newsletter') ?></th>
-                                    <?php if (!$language) { ?>
-                                        <th style="vertical-align: top"><?php esc_html_e('Type', 'newsletter') ?></th>
-                                        <th style="vertical-align: top; white-space: nowrap"><?php esc_html_e('Enforced', 'newsletter') ?> <i class="fas fa-info-circle tnp-notes" title="<?php esc_attr_e('If you check this box, all your new subscribers will be automatically added to this list', 'newsletter') ?>"></i></th>
-                                        <?php if ($is_multilanguage) { ?>
-                                            <th style="vertical-align: top">
-                                                <?php esc_html_e('Enforced by language', 'newsletter') ?>
-                                                <i class="fas fa-info-circle tnp-notes" title="<?php esc_attr_e('If you check a language, all your new subscribers with that language will be automatically added to the list', 'newsletter') ?>"></i>
+                </div>
+                <div class="psource-tabs-content">
+                    <?php for ($j = 0; $j < $panels; $j++) { ?>
+                        <div class="psource-tab-panel<?php if ($j === 0) echo ' active'; ?>" id="tabs-general-<?php echo $j ?>">
+                            <?php $this->language_notice() ?>
+                            <table class="widefat" style="width: auto; max-width: 800px" scope="presentation">
+                                <thead>
+                                    <tr>
+                                        <th style="vertical-align: top">#</th>
+                                        <th style="vertical-align: top"><?php esc_html_e('Name', 'newsletter') ?></th>
+                                        <?php if (!$language) { ?>
+                                            <th style="vertical-align: top"><?php esc_html_e('Type', 'newsletter') ?></th>
+                                            <th style="vertical-align: top; white-space: nowrap"><?php esc_html_e('Enforced', 'newsletter') ?> <i class="fas fa-info-circle tnp-notes" title="<?php esc_attr_e('If you check this box, all your new subscribers will be automatically added to this list', 'newsletter') ?>"></i></th>
+                                            <?php if ($is_multilanguage) { ?>
+                                                <th style="vertical-align: top">
+                                                    <?php esc_html_e('Enforced by language', 'newsletter') ?>
+                                                    <i class="fas fa-info-circle tnp-notes" title="<?php esc_attr_e('If you check a language, all your new subscribers with that language will be automatically added to the list', 'newsletter') ?>"></i>
+                                                </th>
+                                            <?php } ?>
+                                        <?php } elseif ($is_multilanguage) { ?>
+                                            <th style="vertical-align: top; white-space: nowrap">
+                                                <?php esc_html_e('Enforced', 'newsletter') ?><br>
+                                                <span style="color: var(--tnp-gray-light); font-size: .9em">Switch to "all languages"</span>
                                             </th>
                                         <?php } ?>
-                                    <?php } elseif ($is_multilanguage) { ?>
+                                        <th style="vertical-align: top"><?php esc_html_e('Subscribers', 'newsletter') ?></th>
                                         <th style="vertical-align: top; white-space: nowrap">
-                                            <?php esc_html_e('Enforced', 'newsletter') ?><br>
-                                            <span style="color: var(--tnp-gray-light); font-size: .9em">Switch to "all languages"</span>
+                                            <?php esc_html_e('Actions', 'newsletter') ?>
+                                            <?php if ($language) { ?>
+                                                <br><span style="color: var(--tnp-gray-light); font-size: .9em">Switch to "all languages"</span>
+                                            <?php } ?>
                                         </th>
-                                    <?php } ?>
-                                    <th style="vertical-align: top"><?php esc_html_e('Subscribers', 'newsletter') ?></th>
-                                    <th style="vertical-align: top; white-space: nowrap">
-                                        <?php esc_html_e('Actions', 'newsletter') ?>
-                                        <?php if ($language) { ?>
-                                            <br><span style="color: var(--tnp-gray-light); font-size: .9em">Switch to "all languages"</span>
-                                        <?php } ?>
-                                    </th>
-                                </tr>
-                            </thead>
-
-                            <?php for ($i = $j * 10 + 1; $i <= min(($j + 1) * 10, NEWSLETTER_LIST_MAX); $i++) { ?>
-                                <?php
-                                if ($language && empty($main_options['list_' . $i])) {
-                                    continue;
-                                }
-                                ?>
-                                <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td>
-                                        <?php $placeholder = !$language ? '' : $main_options['list_' . $i] ?>
-                                        <?php $controls->text('list_' . $i, 40, $placeholder); ?>
-                                    </td>
-                                    <?php if (!$language) { ?>
-                                        <td><?php $controls->select('list_' . $i . '_status', $status); ?></td>
-                                        <td style="text-align: center">
-                                            <?php $controls->checkbox('list_' . $i . '_forced', ''); ?>
+                                    </tr>
+                                </thead>
+                                <?php for ($i = $j * 10 + 1; $i <= min(($j + 1) * 10, NEWSLETTER_LIST_MAX); $i++) { ?>
+                                    <?php
+                                    if ($language && empty($main_options['list_' . $i])) {
+                                        continue;
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $i; ?></td>
+                                        <td>
+                                            <?php $placeholder = !$language ? '' : $main_options['list_' . $i] ?>
+                                            <?php $controls->text('list_' . $i, 40, $placeholder); ?>
                                         </td>
-                                        <?php if ($is_multilanguage) { ?>
-                                            <td><?php $controls->languages('list_' . $i . '_languages'); ?></td>
-                                        <?php } ?>
-                                    <?php } elseif ($is_multilanguage) { ?>
-                                        <td>&nbsp;</td>
-                                    <?php } ?>
-
-                                    <td>
-                                        <?php //echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where list_" . $i . "=1 and status='C'");   ?>
-                                        <?php
-                                        $field = 'list_' . $i;
-                                        echo $count->$field;
-                                        ?>
-                                    </td>
-
-                                    <td style="white-space: nowrap">
                                         <?php if (!$language) { ?>
-                                            <?php $controls->button_confirm_secondary('unlink', __('Unlink everyone', 'newsletter'), true, $i); ?>
-                                            <?php $controls->button_confirm_secondary('link', __('Add everyone', 'newsletter'), true, $i); ?>
-                                            <?php $controls->button_confirm_secondary('unconfirm', __('Unconfirm all', 'newsletter'), true, $i); ?>
-                                            <?php $controls->button_confirm_secondary('confirm', __('Confirm all', 'newsletter'), true, $i); ?>
+                                            <td><?php $controls->select('list_' . $i . '_status', $status); ?></td>
+                                            <td style="text-align: center">
+                                                <?php $controls->checkbox('list_' . $i . '_forced', ''); ?>
+                                            </td>
+                                            <?php if ($is_multilanguage) { ?>
+                                                <td><?php $controls->languages('list_' . $i . '_languages'); ?></td>
+                                            <?php } ?>
+                                        <?php } elseif ($is_multilanguage) { ?>
+                                            <td>&nbsp;</td>
                                         <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td colspan="7">
-                                        <?php $notes = apply_filters('newsletter_lists_notes', array(), $i); ?>
-                                        <?php
-                                        $text = '';
-                                        foreach ($notes as $note) {
-                                            $text .= esc_html($note) . '<br>';
-                                        }
-                                        if (!empty($text)) {
-                                            echo $text;
-                                            //echo '<i class="fas fa-info-circle tnp-notes" title="', esc_attr($text), '"></i>';
-                                        }
-                                        ?>
-
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </table>
-
-                    </div>
-                <?php } ?>
-                <?php if (NEWSLETTER_DEBUG) { ?>
-                    <div id="tabs-debug">
-                        <pre><?php echo esc_html(wp_json_encode($this->get_db_options('lists', $language), JSON_PRETTY_PRINT)) ?></pre>
-                    </div>
-                <?php } ?>
-
+                                        <td>
+                                            <?php
+                                            $field = 'list_' . $i;
+                                            echo $count->$field;
+                                            ?>
+                                        </td>
+                                        <td style="white-space: nowrap">
+                                            <?php if (!$language) { ?>
+                                                <?php $controls->button_confirm_secondary('unlink', __('Unlink everyone', 'newsletter'), true, $i); ?>
+                                                <?php $controls->button_confirm_secondary('link', __('Add everyone', 'newsletter'), true, $i); ?>
+                                                <?php $controls->button_confirm_secondary('unconfirm', __('Unconfirm all', 'newsletter'), true, $i); ?>
+                                                <?php $controls->button_confirm_secondary('confirm', __('Confirm all', 'newsletter'), true, $i); ?>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td colspan="7">
+                                            <?php $notes = apply_filters('newsletter_lists_notes', array(), $i); ?>
+                                            <?php
+                                            $text = '';
+                                            foreach ($notes as $note) {
+                                                $text .= esc_html($note) . '<br>';
+                                            }
+                                            if (!empty($text)) {
+                                                echo $text;
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    <?php } ?>
+                    <?php if (NEWSLETTER_DEBUG) { ?>
+                        <div class="psource-tab-panel" id="tabs-debug">
+                            <pre><?php echo esc_html(wp_json_encode($this->get_db_options('lists', $language), JSON_PRETTY_PRINT)) ?></pre>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
-
             <p>
                 <?php $controls->button_save(); ?>
             </p>

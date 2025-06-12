@@ -100,146 +100,128 @@ foreach (['subscription_text', 'error_text'] as $key) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-subscription"><?php esc_html_e('Subscription', 'newsletter') ?></a></li>
-                    <li class="tnp-tabs-advanced"><a href="#tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></a></li>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-subscription"><?php esc_html_e('Subscription', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></button>
                     <?php if (NEWSLETTER_DEBUG) { ?>
-                        <li><a href="#tabs-debug">Debug</a></li>
+                        <button class="psource-tab" data-tab="tabs-debug">Debug</button>
                     <?php } ?>
-                </ul>
-
-                <div id="tabs-subscription">
-                    <?php $this->language_notice(); ?>
-                    <table class="form-table">
-                        <tr>
-                            <th><?php $controls->field_label(__('Opt In', 'newsletter'), '/subscription/subscription/') ?></th>
-                            <td>
-                                <?php $controls->select('noconfirmation', array(0 => __('Double Opt In', 'newsletter'), 1 => __('Single Opt In', 'newsletter'))); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Subscription page', 'newsletter') ?></th>
-                            <td>
-
-                                <?php $controls->checkbox2('subscription_text_custom', 'Customize'); ?>
-                                <div data-tnpshow="subscription_text_custom=1">
-                                    <?php $controls->wp_editor('subscription_text', ['editor_height' => 150], ['default' => $this->get_default_text('subscription_text')]); ?>
-                                    <p class="description">
-                                        Remember to add at least the <code>[newsletter_form]</code> shortcode
-                                        (<a href="https://www.thenewsletterplugin.com/documentation/subscription/subscription-form-shortcodes/#attributes" target="_blank">see all the options</a>).
-                                        Remove the shortcode if you don't want to show the subscription form.
-                                    </p>
-                                </div>
-                                <div data-tnpshow="subscription_text_custom=0" class="tnpc-default-text">
-                                    <?php echo wp_kses_post($this->get_default_text('subscription_text')) ?>
-                                </div>
-
-
-                            </td>
-                        </tr>
-
-                    </table>
-
-                    <?php if (!$language) { ?>
-                        <h3>Subscription of existing subscribers</h3>
-
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-subscription">
+                        <?php $this->language_notice(); ?>
                         <table class="form-table">
-
                             <tr>
-                                <th>
-                                    When confirmed
-                                </th>
+                                <th><?php $controls->field_label(__('Opt In', 'newsletter'), '/subscription/subscription/') ?></th>
                                 <td>
-                                    <?php
-                                    $controls->select('multiple', [
-                                        '0' => __('Not allowed', 'newsletter'),
-                                        '1' => __('Allowed', 'newsletter'),
-                                        '2' => __('Allowed (single opt-in)', 'newsletter'),
-                                        '3' => __('Allowed (double opt-in)', 'newsletter')
-                                    ]);
-                                    ?>
-                                    <div data-tnpshow="multiple=0" style="margin-top: 1rem;">
-
-                                        <?php $controls->checkbox2('error_text_custom', __('Customize', 'newsletter')); ?>
-                                        <div data-tnpshow="error_text_custom=1">
-                                            <?php $controls->wp_editor('error_text', ['editor_height' => 150], ['default' => $this->get_default_text('error_text')]); ?>
-                                        </div>
-                                        <div data-tnpshow="error_text_custom=0" class="tnpc-default-text">
-                                            <?php echo wp_kses_post($this->get_default_text('error_text')) ?>
-                                        </div>
-
+                                    <?php $controls->select('noconfirmation', array(0 => __('Double Opt In', 'newsletter'), 1 => __('Single Opt In', 'newsletter'))); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Subscription page', 'newsletter') ?></th>
+                                <td>
+                                    <?php $controls->checkbox2('subscription_text_custom', 'Customize'); ?>
+                                    <div data-tnpshow="subscription_text_custom=1">
+                                        <?php $controls->wp_editor('subscription_text', ['editor_height' => 150], ['default' => $this->get_default_text('subscription_text')]); ?>
+                                        <p class="description">
+                                            Remember to add at least the <code>[newsletter_form]</code> shortcode
+                                            (<a href="https://www.thenewsletterplugin.com/documentation/subscription/subscription-form-shortcodes/#attributes" target="_blank">see all the options</a>).
+                                            Remove the shortcode if you don't want to show the subscription form.
+                                        </p>
+                                    </div>
+                                    <div data-tnpshow="subscription_text_custom=0" class="tnpc-default-text">
+                                        <?php echo wp_kses_post($this->get_default_text('subscription_text')) ?>
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <th>
-                                    When unsubscribed
-                                </th>
-                                <td>
-                                    <?php
-                                    $controls->select('allow_unsubscribed', [
-                                        '0' => __('Not allowed', 'newsletter'),
-                                        '1' => __('Allowed', 'newsletter'),
-                                    ]);
-                                    ?>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    When bounced or complained
-                                </th>
-                                <td>
-                                    Not allowed.
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    When not confirmed
-                                </th>
-                                <td>
-                                    Allowed.
-                                </td>
-                            </tr>
-
                         </table>
-                    <?php } ?>
-
-                </div>
-
-                <div id="tabs-advanced">
-
-                    <?php $this->language_notice(); ?>
-
-                    <?php if (!$language) { ?>
-                        <table class="form-table">
-                            <tr>
-                                <th><?php $controls->field_label(__('Override Opt In', 'newsletter'), '/subscription/subscription/#advanced') ?></th>
-                                <td>
-                                    <?php $controls->yesno('optin_override'); ?>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th><?php esc_html_e('Notifications', 'newsletter') ?></th>
-                                <td>
-                                    <?php $controls->yesno('notify'); ?>
-                                    <?php $controls->text_email('notify_email'); ?>
-                                </td>
-                            </tr>
-                        </table>
-                    <?php } ?>
-                </div>
-
-                <?php if (NEWSLETTER_DEBUG) { ?>
-                    <div id="tabs-debug">
-                        <?php $controls->button_reset(); ?>
-                        <pre><?php echo esc_html(json_encode($this->get_db_options('', $language), JSON_PRETTY_PRINT)) ?></pre>
+                        <?php if (!$language) { ?>
+                            <h3>Subscription of existing subscribers</h3>
+                            <table class="form-table">
+                                <tr>
+                                    <th>
+                                        When confirmed
+                                    </th>
+                                    <td>
+                                        <?php
+                                        $controls->select('multiple', [
+                                            '0' => __('Not allowed', 'newsletter'),
+                                            '1' => __('Allowed', 'newsletter'),
+                                            '2' => __('Allowed (single opt-in)', 'newsletter'),
+                                            '3' => __('Allowed (double opt-in)', 'newsletter')
+                                        ]);
+                                        ?>
+                                        <div data-tnpshow="multiple=0" style="margin-top: 1rem;">
+                                            <?php $controls->checkbox2('error_text_custom', __('Customize', 'newsletter')); ?>
+                                            <div data-tnpshow="error_text_custom=1">
+                                                <?php $controls->wp_editor('error_text', ['editor_height' => 150], ['default' => $this->get_default_text('error_text')]); ?>
+                                            </div>
+                                            <div data-tnpshow="error_text_custom=0" class="tnpc-default-text">
+                                                <?php echo wp_kses_post($this->get_default_text('error_text')) ?>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        When unsubscribed
+                                    </th>
+                                    <td>
+                                        <?php
+                                        $controls->select('allow_unsubscribed', [
+                                            '0' => __('Not allowed', 'newsletter'),
+                                            '1' => __('Allowed', 'newsletter'),
+                                        ]);
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        When bounced or complained
+                                    </th>
+                                    <td>
+                                        Not allowed.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        When not confirmed
+                                    </th>
+                                    <td>
+                                        Allowed.
+                                    </td>
+                                </tr>
+                            </table>
+                        <?php } ?>
                     </div>
-                <?php } ?>
-
+                    <div class="psource-tab-panel" id="tabs-advanced">
+                        <?php $this->language_notice(); ?>
+                        <?php if (!$language) { ?>
+                            <table class="form-table">
+                                <tr>
+                                    <th><?php $controls->field_label(__('Override Opt In', 'newsletter'), '/subscription/subscription/#advanced') ?></th>
+                                    <td>
+                                        <?php $controls->yesno('optin_override'); ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><?php esc_html_e('Notifications', 'newsletter') ?></th>
+                                    <td>
+                                        <?php $controls->yesno('notify'); ?>
+                                        <?php $controls->text_email('notify_email'); ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        <?php } ?>
+                    </div>
+                    <?php if (NEWSLETTER_DEBUG) { ?>
+                        <div class="psource-tab-panel" id="tabs-debug">
+                            <?php $controls->button_reset(); ?>
+                            <pre><?php echo esc_html(json_encode($this->get_db_options('', $language), JSON_PRETTY_PRINT)) ?></pre>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
 
             <p>

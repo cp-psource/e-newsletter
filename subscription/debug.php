@@ -28,21 +28,21 @@ array_walk($items, function ($item) {
         <?php $controls->show(); ?>
         <?php $controls->init(); ?>
 
-        <div id="tabs">
-
-            <ul>
-                <?php foreach ($items as $item) { ?>
-                    <li><a href="#tabs-<?php echo esc_attr($item->option_name) ?>"><?php echo esc_html($item->option_name); ?></a></li>
+        <div class="psource-tabs" id="tabs">
+            <div class="psource-tabs-nav">
+                <?php foreach ($items as $index => $item) { ?>
+                    <button class="psource-tab<?php if ($index === 0) echo ' active'; ?>" data-tab="tabs-<?php echo esc_attr($item->option_name) ?>">
+                        <?php echo esc_html($item->option_name); ?>
+                    </button>
                 <?php } ?>
-            </ul>
-
-            <?php foreach ($items as $item) { ?>
-                <div id="tabs-<?php echo esc_attr($item->option_name) ?>">
-                    <pre><?php echo esc_html(json_encode(maybe_unserialize($item->option_value), JSON_PRETTY_PRINT)) ?></pre>
-                </div>
-
-            <?php } ?>
-
+            </div>
+            <div class="psource-tabs-content">
+                <?php foreach ($items as $index => $item) { ?>
+                    <div class="psource-tab-panel<?php if ($index === 0) echo ' active'; ?>" id="tabs-<?php echo esc_attr($item->option_name) ?>">
+                        <pre><?php echo esc_html(json_encode(maybe_unserialize($item->option_value), JSON_PRETTY_PRINT)) ?></pre>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
 
     </div>

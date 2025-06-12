@@ -37,20 +37,21 @@ if ($controls->is_action('delete')) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div class="tnp-tabs">
-                <ul>
-                    <li><a href="#tabs-logs"><?php esc_html_e('Settings backup', 'newsletter') ?></a></li>
-                </ul>
-
-                <div id="tabs-logs">
-                    <ul class="tnp-log-files">
-                        <?php
-                        foreach ($items as $item) {
-                            $version = substr($item->option_name, -5);
-                            echo '<li><a href="?page=newsletter_system_backup&id=', esc_attr($version), '">', esc_html($version), '</a></li>';
-                        }
-                        ?>
-                    </ul>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-logs"><?php esc_html_e('Settings backup', 'newsletter') ?></button>
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-logs">
+                        <ul class="tnp-log-files">
+                            <?php
+                            foreach ($items as $item) {
+                                $version = substr($item->option_name, -5);
+                                echo '<li><a href="?page=newsletter_system_backup&id=', esc_attr($version), '">', esc_html($version), '</a></li>';
+                            }
+                            ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

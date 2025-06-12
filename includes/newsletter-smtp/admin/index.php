@@ -62,76 +62,69 @@ if (!$controls->is_action()) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-                        <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-general">General</a></li>
-                    <li><a href="#tabs-3">Bounces</a></li>
-                </ul>
-
-                <div id="tabs-general">
-
-            <table class="form-table">
-                <tr>
-                    <th>Enable the SMTP?</th>
-                    <td><?php $controls->enabled(); ?></td>
-                </tr>
-                <tr>
-                    <th>SMTP host/port</th>
-                    <td>
-                        host: <?php $controls->text('host', 30); ?>
-                        port: <?php $controls->text('port', 6, '25'); ?>
-                        <?php $controls->select('secure', array('' => 'No secure protocol', 'tls' => 'SMTP+STARTTLS', 'ssl' => 'SMTPS')); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Authentication</th>
-                    <td>
-                        user: <?php $controls->text('user', 30); ?>
-                        password: <?php $controls->password('pass', 30); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Insecure SSL Connections
-                        <?php $controls->field_help('https://www.thenewsletterplugin.com/documentation/addons/delivery-addons/smtp-extension/#ssl') ?>
-                    </th>
-                    <td>
-                        <?php $controls->yesno('ssl_insecure'); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Test email address</th>
-                    <td>
-                        <?php $controls->text_email('test_email', 30); ?>
-                        <?php $controls->btn('test', 'Save and send test email', ['secondary' => true]); ?>
-                        <p class="description">
-                            If the test reports a "connection failed", review your settings and, if correct, contact
-                            your provider to unlock the connection (if possible).
-                        </p>
-                    </td>
-                </tr>
-            </table>
-                    </div>
-
-
-                <div id="tabs-3">
-
-
-                    <p>
-                        This addon cannot manage the bounces produced by the connected SMTP server. You can consider to
-                        install and configure the
-                        <a href="https://www.thenewsletterplugin.com/documentation/addons/extended-features/bounce-extension/" target="_blank">Bounce Addon</a>.
-                    </p>
-                    <p style="font-weight: bold">
-                        Anyway we advise to use a professional delivery service. Check out our
-                        <a href="https://www.thenewsletterplugin.com/documentation/addons/delivery-addons/" target="_blank">integrations</a>
-                        (some of them are free,
-                        see the addons manager page on the left side menu).
-                        </p>
-
-
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-general">General</button>
+                    <button class="psource-tab" data-tab="tabs-3">Bounces</button>
                 </div>
-
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-general">
+                        <table class="form-table">
+                            <tr>
+                                <th>Enable the SMTP?</th>
+                                <td><?php $controls->enabled(); ?></td>
+                            </tr>
+                            <tr>
+                                <th>SMTP host/port</th>
+                                <td>
+                                    host: <?php $controls->text('host', 30); ?>
+                                    port: <?php $controls->text('port', 6, '25'); ?>
+                                    <?php $controls->select('secure', array('' => 'No secure protocol', 'tls' => 'SMTP+STARTTLS', 'ssl' => 'SMTPS')); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Authentication</th>
+                                <td>
+                                    user: <?php $controls->text('user', 30); ?>
+                                    password: <?php $controls->password('pass', 30); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Insecure SSL Connections
+                                    <?php $controls->field_help('https://www.thenewsletterplugin.com/documentation/addons/delivery-addons/smtp-extension/#ssl') ?>
+                                </th>
+                                <td>
+                                    <?php $controls->yesno('ssl_insecure'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Test email address</th>
+                                <td>
+                                    <?php $controls->text_email('test_email', 30); ?>
+                                    <?php $controls->btn('test', 'Save and send test email', ['secondary' => true]); ?>
+                                    <p class="description">
+                                        If the test reports a "connection failed", review your settings and, if correct, contact
+                                        your provider to unlock the connection (if possible).
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-3">
+                        <p>
+                            This addon cannot manage the bounces produced by the connected SMTP server. You can consider to
+                            install and configure the
+                            <a href="https://www.thenewsletterplugin.com/documentation/addons/extended-features/bounce-extension/" target="_blank">Bounce Addon</a>.
+                        </p>
+                        <p style="font-weight: bold">
+                            Anyway we advise to use a professional delivery service. Check out our
+                            <a href="https://www.thenewsletterplugin.com/documentation/addons/delivery-addons/" target="_blank">integrations</a>
+                            (some of them are free,
+                            see the addons manager page on the left side menu).
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <p>

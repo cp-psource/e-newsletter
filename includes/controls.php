@@ -1345,24 +1345,24 @@ class NewsletterControls {
 
         <?php if ($languages) { ?>
 
-            <div class = "tnp-tabs">
-                <ul>
-                    <li><a href = "#tabs-a">Default</a></li>
-                    <?php foreach ($languages as $key => $value) {
-                        ?>
-                        <li><a href="#tabs-a-<?php echo esc_attr($key) ?>"><?php echo esc_html($value) ?></a></li>
-                    <?php } ?>
-                </ul>
-
-                <div id="tabs-a">
+        <div class="psource-tabs" id="tabs-a">
+            <div class="psource-tabs-nav">
+                <button class="psource-tab active" data-tab="tabs-a-default"><?php esc_html_e('Default'); ?></button>
+                <?php foreach ($languages as $key => $value) { ?>
+                    <button class="psource-tab" data-tab="tabs-a-<?php echo esc_attr($key) ?>"><?php echo esc_html($value) ?></button>
+                <?php } ?>
+            </div>
+            <div class="psource-tabs-content">
+                <div class="psource-tab-panel active" id="tabs-a-default">
                     <?php $this->wp_editor('confirmation_text'); ?>
                 </div>
                 <?php foreach ($languages as $key => $value) { ?>
-                    <div id="tabs-a-<?php echo esc_attr($key) ?>">
+                    <div class="psource-tab-panel" id="tabs-a-<?php echo esc_attr($key) ?>">
                         <?php $this->wp_editor($key . '_confirmation_text', $settings); ?>
                     </div>
                 <?php } ?>
             </div>
+        </div>
         <?php } else { ?>
             <?php $this->wp_editor('confirmation_text', $settings); ?>
         <?php } ?>

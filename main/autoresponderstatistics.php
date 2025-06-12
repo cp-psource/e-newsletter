@@ -66,120 +66,83 @@ $emails[] = $email;
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs" class="tnp-tabs">
-
-                <ul>
-                    <li><a href="#tabs-email"><?php esc_html_e('By email', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-status"><?php esc_html_e('By status', 'newsletter') ?></a></li>
-                </ul>
-
-                <div id="tabs-email">
-                    <p>Counts are limited to active subscribers who have not abandoned the series (by list change, cancellation, ...).</p>
-
-                    <table class="widefat" style="width: auto">
-                        <thead>
-                            <tr>
-                                <th>Progress</th>
-                                <th>Subscribers</th>
-                                <th>Subject</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $total = 0; ?>
-                            <?php for ($i = 0; $i < count($emails); $i++) { ?>
-                                <?php
-                                $email = $emails[$i];
-                                $total += $email->waiting;
-                                ?>
+            <div class="psource-tabs" id="autoresponder-tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-email"><?php esc_html_e('By email', 'newsletter'); ?></button>
+                    <button class="psource-tab" data-tab="tabs-status"><?php esc_html_e('By status', 'newsletter'); ?></button>
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-email">
+                        <p><?php esc_html_e('Counts are limited to active subscribers who have not abandoned the series (by list change, cancellation, ...).', 'newsletter'); ?></p>
+                        <table class="widefat" style="width: auto">
+                            <thead>
                                 <tr>
-                                    <td>Waiting to receive message <?php echo $i + 1 ?></td>
-
-                                    <td>
-                                        <?php echo esc_html($email->waiting) ?>
-                                    </td>
-                                    <td>
-                                        <?php echo esc_html($email->subject) ?>
-                                    </td>
-                                    <td>
-                                        <?php $controls->button_icon_statistics('') ?>
-                                    </td>
+                                    <th><?php esc_html_e('Progress', 'newsletter'); ?></th>
+                                    <th><?php esc_html_e('Subscribers', 'newsletter'); ?></th>
+                                    <th><?php esc_html_e('Subject', 'newsletter'); ?></th>
+                                    <th>&nbsp;</th>
                                 </tr>
-                            <?php } ?>
-                            <tr>
-                                <td><strong>Total queued</strong></td>
-                                <td>
-                                    <strong>
-                                        <?php echo $total ?>
-                                    </strong>
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php $total = 0; ?>
+                                <?php for ($i = 0; $i < count($emails); $i++) { ?>
+                                    <?php
+                                    $email = $emails[$i];
+                                    $total += $email->waiting;
+                                    ?>
+                                    <tr>
+                                        <td><?php printf(esc_html__('Waiting to receive message %d', 'newsletter'), $i + 1); ?></td>
+                                        <td><?php echo esc_html($email->waiting); ?></td>
+                                        <td><?php echo esc_html($email->subject); ?></td>
+                                        <td><?php $controls->button_icon_statistics(''); ?></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td><strong><?php esc_html_e('Total queued', 'newsletter'); ?></strong></td>
+                                    <td><strong><?php echo $total; ?></strong></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-status">
+                        <p><?php esc_html_e('Overview of subscriber on this message series.', 'newsletter'); ?></p>
+                        <table class="widefat" style="width: auto">
+                            <thead>
+                                <tr>
+                                    <th><?php esc_html_e('Status', 'newsletter'); ?></th>
+                                    <th><?php esc_html_e('Subscribers', 'newsletter'); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php esc_html_e('Completed', 'newsletter'); ?></td>
+                                    <td>17</td>
+                                </tr>
+                                <tr>
+                                    <td><?php esc_html_e('Active', 'newsletter'); ?></td>
+                                    <td>347</td>
+                                </tr>
+                                <tr>
+                                    <td><?php esc_html_e('Abandoned', 'newsletter'); ?></td>
+                                    <td>19</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php esc_html_e('Other', 'newsletter'); ?><br>
+                                        <small><?php esc_html_e('Missing user, errors', 'newsletter'); ?></small>
+                                    </td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td><strong><?php esc_html_e('Total', 'newsletter'); ?></strong></td>
+                                    <td><strong>387</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div id="tabs-status">
-
-                    <p>Overview of subscriber on this message series.</p>
-                    <table class="widefat" style="width: auto">
-                        <thead>
-                            <tr>
-                                <th>Status</th>
-                                <th>Subscribers</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr>
-                                <td>Completed</td>
-                                <td>
-                                    17
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>Active</td>
-                                <td>
-                                    347
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>Abandoned</td>
-                                <td>
-                                    19
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    Other<br>
-                                    <small>Missing user, errors</small>
-                                </td>
-                                <td>
-                                    4
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td>
-                                    <strong>387</strong>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-
             </div>
         </form>
 

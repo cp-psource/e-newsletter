@@ -62,53 +62,45 @@ if (!$controls->is_action()) {
 
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-
-                <ul>
-                    <li><a href="#tabs-general"><?php _e('General', 'newsletter') ?></a></li>
-                </ul>
-
-                <div id="tabs-general" class="tnp-tab">
-
-
-                    <table class="form-table">
-
-                        <tr>
-                            <th><?php esc_html_e('Name', 'newsletter'); ?></th>
-                            <td>
-                                <?php $controls->text('name'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Form', 'newsletter'); ?></th>
-                            <td>
-                                <a href="javascript:void(0)" class="button-primary" onclick="document.dispatchEvent(new Event('openDialog'))"><?php _e('Edit', 'newsletter'); ?></a>
-                                <?php $controls->hidden('config'); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Autoresponders', 'newsletter'); ?></th>
-                            <td>
-                                <?php if (class_exists('NewsletterAutoresponder')) { ?>
-                                    <?php
-                                    $autoresponders = NewsletterAutoresponder::instance()->get_autoresponders();
-                                    ?>
-                                    <?php
-                                    foreach ($autoresponders as $autoresponder) {
-                                        $controls->checkbox_group('autoresponders', $autoresponder->id, $autoresponder->name);
-                                        echo '<br>';
-                                    }
-                                    ?>
-
-                                <?php } else { ?>
-                                    The Autoresponder addon is required.
-                                <?php } ?>
-                            </td>
-                        </tr>
-
-                    </table>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-general"><?php _e('General', 'newsletter') ?></button>
                 </div>
-
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active tnp-tab" id="tabs-general">
+                        <table class="form-table">
+                            <tr>
+                                <th><?php esc_html_e('Name', 'newsletter'); ?></th>
+                                <td>
+                                    <?php $controls->text('name'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Form', 'newsletter'); ?></th>
+                                <td>
+                                    <a href="javascript:void(0)" class="button-primary" onclick="document.dispatchEvent(new Event('openDialog'))"><?php _e('Edit', 'newsletter'); ?></a>
+                                    <?php $controls->hidden('config'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Autoresponders', 'newsletter'); ?></th>
+                                <td>
+                                    <?php if (class_exists('NewsletterAutoresponder')) { ?>
+                                        <?php
+                                        $autoresponders = NewsletterAutoresponder::instance()->get_autoresponders();
+                                        foreach ($autoresponders as $autoresponder) {
+                                            $controls->checkbox_group('autoresponders', $autoresponder->id, $autoresponder->name);
+                                            echo '<br>';
+                                        }
+                                        ?>
+                                    <?php } else { ?>
+                                        The Autoresponder addon is required.
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="tnp-buttons">

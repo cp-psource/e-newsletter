@@ -37,27 +37,27 @@ if ($controls->is_action('delete_logs')) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div class="tnp-tabs">
-                <ul>
-                    <li><a href="#tabs-logs"><?php _e('Logs', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-cron"><?php _e('Scheduler', 'newsletter') ?></a></li>
-                </ul>
-
-                <div id="tabs-logs">
-                    <ul class="tnp-log-files">
-                        <?php
-                        $files = glob(WP_CONTENT_DIR . '/logs/newsletter/*.txt'); // get all file names
-                        foreach ($files as $file) { // iterate files
-                            echo '<li><a href="' . WP_CONTENT_URL . '/logs/newsletter/' . basename($file) . '" target="_blank">' . basename($file) . '</a>';
-                            echo ' <span class="tnp-log-size">(' . size_format(filesize($file)) . ')</span>';
-                            echo '</li>';
-                        }
-                        ?>
-                    </ul>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-logs"><?php _e('Logs', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-cron"><?php _e('Scheduler', 'newsletter') ?></button>
                 </div>
-
-                <div id="tabs-cron">
-                    <?php $controls->logs('cron'); ?>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-logs">
+                        <ul class="tnp-log-files">
+                            <?php
+                            $files = glob(WP_CONTENT_DIR . '/logs/newsletter/*.txt'); // get all file names
+                            foreach ($files as $file) { // iterate files
+                                echo '<li><a href="' . WP_CONTENT_URL . '/logs/newsletter/' . basename($file) . '" target="_blank">' . basename($file) . '</a>';
+                                echo ' <span class="tnp-log-size">(' . size_format(filesize($file)) . ')</span>';
+                                echo '</li>';
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                    <div class="psource-tab-panel" id="tabs-cron">
+                        <?php $controls->logs('cron'); ?>
+                    </div>
                 </div>
             </div>
 

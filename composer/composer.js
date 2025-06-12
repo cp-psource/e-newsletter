@@ -365,7 +365,7 @@ function start_composer() {
         });
     });
 
-    jQuery('#tnpc-block-options-form').change(function (event) {
+    jQuery('#tnpc-block-options-form').on('change', function (event) {
         var data = jQuery("#tnpc-block-options-form :input").serializeArray();
 
         var _container = tnp_container;

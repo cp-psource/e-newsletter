@@ -29,28 +29,25 @@ if (!$user) {
 
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-
-                <ul>
-                    <li><a href="#tabs-newsletters"><?php esc_html_e('Newsletters', 'newsletter') ?></a></li>
-                </ul>
-
-
-                <div id="tabs-newsletters" class="tnp-tab">
-                    <?php if (!has_action('newsletter_user_newsletters_tab') && !has_action('newsletter_users_edit_newsletters')) { ?>
-                        <p>
-                            This panel requires the <a href="https://www.thenewsletterplugin.com/plugins/newsletter/reports-module" target="_blank">Reports Addon</a>.
-                        </p>
-                        <?php
-                    } else {
-                        do_action('newsletter_user_newsletters_tab', $user->id);
-                        do_action('newsletter_users_edit_newsletters', $user->id);
-                    }
-                    ?>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-newsletters"><?php esc_html_e('Newsletters', 'newsletter') ?></button>
                 </div>
-
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active tnp-tab" id="tabs-newsletters">
+                        <?php if (!has_action('newsletter_user_newsletters_tab') && !has_action('newsletter_users_edit_newsletters')) { ?>
+                            <p>
+                                This panel requires the <a href="https://www.thenewsletterplugin.com/plugins/newsletter/reports-module" target="_blank">Reports Addon</a>.
+                            </p>
+                            <?php
+                        } else {
+                            do_action('newsletter_user_newsletters_tab', $user->id);
+                            do_action('newsletter_users_edit_newsletters', $user->id);
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
-
 
         </form>
     </div>

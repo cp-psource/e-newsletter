@@ -35,17 +35,16 @@ $controls->set_data($autoresponder);
 
         <form method="post" action="">
 
-            <?php $controls->init(); ?>
+        <?php $controls->init(); ?>
 
-            <div id="tabs">
-
-                <ul>
-                    <li><a href="#tabs-general"><?php esc_html_e('General', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-analytics"><?php esc_html_e('Google Analytics', 'newsletter') ?></a></li>
-                </ul>
-
-                <div id="tabs-general">
+        <div class="psource-tabs" id="tabs">
+            <div class="psource-tabs-nav">
+                <button class="psource-tab active" data-tab="tabs-general"><?php esc_html_e('General', 'newsletter') ?></button>
+                <button class="psource-tab" data-tab="tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></button>
+                <button class="psource-tab" data-tab="tabs-analytics"><?php esc_html_e('Google Analytics', 'newsletter') ?></button>
+            </div>
+            <div class="psource-tabs-content">
+                <div class="psource-tab-panel active" id="tabs-general">
                     <table class="form-table">
                         <tr>
                             <th>Enabled</th>
@@ -56,8 +55,6 @@ $controls->set_data($autoresponder);
                             <td><?php $controls->text('name', 70) ?></td>
                         </tr>
                     </table>
-
-
                     <table class="form-table">
                         <tr>
                             <th>Activation rules</th>
@@ -69,7 +66,6 @@ $controls->set_data($autoresponder);
                             </td>
                         </tr>
                     </table>
-
                     <table class="form-table" id="options-divrules">
                         <tr>
                             <th>List</th>
@@ -101,7 +97,7 @@ $controls->set_data($autoresponder);
                         </tr>
                     </table>
                 </div>
-                <div id="tabs-advanced">
+                <div class="psource-tab-panel" id="tabs-advanced">
                     <table class="form-table">
                         <tr>
                             <th>Restart on re-subscription</th>
@@ -132,22 +128,17 @@ $controls->set_data($autoresponder);
                         </tr>
                     </table>
                 </div>
-
-                <div id="tabs-analytics">
-
+                <div class="psource-tab-panel" id="tabs-analytics">
                     <p>
                         Google Analytics addon required.<br>
                         On UTM parameters <code>{email_id}</code> and <code>{email_subsject}</code> can be used to make them dynamic.<br>
                     </p>
-
                     <table class="form-table">
                         <tr>
                             <th>UTM Campaign</th>
                             <td>
                                 <?php $controls->text('utm_campaign', 50); ?>
-                                <p class="description">
-
-                                </p>
+                                <p class="description"></p>
                             </td>
                         </tr>
                         <tr>
@@ -160,8 +151,6 @@ $controls->set_data($autoresponder);
                                 </p>
                             </td>
                         </tr>
-
-
                         <tr>
                             <th>UTM Medium</th>
                             <td>
@@ -171,7 +160,6 @@ $controls->set_data($autoresponder);
                                 </p>
                             </td>
                         </tr>
-
                         <tr>
                             <th>UTM Term</th>
                             <td>
@@ -181,7 +169,6 @@ $controls->set_data($autoresponder);
                                 </p>
                             </td>
                         </tr>
-
                         <tr>
                             <th>UTM Content</th>
                             <td>
@@ -194,14 +181,11 @@ $controls->set_data($autoresponder);
                     </table>
                 </div>
             </div>
-
             <div class="tnp-buttons">
                 <?php $controls->button_save(); ?>
             </div>
-
-
-
-        </form>
+        </div>
+    </form>
 
     </div>
 

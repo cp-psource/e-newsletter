@@ -27,34 +27,37 @@ $fields->block_style('', [
         ], ['after-rendering' => 'reload'])
 ?>
 
-<div class="tnp-accordion">
-    <h3>Fonts</h3>
-    <div>
+<div class="psource-accordion">
+    <div class="psource-accordion-item active">
+        <button class="psource-accordion-header"><?php esc_html_e('Fonts', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php
+            $fields->font('title_font', __('Title', 'newsletter'), [
+                'family_default' => true,
+                'size_default' => true,
+                'weight_default' => true
+            ])
+            ?>
 
-        <?php
-        $fields->font('title_font', __('Title', 'newsletter'), [
-            'family_default' => true,
-            'size_default' => true,
-            'weight_default' => true
-        ])
-        ?>
-
-        <?php
-        $fields->font('font', __('Text', 'newsletter'), [
-            'family_default' => true,
-            'size_default' => true,
-            'weight_default' => true
-        ])
-        ?>
+            <?php
+            $fields->font('font', __('Text', 'newsletter'), [
+                'family_default' => true,
+                'size_default' => true,
+                'weight_default' => true
+            ])
+            ?>
+        </div>
     </div>
-    <h3>Logo</h3>
-    <div>
-
-        <?php $fields->number('logo_width', __('Width')) ?>
-
+    <div class="psource-accordion-item">
+        <button class="psource-accordion-header"><?php esc_html_e('Logo', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->number('logo_width', __('Width')) ?>
+        </div>
     </div>
-    <h3>Commons</h3>
-    <div>
-        <?php $fields->block_commons() ?>
+    <div class="psource-accordion-item">
+        <button class="psource-accordion-header"><?php esc_html_e('Commons', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->block_commons() ?>
+        </div>
     </div>
 </div>

@@ -95,63 +95,60 @@ if ($handle) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-settings"><?php esc_html_e('Settings', 'newsletter-import') ?></a></li>
-                </ul>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-settings"><?php esc_html_e('Settings', 'newsletter-import') ?></button>
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-settings">
+                        <table class="form-table">
+                            <tr>
+                                <th><?php esc_html_e('Fields separator', 'newsletter-import') ?></th>
+                                <td>
+                                    <?php $controls->select('delimiter', [';' => 'Semicolon (;)', ',' => 'Comma (,)']); ?>
+                                    <?php $controls->button('reload', 'Reload'); ?>
 
-                <div id="tabs-settings">
-
-                    <table class="form-table">
-                        <tr>
-                            <th><?php esc_html_e('Fields separator', 'newsletter-import') ?></th>
-                            <td>
-                                <?php $controls->select('delimiter', [';' => 'Semicolon (;)', ',' => 'Comma (,)']); ?>
-                                <?php $controls->button('reload', 'Reload'); ?>
-
-                                <p class="description">
-                                    Excel (!) lets you to export in "CSV UTF-8 comma separated" but ACTUALLY it uses semicolons (;)
-                                    as field separator. Check the file with a text editor like Notepad.
-                                </p>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php esc_html_e('Sample lines from import file', 'newsletter-import') ?></th>
-                            <td>
-                                <textarea readonly style="background-color: #eee; font-family: monospace; font-size: 12px; width: 100%; height: 100px"><?php echo esc_html(implode("\n", $lines)); ?></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>As parsed</th>
-                            <td>
-                                <p>
-                                    Only the first few lines are shown.
-                                </p>
-                                <table class="parsed">
-                                    <tr>
+                                    <p class="description">
+                                        Excel (!) lets you to export in "CSV UTF-8 comma separated" but ACTUALLY it uses semicolons (;)
+                                        as field separator. Check the file with a text editor like Notepad.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php esc_html_e('Sample lines from import file', 'newsletter-import') ?></th>
+                                <td>
+                                    <textarea readonly style="background-color: #eee; font-family: monospace; font-size: 12px; width: 100%; height: 100px"><?php echo esc_html(implode("\n", $lines)); ?></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>As parsed</th>
+                                <td>
+                                    <p>
+                                        Only the first few lines are shown.
+                                    </p>
+                                    <table class="parsed">
+                                        <tr>
+                                            <?php
+                                            foreach ($headers as $header) {
+                                                echo '<th>', esc_html($header), '</th>';
+                                            }
+                                            ?>
+                                        </tr>
                                         <?php
-                                        foreach ($headers as $header) {
-                                            echo '<th>', esc_html($header), '</th>';
+                                        foreach ($data as $row) {
+                                            echo '<tr>';
+                                            foreach ($row as $cell) {
+                                                echo '<td>', esc_html($cell), '</td>';
+                                            }
+                                            echo '</tr>';
                                         }
                                         ?>
-                                    </tr>
-                                    <?php
-                                    foreach ($data as $row) {
-                                        echo '<tr>';
-                                        foreach ($row as $cell) {
-                                            echo '<td>', esc_html($cell), '</td>';
-                                        }
-                                        echo '</tr>';
-                                    }
-                                    ?>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-
             </div>
 
             <p>

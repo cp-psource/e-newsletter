@@ -29,27 +29,28 @@ $options = array_merge($default_options, $options);
     });
 </script>
 
-<div class="tnp-accordion">
-
-    <h3><?php esc_html_e('Appearance', 'newsletter'); ?></h3>
-    <div>
-        <p>
-            <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/"
-               target="_blank">You can use tags to inject subscriber fields</a>.
-        </p>
-        <table class="form-table">
-            <tr>
-                <td>
-                    <?php $controls->textarea('html', '100%', '300px') ?>
-                </td>
-            </tr>
-        </table>
+<div class="psource-accordion">
+    <div class="psource-accordion-item active">
+        <button class="psource-accordion-header"><?php esc_html_e('Appearance', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <p>
+                <a href="https://cp-psource.github.io/e-newsletter/newsletter-tags/"
+                target="_blank"><?php esc_html_e('You can use tags to inject subscriber fields', 'newsletter'); ?></a>.
+            </p>
+            <table class="form-table">
+                <tr>
+                    <td>
+                        <?php $controls->textarea('html', '100%', '300px') ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-
-    <h3><?php esc_html_e('Commons', 'newsletter'); ?></h3>
-    <div>
-        <?php $fields->block_commons() ?>
+    <div class="psource-accordion-item">
+        <button class="psource-accordion-header"><?php esc_html_e('Commons', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->block_commons() ?>
+        </div>
     </div>
-
 </div>

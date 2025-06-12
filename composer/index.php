@@ -34,9 +34,6 @@ $fields = new NewsletterFields($this);
 
 $dir = is_rtl() ? 'rtl' : 'ltr';
 $rev_dir = is_rtl() ? 'ltr' : 'rlt';
-
-//wp_enqueue_script('jquery-ui-dialog');
-//wp_enqueue_style('wp-jquery-ui-dialog');
 ?>
 <script type="text/javascript">
     if (window.innerWidth < 1550) {

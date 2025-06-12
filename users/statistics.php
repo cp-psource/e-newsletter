@@ -32,20 +32,19 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
 
         <?php $controls->init(); ?>
 
-        <div id="tabs">
-
-            <ul>
-                <li><a href="#tabs-overview"><?php esc_html_e('By Status', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-lists"><?php esc_html_e('By Lists', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-language"><?php esc_html_e('By Language', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-countries"><?php esc_html_e('By location', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-referrers"><?php esc_html_e('By Referrer', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-sources"><?php esc_html_e('By URL', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-gender"><?php esc_html_e('By Gender', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-time"><?php esc_html_e('By Time', 'newsletter'); ?></a></li>
-            </ul>
-
-            <div id="tabs-overview">
+        <div class="psource-tabs" id="tabs">
+            <div class="psource-tabs-nav">
+                <button class="psource-tab active" data-tab="tabs-overview"><?php esc_html_e('By Status', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-lists"><?php esc_html_e('By Lists', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-language"><?php esc_html_e('By Language', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-countries"><?php esc_html_e('By location', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-referrers"><?php esc_html_e('By Referrer', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-sources"><?php esc_html_e('By URL', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-gender"><?php esc_html_e('By Gender', 'newsletter'); ?></button>
+                <button class="psource-tab" data-tab="tabs-time"><?php esc_html_e('By Time', 'newsletter'); ?></button>
+            </div>
+            <div class="psource-tabs-content">
+                <div class="psource-tab-panel active" id="tabs-overview">
                 <?php
                 $list = $wpdb->get_row("select count(*) as total, SUM(if(status='C', 1, 0)) as confirmed, SUM(if(status='S', 1, 0)) as unconfirmed, SUM(if(status='B', 1, 0)) as bounced, SUM(if(status='U', 1, 0)) as unsubscribed, SUM(if(status='P', 1, 0)) as complained from " . NEWSLETTER_USERS_TABLE);
                 ?>
@@ -110,7 +109,6 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
                                 datasets: [{
                                         label: 'Status',
                                         backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
-//                                        borderWidth: 1,
                                         data: <?php echo json_encode([(int) $list->confirmed, (int) $list->unconfirmed, (int) $list->unsubscribed, (int) $list->bounced, (int) $list->complained]) ?>,
                                     }]
                             };
@@ -137,7 +135,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
             </div>
 
 
-            <div id="tabs-lists">
+            <div class="psource-tab-panel" id="tabs-lists">
 
                 <table class="widefat" style="width: auto">
                     <thead>
@@ -196,7 +194,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
 
             </div>
 
-            <div id="tabs-language">
+            <div class="psource-tab-panel" id="tabs-language">
                 <?php if ($this->is_multilanguage()) { ?>
                     <?php $languages = $this->get_languages(); ?>
 
@@ -232,7 +230,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
 
             </div>
 
-            <div id="tabs-countries">
+            <div class="psource-tab-panel" id="tabs-countries">
                 <?php
                 if (!has_action('newsletter_users_statistics_countries')) {
                     include __DIR__ . '/statistics-countries.php';
@@ -243,7 +241,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
             </div>
 
 
-            <div id="tabs-referrers">
+            <div class="psource-tab-panel" id="tabs-referrers">
                 <table class="widefat" style="width: auto">
                     <thead>
                         <tr>
@@ -274,7 +272,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
             </div>
 
 
-            <div id="tabs-sources">
+            <div class="psource-tab-panel" id="tabs-sources">
 
                 <?php
                 $list = $wpdb->get_results("select http_referer, count(*) as total, SUM(if(status='C', 1, 0)) as confirmed, SUM(if(status='S', 1, 0)) as unconfirmed, SUM(if(status='B', 1, 0)) as bounced, SUM(if(status='U', 1, 0)) as unsubscribed, SUM(if(status='P', 1, 0)) as complained from " . NEWSLETTER_USERS_TABLE . " group by http_referer order by count(*) desc limit 100");
@@ -309,9 +307,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
             </div>
 
 
-            <div id="tabs-gender">
-
-
+            <div class="psource-tab-panel" id="tabs-gender">
                 <?php
                 $male_count = $wpdb->get_row("select SUM(if(status='C', 1, 0)) as confirmed, SUM(if(status='S', 1, 0)) as unconfirmed, SUM(if(status='B', 1, 0)) as bounced, SUM(if(status='U', 1, 0)) as unsubscribed, SUM(if(status='P', 1, 0)) as complained from " . NEWSLETTER_USERS_TABLE . " where sex='m'");
                 $female_count = $wpdb->get_row("select SUM(if(status='C', 1, 0)) as confirmed, SUM(if(status='S', 1, 0)) as unconfirmed, SUM(if(status='B', 1, 0)) as bounced, SUM(if(status='U', 1, 0)) as unsubscribed, SUM(if(status='P', 1, 0)) as complained from " . NEWSLETTER_USERS_TABLE . " where sex='f'");
@@ -361,7 +357,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
             </div>
 
 
-            <div id="tabs-time">
+            <div class="psource-tab-panel" id="tabs-time">
 
                 <?php
                 if (!has_action('newsletter_users_statistics_time')) {

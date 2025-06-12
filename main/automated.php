@@ -39,7 +39,7 @@ class NewsletterAutomated {
         );
         // Edit-Seite (versteckt)
         add_submenu_page(
-            null,
+            '',
             __('Edit Automated Channel', 'newsletter'),
             '',
             'manage_options',
@@ -48,7 +48,7 @@ class NewsletterAutomated {
         );
         // Template-Seite (versteckt)
         add_submenu_page(
-            null,
+            '',
             __('Automated Template', 'newsletter'),
             '',
             'manage_options',
@@ -57,7 +57,7 @@ class NewsletterAutomated {
         );
         // Newsletters-Seite (versteckt)
         add_submenu_page(
-            null,
+            '',
             __('Automated Newsletters', 'newsletter'),
             '',
             'manage_options',
@@ -66,7 +66,7 @@ class NewsletterAutomated {
         );
         // Index-Seite (versteckt, aber für Direktaufruf)
         add_submenu_page(
-            null,
+            '',
             __('Automated Index', 'newsletter'),
             '',
             'manage_options',

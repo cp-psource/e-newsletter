@@ -49,22 +49,24 @@ if (!$controls->is_action()) {
                     <th><?php _e('Denied content message', 'newsletter') ?></th>
                     <td>
                         <?php if ($this->is_multilanguage()) { ?>
-                            <div class="tnp-tabs">
-                                <ul>
-                                    <li><a href="#tabs-xx">Default</a></li>
-                                    <?php foreach ($this->get_languages() as $key => $value) { ?>
-                                        <li><a href="#tabs-<?php echo esc_attr($key) ?>"><?php echo esc_html($value) ?></a></li>
-                                    <?php } ?>
-                                </ul>
-                                <div id="tabs-xx">
+                        <div class="psource-tabs" id="lock-tabs">
+                            <div class="psource-tabs-nav">
+                                <button class="psource-tab active" data-tab="tabs-xx"><?php _e('Default'); ?></button>
+                                <?php foreach ($this->get_languages() as $key => $value) { ?>
+                                    <button class="psource-tab" data-tab="tabs-<?php echo esc_attr($key) ?>"><?php echo esc_html($value) ?></button>
+                                <?php } ?>
+                            </div>
+                            <div class="psource-tabs-content">
+                                <div class="psource-tab-panel active" id="tabs-xx">
                                     <?php $controls->wp_editor('message'); ?>
                                 </div>
                                 <?php foreach ($this->get_languages() as $key => $value) { ?>
-                                    <div id="tabs-<?php echo esc_attr($key) ?>">
+                                    <div class="psource-tab-panel" id="tabs-<?php echo esc_attr($key) ?>">
                                         <?php $controls->wp_editor('message_' . $key); ?>
                                     </div>
                                 <?php } ?>
                             </div>
+                        </div>
                         <?php } else { ?>
                             <?php $controls->wp_editor('message'); ?>
                         <?php } ?>

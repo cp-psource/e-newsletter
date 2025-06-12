@@ -419,17 +419,15 @@ if ($email['status'] != 'sent') {
             </div>
 
 
-            <div id="tabs">
-
-                <ul>
-                    <li><a href="#tabs-options"><?php esc_html_e('Targeting', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-ga">Google Analytics</a></li>
-                    <li><a href="#tabs-geo">Geolocation</a></li>
-                    <li class="tnp-tabs-advanced"><a href="#tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></a></li>
-                </ul>
-
-
-                <div id="tabs-options" class="tnp-list-conditions">
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-options"><?php esc_html_e('Targeting', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-ga">Google Analytics</button>
+                    <button class="psource-tab" data-tab="tabs-geo">Geolocation</button>
+                    <button class="psource-tab" data-tab="tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></button>
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active tnp-list-conditions" id="tabs-options">
 
                     <p>
                         <?php esc_html_e('Leaving all multichoice options unselected is like to select all them', 'newsletter'); ?>
@@ -512,7 +510,7 @@ if ($email['status'] != 'sent') {
 
                 </div>
 
-                <div id="tabs-ga">
+                <div class="psource-tab-panel" id="tabs-ga">
                     <?php if (!class_exists('NewsletterAnalytics')) { ?>
                         <p class="tnp-tab-notice">
                             Options effective with the Newsletter - Google Analytics Addon.
@@ -581,7 +579,7 @@ if ($email['status'] != 'sent') {
                 </div>
 
 
-                <div id="tabs-geo">
+                <div class="psource-tab-panel" id="tabs-geo">
                     <?php if (!class_exists('NewsletterGeo')) { ?>
                         <p class="tnp-tab-notice">
                             Options effective with the Newsletter - Geo Addon.
@@ -652,10 +650,7 @@ if ($email['status'] != 'sent') {
 
                 </div>
 
-
-
-
-                <div id="tabs-advanced">
+                <div class="psource-tab-panel" id="tabs-advanced">
 
                     <table class="form-table">
                         <tr>

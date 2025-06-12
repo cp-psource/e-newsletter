@@ -136,23 +136,20 @@ function tnp_describe_table($table) {
                 <?php } ?>
             </p>
 
-            <div class="tnp-tabs">
-
-                <ul>
-
-                    <li><a href="#tabs-general"><?php esc_html_e('General', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-filters"><?php esc_html_e('Filters', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-plugins"><?php esc_html_e('Plugins', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-wordpress">ClassicPress</a></li>
-                    <li><a href="#tabs-database"><?php esc_html_e('Database', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-php">PHP</a></li>
-                    <li><a href="#tabs-parameters"><?php esc_html_e('Parameters', 'newsletter') ?></a></li>
-                </ul>
-
-
-                <div id="tabs-general">
-                    <h3>General checks</h3>
-                    <table class="widefat" id="tnp-status-table">
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-general"><?php esc_html_e('General', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-filters"><?php esc_html_e('Filters', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-plugins"><?php esc_html_e('Plugins', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-wordpress">ClassicPress</button>
+                    <button class="psource-tab" data-tab="tabs-database"><?php esc_html_e('Database', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-php">PHP</button>
+                    <button class="psource-tab" data-tab="tabs-parameters"><?php esc_html_e('Parameters', 'newsletter') ?></button>
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-general">
+                        <h3>General checks</h3>
+                        <table class="widefat" id="tnp-status-table">
 
                         <thead>
                             <tr>
@@ -305,10 +302,6 @@ function tnp_describe_table($table) {
 
                             </tr>
 
-
-
-
-
                             <tr>
                                 <?php
                                 $condition = NEWSLETTER_EXTENSION_UPDATE ? 1 : 0;
@@ -431,7 +424,7 @@ function tnp_describe_table($table) {
                 </div>
 
 
-                <div id="tabs-filters">
+                <div class="psource-tab-panel" id="tabs-filters">
                     <p>
                         Filters can be used by 3rd party plugins to change the standard behavior of Newsletters.
                         <a href="https://www.thenewsletterplugin.com/documentation/developers/dev-newsletter-hooks/" target="_blank">Read more</a>.
@@ -557,7 +550,7 @@ function tnp_describe_table($table) {
                 </div>
 
 
-                <div id="tabs-plugins">
+                <div class="psource-tab-panel" id="tabs-plugins">
                     <table class="widefat" id="tnp-status-table">
                         <thead>
                             <tr>
@@ -645,7 +638,7 @@ function tnp_describe_table($table) {
                     </table>
                 </div>
 
-                <div id="tabs-wordpress">
+                <div class="psource-tab-panel" id="tabs-wordpress">
 
                     <table class="widefat" id="tnp-status-table">
                         <thead>
@@ -778,8 +771,6 @@ function tnp_describe_table($table) {
                                 </td>
                             </tr>
 
-
-
                             <tr>
                                 <?php
                                 $uploads = wp_upload_dir();
@@ -826,7 +817,7 @@ function tnp_describe_table($table) {
 
                 </div>
 
-                <div id="tabs-php">
+                <div class="psource-tab-panel" id="tabs-database">
                     <table class="widefat" id="tnp-status-table">
                         <thead>
                             <tr>
@@ -938,8 +929,7 @@ function tnp_describe_table($table) {
                     </table>
                 </div>
 
-
-                <div id="tabs-database">
+                <div class="psource-tab-panel" id="tabs-php">
                     <table class="widefat" id="tnp-status-table">
                         <thead>
                             <tr>
@@ -1279,9 +1269,7 @@ function tnp_describe_table($table) {
                     </table>
                 </div>
 
-
-
-                <div id="tabs-parameters">
+                <div class="psource-tab-panel" id="tabs-parameters">
 
                     <table class="widefat" id="tnp-parameters-table">
                         <thead>

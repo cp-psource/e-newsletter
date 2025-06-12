@@ -1,6 +1,6 @@
 <script>
     jQuery(function ($) {
-        jQuery("#tnp-edit-subjects-list a").click(function (e) {
+        jQuery("#tnp-edit-subjects-list a").on('click', function (e) {
             e.preventDefault();
             jQuery("#options-subject").val(this.innerText);
             //console.log(jQuery("#options-subject"));

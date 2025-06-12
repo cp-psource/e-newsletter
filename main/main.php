@@ -150,18 +150,17 @@ if (is_wp_error($license_data)) {
         <form method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-
-                <ul>
-                    <li><a href="#tabs-basic"><?php esc_html_e('Settings', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-speed"><?php esc_html_e('Sending', 'newsletter') ?></a></li>
-                    <li class="tnp-tabs-advanced"><a href="#tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></a></li>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-basic"><?php esc_html_e('Settings', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-speed"><?php esc_html_e('Sending', 'newsletter') ?></button>
+                    <button class="psource-tab" data-tab="tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></button>
                     <?php if (NEWSLETTER_DEBUG) { ?>
-                        <li><a href="#tabs-debug">Debug</a></li>
+                        <button class="psource-tab" data-tab="tabs-debug">Debug</button>
                     <?php } ?>
-                </ul>
-
-                <div id="tabs-basic">
+                </div>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-basic">
                     <?php $controls->language_notice(); ?>
                     <table class="form-table">
                         <?php if (!$language) { ?>
@@ -239,7 +238,7 @@ if (is_wp_error($license_data)) {
                     </table>
                 </div>
 
-                <div id="tabs-speed">
+                <div class="psource-tab-panel" id="tabs-speed">
                     <?php $controls->language_notice(); ?>
                     <?php if (!$language) { ?>
                         <table class="form-table">
@@ -300,7 +299,7 @@ if (is_wp_error($license_data)) {
                 </div>
 
 
-                <div id="tabs-advanced">
+                <div class="psource-tab-panel" id="tabs-advanced">
                     <?php $controls->language_notice(); ?>
                     <?php if (!$language) { ?>
                         <table class="form-table">
@@ -412,7 +411,7 @@ if (is_wp_error($license_data)) {
                 </div>
 
                 <?php if (NEWSLETTER_DEBUG) { ?>
-                    <div id="tabs-debug">
+                    <div class="psource-tab-panel" id="tabs-debug">
                         <pre><?php echo esc_html(wp_json_encode($this->get_db_options('', $language), JSON_PRETTY_PRINT)) ?></pre>
                     </div>
                 <?php } ?>

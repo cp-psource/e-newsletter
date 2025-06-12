@@ -5,26 +5,28 @@
  */
 ?>
 
-<div class="tnp-accordion">
-    <h3>GIF</h3>
-    <div>
-        <?php $fields->text('q', __('Search')) ?>
+<div class="psource-accordion">
+    <div class="psource-accordion-item active">
+        <button class="psource-accordion-header">GIF</button>
+        <div class="psource-accordion-content">
+            <?php $fields->text('q', __('Search')) ?>
 
-        <div style="clear: both; max-height: 300px; overflow: scroll; margin-bottom: 15px" id="tnp-giphy-results"></div>
+            <div style="clear: both; max-height: 300px; overflow: scroll; margin-bottom: 15px" id="tnp-giphy-results"></div>
 
-        <?php $controls->hidden('giphy_url') ?>
-        <div id="giphy-preview">
-            <?php if (!empty($controls->data['giphy_url'])) { ?>
-                <img src="<?php echo esc_attr($controls->data['giphy_url']) ?>" style="max-width: 300px">
-            <?php } ?>
+            <?php $controls->hidden('giphy_url') ?>
+            <div id="giphy-preview">
+                <?php if (!empty($controls->data['giphy_url'])) { ?>
+                    <img src="<?php echo esc_attr($controls->data['giphy_url']) ?>" style="max-width: 300px">
+                <?php } ?>
+            </div>
         </div>
-
-
     </div>
 
-    <h3><?php esc_html_e('Commons', 'newsletter'); ?></h3>
-    <div>
-        <?php $fields->block_commons() ?>
+    <div class="psource-accordion-item">
+        <button class="psource-accordion-header"><?php esc_html_e('Commons', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->block_commons() ?>
+        </div>
     </div>
 </div>
 

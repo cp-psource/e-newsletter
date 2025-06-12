@@ -32,37 +32,34 @@ if ($controls->is_action()) {
         <form id="channel" method="post" action="">
             <?php $controls->init(); ?>
 
-            <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-general"><?php esc_html_e('General', 'newsletter') ?></a></li>
+            <div class="psource-tabs" id="tabs">
+                <div class="psource-tabs-nav">
+                    <button class="psource-tab active" data-tab="tabs-general"><?php esc_html_e('General', 'newsletter') ?></button>
                     <?php if (NEWSLETTER_DEBUG) { ?>
-                        <li><a href="#tabs-debug">Debug</a></li>
+                        <button class="psource-tab" data-tab="tabs-debug">Debug</button>
                     <?php } ?>
-                </ul>
-
-                <div id="tabs-general">
-                    <table class="form-table">
-
-                        <tr>
-                            <th>Key</th>
-                            <td>
-                                <?php $controls->value('key'); ?>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
-
-                <?php if (NEWSLETTER_DEBUG) { ?>
-                    <div id="tabs-debug">
-                        <pre><?php echo esc_html(wp_json_encode($this->get_db_options(''), JSON_PRETTY_PRINT)) ?></pre>
+                <div class="psource-tabs-content">
+                    <div class="psource-tab-panel active" id="tabs-general">
+                        <table class="form-table">
+                            <tr>
+                                <th>Key</th>
+                                <td>
+                                    <?php $controls->value('key'); ?>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                <?php } ?>
+                    <?php if (NEWSLETTER_DEBUG) { ?>
+                        <div class="psource-tab-panel" id="tabs-debug">
+                            <pre><?php echo esc_html(wp_json_encode($this->get_db_options(''), JSON_PRETTY_PRINT)) ?></pre>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
-
             <p>
                 <?php //$controls->button_save()  ?>
             </p>
-
         </form>
 
     </div>

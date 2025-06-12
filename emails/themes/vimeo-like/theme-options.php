@@ -19,53 +19,53 @@
 
 defined('ABSPATH') || exit;
 ?>
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-a"><?php _e('General', 'newsletter') ?></a></li>
-        <li><a href="#tabs-b"><?php _e('Social', 'newsletter') ?></a></li>
-    </ul>
-
-
-    <div id="tabs-a">
-        <table class="form-table">
-            <tr>
-                <th>Max new posts to include</th>
-                <td>
-                    <?php $controls->select_number('theme_max_posts', 1, 50); ?>
-                </td>
-            </tr>
-            <tr>
-                <th>Categories to include</th>
-                <td><?php $controls->categories_group('theme_categories'); ?></td>
-            </tr>
-            <tr>
-                <th>Post types</th>
-                <td>
-                    <?php $controls->post_types('theme_post_types'); ?>
-                    <p class="description">Leave all uncheck for a default behavior.</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Pre header message</th>
-                <td>
-                    <?php $controls->textarea_fixed('theme_pre_message', '100%', 120); ?>
-                </td>
-            </tr>
-            <tr>
-                <th>Footer message</th>
-                <td>
-                    <?php $controls->textarea_fixed('theme_footer_message', '100%', 120); ?>
-                </td>
-            </tr>
-            <tr>
-                <th>Read more label</th>
-                <td>
-                    <?php $controls->text('theme_read_more'); ?>
-                </td>
-            </tr>
-        </table>
+<div class="psource-tabs" id="tabs">
+    <div class="psource-tabs-nav">
+        <button class="psource-tab active" data-tab="tabs-a"><?php _e('General', 'newsletter') ?></button>
+        <button class="psource-tab" data-tab="tabs-b"><?php _e('Social', 'newsletter') ?></button>
     </div>
-    <div id="tabs-b">
-        <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social-options.php'; ?>
+    <div class="psource-tabs-content">
+        <div class="psource-tab-panel active" id="tabs-a">
+            <table class="form-table">
+                <tr>
+                    <th>Max new posts to include</th>
+                    <td>
+                        <?php $controls->select_number('theme_max_posts', 1, 50); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Categories to include</th>
+                    <td><?php $controls->categories_group('theme_categories'); ?></td>
+                </tr>
+                <tr>
+                    <th>Post types</th>
+                    <td>
+                        <?php $controls->post_types('theme_post_types'); ?>
+                        <p class="description">Leave all uncheck for a default behavior.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Pre header message</th>
+                    <td>
+                        <?php $controls->textarea_fixed('theme_pre_message', '100%', 120); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Footer message</th>
+                    <td>
+                        <?php $controls->textarea_fixed('theme_footer_message', '100%', 120); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Read more label</th>
+                    <td>
+                        <?php $controls->text('theme_read_more'); ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="psource-tab-panel" id="tabs-b">
+            <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social-options.php'; ?>
+        </div>
     </div>
 </div>

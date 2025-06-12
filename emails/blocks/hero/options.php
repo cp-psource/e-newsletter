@@ -21,33 +21,35 @@ $fields->controls->data['schema'] = '';
     </div>
 </div>
 
-<div class="tnp-accordion">
-    <h3><?php esc_html_e('Appearance', 'newsletter'); ?></h3>
-    <div>
+<div class="psource-accordion">
+    <div class="psource-accordion-item active">
+        <button class="psource-accordion-header"><?php esc_html_e('Appearance', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->text('title', __('Title', 'newsletter')) ?>
 
-        <?php $fields->text('title', __('Title', 'newsletter')) ?>
+            <?php $fields->font('title_font', '', ['family_default' => true, 'size_default' => true, 'weight_default' => true, 'align' => true]) ?>
 
-        <?php $fields->font('title_font', '', ['family_default' => true, 'size_default' => true, 'weight_default' => true, 'align' => true]) ?>
+            <?php $fields->media('image', __('Image', 'newsletter'), array('alt' => true)) ?>
 
-        <?php $fields->media('image', __('Image', 'newsletter'), array('alt' => true)) ?>
+            <?php $fields->textarea('text', __('Text', 'newsletter')) ?>
+            <?php $fields->font('font', '', ['family_default' => true, 'size_default' => true, 'weight_default' => true, 'align' => true]) ?>
 
-        <?php $fields->textarea('text', __('Text', 'newsletter')) ?>
-        <?php $fields->font('font', '', ['family_default' => true, 'size_default' => true, 'weight_default' => true, 'align' => true]) ?>
-
-        <?php
-        $fields->button('button', __('Button', 'newsletter'), [
-            'family_default' => true,
-            'size_default' => true,
-            'weight_default' => true,
-            'align' => true
-        ])
-        ?>
-
+            <?php
+            $fields->button('button', __('Button', 'newsletter'), [
+                'family_default' => true,
+                'size_default' => true,
+                'weight_default' => true,
+                'align' => true
+            ])
+            ?>
+        </div>
     </div>
 
-    <h3><?php esc_html_e('Commons', 'newsletter'); ?></h3>
-    <div>
-        <?php $fields->block_commons() ?>
+    <div class="psource-accordion-item">
+        <button class="psource-accordion-header"><?php esc_html_e('Commons', 'newsletter'); ?></button>
+        <div class="psource-accordion-content">
+            <?php $fields->block_commons() ?>
+        </div>
     </div>
 </div>
 
