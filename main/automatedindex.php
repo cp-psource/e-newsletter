@@ -22,6 +22,20 @@ foreach ($channels as $channel) {
     $feeds[] = $feed;
 }
 
+// Channel löschen, wenn delete-Parameter gesetzt ist
+if (isset($_GET['delete'])) {
+    $delete_id = (string)$_GET['delete'];
+    $channels = get_option('tnp_automated_channels', []);
+    if (isset($channels[$delete_id])) {
+        unset($channels[$delete_id]);
+        update_option('tnp_automated_channels', $channels);
+    }
+    // Nach dem Löschen auf die gleiche Seite weiterleiten (ohne delete-Parameter)
+    echo '<script>window.location.href="' . esc_url(admin_url('admin.php?page=newsletter_main_automatedindex')) . '";</script>';
+    echo '<noscript><meta http-equiv="refresh" content="0;url=' . esc_url(admin_url('admin.php?page=newsletter_main_automatedindex')) . '"></noscript>';
+    exit;
+}
+
 NewsletterMainAdmin::instance()->set_completed_step('automated');
 ?>
 
@@ -91,8 +105,8 @@ NewsletterMainAdmin::instance()->set_completed_step('automated');
                             </td>
 
                             <td style="white-space: nowrap">
-                                <?php $controls->button_icon_copy(); ?>
-                                <?php $controls->button_icon_delete(); ?>
+                                <?php $controls->button_icon_copy($feed->id); ?>
+                                <?php $controls->button_icon_delete('?page=newsletter_main_automatedindex&delete=' . $feed->id); ?>
                             </td>
 
                         </tr>

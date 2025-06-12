@@ -53,7 +53,9 @@ $autoresponders = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}tnp_autorespo
     <div id="tnp-body">
         <?php $controls->show(); ?>
 
-        <p>This is only a demonstrative panel.</p>
+        <p>
+            <?php esc_html_e('Mit Autoresponder-Serien kannst du automatisierte E-Mail-Strecken an neue Abonnenten oder bestimmte Zielgruppen senden. Jede Serie besteht aus mehreren E-Mails, die zeitlich gesteuert und individuell gestaltet werden können.', 'newsletter'); ?>
+        </p>
 
         <form method="post" action="">
             <?php $controls->init(); ?>

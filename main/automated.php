@@ -34,8 +34,8 @@ class NewsletterAutomated {
             __('Automated', 'newsletter'),
             '<span class="tnp-side-menu">Automated</span>',
             'manage_options',
-            'newsletter_main_automated',
-            array($this, 'panel')
+            'newsletter_main_automatedindex',
+            array($this, 'panel_index')
         );
         // Edit-Seite (versteckt)
         add_submenu_page(

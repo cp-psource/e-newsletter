@@ -10,6 +10,7 @@ class NewsletterAutoresponder {
 
     function init() {
         add_action('admin_menu', array($this, 'add_menu'));
+        $this->schedule_cron();
     }
 
     function panel_index() {
@@ -38,6 +39,83 @@ class NewsletterAutoresponder {
 
     function panel_composer() {
         include NEWSLETTER_DIR . '/main/autorespondercomposer.php';
+    }
+
+    public function process_queue() {
+        global $wpdb;
+        $newsletter = Newsletter::instance();
+        $now = time();
+
+        $progress_rows = $wpdb->get_results(
+            "SELECT * FROM {$wpdb->prefix}tnp_autoresponder_progress WHERE status = 'active'"
+        );
+
+        foreach ($progress_rows as $progress) {
+            $email = $wpdb->get_row($wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}tnp_autoresponder_emails WHERE autoresponder_id = %d AND step = %d",
+                $progress->autoresponder_id, $progress->current_step
+            ));
+
+            if (!$email) {
+                $wpdb->update(
+                    "{$wpdb->prefix}tnp_autoresponder_progress",
+                    ['status' => 'completed', 'updated_at' => current_time('mysql')],
+                    ['id' => $progress->id]
+                );
+                continue;
+            }
+
+            $last_sent = strtotime($progress->last_sent);
+            $started_at = strtotime($progress->started_at);
+            $base_time = $last_sent ? $last_sent : $started_at;
+            $due_time = $base_time + (int)$email->delay * 3600;
+
+            if ($now < $due_time) continue;
+
+            $user = get_userdata($progress->user_id);
+            if (!$user) continue;
+
+            // Platzhalter ersetzen
+            $body = $email->body;
+            $body = str_replace('[name]', $user->display_name, $body);
+            $body = str_replace('[email]', $user->user_email, $body);
+            // ...weitere Platzhalter...
+
+            $message = [
+                'subject' => $email->subject,
+                'body'    => $email->body,
+                'to'      => $user->user_email,
+            ];
+
+            $result = $newsletter->deliver($message);
+
+            if (is_wp_error($result)) {
+                error_log('Autoresponder-Fehler für User ' . $progress->user_id . ': ' . $result->get_error_message());
+                $wpdb->update(
+                    "{$wpdb->prefix}tnp_autoresponder_progress",
+                    ['status' => 'error', 'updated_at' => current_time('mysql')],
+                    ['id' => $progress->id]
+                );
+                continue;
+            }
+
+            $wpdb->update(
+                "{$wpdb->prefix}tnp_autoresponder_progress",
+                [
+                    'current_step' => $progress->current_step + 1,
+                    'last_sent'    => current_time('mysql'),
+                    'updated_at'   => current_time('mysql')
+                ],
+                ['id' => $progress->id]
+            );
+        }
+    }
+
+    public function schedule_cron() {
+        if (!wp_next_scheduled('tnp_autoresponder_cron')) {
+            wp_schedule_event(time(), 'hourly', 'tnp_autoresponder_cron');
+        }
+        add_action('tnp_autoresponder_cron', [$this, 'process_queue']);
     }
 
     function add_menu() {
@@ -85,6 +163,33 @@ class NewsletterAutoresponder {
         );
     }
 }
+
+add_action('newsletter_user_confirmed', function($user) {
+    global $wpdb;
+    // Hole alle Autoresponder, die automatisch starten sollen
+    $autoresponders = $wpdb->get_results(
+        "SELECT id FROM {$wpdb->prefix}tnp_autoresponders WHERE auto_start = 1"
+    );
+    foreach ($autoresponders as $ar) {
+        $exists = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$wpdb->prefix}tnp_autoresponder_progress WHERE user_id = %d AND autoresponder_id = %d",
+            $user->ID, $ar->id
+        ));
+        if (!$exists) {
+            $wpdb->insert(
+                "{$wpdb->prefix}tnp_autoresponder_progress",
+                [
+                    'user_id' => $user->ID,
+                    'autoresponder_id' => $ar->id,
+                    'current_step' => 1,
+                    'status' => 'active',
+                    'started_at' => current_time('mysql'),
+                    'updated_at' => current_time('mysql')
+                ]
+            );
+        }
+    }
+});
 
 // Initialisierung (z.B. in deiner Plugin-Hauptdatei)
 if (class_exists('NewsletterAutoresponder')) {

@@ -10,39 +10,49 @@ require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 
 // Kanal-ID aus der URL holen
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$id = isset($_POST['id']) ? (string)$_POST['id'] : (isset($_GET['id']) ? (string)$_GET['id'] : '');
 
 // Kanäle laden
 $channels = get_option('tnp_automated_channels', []);
 
-// === HIER: Formularverarbeitung ===
+// Formularverarbeitung
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Werte aus dem Formular holen
-    $data = $controls->get_post_data();
+    $options = $_POST['options'] ?? [];
+    $data = [];
+    $data['id'] = !empty($id) ? $id : (string)time();
+    $data['name'] = $options['name'] ?? '';
+    $data['track'] = isset($options['track']) ? intval($options['track']) : 0;
+    $data['frequency'] = $options['frequency'] ?? 'weekly';
+    $data['day_1'] = isset($options['day_1']) ? intval($options['day_1']) : 0;
+    $data['day_2'] = isset($options['day_2']) ? intval($options['day_2']) : 0;
+    $data['day_3'] = isset($options['day_3']) ? intval($options['day_3']) : 0;
+    $data['day_4'] = isset($options['day_4']) ? intval($options['day_4']) : 0;
+    $data['day_5'] = isset($options['day_5']) ? intval($options['day_5']) : 0;
+    $data['day_6'] = isset($options['day_6']) ? intval($options['day_6']) : 0;
+    $data['day_7'] = isset($options['day_7']) ? intval($options['day_7']) : 0;
+    $data['hour'] = isset($options['hour']) ? intval($options['hour']) : 0;
+    $data['hour2_enabled'] = isset($options['hour2_enabled']) ? intval($options['hour2_enabled']) : 0;
+    $data['hour2'] = isset($options['hour2']) ? intval($options['hour2']) : 0;
+    $data['enabled'] = isset($options['enabled']) ? intval($options['enabled']) : 0;
+    $data['subject'] = $options['subject'] ?? '';
+    $data['list'] = $options['list'] ?? '';
+    $data['sender_name'] = $options['sender_name'] ?? '';
+    $data['sender_email'] = $options['sender_email'] ?? '';
 
-    // Neue ID vergeben, falls neu
-    if (!$id) {
-        $id = time(); // oder ein anderer eindeutiger Wert
-        $data['id'] = $id;
-    }
-
-    // Speichern/Überschreiben
-    $channels[$id] = $data;
+    $channels[$data['id']] = $data;
     update_option('tnp_automated_channels', $channels);
 
-    // Optional: Weiterleitung nach dem Speichern
-    wp_redirect(admin_url('admin.php?page=newsletter_main_automatedindex'));
+    echo '<script>window.location.href="' . admin_url('admin.php?page=newsletter_main_automatedindex') . '";</script>';
+    echo '<noscript><meta http-equiv="refresh" content="0;url=' . admin_url('admin.php?page=newsletter_main_automatedindex') . '"></noscript>';
     exit;
 }
-// === ENDE Formularverarbeitung ===
 
 // Kanal suchen oder neuen anlegen
 if ($id && isset($channels[$id])) {
     $channel = $channels[$id];
 } else {
-    // Neuer Kanal (leere Werte)
     $channel = [
-        'id' => 0,
+        'id' => '',
         'name' => '',
         'track' => 1,
         'frequency' => 'weekly',
@@ -50,8 +60,6 @@ if ($id && isset($channels[$id])) {
         // ... weitere Felder ...
     ];
 }
-
-// Daten an Controls übergeben
 $controls->data = $channel;
 
 ?>
@@ -72,6 +80,7 @@ $controls->data = $channel;
 
         <form method="post" action="">
             <?php $controls->init(); ?>
+            <input type="hidden" name="id" value="<?php echo esc_attr($channel['id']); ?>">
 
             <div class="psource-tabs" id="tabs">
                 <div class="psource-tabs-nav">
@@ -223,6 +232,9 @@ $controls->data = $channel;
                     </div>
                 </div>
             </div>
+            <p>
+                <?php $controls->button('save', __('Speichern', 'newsletter')); ?>
+            </p>
         </form>
     </div>
 </div>

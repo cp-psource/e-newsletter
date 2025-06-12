@@ -1194,8 +1194,18 @@ class NewsletterControls {
         $this->btn('delete', __('Delete', 'newsletter'), ['data' => $data, 'icon' => 'fa-times', 'confirm' => true, 'delete' => true]);
     }
 
-    function button_icon_delete($id) {
-        $url = admin_url('admin.php?page=newsletter_main_autoresponderindex&action=delete&id=' . intval($id));
+    function button_icon_delete($id_or_url) {
+        if (is_numeric($id_or_url)) {
+            // Standard: Autoresponder
+            $url = admin_url('admin.php?page=newsletter_main_autoresponderindex&action=delete&id=' . intval($id_or_url));
+        } else {
+            // Wenn schon eine URL übergeben wurde (z.B. für Channels)
+            $url = $id_or_url;
+            // Falls es keine absolute URL ist, ergänze admin_url()
+            if (strpos($url, 'http') !== 0) {
+                $url = admin_url('admin.php' . $url);
+            }
+        }
         echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: darkred; color: #fff;" title="' . esc_attr__('Delete', 'newsletter') . '" onclick="return confirm(\'Wirklich löschen?\');"><i class="fas fa-times"></i></a>';
     }
 

@@ -1199,6 +1199,7 @@ function tnp_autoresponder_install() {
         utm_medium VARCHAR(255) DEFAULT '',
         utm_term VARCHAR(255) DEFAULT '',
         utm_content VARCHAR(255) DEFAULT '',
+        auto_start TINYINT(1) DEFAULT 0,     
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY  (id)
     ) $charset_collate;";
@@ -1208,7 +1209,9 @@ function tnp_autoresponder_install() {
         autoresponder_id BIGINT(20) NOT NULL,
         subject VARCHAR(255) NOT NULL,
         content LONGTEXT,
-        step INT(11) DEFAULT 1,           -- <--- HIER
+        message LONGTEXT,
+        options LONGTEXT,
+        step INT(11) DEFAULT 1,
         delay_hours INT(11) DEFAULT 0,
         sort_order INT(11) DEFAULT 0,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1228,8 +1231,24 @@ function tnp_autoresponder_install() {
     ) $charset_collate;";
 
     dbDelta($sql1);
+    $table = $wpdb->prefix . 'tnp_autoresponders';
+    $columns = $wpdb->get_col("DESC $table", 0);
+    if (!in_array('auto_start', $columns)) {
+        $wpdb->query("ALTER TABLE $table ADD COLUMN auto_start TINYINT(1) DEFAULT 0");
+    }
+
     dbDelta($sql2);
+    $table = $wpdb->prefix . 'tnp_autoresponder_emails';
+    $columns = $wpdb->get_col("DESC $table", 0);
+    if (!in_array('message', $columns)) {
+        $wpdb->query("ALTER TABLE $table ADD COLUMN message LONGTEXT");
+    }
+    if (!in_array('options', $columns)) {
+        $wpdb->query("ALTER TABLE $table ADD COLUMN options LONGTEXT");
+    }
+
     dbDelta($sql3);
+    
 }
 
 if (is_admin()) {
