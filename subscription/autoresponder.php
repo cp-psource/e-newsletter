@@ -21,18 +21,14 @@ defined('ABSPATH') || exit;
 
         <?php $controls->show(); ?>
 
-        <?php if (!class_exists('NewsletterAutoresponder')) { ?>
-
-            <p>
-                <?php
-                printf(
-                    esc_html__('Configure your welcome/follow series on the %s.', 'newsletter'),
-                    '<a href="?page=newsletter_main_autoresponderindex">' . esc_html__('Autoresponder settings page', 'newsletter') . '</a>'
-                );
-                ?>
-            </p>
-
-        <?php } ?>
+        <p>
+            <?php
+            printf(
+                esc_html__('Configure your welcome/follow series on the %s.', 'newsletter'),
+                '<a href="?page=newsletter_main_autoresponderindex">' . esc_html__('Autoresponder settings page', 'newsletter') . '</a>'
+            );
+            ?>
+        </p>
 
     </div>
 </div>

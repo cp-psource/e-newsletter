@@ -22,8 +22,6 @@ defined('ABSPATH') || exit;
 
         <?php $controls->show(); ?>
 
-        <?php if (!class_exists('NewsletterAutoresponder')) { ?>
-
             <p>
                 <?php
                 printf(
@@ -32,8 +30,6 @@ defined('ABSPATH') || exit;
                 );
                 ?>
             </p>
-
-        <?php } ?>
 
     </div>
 </div>

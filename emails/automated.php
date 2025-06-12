@@ -22,21 +22,14 @@ defined('ABSPATH') || exit;
 
         <?php $controls->show(); ?>
 
-        <?php if (!class_exists('NewsletterAutomated')) { ?>
-
             <p>
-                To create recurring newsletters (daily, weekly, monthly, and so on) the
-                <a href="?page=newsletter_main_automated">Automated Addon</a> is required.
+                <?php
+                printf(
+                    esc_html__('Configure your recurring newsletters on the %s.', 'newsletter'),
+                    '<a href="?page=newsletter_main_automatedindex">' . esc_html__('Automated settings page', 'newsletter') . '</a>'
+                );
+                ?>
             </p>
-
-
-        <?php } else { ?>
-
-            <p>
-                Configure your recurring newsletters on the <a href="?page=newsletter_automated_index">Automated settings page</a>.
-            </p>
-
-        <?php } ?>
 
     </div>
 </div>
