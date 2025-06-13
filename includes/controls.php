@@ -2483,9 +2483,6 @@ class NewsletterControls {
         echo '">';
         echo '&nbsp;<a href="#subject-ideas-modal" rel="modal:open"><i class="far fa-lightbulb tnp-suggest-subject"></i></a>';
         do_action('newsletter_composer_subject');
-
-        echo '<img src="', esc_attr(plugins_url('e-newsletter')), '/admin/images/subject/android.png" style="position: absolute; width: 16px; left: 330px; top: 25px; display: block; opacity: 0">';
-        echo '<img src="', esc_attr(plugins_url('e-newsletter')), '/admin/images/subject/iphone.png" style="position: absolute; width: 16px; left: 380px; top: 25px; display: block; opacity: 0">';
         echo '</div>';
     }
 

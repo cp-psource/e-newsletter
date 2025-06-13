@@ -191,7 +191,6 @@ add_action('newsletter_user_confirmed', function($user) {
     }
 });
 
-// Initialisierung (z.B. in deiner Plugin-Hauptdatei)
 if (class_exists('NewsletterAutoresponder')) {
     $GLOBALS['newsletter_autoresponder'] = new NewsletterAutoresponder();
     $GLOBALS['newsletter_autoresponder']->init();

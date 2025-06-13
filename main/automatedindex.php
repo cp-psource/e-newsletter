@@ -15,6 +15,7 @@ foreach ($channels as $channel) {
     $feed = new stdClass();
     $feed->id = $channel['id'];
     $feed->data = $channel;
+    $feed->name = $channel['name']; // <--- Hier hinzufügen!
     // Beispielwerte, ggf. anpassen:
     $feed->last_time = isset($channel['last_time']) ? $channel['last_time'] : 0;
     $feed->sent = isset($channel['sent']) ? $channel['sent'] : 0;
