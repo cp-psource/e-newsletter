@@ -42,11 +42,6 @@ if (empty($email->track)) {
 
         <?php $controls->show() ?>
 
-        <p>
-            The full report for this newsletter can be generated with the
-            <a href="https://www.thenewsletterplugin.com/reports" target="_blank">Reports Addon</a>.
-        </p>
-
         <div class="tnp-cards-container">
 
             <div class="tnp-card">

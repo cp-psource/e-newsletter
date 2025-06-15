@@ -203,6 +203,40 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
             return '<span>' . esc_html(date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $email->send_on)) . '</span>';
         }
     }
+
+    public function get_clicked_urls($email_id) {
+        global $wpdb;
+        $table = $wpdb->prefix . 'newsletter_stats';
+        // Da email_id in deiner Tabelle ein VARCHAR(10) ist, casten wir es als String!
+        $results = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT url, COUNT(*) as number 
+                FROM $table 
+                WHERE email_id = %s AND url <> '' 
+                GROUP BY url 
+                ORDER BY number DESC",
+                (string)$email_id
+            )
+        );
+        return $results ?: [];
+    }
+
+    public function get_newsletter_recipients($email_id) {
+        global $wpdb;
+        $sent_table = $wpdb->prefix . 'newsletter_sent';
+        $user_table = NEWSLETTER_USERS_TABLE;
+
+        return $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT s.user_id as id, s.status as sent_status, s.open as sent_open, s.error,
+                        u.email, u.name, u.surname, u.status
+                FROM $sent_table s
+                LEFT JOIN $user_table u ON s.user_id = u.id
+                WHERE s.email_id = %d",
+                $email_id
+            )
+        );
+    }
 }
 
 class TNP_Statistics {

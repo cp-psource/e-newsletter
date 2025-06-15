@@ -10,96 +10,20 @@ if (empty($email)) {
     echo 'Newsletter not found';
     return;
 }
-$list = [];
 
-$sub = new stdClass();
-$sub->id = 1;
-$sub->status = 'C';
-$sub->email = $sub->id . '@example.org';
-$sub->name = 'John';
-$sub->surname = 'Doe';
-$sub->sent_status = 0;
-$sub->error = '';
-
-$list[] = $sub;
-
-$sub = new stdClass();
-$sub->id = 1;
-$sub->status = 'C';
-$sub->email = $sub->id . '@example.org';
-$sub->name = 'John';
-$sub->surname = 'Doe';
-$sub->sent_status = 0;
-$sub->sent_open = 0;
-$sub->error = '';
-
-$list[] = $sub;
-
-$sub = new stdClass();
-$sub->id = 3;
-$sub->status = 'C';
-$sub->email = $sub->id . '@example.org';
-$sub->name = 'John';
-$sub->surname = 'Doe';
-$sub->sent_status = 1;
-$sub->sent_open = 0;
-$sub->error = 'Unable to contact the mailbox';
-
-$list[] = $sub;
-
-$sub = new stdClass();
-$sub->id = 4;
-$sub->status = 'C';
-$sub->email = $sub->id . '@example.org';
-$sub->name = 'John';
-$sub->surname = 'Doe';
-$sub->sent_status = 0;
-$sub->sent_open = 1;
-$sub->error = '';
-
-$list[] = $sub;
-
-$sub = new stdClass();
-$sub->id = 5;
-$sub->status = 'U';
-$sub->email = $sub->id . '@example.org';
-$sub->name = 'John';
-$sub->surname = 'Doe';
-$sub->sent_status = 0;
-$sub->sent_open = 2;
-$sub->error = '';
-
-$list[] = $sub;
-
-$sub = new stdClass();
-$sub->id = 6;
-$sub->status = 'P';
-$sub->email = $sub->id . '@example.org';
-$sub->name = 'John';
-$sub->surname = 'Doe';
-$sub->sent_status = 0;
-$sub->sent_open = 0;
-$sub->error = '';
-
-$list[] = $sub;
+// HIER: Live-Daten laden!
+$list = $this->get_newsletter_recipients($email->id);
 ?>
 <style>
 <?php include __DIR__ . '/style.css'; ?>
 </style>
 <div class="wrap tnp-statistics tnp-statistics-view" id="tnp-wrap">
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
-
     <?php include __DIR__ . '/view-heading.php' ?>
 
-
     <div id="tnp-body">
-        <p style="font-size: 1.1em;">
-            Details by single subscriber for this newsletter are available
-            with the <a href="https://www.thenewsletterplugin.com/reports?utm_source=statistics&utm_campaign=plugin" target="_blank">Reports Addon</a>.
-            Data below is a sample view.
-        </p>
 
-        <table class="widefat" style="opacity: 50%">
+        <table class="widefat">
             <thead>
                 <tr>
                     <th>&nbsp;</th>
@@ -111,7 +35,6 @@ $list[] = $sub;
                     <th>Error</th>
                 </tr>
             </thead>
-
             <?php foreach ($list as $sub) { ?>
                 <tr>
                     <td style="width: 55px">
