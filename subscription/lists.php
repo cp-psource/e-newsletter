@@ -117,11 +117,22 @@ $panels = (int) (NEWSLETTER_LIST_MAX / 10) + (NEWSLETTER_LIST_MAX % 10 > 0 ? 1 :
                                         <th style="vertical-align: top"><?php esc_html_e('Name', 'newsletter') ?></th>
                                         <?php if (!$language) { ?>
                                             <th style="vertical-align: top"><?php esc_html_e('Type', 'newsletter') ?></th>
-                                            <th style="vertical-align: top; white-space: nowrap"><?php esc_html_e('Enforced', 'newsletter') ?> <i class="fas fa-info-circle tnp-notes" title="<?php esc_attr_e('If you check this box, all your new subscribers will be automatically added to this list', 'newsletter') ?>"></i></th>
+                                            <th style="vertical-align: top; white-space: nowrap">
+                                                <?php esc_html_e('Enforced', 'newsletter') ?>
+                                                <span class="psource-tooltip" tabindex="0">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <span class="psource-tooltip-text">
+                                                        <?php esc_html_e('If you check this box, all your new subscribers will be automatically added to this list', 'newsletter') ?>
+                                                    </span>
+                                                </span>
+                                            </th>
                                             <?php if ($is_multilanguage) { ?>
-                                                <th style="vertical-align: top">
-                                                    <?php esc_html_e('Enforced by language', 'newsletter') ?>
-                                                    <i class="fas fa-info-circle tnp-notes" title="<?php esc_attr_e('If you check a language, all your new subscribers with that language will be automatically added to the list', 'newsletter') ?>"></i>
+                                                <th style="vertical-align: top; white-space: nowrap">
+                                                    <?php esc_html_e('Enforced', 'newsletter') ?>
+                                                    <span class="psource-tooltip" tabindex="0">
+                                                        <i class="fas fa-info-circle"></i>
+                                                        <span class="psource-tooltip-text"><?php esc_html_e('If you check this box, all your new subscribers will be automatically added to this list', 'newsletter') ?></span>
+                                                    </span>
                                                 </th>
                                             <?php } ?>
                                         <?php } elseif ($is_multilanguage) { ?>

@@ -1,6 +1,11 @@
 // add delete buttons
 jQuery.fn.add_delete = function () {
-    this.append('<div class="tnpc-row-delete" title="Delete"><img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/delete.png" width="32"></div>');
+    this.append(
+        '<span class="psource-tooltip tnpc-row-delete" tabindex="0">' +
+            '<img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/delete.png" width="32">' +
+            '<span class="psource-tooltip-text">Delete</span>' +
+        '</span>'
+    );
     this.find('.tnpc-row-delete').perform_delete();
 };
 
@@ -16,7 +21,12 @@ jQuery.fn.perform_delete = function () {
 // add edit button
 jQuery.fn.add_block_edit = function () {
     //console.log('Add block edit');
-    this.append('<div class="tnpc-row-edit-block" title="Edit"><img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/edit.png" width="32"></div>');
+    this.append(
+        '<span class="psource-tooltip tnpc-row-edit-block" tabindex="0">' +
+            '<img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/edit.png" width="32">' +
+            '<span class="psource-tooltip-text">Edit</span>' +
+        '</span>'
+    );
     this.find('.tnpc-row-edit-block').perform_block_edit();
 }
 
@@ -25,11 +35,11 @@ jQuery.fn.perform_block_edit = function () {
 
     //console.log('Perform block edit');
 
-    jQuery(".tnpc-row-edit-block").click(function (e) {
+    jQuery(".tnpc-row-edit-block").on("click", function (e) {
         e.preventDefault()
     });
 
-    this.click(function (e) {
+    this.on("click", function (e) {
 
         e.preventDefault();
 
@@ -75,18 +85,23 @@ jQuery.fn.perform_block_edit = function () {
 
 // add clone button
 jQuery.fn.add_block_clone = function () {
-    this.append('<div class="tnpc-row-clone" title="Clone"><img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/copy.png" width="32"></div>');
+    this.append(
+        '<span class="psource-tooltip tnpc-row-clone" tabindex="0">' +
+            '<img src="' + TNP_PLUGIN_URL + '/emails/tnp-composer/_assets/copy.png" width="32">' +
+            '<span class="psource-tooltip-text">Clone</span>' +
+        '</span>'
+    );
     this.find('.tnpc-row-clone').perform_clone();
 }
 
 // clone block
 jQuery.fn.perform_clone = function () {
 
-    jQuery(".tnpc-row-clone").click(function (e) {
+    jQuery(".tnpc-row-clone").on("click", function (e) {
         e.preventDefault();
     });
 
-    this.click(function (e) {
+    this.on("click", function (e) {
 
         e.preventDefault();
 

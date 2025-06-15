@@ -986,9 +986,8 @@ class NewsletterControls {
         if (!$attrs['visible']) {
             $style .= 'display: none;';
         }
-        echo '<input id="options-', esc_attr($name), '" placeholder="', esc_attr($attrs['placeholder']), '" title="',
-        esc_attr($attrs['placeholder']), '" name="options[', esc_attr($name), ']" type="text" ',
-        'style="', esc_attr($style), '"';
+        echo '<input id="options-', esc_attr($name), '" placeholder="', esc_attr($attrs['placeholder']), '" name="options[', esc_attr($name), ']" type="text" ',
+            'style="', esc_attr($style), '"';
         if (!empty($attrs['size'])) {
             echo ' size="', esc_attr($attrs['size']), '" ';
         }
@@ -1081,9 +1080,6 @@ class NewsletterControls {
 
         echo ' onclick="', esc_attr($onclick), '"';
 
-        if (!empty($attrs['title'])) {
-            echo ' title="', esc_attr($attrs['title']), '"';
-        }
         if (!empty($attrs['style'])) {
             echo ' style="', esc_attr($attrs['style']), '"';
         }
@@ -1121,9 +1117,6 @@ class NewsletterControls {
         }
         if (!empty($attrs['style'])) {
             echo ' style="', esc_attr($attrs['style']), '"';
-        }
-        if (!empty($attrs['title'])) {
-            echo ' title="', esc_attr($attrs['title']), '"';
         }
         if (!empty($attrs['id'])) {
             echo ' id="', esc_attr($attrs['id']), '"';
@@ -1183,7 +1176,12 @@ class NewsletterControls {
 
     function button_icon_copy($id) {
         $url = admin_url('admin.php?page=newsletter_main_autoresponderindex&action=copy&id=' . intval($id));
-        echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: #0073aa; color: #fff;" title="' . esc_attr__('Duplicate', 'newsletter') . '"><i class="fas fa-copy"></i></a>';
+        echo '<span class="psource-tooltip">';
+        echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: #0073aa; color: #fff;">';
+        echo '<i class="fas fa-copy"></i>';
+        echo '</a>';
+        echo '<span class="psource-tooltip-text">' . esc_html__('Duplicate', 'newsletter') . '</span>';
+        echo '</span>';
     }
 
     /**
@@ -1206,7 +1204,10 @@ class NewsletterControls {
                 $url = admin_url('admin.php' . $url);
             }
         }
-        echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: darkred; color: #fff;" title="' . esc_attr__('Delete', 'newsletter') . '" onclick="return confirm(\'Wirklich löschen?\');"><i class="fas fa-times"></i></a>';
+        echo '<span class="psource-tooltip">';
+        echo '<a href="' . esc_url($url) . '" class="button button-small" style="background-color: darkred; color: #fff;" onclick="return confirm(\'Wirklich löschen?\');"><i class="fas fa-times"></i></a>';
+        echo '<span class="psource-tooltip-text">' . esc_html__('Delete', 'newsletter') . '</span>';
+        echo '</span>';
     }
 
     function button_icon_configure($url, $attrs = []) {
@@ -1483,9 +1484,6 @@ class NewsletterControls {
         echo '"';
         if (!empty($this->data[$name])) {
             echo ' checked';
-        }
-        if (!empty($attrs['title'])) {
-            echo ' title="', esc_attr($attrs['title']), '"';
         }
         echo '>';
         if ($label != '') {
@@ -2351,22 +2349,34 @@ class NewsletterControls {
      * @param string $label
      */
     static function help($url, $label = '') {
-        echo '<a href="', esc_attr($url), '" target="_blank" title="', esc_attr($label), '"><i class="fas fa-question-circle"></i></a>';
+        echo '<span class="psource-tooltip">';
+        echo '<a href="', esc_attr($url), '" target="_blank"><i class="fas fa-question-circle"></i></a>';
+        if (!empty($label)) {
+            echo '<span class="psource-tooltip-text">', esc_html($label), '</span>';
+        }
+        echo '</span>';
     }
 
     static function idea($url, $label = '') {
-        echo '<a href="', esc_attr($url), '" target="_blank" title="', esc_attr($label), '"><i class="fas fa-lightbulb-o"></i></a>';
+        echo '<span class="psource-tooltip">';
+        echo '<a href="', esc_attr($url), '" target="_blank"><i class="fas fa-lightbulb-o"></i></a>';
+        if (!empty($label)) {
+            echo '<span class="psource-tooltip-text">', esc_html($label), '</span>';
+        }
+        echo '</span>';
     }
 
     static function field_help($url, $text = '') {
         if (strpos($url, 'http') !== 0) {
-            $url = 'https://www.thenewsletterplugin.com/documentation' . $url;
+            $url = 'https://cp-psource.github.io/e-newsletter/documentation' . $url;
         }
-        echo '<a href="', esc_attr($url), '" class="tnpc-field-help" target="_blank" style="text-decoration: none" title="' . esc_attr(__('Read more', 'newsletter')) . '"><i class="fas fa-question-circle"></i>';
+        echo '<span class="psource-tooltip">';
+        echo '<a href="', esc_attr($url), '" class="tnpc-field-help" target="_blank" style="text-decoration: none"><i class="fas fa-question-circle"></i></a>';
+        echo '<span class="psource-tooltip-text">', esc_html__('Read more', 'newsletter'), '</span>';
         if ($text) {
             echo '&nbsp;', wp_kses_post($text);
         }
-        echo '</a>';
+        echo '</span>';
     }
 
     static function field_label($label, $help_url = false) {

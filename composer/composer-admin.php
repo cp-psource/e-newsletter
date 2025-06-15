@@ -376,7 +376,10 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
                 continue;
             }
             $content .= '<div class="tnpc-preset tnpc-preset2" onclick="tnpc_load_preset(\'' . esc_attr($template->id) . '\')">';
-            $content .= '<img src="' . esc_attr($template->icon) . '" title="' . esc_attr($template->name) . '" alt="' . esc_attr($template->name) . '">';
+            $content .= '<span class="psource-tooltip" tabindex="0">';
+            $content .= '<img src="' . esc_attr($template->icon) . '" alt="' . esc_attr($template->name) . '">';
+            $content .= '<span class="psource-tooltip-text">' . esc_html($template->name) . '</span>';
+            $content .= '</span>';
             $content .= '<span class="tnpc-preset-label">' . esc_html($template->name) . '</span>';
             $content .= '</div>';
         }
@@ -397,7 +400,10 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
                 continue;
             }
             $content .= '<div class="tnpc-preset tnpc-preset2" onclick="tnpc_load_preset(\'' . esc_attr($template->id) . '\')">';
-            $content .= '<img src="' . esc_attr($template->icon) . '" title="' . esc_attr($template->name) . '" alt="' . esc_attr($template->name) . '">';
+            $content .= '<span class="psource-tooltip" tabindex="0">';
+            $content .= '<img src="' . esc_attr($template->icon) . '" alt="' . esc_attr($template->name) . '">';
+            $content .= '<span class="psource-tooltip-text">' . esc_html($template->name) . '</span>';
+            $content .= '</span>';
             $content .= '<span class="tnpc-preset-label">' . esc_html($template->name) . '</span>';
             $content .= '</div>';
         }

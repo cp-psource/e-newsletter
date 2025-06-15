@@ -73,19 +73,24 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                         <th dir="<?php echo $dir ?>">
                             <?php esc_html_e('Subject', 'newsletter') ?>
                             <?php if ($context_type === 'automated') { ?>
-                                <?php $this->field_help('https://www.thenewsletterplugin.com/documentation/addons/extended-features/automated-extension/#subject') ?>
+                                <?php $this->field_help('https://cp-psource.github.io/e-newsletter/composer/#subject') ?>
                             <?php } ?>
                         </th>
                         <td dir="<?php echo $dir ?>">
                             <div id="tnpc-subject">
                                 <?php $this->subject('subject'); ?>
-
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <th dir="<?php echo $dir ?>"><span title="<?php esc_attr_e('Shown by some email clients as excerpt', 'newsletter') ?>"><?php _e('Snippet', 'newsletter') ?></span>
-                            <?php $this->field_help('https://www.thenewsletterplugin.com/documentation/newsletters/composer/#subject') ?>
+                        <th dir="<?php echo $dir ?>">
+                            <span class="psource-tooltip" tabindex="0">
+                                <?php _e('Snippet', 'newsletter') ?>
+                                <span class="psource-tooltip-text">
+                                    <?php esc_html_e('Shown by some email clients as excerpt', 'newsletter') ?>
+                                </span>
+                            </span>
+                            <?php $this->field_help('https://cp-psource.github.io/e-newsletter/composer/#subject') ?>
                         </th>
                         <td dir="<?php echo $dir ?>"><?php $this->text('preheader') ?></td>
                     </tr>
@@ -93,22 +98,31 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
                 <div class="tnpb-actions">
 
-                    <span class="button-primary" onclick="tnpc_show_presets_modal()" title="<?php esc_attr_e('Template', 'newsletter') ?>">
+                    <span class="button-primary psource-tooltip" tabindex="0" onclick="tnpc_show_presets_modal()">
                         <i class="far fa-file"></i>
+                        <span class="psource-tooltip-text"><?php esc_html_e('Template', 'newsletter') ?></span>
                     </span>
 
-                    <a class="button-primary" href="#tnpc-placeholders" rel="modal:open" title="<?php esc_attr_e('Placeholders', 'newsletter') ?>"><i class="fas fa-user"></i></a>
+                    <span class="button-primary psource-tooltip" tabindex="0" href="#tnpc-placeholders" rel="modal:open">
+                        <i class="fas fa-user"></i>
+                        <span class="psource-tooltip-text"><?php esc_html_e('Placeholders', 'newsletter') ?></span>
+                    </span>
 
-                    <a class="button-primary" href="#tnpc-attachment-modal" rel="modal:open" title="<?php esc_attr_e('Attachments', 'newsletter') ?>"><i class="fas fa-paperclip"></i></a>
+                    <span class="button-primary psource-tooltip" tabindex="0" href="#tnpc-attachment-modal" rel="modal:open">
+                        <i class="fas fa-paperclip"></i>
+                        <span class="psource-tooltip-text"><?php esc_html_e('Attachments', 'newsletter') ?></span>
+                    </span>
 
                     <?php if ($show_test) { ?>
-                        <span class="button-primary" data-tnp-modal-target="#test-newsletter-modal" title="<?php esc_attr_e('Test', 'newsletter') ?>">
-                            <i class="fas fa-paper-plane"></i> <?php //_e('Test', 'newsletter')          ?>
+                        <span class="button-primary psource-tooltip" tabindex="0" data-tnp-modal-target="#test-newsletter-modal">
+                            <i class="fas fa-paper-plane"></i>
+                            <span class="psource-tooltip-text"><?php esc_html_e('Test', 'newsletter') ?></span>
                         </span>
                     <?php } ?>
 
-                    <span class="button-primary" id="tnpc-view-mode" title="<?php esc_attr_e('Switch preview mode', 'newsletter') ?>">
+                    <span class="button-primary psource-tooltip" tabindex="0" id="tnpc-view-mode">
                         <i id="tnpc-view-mode-icon" class="fas fa-desktop"></i>
+                        <span class="psource-tooltip-text"><?php esc_html_e('Switch preview mode', 'newsletter') ?></span>
                     </span>
 
                 </div>
@@ -137,13 +151,14 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
         <div id="tnpb-blocks" class="tnpb-tab">
             <?php foreach ($blocks as $k => $section) { ?>
-                <div class="tnpb-block-icons" id="sidebar-add-<?php echo esc_attr($k) ?>">
-                    <?php foreach ($section as $key => $block) { ?>
-                        <div class="tnpb-block-icon" data-id="<?php echo esc_attr($key) ?>" data-name="<?php echo esc_attr($block['name']) ?>">
-                            <img src="<?php echo esc_attr($block['icon']) ?>" title="<?php echo esc_attr($block['name']) ?>">
-                        </div>
-                    <?php } ?>
-                </div>
+            <div class="tnpb-block-icons" id="sidebar-add-<?php echo esc_attr($k) ?>">
+                <?php foreach ($section as $key => $block) { ?>
+                    <span class="psource-tooltip tnpb-block-icon" data-id="<?php echo esc_attr($key) ?>" data-name="<?php echo esc_attr($block['name']) ?>" tabindex="0">
+                        <img src="<?php echo esc_attr($block['icon']) ?>" alt="<?php echo esc_attr($block['name']) ?>">
+                        <span class="psource-tooltip-text"><?php echo esc_html($block['name']) ?></span>
+                    </span>
+                <?php } ?>
+            </div>
             <?php } ?>
         </div>
 

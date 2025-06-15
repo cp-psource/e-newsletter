@@ -109,11 +109,16 @@ class NewsletterEmails extends NewsletterModule {
                 break;
         }
         if ($only_icon) {
-            return '<a class="button-primary" href="' . $edit_url . '" title="' . esc_attr__('Edit', 'newsletter') . '">' .
-                    '<i class="fas fa-' . $icon_class . '"></i></a>';
+            return '<span class="psource-tooltip">' .
+                '<a class="button-primary" href="' . $edit_url . '">' .
+                    '<i class="fas fa-' . $icon_class . '"></i>' .
+                '</a>' .
+                '<span class="psource-tooltip-text">' . esc_html__('Edit', 'newsletter') . '</span>' .
+            '</span>';
         } else {
-            return '<a class="button-primary" href="' . $edit_url . '" title="' . esc_attr__('Edit', 'newsletter') . '">' .
-                    '<i class="fas fa-' . $icon_class . '"></i> ' . __('Edit', 'newsletter') . '</a>';
+            return '<a class="button-primary" href="' . $edit_url . '">' .
+                '<i class="fas fa-' . $icon_class . '"></i> ' . __('Edit', 'newsletter') .
+            '</a>';
         }
     }
 

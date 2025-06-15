@@ -93,10 +93,12 @@ $emails = $this->get_emails('composer_template');
                             </td>
 
                             <td>
-                                <?php
-                                echo '<a class="button-primary tnpc-button" href="admin.php?page=newsletter_emails_presets-edit&id=' . $email->id . '" title="' . esc_attr__('Edit', 'newsletter') . '">' .
-                                '<i class="fas fa-th-large"></i> ' . __('Edit', 'newsletter') . '</a>';
-                                ?>
+                                <span class="psource-tooltip">
+                                    <a class="button-primary tnpc-button" href="admin.php?page=newsletter_emails_presets-edit&id=<?php echo $email->id; ?>">
+                                        <i class="fas fa-th-large"></i> <?php _e('Edit', 'newsletter'); ?>
+                                    </a>
+                                    <span class="psource-tooltip-text"><?php esc_html_e('Edit', 'newsletter'); ?></span>
+                                </span>
                             </td>
 
 

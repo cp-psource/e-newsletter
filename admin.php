@@ -149,16 +149,18 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
         // Styles and scripts only for our admin pages
         if (self::is_admin_page()) {
-            wp_enqueue_script('jquery-ui-tooltip');
             wp_enqueue_script('jquery-ui-draggable');
             wp_enqueue_media();
 
-            wp_enqueue_script('psource-ui-tabs', $url . '/assets/psource-ui/tabs/tabs.js', ['jquery'], NEWSLETTER_VERSION, true);
-            wp_enqueue_style('psource-ui-tabs', $url . '/assets/psource-ui/tabs/tabs.css', [], NEWSLETTER_VERSION);
+            wp_enqueue_script('psource-ui-tabs', $url . '/assets/psource-ui/tabs/psource-tabs.js', ['jquery'], NEWSLETTER_VERSION, true);
+            wp_enqueue_style('psource-ui-tabs', $url . '/assets/psource-ui/tabs/psource-tabs.css', [], NEWSLETTER_VERSION);
 
-            wp_enqueue_script('psource-ui-accordion', $url . '/assets/psource-ui/accordion/accordion.js', ['jquery'], NEWSLETTER_VERSION, true);
-            wp_enqueue_style('psource-ui-accordion', $url . '/assets/psource-ui/accordion/accordion.css', [], NEWSLETTER_VERSION);
+            wp_enqueue_script('psource-ui-accordion', $url . '/assets/psource-ui/accordion/psource-accordion.js', ['jquery'], NEWSLETTER_VERSION, true);
+            wp_enqueue_style('psource-ui-accordion', $url . '/assets/psource-ui/accordion/psource-accordion.css', [], NEWSLETTER_VERSION);
 
+            wp_enqueue_style('psource-ui-tooltip', $url . '/assets/psource-ui/tooltip/psource-tooltip.css', [], NEWSLETTER_VERSION);
+            wp_enqueue_script('psource-ui-tooltip', $url . '/assets/psource-ui/tooltip/psource-tooltip.js', [], NEWSLETTER_VERSION, true);
+            
             wp_enqueue_style('tnp-admin-font', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
             wp_enqueue_script('tnp-admin', $url . '/admin/js/all.js', ['jquery'], NEWSLETTER_VERSION);
