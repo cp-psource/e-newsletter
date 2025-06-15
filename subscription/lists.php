@@ -58,15 +58,6 @@ $count = $this->get_row("select " . implode(',', $conditions) . ' from ' . NEWSL
 
 $panels = (int) (NEWSLETTER_LIST_MAX / 10) + (NEWSLETTER_LIST_MAX % 10 > 0 ? 1 : 0);
 ?>
-<script>
-    jQuery(function () {
-        jQuery(".tnp-notes").tooltip({
-            content: function () {
-                return this.title;
-            }
-        });
-    });
-</script>
 <div class="wrap tnp-lists" id="tnp-wrap">
 
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
