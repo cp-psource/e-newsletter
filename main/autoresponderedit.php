@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
             'utm_medium'   => sanitize_text_field($_POST['options']['utm_medium'] ?? ''),
             'utm_term'     => sanitize_text_field($_POST['options']['utm_term'] ?? ''),
             'utm_content'  => sanitize_text_field($_POST['options']['utm_content'] ?? ''),
+            'rules' => isset($_POST['options']['rules']) ? intval($_POST['options']['rules']) : 0,
+            'list_id'      => isset($_POST['list']) ? intval($_POST['list']) : 0,
+            'keep_active' => isset($_POST['options']['keep_active']) ? intval($_POST['options']['keep_active']) : 0,
+            'language'     => sanitize_text_field($_POST['language'] ?? ''),
         ],
         ['id' => $id]
     );
@@ -67,7 +71,9 @@ $controls->set_data($autoresponder);
 
         <?php $controls->show(); ?>
 
-        <p>This is only a demonstrative panel.</p>
+        <p>
+            <?php esc_html_e('Here you can configure the autoresponder settings. Define activation rules, select the subscriber list, set language filters, and adjust advanced options for your automated email series.', 'newsletter'); ?>
+        </p>
 
         <form method="post" action="">
 
@@ -77,57 +83,56 @@ $controls->set_data($autoresponder);
             <div class="psource-tabs-nav">
                 <button class="psource-tab active" data-tab="tabs-general"><?php esc_html_e('General', 'newsletter') ?></button>
                 <button class="psource-tab" data-tab="tabs-advanced"><?php esc_html_e('Advanced', 'newsletter') ?></button>
-                <button class="psource-tab" data-tab="tabs-analytics"><?php esc_html_e('Google Analytics', 'newsletter') ?></button>
             </div>
             <div class="psource-tabs-content">
                 <div class="psource-tab-panel active" id="tabs-general">
                     <table class="form-table">
                         <tr>
-                            <th>Enabled</th>
+                            <th><?php esc_html_e('Enabled', 'newsletter'); ?></th>
                             <td><?php $controls->yesno('status') ?></td>
                         </tr>
                         <tr>
-                            <th>Title</th>
+                            <th><?php esc_html_e('Title', 'newsletter'); ?></th>
                             <td><?php $controls->text('name', 70) ?></td>
                         </tr>
                     </table>
                     <table class="form-table">
                         <tr>
-                            <th>Activation rules</th>
+                            <th><?php esc_html_e('Activation rules', 'newsletter'); ?></th>
                             <td>
                                 <?php $controls->enabled('rules', ['bind_to'=>'divrules']) ?>
                                 <p class="description">
-                                    When disabled the series can anyway be activated by addons, custom subscription forms, and so on.
+                                    <?php esc_html_e('When disabled the series can anyway be activated by addons, custom subscription forms, and so on.', 'newsletter'); ?>
                                 </p>
                             </td>
                         </tr>
                     </table>
                     <table class="form-table" id="options-divrules">
                         <tr>
-                            <th>List</th>
+                            <th><?php esc_html_e('List', 'newsletter'); ?></th>
                             <td>
-                                <?php $controls->lists_select_with_notes('list', 'All subscribers') ?>
+                                <?php $controls->lists_select_with_notes('list', esc_html__('All subscribers', 'newsletter')) ?>
                                 <p class="description">
-                                    <strong>List set</strong> - the series is activated to subscribers in the specified list. Subscribers are automatically
-                                    captured when they enter the list and automatically released when they exit the list (usually within 5 minutes).
+                                    <strong><?php esc_html_e('List set', 'newsletter'); ?></strong> - 
+                                    <?php esc_html_e('the series is activated to subscribers in the specified list. Subscribers are automatically captured when they enter the list and automatically released when they exit the list (usually within 5 minutes).', 'newsletter'); ?>
                                 </p>
                             </td>
                         </tr>
                         <tr>
-                            <th>Keep active</th>
+                            <th><?php esc_html_e('Keep active', 'newsletter'); ?></th>
                             <td>
                                 <?php $controls->yesno('keep_active') ?>
                                 <p class="description">
-                                    Keep the series activeif the subscriber is removed from the list, otherwise stop it.
+                                    <?php esc_html_e('Keep the series active if the subscriber is removed from the list, otherwise stop it.', 'newsletter'); ?>
                                 </p>
                             </td>
                         </tr>
                         <tr>
-                            <th>Language</th>
+                            <th><?php esc_html_e('Language', 'newsletter'); ?></th>
                             <td>
                                 <?php $controls->language() ?>
                                 <p class="description">
-                                    Only subscribers with a matching language will be linked.
+                                    <?php esc_html_e('Only subscribers with a matching language will be linked.', 'newsletter'); ?>
                                 </p>
                             </td>
                         </tr>
@@ -135,86 +140,34 @@ $controls->set_data($autoresponder);
                 </div>
                 <div class="psource-tab-panel" id="tabs-advanced">
                     <table class="form-table">
-                        <tr>
-                            <th>Restart on re-subscription</th>
-                            <td>
-                                <?php $controls->yesno('restart') ?>
-                                <p class="description">
-                                    If a subscriber re-subscribes and the series is already completed, restart it.
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Update emails content</th>
-                            <td>
-                                <?php $controls->yesno('regenerate') ?>
-                                <p class="description">
-                                    If the content of the emails should be updated every day (it applies to post list, product list and so on)
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Lists to add on completion</th>
-                            <td>
-                                <?php $controls->lists('new_lists') ?>
-                                <p class="description">
-                                    List to be set on a subscriber's profile when the series reaches its end.
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="psource-tab-panel" id="tabs-analytics">
-                    <p>
-                        Google Analytics addon required.<br>
-                        On UTM parameters <code>{email_id}</code> and <code>{email_subsject}</code> can be used to make them dynamic.<br>
-                    </p>
-                    <table class="form-table">
-                        <tr>
-                            <th>UTM Campaign</th>
-                            <td>
-                                <?php $controls->text('utm_campaign', 50); ?>
-                                <p class="description"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>UTM Source (mandatory)</th>
-                            <td>
-                                <?php $controls->text('utm_source', 50); ?>
-                                <p class="description">
-                                    Use the <code>{step}</code> tag to have the step number inserted (1, 2, 3, ...). The suggested value
-                                    is <code>step-{step}</code>.
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>UTM Medium</th>
-                            <td>
-                                <?php $controls->text('utm_medium', 50); ?>
-                                <p class="description">
-                                    Should be set to "email" since this is the only medium used.
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>UTM Term</th>
-                            <td>
-                                <?php $controls->text('utm_term', 50); ?>
-                                <p class="description">
-                                    Usually empty can be used on specific newsletters but it is more related to keyword based advertising.
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>UTM Content</th>
-                            <td>
-                                <?php $controls->text('utm_content', 50); ?>
-                                <p class="description">
-                                    Usually empty can be used on specific newsletters.
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
+                    <tr>
+                        <th><?php esc_html_e('Restart on re-subscription', 'newsletter'); ?></th>
+                        <td>
+                            <?php $controls->yesno('restart') ?>
+                            <p class="description">
+                                <?php esc_html_e('If a subscriber re-subscribes and the series is already completed, restart it.', 'newsletter'); ?>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php esc_html_e('Update emails content', 'newsletter'); ?></th>
+                        <td>
+                            <?php $controls->yesno('regenerate') ?>
+                            <p class="description">
+                                <?php esc_html_e('If the content of the emails should be updated every day (it applies to post list, product list and so on)', 'newsletter'); ?>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php esc_html_e('Lists to add on completion', 'newsletter'); ?></th>
+                        <td>
+                            <?php $controls->lists('new_lists') ?>
+                            <p class="description">
+                                <?php esc_html_e("List to be set on a subscriber's profile when the series reaches its end.", 'newsletter'); ?>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
                 </div>
             </div>
             <div class="tnp-buttons">

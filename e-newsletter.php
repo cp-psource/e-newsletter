@@ -1190,6 +1190,7 @@ function tnp_autoresponder_install() {
         description TEXT,
         list_id BIGINT(20) DEFAULT 0,
         status TINYINT(1) DEFAULT 1,
+        rules TINYINT(1) DEFAULT 0,           // <--- HIER HINZUFÜGEN!
         keep_active TINYINT(1) DEFAULT 0,
         language VARCHAR(10) DEFAULT '',
         restart TINYINT(1) DEFAULT 0,
@@ -1235,6 +1236,11 @@ function tnp_autoresponder_install() {
     $columns = $wpdb->get_col("DESC $table", 0);
     if (!in_array('auto_start', $columns)) {
         $wpdb->query("ALTER TABLE $table ADD COLUMN auto_start TINYINT(1) DEFAULT 0");
+    }
+    $table = $wpdb->prefix . 'tnp_autoresponders';
+    $columns = $wpdb->get_col("DESC $table", 0);
+    if (!in_array('rules', $columns)) {
+        $wpdb->query("ALTER TABLE $table ADD COLUMN rules TINYINT(1) DEFAULT 0");
     }
 
     dbDelta($sql2);
