@@ -30,7 +30,7 @@ if (!$controls->is_action()) {
             <?php
             printf(
                 esc_html__('Please, %sread more here how to use and configure%s, since it can incredibly increase your subscription rate.', 'newsletter'),
-                '<a href="https://cp-psource.github.io/e-newsletter/locked-content-extension" target="_blank">',
+                '<a href="https://cp-psource.github.io/e-newsletter/locked-content" target="_blank">',
                 '</a>'
             );
             ?>
