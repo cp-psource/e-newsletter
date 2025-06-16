@@ -280,8 +280,11 @@ if ($controls->is_action('change_status')) {
                                     <?php $controls->button_confirm_secondary('list_remove', 'Deactivate for everyone'); ?>
                                     <?php $controls->button_confirm_secondary('list_delete', 'Delete everyone in that list'); ?>
                                     <p class="description">
-                                        If you choose to <strong>delete</strong> users in a list, they will be
-                                        <strong>physically deleted</strong> from the database (no way back).
+                                        <?php esc_html_e('If you choose to', 'newsletter'); ?>
+                                        <strong><?php esc_html_e('delete', 'newsletter'); ?></strong>
+                                        <?php esc_html_e('users in a list, they will be', 'newsletter'); ?>
+                                        <strong><?php esc_html_e('physically deleted', 'newsletter'); ?></strong>
+                                        <?php esc_html_e('from the database (no way back).', 'newsletter'); ?>
                                     </p>
                                 </td>
                             </tr>

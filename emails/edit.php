@@ -625,23 +625,23 @@ if ($email['status'] != 'sent') {
 
                     <table class="form-table">
                         <tr valign="top">
-                            <th>Country</th>
+                            <th><?php esc_html_e('Country', 'newsletter'); ?></th>
                             <td>
                                 <?php $controls->select2('options_countries', $countries, null, true); ?>
                                 <p class="description">
-                                    Some country codes could have no meaning. Not all subscribers are resolved.<br>
-                                    If you're targeting not confirmed subscribers, save to get the correct country list.
+                                    <?php esc_html_e('Some country codes could have no meaning. Not all subscribers are resolved.', 'newsletter'); ?><br>
+                                    <?php esc_html_e("If you're targeting not confirmed subscribers, save to get the correct country list.", 'newsletter'); ?>
                                 </p>
                             </td>
                         </tr>
                         <tr valign="top">
-                            <th>Regions</th>
+                            <th><?php esc_html_e('Regions', 'newsletter'); ?></th>
                             <td>
                                 <?php $controls->select2('options_regions', $regions, null, true); ?>
                             </td>
                         </tr>
                         <tr valign="top">
-                            <th>Cities</th>
+                            <th><?php esc_html_e('Cities', 'newsletter'); ?></th>
                             <td>
                                 <?php $controls->select2('options_cities', $cities, null, true); ?>
                             </td>

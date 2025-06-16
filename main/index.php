@@ -100,21 +100,31 @@ $steps_completed = count($steps) >= 10;
                         <div class="tnp-card-upper-buttons"><a href="?page=newsletter_users_statistics"><i class="fas fa-chart-bar"></i></a></div>
                     </div>
                     <div class="tnp-card-value"><?php echo esc_html($subscribers_count); ?></div>
-                    <div class="tnp-card-description">Confirmed subscribers</div>
+                    <div class="tnp-card-description">
+                        <?php esc_html_e('Confirmed subscribers', 'newsletter'); ?>
+                    </div>
                 </div>
 
                 <div class="tnp-card">
                     <div class="tnp-card-title"><?php esc_html_e('Last 30 days', 'newsletter') ?></div>
                     <div class="tnp-card-value"><?php echo esc_html($subscribers_count_last_30_days); ?></div>
-                    <div class="tnp-card-description">Confirmed subscribers</div>
+                    <div class="tnp-card-description">
+                            <?php esc_html_e('Confirmed subscribers', 'newsletter'); ?>
+                        </div>
 
                 </div>
-
 
                 <div class="tnp-card">
                     <div class="tnp-card-title"><?php esc_html_e('Queued emails', 'newsletter') ?></div>
                     <div class="tnp-card-value"><?php echo esc_html($queued); ?></div>
-                    <div class="tnp-card-description">Delivering at <?php echo esc_html($speed); ?> emails per hour.</div>
+                    <div class="tnp-card-description">
+                        <?php
+                        printf(
+                            esc_html__('Delivering at %s emails per hour.', 'newsletter'),
+                            esc_html($speed)
+                        );
+                        ?>
+                    </div>
                 </div>
 
                 <div class="tnp-card">
@@ -122,8 +132,6 @@ $steps_completed = count($steps) >= 10;
                     <div class="tnp-card-value"><?php echo esc_html($total_sent); ?></div>
                     <div class="tnp-card-description"></div>
                 </div>
-
-
             </div>
 
 

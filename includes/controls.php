@@ -782,7 +782,9 @@ class NewsletterControls {
         if (!empty($attrs['preview_url']) && current_user_can('administrator')) {
             $this->btn_link($attrs['preview_url'], __('Preview', 'newsletter'), ['tertiary' => true, 'target' => '_blank']);
         }
-        echo '<p class="description" data-tnpshow="', esc_attr($name), '_id=0">The public page is set on general Setting page.</p>';
+        echo '<p class="description" data-tnpshow="', esc_attr($name), '_id=0">',
+        esc_html__('The public page is set on general Setting page.', 'newsletter'),
+        '</p>';
         echo '<div data-tnpshow="', esc_attr($name), '_id=url" style="margin-top: 1rem;">';
         $this->text($name . '_url', ['placeholder' => 'https://']);
         echo '</div>';

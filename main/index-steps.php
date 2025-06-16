@@ -10,11 +10,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Your sender name and address</h3>
+                    <h3><?php esc_html_e('Your sender name and address', 'newsletter'); ?></h3>
                     <p>
-                        From who your subscribers will see the emails coming from?
-
-                        <a href="?page=newsletter_main_main">Review</a>
+                        <?php esc_html_e('From who your subscribers will see the emails coming from?', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_main_main"><?php esc_html_e('Review', 'newsletter'); ?></a>
                     </p>
                 </div>
             </div>
@@ -24,11 +24,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Subscription: popup and inline forms</h3>
+                    <h3><?php esc_html_e('Subscription: popup and inline forms', 'newsletter'); ?></h3>
                     <p>
-                        Activate the subscription forms to grow your subscriber list.
-
-                        <a href="?page=newsletter_subscription_sources">Configure</a>.
+                        <?php esc_html_e('Activate the subscription forms to grow your subscriber list.', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_subscription_sources"><?php esc_html_e('Configure', 'newsletter'); ?></a>.
                     </p>
                 </div>
             </div>
@@ -38,11 +38,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Be notified when someone subscribes</h3>
+                    <h3><?php esc_html_e('Be notified when someone subscribes', 'newsletter'); ?></h3>
                     <p>
-                        Activate the notification when you get a new subscriber.
-
-                        <a href="?page=newsletter_subscription_options#advanced">Configure</a>.
+                        <?php esc_html_e('Activate the notification when you get a new subscriber.', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_subscription_options#advanced"><?php esc_html_e('Configure', 'newsletter'); ?></a>.
                     </p>
                 </div>
             </div>
@@ -52,10 +52,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Welcome email: give it your style</h3>
+                    <h3><?php esc_html_e('Welcome email: give it your style', 'newsletter'); ?></h3>
                     <p>
-                        Customize the welcome email to reflect your style.
-                        <a href="?page=newsletter_subscription_welcome">Review</a>.
+                        <?php esc_html_e('Customize the welcome email to reflect your style.', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_subscription_welcome"><?php esc_html_e('Review', 'newsletter'); ?></a>.
                     </p>
                 </div>
             </div>
@@ -70,11 +71,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Test the email delivery</h3>
+                    <h3><?php esc_html_e('Test the email delivery', 'newsletter'); ?></h3>
                     <p>
-                        Check if your blog can deliver emails.
-
-                        <a href="?page=newsletter_system_delivery">Run a test</a>.
+                        <?php esc_html_e('Check if your blog can deliver emails.', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_system_delivery"><?php esc_html_e('Run a test', 'newsletter'); ?></a>.
                     </p>
                 </div>
             </div>
@@ -84,11 +85,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Your company info and socials</h3>
+                    <h3><?php esc_html_e('Your company info and socials', 'newsletter'); ?></h3>
                     <p>
-                        Review your company info and socials
-
-                        <a href="?page=newsletter_main_info">Review</a>.
+                        <?php esc_html_e('Review your company info and socials', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_main_info"><?php esc_html_e('Review', 'newsletter'); ?></a>.
                     </p>
                 </div>
             </div>
@@ -98,11 +99,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Create your first newsletter</h3>
+                    <h3><?php esc_html_e('Create your first newsletter', 'newsletter'); ?></h3>
                     <p>
-                        Explore the composer and send it.
-
-                        <a href="?page=newsletter_emails_index">Go create</a>.
+                        <?php esc_html_e('Explore the composer and send it.', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_emails_index"><?php esc_html_e('Go create', 'newsletter'); ?></a>.
                     </p>
                 </div>
             </div>
@@ -112,11 +113,11 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h3>Change the delivery speed</h3>
+                    <h3><?php esc_html_e('Change the delivery speed', 'newsletter'); ?></h3>
                     <p>
-                        Set how many emails per hour you want to send.
-
-                        <a href="?page=newsletter_main_main">Review</a>
+                        <?php esc_html_e('Set how many emails per hour you want to send.', 'newsletter'); ?>
+                        <br>
+                        <a href="?page=newsletter_main_main"><?php esc_html_e('Review', 'newsletter'); ?></a>
                     </p>
                 </div>
             </div>

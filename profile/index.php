@@ -85,19 +85,31 @@ foreach (['text'] as $key) {
                                         <?php echo wp_kses_post($this->get_default_text('text')) ?>
                                     </div>
                                     <p class="description">
-                                        Content of the Newsletter public page
+                                        <?php esc_html_e('Content of the Newsletter public page', 'newsletter'); ?>
                                     </p>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    Notes
+                                    <?php esc_html_e('Notes', 'newsletter'); ?>
                                 </th>
                                 <td>
                                     <ul>
-                                        <li>Use <code>[newsletter_profile /]</code> where you want the edit form to be inserted.</li>
-                                        <li>Use <code>[newsletter_unsubscribe_button label="..." /]</code> to add the unsubscribe button.</li>
-                                        <li>Use <code>[newsletter_export_button label="..." /]</code> to add the GDPR export button.</li>
+                                        <li>
+                                            <?php esc_html_e('Use', 'newsletter'); ?>
+                                            <code>[newsletter_profile /]</code>
+                                            <?php esc_html_e('where you want the edit form to be inserted.', 'newsletter'); ?>
+                                        </li>
+                                        <li>
+                                            <?php esc_html_e('Use', 'newsletter'); ?>
+                                            <code>[newsletter_unsubscribe_button label="..." /]</code>
+                                            <?php esc_html_e('to add the unsubscribe button.', 'newsletter'); ?>
+                                        </li>
+                                        <li>
+                                            <?php esc_html_e('Use', 'newsletter'); ?>
+                                            <code>[newsletter_export_button label="..." /]</code>
+                                            <?php esc_html_e('to add the GDPR export button.', 'newsletter'); ?>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
