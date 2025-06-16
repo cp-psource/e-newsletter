@@ -27,8 +27,13 @@ if (!$controls->is_action()) {
     <div id="tnp-body">
         <?php $controls->show(); ?>
         <p>
-            Please, <a href="http://www.thenewsletterplugin.com/documentation/locked-content-extension" target="_blank">read more here how to use and configure</a>,
-            since it can incredibly increase your subscription rate.
+            <?php
+            printf(
+                esc_html__('Please, %sread more here how to use and configure%s, since it can incredibly increase your subscription rate.', 'newsletter'),
+                '<a href="https://cp-psource.github.io/e-newsletter/locked-content-extension" target="_blank">',
+                '</a>'
+            );
+            ?>
         </p>
         <form method="post" action="">
             <?php $controls->init(); ?>
