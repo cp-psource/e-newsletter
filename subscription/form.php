@@ -53,9 +53,14 @@ $main_options = $this->get_main_options('form');
         <?php $controls->show(); ?>
 
         <p>
-            Configure the standard form displayed on the subscription page, popup, post injection, with the
-            plain <code>[newsletter_form]</code> shortcode, and so on.
-            See it on <a href="<?php echo esc_attr(Newsletter::instance()->get_newsletter_page_url()) ?>" target="_blank">the Newsletter public page</a>.
+            <?php
+            printf(
+                esc_html__('Configure the standard form displayed on the subscription page, popup, post injection, with the plain %1$s shortcode, and so on. See it on %2$sthe Newsletter public page%3$s.', 'newsletter'),
+                '<code>[newsletter_form]</code>',
+                '<a href="' . esc_attr(Newsletter::instance()->get_newsletter_page_url()) . '" target="_blank">',
+                '</a>'
+            );
+            ?>
         </p>
 
         <form action="" method="post">
@@ -78,10 +83,10 @@ $main_options = $this->get_main_options('form');
                         <table class="widefat" style="width: auto">
                             <thead>
                                 <tr>
-                                    <th>Field</th>
-                                    <th>Show</th>
-                                    <th>Label</th>
-                                    <th>Placeholder</th>
+                                    <th><?php esc_html_e('Field', 'newsletter'); ?></th>
+                                    <th><?php esc_html_e('Show', 'newsletter'); ?></th>
+                                    <th><?php esc_html_e('Label', 'newsletter'); ?></th>
+                                    <th><?php esc_html_e('Placeholder', 'newsletter'); ?></th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>

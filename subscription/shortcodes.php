@@ -19,25 +19,33 @@ defined('ABSPATH') || exit;
 
         <?php $controls->show(); ?>
 
-        <h3>Shortcodes</h3>
+        <h3><?php esc_html_e('Shortcodes', 'newsletter'); ?></h3>
         <p>
-            The shortcode <code>[newsletter_form]</code> can be used anyware to display the subscription
-            form. Use the "shortcode block" in your posts and pages and in your widgets.
+            <?php esc_html_e('The shortcode', 'newsletter'); ?>
+            <code>[newsletter_form]</code>
+            <?php esc_html_e('can be used anywhere to display the subscription form. Use the "shortcode block" in your posts and pages and in your widgets.', 'newsletter'); ?>
         </p>
         <p>
-            <a href="https://cp-psource.github.io/e-newsletter/subscription-form-shortcodes/" target="_blank">Read more</a>
-            to know all the available features.
+            <a href="https://cp-psource.github.io/e-newsletter/subscription-form-shortcodes/" target="_blank">
+                <?php esc_html_e('Read more', 'newsletter'); ?>
+            </a>
+            <?php esc_html_e('to know all the available features.', 'newsletter'); ?>
         </p>
 
-        <h3>Widgets</h3>
+        <h3><?php esc_html_e('Widgets', 'newsletter'); ?></h3>
         <p>
-            Two widgets are provides (standard and minimal). You can use them on
+            <?php esc_html_e('Two widgets are provided (standard and minimal). You can use them on', 'newsletter'); ?>
             <?php if (function_exists('wp_is_block_theme') && wp_is_block_theme()) { ?>
-            the <a href="<?php echo esc_attr(admin_url('site-editor.php')) ?>" target="_blank">Site Editor</a>
+                <?php echo ' '; ?>
+                <a href="<?php echo esc_attr(admin_url('site-editor.php')); ?>" target="_blank">
+                    <?php esc_html_e('the Site Editor', 'newsletter'); ?>
+                </a>
             <?php } else { ?>
-            the <a href="<?php echo esc_attr(admin_url('widgets.php')) ?>" target="_blank">Widgets panel</a>
+                <?php echo ' '; ?>
+                <a href="<?php echo esc_attr(admin_url('widgets.php')); ?>" target="_blank">
+                    <?php esc_html_e('the Widgets panel', 'newsletter'); ?>
+                </a>
             <?php } ?>
-
         </p>
 
     </div>

@@ -6,7 +6,7 @@ Plugin URI: https://cp-psource.github.io/ps-newsletter/
 Description: Das ultimative Newsletter Plugin für ClassicPress. Keine Drittanbieterdienste oder Abo-Kosten, Newsletter direkt aus dem ClassicPress-Dashboard managen und versenden.
 Natürlich mit der großartigen Piestingtal.Source Kompatibilität.
 Version: 2.9.3
-Text Domain: email-newsletter
+Text Domain: newsletter
 Author: PSOURCE
 Author URI: https://github.com/cp-psource
 
@@ -218,7 +218,7 @@ class Newsletter extends NewsletterModule {
         $this->setup_language();
 
         if (function_exists('load_plugin_textdomain')) {
-            load_plugin_textdomain('newsletter', false, plugin_basename(__DIR__) . '/languages');
+            load_plugin_textdomain('newsletter', false, dirname(plugin_basename(__FILE__)) . '/languages/');
         }
     }
 

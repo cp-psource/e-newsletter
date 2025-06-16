@@ -60,9 +60,11 @@ if (class_exists('NewsletterLeads')) {
                                 <td>
                                     <?php $controls->yesno('bottom_enabled'); ?>
                                     <?php if ($last_post_url) { ?>
-                                        <a href="<?php echo esc_attr($last_post_url) ?>#tnp-subscription-posts" target="test">See on your last post</a>.
+                                        <a href="<?php echo esc_attr($last_post_url); ?>#tnp-subscription-posts" target="test">
+                                            <?php esc_html_e('See on your last post', 'newsletter'); ?>
+                                        </a>.
                                     <?php } else { ?>
-                                        No public posts on your site?
+                                        <?php esc_html_e('No public posts on your site?', 'newsletter'); ?>
                                     <?php } ?>
                                 </td>
                             </tr>

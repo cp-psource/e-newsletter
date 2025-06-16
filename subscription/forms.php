@@ -30,8 +30,12 @@ if ($controls->is_action('save')) {
 
     <div id="tnp-body">
         <p>
-            <strong>Old feature</strong>. To inject an HTML form use the shortcode <code>[newsletter_form form="X"]</code> where
-            <code>X</code> is the form number.
+            <strong><?php esc_html_e('Old feature', 'newsletter'); ?></strong>.
+            <?php esc_html_e('To inject an HTML form use the shortcode', 'newsletter'); ?>
+            <code>[newsletter_form form="X"]</code>
+            <?php esc_html_e('where', 'newsletter'); ?>
+            <code>X</code>
+            <?php esc_html_e('is the form number.', 'newsletter'); ?>
         </p>
 
         <?php $controls->show(); ?>

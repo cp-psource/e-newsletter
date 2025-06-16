@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PS-eNewsletter\n"
-"POT-Creation-Date: 2025-06-16 11:17+0200\n"
-"PO-Revision-Date: 2025-06-16 11:17+0200\n"
+"POT-Creation-Date: 2025-06-16 13:57+0200\n"
+"PO-Revision-Date: 2025-06-16 13:57+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -440,7 +440,7 @@ msgstr ""
 #: emails/blocks/footer/options.php:14 emails/blocks/header/options.php:16
 #: emails/blocks/header/options.php:24 emails/blocks/heading/options.php:7
 #: emails/blocks/posts/options.php:38 includes/controls.php:841
-#: includes/controls.php:1360 includes/newsletter-lock/admin/index.php:54
+#: includes/controls.php:1360 includes/newsletter-lock/admin/index.php:59
 #: subscription/confirmation.php:159 subscription/welcome.php:162
 msgid "Default"
 msgstr ""
@@ -2179,27 +2179,34 @@ msgstr ""
 msgid "Success"
 msgstr ""
 
-#: includes/newsletter-lock/admin/index.php:38
+#: includes/newsletter-lock/admin/index.php:32
+#, php-format
+msgid ""
+"Please, %sread more here how to use and configure%s, since it can incredibly "
+"increase your subscription rate."
+msgstr ""
+
+#: includes/newsletter-lock/admin/index.php:43
 msgid "Tags or categories to block"
 msgstr ""
 
-#: includes/newsletter-lock/admin/index.php:40
+#: includes/newsletter-lock/admin/index.php:45
 msgid "comma separated"
 msgstr ""
 
-#: includes/newsletter-lock/admin/index.php:42
+#: includes/newsletter-lock/admin/index.php:47
 msgid "Use tag or category slugs or id for which lock the posts content"
 msgstr ""
 
-#: includes/newsletter-lock/admin/index.php:49
+#: includes/newsletter-lock/admin/index.php:54
 msgid "Denied content message"
 msgstr ""
 
-#: includes/newsletter-lock/admin/index.php:84
+#: includes/newsletter-lock/admin/index.php:89
 msgid "Unlock destination URL"
 msgstr ""
 
-#: includes/newsletter-lock/admin/index.php:88
+#: includes/newsletter-lock/admin/index.php:93
 msgid ""
 "URL where redirect subscribers when they click on unlocking URL "
 "({unlock_url}) inserted in newsletters and welcome message."

@@ -268,7 +268,10 @@ class NewsletterUnsubscription extends NewsletterModule {
 
         $admin_notice = '';
         if ($user->_dummy) {
-            $admin_notice = '<p style="background-color: #eee; color: #000; padding: 1rem; margin: 1rem 0"><strong>Visible only to administrator</strong>. Preview of the content with a dummy subscriber. <a href="' . admin_url('admin.php?page=newsletter_unsubscription_index') . '" target="_blank">Edit this content</a>.</p>';
+            $admin_notice = '<p style="background-color: #eee; color: #000; padding: 1rem; margin: 1rem 0"><strong>' . esc_html__('Visible only to administrator', 'newsletter') . '</strong>. '
+                . esc_html__('Preview of the content with a dummy subscriber.', 'newsletter') . ' '
+                . '<a href="' . esc_url(admin_url('admin.php?page=newsletter_unsubscription_index')) . '" target="_blank">'
+                . esc_html__('Edit this content', 'newsletter') . '</a>.</p>';
         }
 
         $message = $this->get_text($key . '_text');

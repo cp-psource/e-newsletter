@@ -77,11 +77,12 @@ if (!$controls->is_action()) {
                         <?php } ?>
 
                         <p class="description">
-                            This message is shown in place of protected post or page content which is surrounded with
-                            [newsletter_lock] and [/newsletter_lock] shortcodes or in place of the full content if they are
-                            in categories or have tags as specified above.<br>
-                            You can use shortcodes like [newsletter_form] to display a subscription form or any other Newsletter shortcode.
-                            <strong>Remember to add the {unlock_url} on the welcome email so the user can unlock the content.</strong>
+                            <?php esc_html_e('This message is shown in place of protected post or page content which is surrounded with [newsletter_lock] and [/newsletter_lock] shortcodes or in place of the full content if they are in categories or have tags as specified above.', 'newsletter'); ?>
+                            <br>
+                            <?php esc_html_e('You can use shortcodes like [newsletter_form] to display a subscription form or any other Newsletter shortcode.', 'newsletter'); ?>
+                            <strong>
+                                <?php esc_html_e('Remember to add the {unlock_url} on the welcome email so the user can unlock the content.', 'newsletter'); ?>
+                            </strong>
                         </p>
                     </td>
                 </tr>
@@ -90,10 +91,9 @@ if (!$controls->is_action()) {
                     <td>
                         <?php $controls->text('url', 70); ?>
                         <p class="description">
-                            <?php _e('URL where redirect subscribers when they click on unlocking URL ({unlock_url}) inserted in newsletters and welcome message.', 'newsletter') ?>
+                            <?php esc_html_e('URL where redirect subscribers when they click on unlocking URL ({unlock_url}) inserted in newsletters and welcome message.', 'newsletter'); ?>
                             <br>
-                            Newsletters with tracking active can link directly the pages with locked content since the URLs will
-                            unlock the content as well.
+                            <?php esc_html_e('Newsletters with tracking active can link directly the pages with locked content since the URLs will unlock the content as well.', 'newsletter'); ?>
                         </p>
                     </td>
                 </tr>

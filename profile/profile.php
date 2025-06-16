@@ -236,11 +236,11 @@ class NewsletterProfile extends NewsletterModule {
                 }
                 $edit_url .= '&lang=' . urldecode($language);
             }
-            $admin_notice = '<p style="background-color: #eee; color: #000; padding: 1rem; margin: 1rem 0"><strong>Visible only to administrators</strong>. ';
+            $admin_notice = '<p style="background-color: #eee; color: #000; padding: 1rem; margin: 1rem 0"><strong>' . esc_html__('Visible only to administrators', 'newsletter') . '</strong>. ';
             if ($user->_dummy) {
-                $admin_notice .= 'Preview of the content with a dummy subscriber. ';
+                $admin_notice .= esc_html__('Preview of the content with a dummy subscriber.', 'newsletter') . ' ';
             }
-            $admin_notice .= '<a href="' . esc_attr($edit_url) . '" target="_blank">Edit this content</a>.</p>';
+            $admin_notice .= '<a href="' . esc_attr($edit_url) . '" target="_blank">' . esc_html__('Edit this content', 'newsletter') . '</a>.</p>';
         }
 
         $text = $this->get_text('text');

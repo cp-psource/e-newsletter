@@ -27,39 +27,30 @@ defined('ABSPATH') || exit;
             <div class="tnp-dashboard">
                 <div class="tnp-cards-container">
                     <div class="tnp-card">
-                        <div class="tnp-card-title">How to get support</div>
+                        <div class="tnp-card-title"><?php esc_html_e('How to get support', 'newsletter'); ?></div>
 
-                        <h3><i class="fas fa-book"></i> Documentation</h3>
+                        <h3><i class="fas fa-book"></i> <?php esc_html_e('Documentation', 'newsletter'); ?></h3>
                         <p>
-                            We have <a href="https://www.thenewsletterplugin.com/documentation" target=_blank">extensive documentation</a>
-                            about PS eNewsletter settigs and feature and the free and commercial addons.
+                            <?php
+                            printf(
+                                esc_html__('We have %1$sextensive documentation%2$s about PS eNewsletter settings and features and the free and commercial addons.', 'newsletter'),
+                                '<a href="https://cp-psource.github.io/e-newsletter/documentation" target="_blank">',
+                                '</a>'
+                            );
+                            ?>
                         </p>
 
-                        <h3><i class="fas fa-comment"></i> Forum</h3>
-                        <p>We run a <a href="https://www.thenewsletterplugin.com/forums" target=_blank">support forum</a>
-                            where you can send your requests for help, new features, ideas and so on.</p>
-
+                        <h3><i class="fas fa-comment"></i> <?php esc_html_e('Forum', 'newsletter'); ?></h3>
+                        <p>
+                            <?php
+                            printf(
+                                esc_html__('We run a %1$ssupport forum%2$s where you can send your requests for help, new features, ideas and so on.', 'newsletter'),
+                                '<a href="https://github.com/cp-psource/e-newsletter/discussions" target="_blank">',
+                                '</a>'
+                            );
+                            ?>
+                        </p>
                     </div>
-
-
-                    <div class="tnp-card">
-                        <div class="tnp-card-title">Premium support (with an active license)</div>
-                        <p style="font-weight: bold">
-                            With an active license, please install our
-                            <a href="https://www.thenewsletterplugin.com/documentation/installation/how-to-install-the-addons-manager/" target=_blank">Addons Manager</a>
-                            to send debug data and test emails to our staff.
-                        </p>
-
-                        <p>
-                            You can open a ticket from your account page to have the fastest support.
-                        </p>
-                        <p>
-                            <?php $controls->btn_link('https://www.thenewsletterplugin.com/account', __('Open a ticket', 'newsletter'), ['target' => '_blank']); ?>
-                        </p>
-
-                    </div>
-
-
                 </div>
             </div>
         </form>
