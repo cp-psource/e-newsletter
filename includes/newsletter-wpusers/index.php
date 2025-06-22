@@ -87,6 +87,7 @@ if (!$controls->is_action()) {
     }
 
     if ($controls->is_action('link')) {
+        global $wpdb; // <-- Diese Zeile hinzufügen
         /* @var $wpdb wpdb */
         $res = $wpdb->query("update " . NEWSLETTER_USERS_TABLE . " n join " . $wpdb->users . " u on u.user_email=n.email set n.wp_user_id=u.id");
         if ($res === false) {

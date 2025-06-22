@@ -1729,8 +1729,8 @@ class NewsletterControls {
             $this->checkbox_group($name, $list->id, '<span>' . $list->id . '</span> ' . esc_html($list->name));
         }
         echo '<a href="https://www.thenewsletterplugin.com/documentation/newsletter-lists" target="_blank">'
-        . 'Click here to read more about lists.'
-        . '</a>';
+            . esc_html__('Click here to read more about lists.', 'newsletter')
+            . '</a>';
         echo '</div>';
     }
 
@@ -1756,7 +1756,7 @@ class NewsletterControls {
             echo '</div>';
         }
         echo '<div style="clear: both"></div>';
-        echo '<a href="https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-preferences" target="_blank">Click here know more about preferences.</a> They can be configured on Subscription/Form field panel.';
+        echo '<a href="https://cp-psource.github.io/e-newsletter/newsletter-lists" target="_blank">Click here know more about preferences.</a> They can be configured on Subscription/Form field panel.';
         echo '</div>';
     }
 
