@@ -288,6 +288,8 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
         );
 
         global $newsletterForms;
+
+        // Index-Seite
         add_submenu_page(
             'newsletter_main_index',
             'Forms',
@@ -296,11 +298,20 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             'newsletter_forms_index',
             function () use ($newsletterForms) {
                 $forms = $newsletterForms;
-                if (isset($_GET['id'])) {
-                    require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/edit.php';
-                } else {
-                    require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/index.php';
-                }
+                require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/index.php';
+            }
+        );
+
+        // Edit-Seite (versteckt)
+        add_submenu_page(
+            '',
+            'Edit Form',
+            '', // leer, damit nicht im Menü sichtbar
+            'manage_options',
+            'newsletter_forms_edit',
+            function () use ($newsletterForms) {
+                $forms = $newsletterForms;
+                require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/edit.php';
             }
         );
     }

@@ -1278,13 +1278,18 @@ class NewsletterSubscription extends NewsletterModule {
         }
 
         if (isset($attrs['autoresponders']) && method_exists('NewsletterAutoresponder', 'get_autoresponder_key')) {
+            global $newsletter_autoresponder;
             $ids = wp_parse_id_list($attrs['autoresponders']);
             foreach ($ids as $id) {
-                $key = NewsletterAutoresponder::instance()->get_autoresponder_key($id);
-                if ($key) {
-                    $b .= '<input type="hidden" name="nar[]" value="' . esc_attr($key) . '">' . "\n";
+                if ($newsletter_autoresponder && method_exists($newsletter_autoresponder, 'get_autoresponder_key')) {
+                    $key = $newsletter_autoresponder->get_autoresponder_key($id);
+                    if ($key) {
+                        $b .= '<input type="hidden" name="nar[]" value="' . esc_attr($key) . '">' . "\n";
+                    } else {
+                        $b .= $this->build_field_admin_notice(__('Autoresponder not found: ', 'newsletter') . $id);
+                    }
                 } else {
-                    $b .= $this->build_field_admin_notice('Autoresponder not found: ' . $id);
+                    $b .= $this->build_field_admin_notice(__('Autoresponder instance or method not found.', 'newsletter'));
                 }
             }
         }

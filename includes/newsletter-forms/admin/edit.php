@@ -14,6 +14,9 @@ if (!$form) {
 }
 
 if ($controls->is_action('save')) {
+
+    error_log(print_r($_POST, true));
+    error_log(print_r($controls->data, true));
     $controls->data['id'] = $form->id;
     $form = $forms->save_form($controls->data);
     $controls->add_toast_saved();
@@ -43,7 +46,7 @@ if (!$controls->is_action()) {
     }, false);
 </script>
 
-<link href="<?php echo plugins_url('newsletter') ?>/style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo plugin_dir_url(dirname(__DIR__)) . 'newsletter-forms/assets/style.css'; ?>" rel="stylesheet" type="text/css">
 
 <div class="wrap tnp-forms tnp-forms-edit" id="tnp-wrap">
 
@@ -87,14 +90,19 @@ if (!$controls->is_action()) {
                                 <td>
                                     <?php if (class_exists('NewsletterAutoresponder')) { ?>
                                         <?php
-                                        $autoresponders = NewsletterAutoresponder::instance()->get_autoresponders();
-                                        foreach ($autoresponders as $autoresponder) {
-                                            $controls->checkbox_group('autoresponders', $autoresponder->id, $autoresponder->name);
-                                            echo '<br>';
+                                        global $newsletter_autoresponder;
+                                        if (isset($newsletter_autoresponder)) {
+                                            $autoresponders = $newsletter_autoresponder->get_autoresponders();
+                                            foreach ($autoresponders as $autoresponder) {
+                                                $controls->checkbox_group('autoresponders', $autoresponder->id, $autoresponder->name);
+                                                echo '<br>';
+                                            }
+                                        } else {
+                                            esc_html_e('Autoresponder instance not found.', 'newsletter');
                                         }
                                         ?>
                                     <?php } else { ?>
-                                        The Autoresponder addon is required.
+                                        <?php esc_html_e('The Autoresponder addon is required.', 'newsletter'); ?>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -105,6 +113,7 @@ if (!$controls->is_action()) {
 
             <div class="tnp-buttons">
                 <?php $controls->button_icon_back('?page=newsletter_forms_index'); ?>
+                <input type="hidden" name="act" value="save">
                 <?php $controls->button_save(); ?>
                 <?php $controls->button_delete(); ?>
             </div>

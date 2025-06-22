@@ -54,7 +54,6 @@ $controls->warnings[] = __('Please note: this is an experimental feature that co
 
             <div class="tnp-buttons">
                 <?php $controls->button('add', 'New') ?>
-                <?php $controls->button_link('https://forms.gle/bfvJECGdSPtsc2gdA', __('Share your thoughts', 'newsletter')) ?>
             </div>
 
             <table class="widefat" style="width: 100%">

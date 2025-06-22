@@ -41,6 +41,11 @@ class NewsletterAutoresponder {
         include NEWSLETTER_DIR . '/main/autorespondercomposer.php';
     }
 
+    public function get_autoresponders() {
+        global $wpdb;
+        return $wpdb->get_results("SELECT * FROM {$wpdb->prefix}tnp_autoresponders");
+    }
+
     public function process_queue() {
         global $wpdb;
         $newsletter = Newsletter::instance();
@@ -195,3 +200,5 @@ if (class_exists('NewsletterAutoresponder')) {
     $GLOBALS['newsletter_autoresponder'] = new NewsletterAutoresponder();
     $GLOBALS['newsletter_autoresponder']->init();
 }
+
+

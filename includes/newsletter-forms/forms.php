@@ -71,20 +71,40 @@ class NewsletterForms {
     }
 
     function hook_admin_enqueue_scripts() {
-        $url = plugins_url('newsletter-forms');
-        wp_enqueue_script('tnp-forms-designer-vue', $url . '/vendor/vue/vue.global.prod.min.js', [], time());
-        wp_enqueue_script('tnp-forms-designer', $url . '/assets/tnpfd.umd.js', ['tnp-forms-designer-vue'], time());
-        wp_enqueue_style('tnp-forms-designer', $url . '/assets/style.css', [], time());
+        // Hole das Plugin-Basisverzeichnis (ein Verzeichnis höher!)
+        $base_url = plugin_dir_url(dirname(__DIR__)); // <- geht ein Verzeichnis nach oben
+
+        // Hänge den Pfad zum Asset-Ordner an
+        $forms_url = $base_url . 'includes/newsletter-forms';
+
+        wp_enqueue_script('tnp-forms-designer-vue', $forms_url . '/vendor/vue/vue.global.prod.min.js', [], time());
+        wp_enqueue_script('tnp-forms-designer', $forms_url . '/assets/tnpfd.umd.js', ['tnp-forms-designer-vue'], time());
+        wp_enqueue_style('tnp-forms-designer', $forms_url . '/assets/style.css', [], time());
     }
 
-    function hook_admin_menu() {
-        add_submenu_page('newsletter_main_index', 'Forms', '<span class="tnp-side-menu">Forms</span>', 'exist', 'newsletter_forms_index', function () {
-            require __DIR__ . '/admin/index.php';
-        });
-        add_submenu_page('admin.php', 'Edit', 'Edit', 'exist', 'newsletter_forms_edit', function () {
-            require __DIR__ . '/admin/edit.php';
-        });
-    }
+    /*function hook_admin_menu() {
+        error_log('hook_admin_menu läuft');
+        add_submenu_page(
+            'newsletter_main_index', // Parent-Slug, muss exakt so auch bei add_menu_page stehen!
+            'Forms',
+            '<span class="tnp-side-menu">Forms</span>',
+            'manage_options',
+            'newsletter_forms_index',
+            function () {
+                require plugin_dir_path(__FILE__) . 'includes/newsletter-forms/admin/index.php';
+            }
+        );
+        add_submenu_page(
+            'newsletter_main_index', // Parent-Slug, KEIN 'admin.php'!
+            'Edit Form',
+            '', // leer, damit nicht im Menü sichtbar
+            'manage_options',
+            'newsletter_forms_edit',
+            function () {
+                require plugin_dir_path(__FILE__) . 'includes/newsletter-forms/admin/edit.php';
+            }
+        );
+    }*/
 
     function shortcode_form($attrs) {
         $form = $this->get_form($attrs['id']);
@@ -377,13 +397,16 @@ class NewsletterForms {
 
         $b .= "<input type='hidden' name='nfid' value='" . esc_attr($form->id) . "'>\n";
 
-        if (!empty($form->autoresponders) && method_exists('\NewsletterAutoresponder', 'get_autoresponder_key')) {
+        if (!empty($form->autoresponders) && method_exists('NewsletterAutoresponder', 'get_autoresponder_key')) {
+            global $newsletter_autoresponder;
             foreach ($form->autoresponders as $id) {
-                $key = \NewsletterAutoresponder::instance()->get_autoresponder_key($id);
-                if ($key) {
-                    $b .= '<input type="hidden" name="nar[]" value="' . esc_attr($key) . '">' . "\n";
-                } else {
-                    //$b .= $this->build_field_admin_notice('Autoresponder not found: ' . $id);
+                if ($newsletter_autoresponder && method_exists($newsletter_autoresponder, 'get_autoresponder_key')) {
+                    $key = $newsletter_autoresponder->get_autoresponder_key($id);
+                    if ($key) {
+                        $b .= '<input type="hidden" name="nar[]" value="' . esc_attr($key) . '">' . "\n";
+                    } else {
+                        // $b .= $this->build_field_admin_notice(__('Autoresponder not found: ', 'newsletter') . $id);
+                    }
                 }
             }
         }

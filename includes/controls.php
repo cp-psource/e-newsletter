@@ -1161,7 +1161,7 @@ class NewsletterControls {
     }
 
     function button_save($label = 'Speichern') {
-        echo '<button type="submit" name="save" class="button-primary tnpc-button"><i class="fas fa-save"></i>&nbsp;' . esc_html($label) . '</button>';
+        echo '<button type="submit" name="save" class="button-primary tnpc-button" onclick="this.form.act.value=\'save\';"><i class="fas fa-save"></i>&nbsp;' . esc_html($label) . '</button>';
     }
 
     function button_link_save($url) {
@@ -1635,11 +1635,17 @@ class NewsletterControls {
 
     function autoresponders($name = 'autoresponders') {
         if (!class_exists('NewsletterAutoresponder')) {
-            echo 'The Autoresponder addon is required.';
+            esc_html_e('The Autoresponder addon is required.', 'newsletter');
             return;
         }
 
-        $autoresponders = NewsletterAutoresponder::instance()->get_autoresponders();
+        global $newsletter_autoresponder;
+        if (!$newsletter_autoresponder) {
+            esc_html_e('Autoresponder instance not found.', 'newsletter');
+            return;
+        }
+
+        $autoresponders = $newsletter_autoresponder->get_autoresponders();
 
         foreach ($autoresponders as $autoresponder) {
             $this->checkbox_group($name, $autoresponder->id, $autoresponder->name);
@@ -1656,16 +1662,21 @@ class NewsletterControls {
      */
     function autoresponders_on_off($name = 'autoresponders') {
         if (!class_exists('NewsletterAutoresponder')) {
-            echo 'The Autoresponder addon is required.';
+            esc_html_e('The Autoresponder addon is required.', 'newsletter');
             return;
         }
 
-        $autoresponders = NewsletterAutoresponder::instance()->get_autoresponders();
+        global $newsletter_autoresponder;
+        if (!$newsletter_autoresponder) {
+            esc_html_e('Autoresponder instance not found.', 'newsletter');
+            return;
+        }
+
+        $autoresponders = $newsletter_autoresponder->get_autoresponders();
 
         echo '<table class="widefat" style="width: auto">';
         echo '<thead><tr>';
-        echo '<th>Series</th><th>&nbsp;</th>';
-
+        echo '<th>' . esc_html__('Series', 'newsletter') . '</th><th>&nbsp;</th>';
         echo '</tr></thead>';
 
         foreach ($autoresponders as $autoresponder) {
@@ -1673,30 +1684,28 @@ class NewsletterControls {
             echo esc_html($autoresponder->name);
             echo '</td><td>';
 
-            echo '<select name="options[', esc_attr($name), '][]"';
-            echo '>';
-
-            echo '<option value="">', esc_html__('Ignore', 'newsletter'), '</option>';
+            echo '<select name="options[' . esc_attr($name) . '][]">';
+            echo '<option value="">' . esc_html__('Ignore', 'newsletter') . '</option>';
 
             $values = $this->get_value_array($name);
 
             // Positive ID
-            echo '<option value="', esc_attr($autoresponder->id), '"';
+            echo '<option value="' . esc_attr($autoresponder->id) . '"';
             if (in_array('' . $autoresponder->id, $values)) {
                 echo ' selected';
             }
-            echo '>', esc_html__('Activate', 'newsletter'), '</option>';
+            echo '>' . esc_html__('Activate', 'newsletter') . '</option>';
 
             // Negative ID
-            echo '<option value="-', esc_attr($autoresponder->id), '"';
+            echo '<option value="-' . esc_attr($autoresponder->id) . '"';
             if (in_array('-' . $autoresponder->id, $values)) {
                 echo ' selected';
             }
-            echo '>', esc_html__('Deactivate', 'newsletter'), '</option>';
+            echo '>' . esc_html__('Deactivate', 'newsletter') . '</option>';
 
             echo '</select>';
 
-            echo '</tr></td>';
+            echo '</td></tr>';
         }
 
         echo '</table>';
