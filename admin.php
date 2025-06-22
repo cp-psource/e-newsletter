@@ -287,6 +287,17 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             }
         );
 
+        add_submenu_page(
+            'newsletter_main_index',
+            'SMTP',
+            'SMTP',
+            'manage_options',
+            'newsletter_smtp_index',
+            function () {
+                require_once NEWSLETTER_DIR . '/includes/newsletter-smtp/admin/index.php';
+            }
+        );
+
         global $newsletterForms;
 
         // Index-Seite

@@ -1165,6 +1165,7 @@ require_once NEWSLETTER_DIR . '/includes/newsletter-wpusers/wpusers.php';
 $wpusers = new NewsletterWpUsers($newsletter->version);
 $wpusers->init();
 require_once NEWSLETTER_DIR . '/includes/newsletter-archive/archive.php';
+require_once NEWSLETTER_DIR . '/includes/newsletter-smtp/smtp.php';
 require_once NEWSLETTER_DIR . '/includes/newsletter-forms/forms.php';
 global $newsletterForms;
 $newsletterForms = new \TNP\Forms\NewsletterForms($newsletter->version);

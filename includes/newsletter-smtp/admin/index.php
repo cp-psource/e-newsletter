@@ -50,22 +50,17 @@ if (!$controls->is_action()) {
 
 <div class="wrap" id="tnp-wrap">
 
-    <?php include NEWSLETTER_ADMIN_HEADER; ?>
-
-    <div id="tnp-heading">
+    <?php include NEWSLETTER_ADMIN_HEADER; ?>    <div id="tnp-heading">
         <?php $controls->title_help('/addons/delivery-addons/smtp-extension/') ?>
-        <h2><?php echo $this->get_title(); ?></h2>
+        <h2><?php _e('SMTP-Konfiguration', 'newsletter'); ?></h2>
     </div>
 
     <div id="tnp-body">
         <?php $controls->show(); ?>
         <form method="post" action="">
-            <?php $controls->init(); ?>
-
-            <div class="psource-tabs" id="tabs">
+            <?php $controls->init(); ?>            <div class="psource-tabs" id="tabs">
                 <div class="psource-tabs-nav">
-                    <button class="psource-tab active" data-tab="tabs-general">General</button>
-                    <button class="psource-tab" data-tab="tabs-3">Bounces</button>
+                    <button class="psource-tab active" data-tab="tabs-general"><?php _e('General', 'newsletter'); ?></button>
                 </div>
                 <div class="psource-tabs-content">
                     <div class="psource-tab-panel active" id="tabs-general">
@@ -108,21 +103,7 @@ if (!$controls->is_action()) {
                                         your provider to unlock the connection (if possible).
                                     </p>
                                 </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="psource-tab-panel" id="tabs-3">
-                        <p>
-                            This addon cannot manage the bounces produced by the connected SMTP server. You can consider to
-                            install and configure the
-                            <a href="https://www.thenewsletterplugin.com/documentation/addons/extended-features/bounce-extension/" target="_blank">Bounce Addon</a>.
-                        </p>
-                        <p style="font-weight: bold">
-                            Anyway we advise to use a professional delivery service. Check out our
-                            <a href="https://www.thenewsletterplugin.com/documentation/addons/delivery-addons/" target="_blank">integrations</a>
-                            (some of them are free,
-                            see the addons manager page on the left side menu).
-                        </p>
+                            </tr>                        </table>
                     </div>
                 </div>
             </div>

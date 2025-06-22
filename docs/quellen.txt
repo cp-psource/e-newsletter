@@ -6,5 +6,7 @@ https://www.thenewsletterplugin.com/documentation/newsletters/extra-profile-fiel
 
 https://www.thenewsletterplugin.com/documentation/installation/newsletter-configuration/ -> newsletter-configuration.md
 
+https://www.thenewsletterplugin.com/documentation/addons/delivery-addons/smtp-extension/ -> newsletter-smtp.md
+
 
 
