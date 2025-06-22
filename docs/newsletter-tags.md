@@ -3,85 +3,126 @@ layout: psource-theme
 title: "PS-eNewsletter Tags"
 ---
 
-<h2 align="center" style="color:#38c2bb;">📚 PS-eNewsletter Tags</h2>
+# 📚 PS-eNewsletter Tags
 
 <div class="menu">
   <a href="https://github.com/cp-psource/e-newsletter/discussions" style="color:#38c2bb;">💬 Forum</a>
   <a href="https://github.com/cp-psource/e-newsletter/releases" style="color:#38c2bb;">📝 Download</a>
 </div>
 
-Tags. How To Insert Subscriber’s Data into Newsletters
-The Newsletter plugin provides a number of tags or placeholders you can use to inject subscriber’s data, dynamic URLs, or forms on pages or newsletters. Examples are the subscriber’s name or the personal cancellation URL.
+## Newsletter-Tags - So fügst du Abonnentendaten in Newsletter ein
 
-They’re written as {tagname}, like {name} (the subscriber’s first name) or {email_url} (the link to the newsletter online version).
+Das Newsletter-Plugin bietet eine Reihe von Tags oder Platzhaltern, die du verwenden kannst, um Abonnentendaten, dynamische URLs oder Formulare auf Seiten oder in Newslettern einzufügen. Beispiele sind der Name des Abonnenten oder die persönliche Abmelde-URL.
 
-Let’s start exploring them all!
+Sie werden als `{tagname}` geschrieben, wie `{name}` (der Vorname des Abonnenten) oder `{email_url}` (der Link zur Online-Version des Newsletters).
 
-What's inside
-How to use URL-generating tags
-General tags
-Subscriber specific tags
-About profile fields tags {profile_N}
-Salutation according to gender
-Subscription, cancellation, profile page URL tags
-Company information tags
-Forms
-Tags can be used on messages, subjects, and on-page texts (configurable from the subscription panel). Of course, not all tags make sense in every place or every context. For example, a subscription confirmation tag has not much sense in the welcome message (sent when the subscription is already confirmed).
+Lass uns alle erkunden!
 
-Newsletter tags can not be used on posts or pages, they don’t work! They work only when the text is manipulated by Newsletter, for example while creating the final email or the final message to be displayed to the subscriber.
+## 📋 Inhalt
 
-Many tags are subscriber-linked so they need a subscriber set of data to be generated. Clearly the {name} tag needs a subscriber, but even the {subscription_confirm_url} needs it, since the generated URL contains the subscriber’s keys.
+- [Verwendung von URL-generierenden Tags](#verwendung-von-url-generierenden-tags)
+- [Allgemeine Tags](#allgemeine-tags)
+- [Abonnentenspezifische Tags](#abonnentenspezifische-tags)
+- [Über Profilfeld-Tags {profile_N}](#über-profilfeld-tags-profile_n)
+- [Anrede nach Geschlecht](#anrede-nach-geschlecht)
+- [URL-Tags für Anmeldung, Abmeldung und Profilseite](#url-tags-für-anmeldung-abmeldung-und-profilseite)
+- [Firmendaten-Tags](#firmendaten-tags)
+- [Formulare](#formulare)
 
-How to use URL-generating tags
-Some tags generate an URL with the subscriber’s private token to access his profile or to start some kind of action like activation or cancellation. If you write directly the HTML code, the tag should be used in this way:
+## Grundlagen
 
-<a href="{unsubscription_url}">To unsubscribe click here</a>
-if you use an editor, just select the word or phrase you to become a link, press the link tool and use the tag as URL.
+Tags können in Nachrichten, Betreffzeilen und auf Seitentexten verwendet werden (konfigurierbar über das Abonnement-Panel). Natürlich machen nicht alle Tags in jedem Kontext Sinn. Zum Beispiel macht ein Anmeldebestätigungs-Tag in der Willkommensnachricht wenig Sinn (die gesendet wird, wenn die Anmeldung bereits bestätigt ist).
 
+> **⚠️ Wichtig:** Newsletter-Tags können **nicht** in Beiträgen oder Seiten verwendet werden - sie funktionieren dort nicht! Sie funktionieren nur, wenn der Text vom Newsletter-Plugin verarbeitet wird, z.B. beim Erstellen der finalen E-Mail oder der finalen Nachricht für den Abonnenten.
 
-General tags
-{blog_url} – the blog URL, like https://www.thenewsletterplugin.com
-{blog_title} – the blog title as configured on the WordPress general settings
-{blog_description} – the blog description as configured on the WordPress general settings
-{date} – the current date (not time) formatted as configured on the WordPress general settings
-{date_NNN} – the current date formatted as specified by NNN which is a sequence of characters compatible with the PHP date() function specifications
-{email_url} – the URL to see the current newsletter online
-Subscriber specific tags
-{id} – the subscriber’s unique ID
-{name} – the subscriber’s name or first name, it depends on how you use that fields during the subscription
-{surname}  – the subscriber’s last name
-{title} – the subscriber’s title or salutation, like Mr or Mrs, can be configured on the subscription panel
-{email} – the subscriber’s email
-{profile_N} – the profile number N as configured on subscription form fields
-{ip} – the IP from which the subscription has been started; there is who like to add it to the confirmation email
-About profile fields tags {profile_N}
-The {profile_N} tag must be used by changing the “N” to the number of the profile field you want to insert.
+Viele Tags sind abonnentenverknüpft und benötigen daher einen Abonnentendatensatz zur Generierung. Klar braucht der `{name}`-Tag einen Abonnenten, aber sogar die `{subscription_confirm_url}` benötigt ihn, da die generierte URL die privaten Schlüssel des Abonnenten enthält.
 
-For example, if your profile field number 2 is the shoe number and you want to personalize the newsletter content by writing something like “See all our offers for shoes of number [subscriber show number]” you can write the sentence in this way: “See all our offers for shoes of number {profile_2}”.
+## Verwendung von URL-generierenden Tags
 
-Salutation according to gender
-To start a newsletter with a different salutation by gender you can use a combination of tags {title} and {name}. For example
+Einige Tags generieren eine URL mit dem privaten Token des Abonnenten, um auf sein Profil zuzugreifen oder Aktionen wie Aktivierung oder Abmeldung zu starten. Wenn du direkt HTML-Code schreibst, sollte der Tag so verwendet werden:
 
-Good morning {title} {name},
-there {title} is replaced with Mr. or Mrs. or the texts you set on Subscription>Form fields panel.
+```html
+<a href="{unsubscription_url}">Zum Abmelden klicke hier</a>
+```
 
-Subscription, cancellation, profile page URL tags
-{subscription_confirm_url} – to confirm a subscription, to be used only on confirmation email when the double opt-in is used
-{unsubscription_url} – to drive the user to the unsubscription page where he’s asked to confirm he wants to unsubscribe; should be used on every email even is a good alternative is to use the {profile_url} tag
-{unsubscription_confirm_url} – to definitively unsubscribe; can be used on every email for the “one-click unsubscription” or on the unsubscription request page (the one references by the {unsubscription_url} tag)
-{profile_url} – point directly to the profile editing page; I prefer to use this tag to offer the unsubscription feature, adding on the profile page the {unsubscription_confirm_url} so the subscriber can (eventually) review his profile instead of unsubscribe
-Note: “unsubscription” is not an English word, that was an error from the first plugin’s days.
+Wenn du einen Editor verwendest, wähle einfach das Wort oder den Satz aus, der zu einem Link werden soll, drücke das Link-Tool und verwende den Tag als URL.
 
-Company information tags
-Company data can be set on Settings>Company Info panel.
+## Allgemeine Tags
 
-{company_name} – the company name from the company info configuration
-{company_address} – the company address from the company info configuration
-{company_legal} – the legal text set on company info
-Forms
-Forms tags are of course specific and can be used only on some pages. They can have different behavior in different contexts.
+| Tag | Beschreibung |
+|-----|-------------|
+| `{blog_url}` | Die Blog-URL, z.B. https://www.example.com |
+| `{blog_title}` | Der Blog-Titel, wie in den WordPress-Grundeinstellungen konfiguriert |
+| `{blog_description}` | Die Blog-Beschreibung, wie in den WordPress-Grundeinstellungen konfiguriert |
+| `{date}` | Das aktuelle Datum (nicht die Zeit), formatiert wie in den WordPress-Grundeinstellungen konfiguriert |
+| `{date_NNN}` | Das aktuelle Datum, formatiert nach NNN (kompatibel mit PHP date()-Funktion) |
+| `{email_url}` | Die URL zur Online-Ansicht des aktuellen Newsletters |
 
-{subscription_form} – generates the main subscription form and should be used only on the subscription page configurable on the subscription panel
-{subscription_form_N} – can be used in place of the {subscription_form} to recall the custom form number N
-{profile_form} – must be used on profile page text (configurable on subscription panel) and generated the form where a subscriber can review and edit his data; I use it even on the welcome page to let the subscriber complete the subscription adding more information
-The {subscription_form}, when used on the widget, it is replaced by a different form, with the same field but a different layout (that better adapts to a sidebar).
+## Abonnentenspezifische Tags
+
+| Tag | Beschreibung |
+|-----|-------------|
+| `{id}` | Die eindeutige ID des Abonnenten |
+| `{name}` | Der Name oder Vorname des Abonnenten (je nach Feldverwendung bei der Anmeldung) |
+| `{surname}` | Der Nachname des Abonnenten |
+| `{title}` | Der Titel oder die Anrede des Abonnenten (z.B. Herr/Frau), konfigurierbar im Anmeldepanel |
+| `{email}` | Die E-Mail-Adresse des Abonnenten |
+| `{profile_N}` | Das Profilfeld Nummer N, wie in den Anmeldeformular-Feldern konfiguriert |
+| `{ip}` | Die IP-Adresse, von der die Anmeldung gestartet wurde |
+
+## Über Profilfeld-Tags {profile_N}
+
+Der `{profile_N}`-Tag muss verwendet werden, indem du das "N" durch die Nummer des Profilfelds ersetzt, das du einfügen möchtest.
+
+**Beispiel:** Wenn dein Profilfeld Nummer 2 die Schuhgröße ist und du den Newsletter-Inhalt personalisieren möchtest, indem du etwa schreibst "Sieh dir alle unsere Angebote für Schuhe in Größe [Abonnenten-Schuhgröße] an", kannst du den Satz so schreiben: 
+
+```
+"Sieh dir alle unsere Angebote für Schuhe in Größe {profile_2} an"
+```
+
+## Anrede nach Geschlecht
+
+Um einen Newsletter mit unterschiedlicher Anrede je nach Geschlecht zu beginnen, kannst du eine Kombination der Tags `{title}` und `{name}` verwenden:
+
+```
+Guten Morgen {title} {name},
+```
+
+Hier wird `{title}` durch "Herr" oder "Frau" oder die Texte ersetzt, die du im Panel "Anmeldung > Formularfelder" eingestellt hast.
+
+## URL-Tags für Anmeldung, Abmeldung und Profilseite
+
+| Tag | Beschreibung |
+|-----|-------------|
+| `{subscription_confirm_url}` | Zur Bestätigung einer Anmeldung - nur in Bestätigungs-E-Mails bei Double-Opt-In verwenden |
+| `{unsubscription_url}` | Leitet den Nutzer zur Abmeldeseite, wo er bestätigen muss, dass er sich abmelden möchte; sollte in jeder E-Mail verwendet werden |
+| `{unsubscription_confirm_url}` | Für die endgültige Abmeldung; kann für "Ein-Klick-Abmeldung" in jeder E-Mail oder auf der Abmeldeanfrage-Seite verwendet werden |
+| `{profile_url}` | Zeigt direkt auf die Profilbearbeitungsseite; ich verwende diesen Tag lieber für die Abmeldefunktion und füge auf der Profilseite die `{unsubscription_confirm_url}` hinzu, damit der Abonnent (eventuell) sein Profil überprüfen kann, anstatt sich abzumelden |
+
+> **💡 Tipp:** Ich verwende lieber `{profile_url}` für die Abmeldefunktion, da Abonnenten so die Möglichkeit haben, ihr Profil zu überprüfen, bevor sie sich endgültig abmelden.
+
+## Firmendaten-Tags
+
+Firmendaten können im Panel "Einstellungen > Firmendaten" eingestellt werden.
+
+| Tag | Beschreibung |
+|-----|-------------|
+| `{company_name}` | Der Firmenname aus der Firmendaten-Konfiguration |
+| `{company_address}` | Die Firmenadresse aus der Firmendaten-Konfiguration |
+| `{company_legal}` | Der rechtliche Text aus den Firmendaten |
+
+## Formulare
+
+Formular-Tags sind spezifisch und können nur auf bestimmten Seiten verwendet werden. Sie können in verschiedenen Kontexten unterschiedlich funktionieren.
+
+| Tag | Beschreibung |
+|-----|-------------|
+| `{subscription_form}` | Generiert das Hauptanmeldeformular und sollte nur auf der Anmeldeseite verwendet werden (konfigurierbar im Anmeldepanel) |
+| `{subscription_form_N}` | Kann anstelle von `{subscription_form}` verwendet werden, um das benutzerdefinierte Formular Nummer N aufzurufen |
+| `{profile_form}` | Muss im Profilseitentext verwendet werden (konfigurierbar im Anmeldepanel) und generiert das Formular, wo ein Abonnent seine Daten überprüfen und bearbeiten kann |
+
+> **📝 Hinweis:** Das `{subscription_form}` wird im Widget durch ein anderes Formular mit denselben Feldern, aber einem anderen Layout ersetzt, das besser in eine Seitenleiste passt.
+
+---
+
+**🚀 Viel Erfolg mit deinen personalisierten Newslettern!**

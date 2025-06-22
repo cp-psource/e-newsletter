@@ -1,136 +1,261 @@
-Welcome to the all-new Newsletter Composer! Through this guide, we would like to offer an overview of the new features available within the Visual Composer and help our previous users migrating from the old editor.  Please read on carefully and if still in doubt don’t be afraid to contact us through our forums or social accounts.
+---
+layout: psource-theme
+title: "PS-eNewsletter Composer"
+---
 
-2.  Starting the editor
-Starting from the main Newsletter Dashboard, click on the “Newsletters” and then on “Create Newsletter”. This will take you to the new composer, which is now the default newsletter creation tool. If you still want to use the old editor, you will be offered an option to do so on the following screen: this is particularly useful if you have created your custom themes, as they will show up exactly like they always did. However, please note that once a tool is selected you will be able to edit that newsletter only with that tool: composer-created newsletters cannot be edited with the old editor and vice-versa.
+# 🎨 PS-eNewsletter Composer Guide
 
-When you click on “Create Newsletter”, you will find our presets. Click here to know more about them.
+<div class="menu">
+  <a href="https://github.com/cp-psource/e-newsletter/discussions" style="color:#38c2bb;">💬 Forum</a>
+  <a href="https://github.com/cp-psource/e-newsletter/releases" style="color:#38c2bb;">📝 Download</a>
+</div>
 
+## Willkommen beim brandneuen Newsletter Composer!
 
-3.  The working space
-After selecting the preset, you will move to the working space. The main working space is divided into two sections: the newsletter area and the blocks sidebar.
+Mit diesem Guide möchten wir dir einen Überblick über die neuen Features des Visual Composers geben und bisherigen Nutzern beim Umstieg vom alten Editor helfen. Lies bitte aufmerksam durch und zögere nicht, uns über unser Forum oder die sozialen Medien zu kontaktieren, falls du noch Fragen hast.
 
-Newsletter Area
-In the main newsletter area, you will see your newsletter, simply drag and drop the blocks you want to include! Starting from the upper section, a standard newsletter is commonly made of a header, a body and a footer. The body area, in turn, may contain a text paragraph, a hero image, a call to action and so on. This is basically what you will see the first time you open the composer.
+## 📋 Inhalt
 
-You can notice the header, with the logo and a service text, the body, with a hero image, a paragraph and a call to action, and a footer, with contact information and some “legal” text at the very end.
+- [Editor starten](#editor-starten)
+- [Der Arbeitsbereich](#der-arbeitsbereich)
+- [Composer-Einstellungen](#composer-einstellungen)
+- [Block hinzufügen](#block-hinzufügen)
+- [Block entfernen](#block-entfernen)
+- [Block bearbeiten](#block-bearbeiten)
+- [Die Blöcke](#die-blöcke)
+- [Inhalt bearbeiten](#inhalt-bearbeiten)
+- [Blöcke bearbeiten](#blöcke-bearbeiten)
+- [Newsletter vorschauen und testen](#newsletter-vorschauen-und-testen)
+- [Betreff und Snippet](#betreff-und-snippet)
+- [Häufige Probleme](#häufige-probleme)
 
-Sidebar Area
-On the right, you can see the sidebar area with all the blocks. They’re grouped by functions: Header, Content, Footer, based on which section of the newsletter they are commonly related to.
+## 🚀 Editor starten
 
-4. Composer settings
+Klicke vom Newsletter-Dashboard aus auf "Newsletter" und dann auf "Newsletter erstellen". Das bringt dich zum neuen Composer, der jetzt das Standard-Tool für die Newsletter-Erstellung ist. 
 
-in you click on “Settings”, at the top right corner of the composer, you can change the global styles of your newsletter. You can chaing the main background color, the blocks color, fonts and button styles.
+Falls du noch den alten Editor verwenden möchtest, bekommst du auf dem folgenden Bildschirm eine entsprechende Option angeboten. Das ist besonders nützlich, wenn du eigene Themes erstellt hast, da diese genau so angezeigt werden wie gewohnt.
 
-5. Adding a block
-To add a block from the sidebar to your layout just click and drag it from the right area to the left, then release it in the desired position. If you feel a block is not where you would like it to be, you can always move it up or down just dragging and dropping it on the new position.
+> **⚠️ Wichtig:** Sobald du ein Tool gewählt hast, kannst du den Newsletter nur noch mit diesem Tool bearbeiten. Mit dem Composer erstellte Newsletter können nicht mit dem alten Editor bearbeitet werden und umgekehrt.
 
-6. Removing a block
-To remove a block from the layout, just hover on the blocks in the newsletter area and two icons will appear on the right. Clicking on the x icon will remove that block from the layout. You can repeat this step until you have a blank layout and then start over by dragging your preferred blocks.
+Wenn du auf "Newsletter erstellen" klickst, findest du unsere Vorlagen (Presets). [Hier erfährst du mehr über sie](#).
 
-7. Editing a block
-Our composer lets you edit the block and its content as well. Content-level customizations will always overrule block-level customizations. Keep this in mind when setting global font families, for example.
+## 🏗️ Der Arbeitsbereich
 
-Block Options
-If you click on the pencil icon, a modal box with some layout options will come up. All the options set in this box will affect every item of that block: e.g., if you set a specific font family using this option, all the text blocks inside that block will use that font family. This lets you specify some general styling across the different parts of your newsletter. The same applies to the background color. We will take a more in-depth view of all these options in the 10. Editing the blocks section of this guide.
+Nach der Auswahl der Vorlage gelangst du zum Arbeitsbereich. Der Hauptarbeitsbereich ist in zwei Bereiche unterteilt: den Newsletter-Bereich und die Block-Seitenleiste.
 
-Content Options
-Every block will have some specific elements that can be edited: e.g. the image block will let specify the image source and link, the header block will let you upload your custom logo and some introductory text. This edit box differs from element to element but they are all quite self-explanatory: the Edit Text box will let you edit your paragraph…and so on. We will take a more in-depth view of all these options in the 9. Editing the content section of this guide.
+### Newsletter-Bereich
 
+Im Hauptbereich siehst du deinen Newsletter. Ziehe einfach die gewünschten Blöcke per Drag & Drop hinein! Ein Standard-Newsletter besteht normalerweise aus:
 
-8. The blocks
-Every block you will find on the right adds specific content to your newsletter: they should be used to customize the look and feel of your mail according to the goal it must achieve. Every block is made of one or more elements and they all have some special options you can tweak: e.g. clicking on the image edit icon inside the image block (just hover on it and the pencil icon will come up) will let you change the image source and its link.
+- **Header** (Kopfbereich)
+- **Body** (Hauptteil) 
+- **Footer** (Fußbereich)
 
-Here’s a list of the blocks you can add to the newsletter with a basic explanation of their function and editing options. We will periodically add new blocks in the future, so stay updated and subscribe to our mailing list. Here you can find the list of our premium blocks, available with a paid subscription plan.
+Der Body-Bereich kann wiederum verschiedene Elemente enthalten:
+- Textabsätze
+- Hero-Bilder
+- Call-to-Action-Buttons
+- und vieles mehr
 
-Header
-Ideally the beginning of every newsletter, with a custom logo area and some text.
+### Seitenleisten-Bereich
 
-Hero
-A big centred image, a strong text heading, a paragraph, and a call to action button.
+Rechts siehst du die Seitenleiste mit allen verfügbaren Blöcken. Sie sind nach Funktionen gruppiert:
 
-Heading
-A big paragraph title you can use to start a paragraph or a new section
+| Kategorie | Beschreibung |
+|-----------|--------------|
+| **Header** | Blöcke für den Kopfbereich |
+| **Content** | Inhaltsblöcke für den Hauptteil |
+| **Footer** | Blöcke für den Fußbereich |
 
-Text
-A simple, editable text block.
+## ⚙️ Composer-Einstellungen
 
-Call To Action
-A call to action (CTA) is an invite to your readers to make them act: something like “Read more..”, “Buy now” or “Fill the form”.
+Wenn du auf "Einstellungen" in der oberen rechten Ecke klickst, kannst du die globalen Styles deines Newsletters ändern:
 
-Image
-A full-width image: this could be a banner, an image of your products, even an animated gif!
+- **Haupthintergrundfarbe**
+- **Block-Farben**
+- **Schriftarten**
+- **Button-Styles**
 
-Blog Posts
-These blocks will import the latest posts from your blog and show them in a single column with a thumbnail picture, post date, a title, and a link to the article.
+## ➕ Block hinzufügen
 
+Um einen Block von der Seitenleiste zu deinem Layout hinzuzufügen:
 
-An example of the Posts Blocks layouts and different kinds of languages (texts are not meaningful)
-Footer
-A centred text block to show your contact information and/or a disclaimer.
+1. **Klicke und ziehe** den Block aus dem rechten Bereich nach links
+2. **Lasse ihn** an der gewünschten Position los
+3. **Verschiebe** ihn bei Bedarf durch erneutes Drag & Drop
 
-Legal Text
-A centred text block to show an Unsubscribe and a View this email in your browser links. These are both required by the CAN-SPAM Act.
+## ❌ Block entfernen
 
-Social
-This block will show social networks icons that link to your social profiles. To configure your social profiles, please go to Company Info > Social panel under the Settings section of the plugin.
+Um einen Block aus dem Layout zu entfernen:
 
+1. **Bewege** den Mauszeiger über den Block im Newsletter-Bereich
+2. **Zwei Symbole** erscheinen rechts
+3. **Klicke** auf das X-Symbol, um den Block zu entfernen
 
-An example of the Social Block (current version may look different)
-9. Editing the content
-When editing the content, you may find different editing boxes. Let’s see them one by one.
+Du kannst diesen Schritt wiederholen, bis du ein leeres Layout hast und dann von vorne beginnen.
 
-Edit Text
-This is a quite common text editor that lets you select font family, font sizes, font styles (bold, italic and underlined), you can set up a hyperlink, create some ordered list, insert an emoticon, align text. We’ve added a button with our icon that you can use to easily insert our shortcodes into any paragraph.
+## ✏️ Block bearbeiten
 
-Edit Image
-This is a simple edit box that lets you specify the image source and set a link for that image. You can insert an URL or use the WordPress media uploader. The image will be automatically centred.
+Unser Composer ermöglicht es dir, sowohl den Block als auch seinen Inhalt zu bearbeiten. 
 
-Please note: we use stock images courtesy of Unsplash.com as placeholders.
+> **💡 Tipp:** Inhaltsebene-Anpassungen überschreiben immer Block-Ebene-Anpassungen. Denke daran, wenn du globale Schriftfamilien festlegst.
 
-Edit Title
-With this edit box, you can set the title itself and its colour.
+### Block-Optionen
 
-Edit Button
-With this edit box, you can style your button look. You can set the button label, link, text color and button background.
+Wenn du auf das Bleistift-Symbol klickst, öffnet sich ein Modal-Fenster mit Layout-Optionen. Alle hier eingestellten Optionen betreffen jeden Bestandteil dieses Blocks.
 
-10. Editing the blocks
-When editing blocks, you will find two different editing boxes: one for blocks with blog posts and one for all the other blocks. Let’s see them:
+**Beispiel:** Wenn du hier eine bestimmte Schriftfamilie festlegst, verwenden alle Textblöcke innerhalb dieses Blocks diese Schriftfamilie.
 
-Edit Block (Blog Posts)
-With this edit box, you can set how the blog posts should appear in this block. You can set a background color, font family, how many posts you would like to show, which category they should belong to and which tags. 
+### Inhalts-Optionen
 
-Edit Block (All other blocks)
-With this edit box, you can set the main font family and background color for the related block. Please note that this will have no effect if you set a different font family on one of the inner elements of a block.
+Jeder Block hat spezifische Elemente, die bearbeitet werden können:
+- **Bildblock:** Bildquelle und Link festlegen
+- **Header-Block:** Eigenes Logo und Einleitungstext hochladen
+- **Text-Block:** Paragraphen bearbeiten
 
-11. Preview your newsletter and send a test
-When you feel your newsletter is ready to be sent, remember to hit the save button. At this point, it’s time to check how it will be displayed when it arrives to its destination. There are two ways to check it: the first, it to click on the mobile or PC icon in the newsletter area (see screenshot below), while the second is to click on next and go on the “preview” tab.
+## 🧩 Die Blöcke
 
+Jeder Block fügt spezifischen Inhalt zu deinem Newsletter hinzu. Hier ist eine Liste der verfügbaren Blöcke:
 
-Important! While the rendered preview of your newsletter is very useful for testing layout issues, please note that some of the links may not work. This happens because some links are generated only when a real delivery is triggered.
+### Header-Blöcke
 
-Send a test
-Once you are done with the newsletter, it’s a good practice to send to yourself a test. This is important to see if there are any layout issues and if the links and buttons you inserted are working correctly. By clicking on “test” you can either insert an email address or sending it to your test subscribers. Read more about test subscribers here.
+| Block | Beschreibung |
+|-------|--------------|
+| **Header** | Der ideale Beginn jedes Newsletters mit Logo-Bereich und Text |
 
-## Subject and snippet
+### Content-Blöcke
 
-The subject is of course the “title” of your email, the first thing your subscribers see when you send them a message. As you may already know, the subject is what triggers your readers to open or skip your emails, so it is very important to write an engaging subject and give yourself enough time to find out which could be the best subject.
+| Block | Beschreibung |
+|-------|--------------|
+| **Hero** | Ein großes zentriertes Bild, starke Überschrift, Paragraph und Call-to-Action-Button |
+| **Heading** | Eine große Paragraph-Überschrift für neue Abschnitte |
+| **Text** | Ein einfacher, bearbeitbarer Textblock |
+| **Call To Action** | Eine Aufforderung an deine Leser zu handeln ("Mehr lesen", "Jetzt kaufen", etc.) |
+| **Image** | Ein Vollbreiten-Bild (Banner, Produktbilder, animierte GIFs) |
+| **Blog Posts** | Importiert die neuesten Posts deines Blogs und zeigt sie in einer Spalte mit Thumbnail, Datum, Titel und Link |
 
-You can ask yourself: what about if I receive an email with that subject? Would I open it or not?
+### Footer-Blöcke
 
-The snippet is a hidden part of the email text which is shown by some email clients, like Gmail. If not present, Gmail will extract the first words of your message to create a snippet. See an example in the picture below:
+| Block | Beschreibung |
+|-------|--------------|
+| **Footer** | Ein zentrierter Textblock für Kontaktinformationen und/oder Haftungsausschluss |
+| **Legal Text** | Ein zentrierter Textblock mit Abmelde- und "Im Browser anzeigen"-Links (rechtlich erforderlich) |
+| **Social** | Zeigt Social Media Icons mit Links zu deinen Profilen |
 
+> **📝 Hinweis:** Wir werden regelmäßig neue Blöcke hinzufügen. Bleibe auf dem Laufenden und abonniere unseren Newsletter! [Hier findest du unsere Premium-Blöcke](link).
 
-The snippet as is shown on Gmail
-The snippet is particularly important if the first line of your email has generic links, like “view online”, or generic text like the title of your site which could not be so relevant to your subscribers.
+## 📝 Inhalt bearbeiten
 
-Common issues
-Images are not shown
-Check on the Help/System panel for warnings about the images/upload folder: sometimes it is configured to be “relative” and that is not compatible with emails
-If the email reader asks to press a button to unlock the images, it is a problem of the email client set for privacy or not trusting the sender: that is not something that can be controlled by the plugin
-If images are not shown on iPhone or Apple devices, read more here: the provider intervention is required.
-Emails look bad on Outlook, Gmail, …
-Usually, emails created with our composer should look good on all email clients BUT the rendering is not always the same. Outlook, for example, does not support some kinds of formatting.
+Beim Bearbeiten von Inhalten findest du verschiedene Bearbeitungsfelder:
 
-If you created the newsletter using the free editor or HTML, be aware that you should use very simple layouts otherwise they won’t be respected by email clients (even if while editing they look good).
+### Text bearbeiten
+Ein gewöhnlicher Texteditor mit folgenden Funktionen:
+- **Schriftfamilie** und **-größe** auswählen
+- **Schriftstile** (fett, kursiv, unterstrichen)
+- **Hyperlinks** einrichten
+- **Nummerierte Listen** erstellen
+- **Emoticons** einfügen
+- **Text ausrichten**
+- **Shortcodes** über unser Icon-Button einfügen
 
-Do not “copy and paste” from Word or other editors: the generated code is almost always not good for email readers.
+### Bild bearbeiten
+Einfaches Bearbeitungsfeld zum:
+- **Bildquelle** festlegen
+- **Link** für das Bild setzen
+- **URL eingeben** oder WordPress Media Uploader verwenden
+
+> **📸 Hinweis:** Wir verwenden Stock-Bilder von Unsplash.com als Platzhalter.
+
+### Titel bearbeiten
+Hier kannst du:
+- **Titel selbst** festlegen
+- **Farbe** bestimmen
+
+### Button bearbeiten
+Gestaltung deines Buttons:
+- **Button-Text** festlegen
+- **Link** setzen
+- **Textfarbe** auswählen
+- **Button-Hintergrund** bestimmen
+
+## 🎛️ Blöcke bearbeiten
+
+Beim Bearbeiten von Blöcken findest du zwei verschiedene Bearbeitungsfelder:
+
+### Blog Posts Blöcke bearbeiten
+Hier kannst du festlegen:
+- **Hintergrundfarbe**
+- **Schriftfamilie**
+- **Anzahl der Posts**
+- **Kategorie** der Posts
+- **Tags** der Posts
+
+### Alle anderen Blöcke bearbeiten
+Hier kannst du festlegen:
+- **Hauptschriftfamilie** für den Block
+- **Hintergrundfarbe** für den Block
+
+> **⚠️ Beachte:** Dies hat keine Auswirkung, wenn du eine andere Schriftfamilie für einzelne Elemente innerhalb des Blocks festlegst.
+
+## 👀 Newsletter vorschauen und testen
+
+Wenn dein Newsletter fertig ist:
+
+1. **Speichern** nicht vergessen!
+2. **Vorschau prüfen** über die Handy- oder PC-Symbole im Newsletter-Bereich
+3. **Oder:** Auf "Weiter" klicken und zum "Vorschau"-Tab gehen
+
+> **⚠️ Wichtig:** Die gerenderte Vorschau ist sehr nützlich für Layout-Tests, aber einige Links funktionieren möglicherweise nicht. Das passiert, weil manche Links erst beim echten Versand generiert werden.
+
+### Test versenden
+
+Es ist eine gute Praxis, sich selbst einen Test zu senden:
+
+1. **Auf "Test" klicken**
+2. **E-Mail-Adresse eingeben** oder an Test-Abonnenten senden
+3. **Layout-Probleme** und **Link-Funktionen** überprüfen
+
+[Mehr über Test-Abonnenten hier](link).
+
+## 📧 Betreff und Snippet
+
+### Betreff
+Der Betreff ist der "Titel" deiner E-Mail - das erste, was deine Abonnenten sehen. Der Betreff entscheidet darüber, ob deine E-Mails geöffnet oder übersprungen werden.
+
+**Frag dich selbst:** Würde ich eine E-Mail mit diesem Betreff öffnen oder nicht?
+
+### Snippet
+Das Snippet ist ein versteckter Teil des E-Mail-Texts, der von einigen E-Mail-Clients wie Gmail angezeigt wird. Wenn nicht vorhanden, extrahiert Gmail die ersten Wörter deiner Nachricht für das Snippet.
+
+**Beispiel Gmail-Snippet:**
+```
+Von: newsletter@example.com
+Betreff: Tolle Neuigkeiten!
+Snippet: Entdecke unsere neuen Produkte...
+```
+
+Das Snippet ist besonders wichtig, wenn die erste Zeile deiner E-Mail generische Links wie "Online anzeigen" oder generischen Text wie den Titel deiner Website enthält.
+
+## 🔧 Häufige Probleme
+
+### Bilder werden nicht angezeigt
+
+**Mögliche Ursachen:**
+- **Prüfe** das Help/System-Panel auf Warnungen über den images/upload-Ordner
+- **"Relative" Konfiguration** ist nicht mit E-Mails kompatibel
+- **E-Mail-Client-Einstellungen:** Nutzer muss Button drücken, um Bilder freizuschalten (Datenschutz/Vertrauen)
+- **iPhone/Apple-Geräte:** Provider-Intervention erforderlich [mehr hier](link)
+
+### E-Mails sehen schlecht aus in Outlook, Gmail, etc.
+
+**Lösungsansätze:**
+- **Newsletter vom Composer** sollten gut aussehen, aber Rendering ist nicht immer identisch
+- **Outlook** unterstützt manche Formatierungen nicht
+- **Bei freiem Editor/HTML:** Verwende sehr einfache Layouts
+- **Niemals** aus Word oder anderen Editoren kopieren - der generierte Code ist fast nie gut für E-Mail-Reader
+
+> **💡 Tipp:** Teste deinen Newsletter immer in verschiedenen E-Mail-Clients, bevor du ihn versendest!
+
+---
+
+**🎨 Viel Spaß beim Erstellen deiner Newsletter mit dem Composer!**

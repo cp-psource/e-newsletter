@@ -73,10 +73,6 @@ if (empty($emails)) {
 
         <?php $controls->show() ?>
         <p><?php esc_html_e('Overall basic statistics (last 20 newsletters)', 'newsletter') ?></p>
-        <p>
-            Full details, including Automated and Autoresponder newsletter statistics are available with the
-            <a href="https://www.thenewsletterplugin.com/reports?utm_source=statistics&utm_campaign=plugin" target="_blank">Reports Addon</a>.
-        </p>
 
         <div class="tnp-cards-container">
 
@@ -103,9 +99,9 @@ if (empty($emails)) {
         <div class="tnp-cards-container">
 
             <div class="tnp-card">
-                <div class="tnp-card-title">Open rate</div>
+                <div class="tnp-card-title"><?php _e('Open rate', 'newsletter'); ?></div>
                 <p>
-                    Every point represents a newsletter on the day it has been send. Stop over the point to see the subsject.
+                    <?php _e('Every point represents a newsletter on the day it has been sent. Stop over the point to see the subject.', 'newsletter'); ?>
                 </p>
 
 
@@ -120,7 +116,7 @@ if (empty($emails)) {
                             labels: <?php echo wp_json_encode($overview_labels) ?>,
                             datasets: [
                                 {
-                                    label: "Open",
+                                    label: "<?php _e('Open', 'newsletter'); ?>",
                                     fill: false,
                                     strokeColor: "#2980b9",
                                     backgroundColor: "#2980b9",
@@ -165,9 +161,9 @@ if (empty($emails)) {
 
 
             <div class="tnp-card">
-                <div class="tnp-card-title">Click rate</div>
+                <div class="tnp-card-title"><?php _e('Click rate', 'newsletter'); ?></div>
                 <p>
-                    Every point represents a newsletter on the day it has been send. Stop over the point to see the subsject.
+                    <?php _e('Every point represents a newsletter on the day it has been sent. Stop over the point to see the subject.', 'newsletter'); ?>
                 </p>
 
                 <div id="tnp-clicks-chart" style="width: 90%">
@@ -182,7 +178,7 @@ if (empty($emails)) {
                             datasets: [
 
                                 {
-                                    label: "Click",
+                                    label: "<?php _e('Click', 'newsletter'); ?>",
                                     fill: false,
                                     strokeColor: "#2980b9",
                                     backgroundColor: "#2980b9",
