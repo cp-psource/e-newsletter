@@ -63,7 +63,7 @@ $panels = (int) (NEWSLETTER_LIST_MAX / 10) + (NEWSLETTER_LIST_MAX % 10 > 0 ? 1 :
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
 
     <div id="tnp-heading">
-        <?php $controls->title_help('/subscription/newsletter-lists/') ?>
+        <?php $controls->title_help('/newsletter-lists/') ?>
         <h2><?php esc_html_e('Lists', 'newsletter') ?></h2>
     </div>
 
@@ -72,15 +72,25 @@ $panels = (int) (NEWSLETTER_LIST_MAX / 10) + (NEWSLETTER_LIST_MAX % 10 > 0 ? 1 :
         <?php $controls->show(); ?>
 
         <p>
-            Configure the lists visibility on the <a href="?page=newsletter_subscription_form" target="_blank">Subscription form</a>
-            and <a href="?page=newsletter_profile_index" target="_blank">Profile page</a>.
+            <?php printf(
+                /* translators: %1$s: Link zum Anmeldeformular, %2$s: Link zur Profilseite */
+                esc_html__('Configure the lists visibility on the %1$s and %2$s.', 'newsletter'),
+                '<a href="?page=newsletter_subscription_form" target="_blank">' . esc_html__('Subscription form', 'newsletter') . '</a>',
+                '<a href="?page=newsletter_profile_index" target="_blank">' . esc_html__('Profile page', 'newsletter') . '</a>'
+            ); ?>
         </p>
         <p>
-            List wide operations on subscribers (delete, move, add, ...) can be performed
-            on the Subscribers Maintenance page</a>.
+            <?php printf(
+                /* translators: %s: Link zur Abonnenten-Wartung */
+                esc_html__('List wide operations on subscribers (delete, move, add, ...) can be performed on the %s.', 'newsletter'),
+                '<a href="?page=newsletter_subscribers_maintenance" target="_blank">' . esc_html__('Subscribers Maintenance page', 'newsletter') . '</a>'
+            ); ?>
         </p>
         <p>
-            Need more lists? <a href="https://www.thenewsletterplugin.com/documentation/subscription/newsletter-lists/#adding-more" target="_blank">Read here</a>.
+            <?php printf(
+                esc_html__('Need more lists? %s', 'newsletter'),
+                '<a href="https://cp-psource.github.io/e-newsletter/newsletter-lists/#Mehr als 40 Listen hinzufügen" target="_blank">' . esc_html__('Read here', 'newsletter') . '</a>'
+            ); ?>
         </p>
 
         <form method="post" action="">
