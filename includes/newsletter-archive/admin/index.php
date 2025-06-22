@@ -27,7 +27,7 @@ if (!$controls->is_action()) {
             <?php _e('Add the following shortcode to any WordPress page to display an archive of all sent newsletters:', 'newsletter'); ?>
         </p>
         <div style="margin-bottom:10px;">
-            <input type="text" value="[newsletter_archive]" id="archive-shortcode" readonly style="width:220px; font-family:monospace;">
+            <input type="text" value="[newsletter_archive /]" id="archive-shortcode" readonly style="width:220px; font-family:monospace;">
             <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('archive-shortcode').value)"><?php _e('Copy', 'newsletter'); ?></button>
         </div>
 
@@ -64,17 +64,17 @@ if (!$controls->is_action()) {
 
             <table class="form-table">
                 <tr valign="top">
-                    <th>Show newsletter date?</th>
+                    <th><?php _e('Show newsletter date?', 'newsletter'); ?></th>
                     <td>
                         <?php $controls->checkbox('date'); ?>
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th>Showing the newsletter</th>
+                    <th><?php _e('Showing the newsletter', 'newsletter'); ?></th>
                     <td>
-                        <?php $controls->select('show', ['' => 'Embedded the same page', 'blank' => 'In a new browser page', 'self' => 'In the same browser page']); ?>
+                        <?php $controls->select('show', ['' => __('Embedded the same page', 'newsletter'), 'blank' => __('In a new browser page', 'newsletter'), 'self' => __('In the same browser page', 'newsletter')]); ?>
                         <p class="description">
-                            Some page biulder or some page filters do not allow to show the newsletter in the same page: use an alternative option.
+                            <?php _e('Some page builder or some page filters do not allow to show the newsletter in the same page: use an alternative option.', 'newsletter'); ?>
                         </p>
                     </td>
                 </tr>
