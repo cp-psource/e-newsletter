@@ -144,37 +144,16 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
         $url = plugins_url('e-newsletter');
 
-        // SCHRITT 1: jQuery UI Sortable und Draggable explizit deregistrieren und blockieren
-        wp_deregister_script('jquery-ui-sortable');
-        wp_deregister_script('jquery-ui-draggable');
-        
-        // SCHRITT 2: Verhindere erneute Registrierung
-        add_action('wp_enqueue_scripts', function() {
-            wp_dequeue_script('jquery-ui-sortable');
-            wp_dequeue_script('jquery-ui-draggable');
-        }, 999);
-        
-        add_action('admin_enqueue_scripts', function() {
-            wp_dequeue_script('jquery-ui-sortable');
-            wp_dequeue_script('jquery-ui-draggable');
-        }, 1000);
-
         // Styles for the left side menu
         wp_enqueue_style('tnp-admin-global', $url . '/admin/css/global.css', [], NEWSLETTER_VERSION);
 
         // Styles and scripts only for our admin pages
         if (self::is_admin_page()) {
-            // JQUERY UI ELIMINATOR - Entfernt alle jQuery UI Abhängigkeiten
-            wp_enqueue_script('newsletter-jquery-ui-eliminator', $url . '/assets/js/newsletter-jquery-ui-eliminator.js', ['jquery'], NEWSLETTER_VERSION, true);
-            
-            // Plugin-Daten für JavaScript bereitstellen
-            wp_localize_script('newsletter-jquery-ui-eliminator', 'newsletter_admin_vars', [
-                'plugin_url' => $url,
-                'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('newsletter_admin_nonce')
-            ]);
-            
+            wp_enqueue_script('jquery-ui-draggable');
             wp_enqueue_media();
+
+            //wp_enqueue_style('psource-ui-draggable', $url . '/assets/psource-ui/draggable/psource-draggable.css', [], NEWSLETTER_VERSION);
+            //wp_enqueue_script('psource-ui-draggable', $url . '/assets/psource-ui/draggable/psource-draggable.js', [], NEWSLETTER_VERSION, true);
 
             wp_enqueue_script('psource-ui-tabs', $url . '/assets/psource-ui/tabs/psource-tabs.js', ['jquery'], NEWSLETTER_VERSION, true);
             wp_enqueue_style('psource-ui-tabs', $url . '/assets/psource-ui/tabs/psource-tabs.css', [], NEWSLETTER_VERSION);
@@ -198,8 +177,7 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             wp_enqueue_script('tnp-select2', $url . '/vendor/select2/js/select2.min.js', ['jquery'], NEWSLETTER_VERSION);
 
             wp_enqueue_style('tnp-admin-fontawesome', $url . '/vendor/fa/css/all.min.css', [], NEWSLETTER_VERSION);
-            // JQUERY UI KOMPLETT ENTFERNT
-            // wp_enqueue_style('tnp-admin-jquery-ui', $url . '/vendor/jquery-ui/jquery-ui.min.css', [], NEWSLETTER_VERSION);
+            wp_enqueue_style('tnp-admin-jquery-ui', $url . '/vendor/jquery-ui/jquery-ui.min.css', [], NEWSLETTER_VERSION);
 
             wp_enqueue_script('tnp-jquery-modal', $url . '/vendor/jquery-modal/jquery.modal.min.js', ['jquery'], NEWSLETTER_VERSION);
             wp_enqueue_style('tnp-jquery-modal', $url . '/vendor/jquery-modal/jquery.modal.min.css', [], NEWSLETTER_VERSION);
