@@ -328,6 +328,20 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
                 require NEWSLETTER_DIR . '/includes/newsletter-forms/admin/edit.php';
             }
         );
+
+        // REST API Menu
+        add_submenu_page(
+            'newsletter_main_index',
+            __('REST API', 'newsletter'),
+            '<span class="tnp-side-menu">REST API</span>',
+            'manage_options',
+            'newsletter_api_index',
+            function () {
+                $api = NewsletterRestApi::instance();
+                require NEWSLETTER_DIR . '/includes/api/admin/index.php';
+            }
+        );
+
     }
 }
 

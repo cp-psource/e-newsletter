@@ -1175,89 +1175,11 @@ global $newsletterInstasend;
 $newsletterInstasend = new NewsletterInstasend($newsletter->version);
 $newsletterInstasend->init();
 require_once NEWSLETTER_DIR . '/includes/newsletter-lock/lock.php';
-global $newsletterLock;
-$newsletterLock = new NewsletterLock($newsletter->version);
-$newsletterLock->init();
 
-function tnp_autoresponder_install() {
-    global $wpdb;
-    $charset_collate = $wpdb->get_charset_collate();
+// REST API Integration
+require_once NEWSLETTER_DIR . '/includes/newsletter-rest-api.php';
 
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-    $sql1 = "CREATE TABLE {$wpdb->prefix}tnp_autoresponders (
-        id BIGINT(20) NOT NULL AUTO_INCREMENT,
-        name VARCHAR(255) NOT NULL,
-        description TEXT,
-        list_id BIGINT(20) DEFAULT 0,
-        status TINYINT(1) DEFAULT 1,
-        rules TINYINT(1) DEFAULT 0,           // <--- HIER HINZUFÜGEN!
-        keep_active TINYINT(1) DEFAULT 0,
-        language VARCHAR(10) DEFAULT '',
-        restart TINYINT(1) DEFAULT 0,
-        regenerate TINYINT(1) DEFAULT 0,
-        utm_campaign VARCHAR(255) DEFAULT '',
-        utm_source VARCHAR(255) DEFAULT '',
-        utm_medium VARCHAR(255) DEFAULT '',
-        utm_term VARCHAR(255) DEFAULT '',
-        utm_content VARCHAR(255) DEFAULT '',
-        auto_start TINYINT(1) DEFAULT 0,     
-        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY  (id)
-    ) $charset_collate;";
-
-    $sql2 = "CREATE TABLE {$wpdb->prefix}tnp_autoresponder_emails (
-        id BIGINT(20) NOT NULL AUTO_INCREMENT,
-        autoresponder_id BIGINT(20) NOT NULL,
-        subject VARCHAR(255) NOT NULL,
-        content LONGTEXT,
-        message LONGTEXT,
-        options LONGTEXT,
-        step INT(11) DEFAULT 1,
-        delay_hours INT(11) DEFAULT 0,
-        sort_order INT(11) DEFAULT 0,
-        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (id)
-    ) $charset_collate;";
-
-    $sql3 = "CREATE TABLE {$wpdb->prefix}tnp_autoresponder_progress (
-        id BIGINT(20) NOT NULL AUTO_INCREMENT,
-        user_id BIGINT(20) NOT NULL,
-        autoresponder_id BIGINT(20) NOT NULL,
-        current_step INT(11) DEFAULT 0,
-        status VARCHAR(50) DEFAULT 'active',
-        last_sent DATETIME,
-        started_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME,
-        PRIMARY KEY (id)
-    ) $charset_collate;";
-
-    dbDelta($sql1);
-    $table = $wpdb->prefix . 'tnp_autoresponders';
-    $columns = $wpdb->get_col("DESC $table", 0);
-    if (!in_array('auto_start', $columns)) {
-        $wpdb->query("ALTER TABLE $table ADD COLUMN auto_start TINYINT(1) DEFAULT 0");
-    }
-    $table = $wpdb->prefix . 'tnp_autoresponders';
-    $columns = $wpdb->get_col("DESC $table", 0);
-    if (!in_array('rules', $columns)) {
-        $wpdb->query("ALTER TABLE $table ADD COLUMN rules TINYINT(1) DEFAULT 0");
-    }
-
-    dbDelta($sql2);
-    $table = $wpdb->prefix . 'tnp_autoresponder_emails';
-    $columns = $wpdb->get_col("DESC $table", 0);
-    if (!in_array('message', $columns)) {
-        $wpdb->query("ALTER TABLE $table ADD COLUMN message LONGTEXT");
-    }
-    if (!in_array('options', $columns)) {
-        $wpdb->query("ALTER TABLE $table ADD COLUMN options LONGTEXT");
-    }
-
-    dbDelta($sql3);
-    
-}
-
+// Admin-Interface laden
 if (is_admin()) {
     require_once NEWSLETTER_DIR . '/admin.php';
     require_once NEWSLETTER_DIR . '/main/automated.php';
