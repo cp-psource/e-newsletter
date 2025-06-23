@@ -10,9 +10,14 @@
     });
 </script>
 
-<div id="subject-ideas-modal" aria-hidden="true" class="modal">
-
-    <div id="tnp-edit-subjects-list">
+<dialog id="subject-ideas-modal">
+    <div class="psource-modal-content">
+        <div class="psource-modal-header">
+            <h3><?php esc_html_e('Subject Ideas', 'newsletter') ?></h3>
+            <button class="psource-modal-close">&times;</button>
+        </div>
+        <div class="psource-modal-body">
+            <div id="tnp-edit-subjects-list">
         <h3 class="tnp-subject-category">Promotions</h3>
         <a href="#"><?php _e('Last day to save 30%', 'newsletter') ?></a><br>
         <a href="#"><?php _e('Black Friday Sale is almost over', 'newsletter') ?></a><br>
@@ -44,6 +49,7 @@
         <a href="#"><?php _e('The Top 10 <em>[something]</em>', 'newsletter') ?></a><br>
         <a href="#"><?php _e('The 10 Rules for <em>[something]</em>', 'newsletter') ?></a><br>
         <a href="#"><?php _e('Get/Become <em>[something]</em>. 10 Ideas That Work', 'newsletter') ?></a><br>
+            </div>
+        </div>
     </div>
-
-</div>
+</dialog>

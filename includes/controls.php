@@ -2502,7 +2502,7 @@ class NewsletterControls {
         echo '<div style="position: relative"><input size="80" id="options-subject-', esc_attr($name), '" name="options[' . esc_attr($name) . ']" type="text" placeholder="" value="';
         echo esc_attr($value);
         echo '">';
-        echo '&nbsp;<a href="#subject-ideas-modal" rel="modal:open"><i class="far fa-lightbulb tnp-suggest-subject"></i></a>';
+        echo '&nbsp;<a data-psource-modal-open="subject-ideas-modal"><i class="far fa-lightbulb tnp-suggest-subject"></i></a>';
         do_action('newsletter_composer_subject');
         echo '</div>';
     }

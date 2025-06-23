@@ -3,8 +3,14 @@ $emails_module = NewsletterEmails::instance();
 $user_preset_list = $emails_module->get_emails(NewsletterEmails::PRESET_EMAIL_TYPE);
 $templates = NewsletterComposer::instance()->get_templates();
 ?>
-<div id="templates-modal" aria-hidden="true" class="modal" style="min-width: 750px">
-    <div class='tnpc-preset-container'>
+<dialog id="templates-modal" style="min-width: 750px">
+    <div class="psource-modal-content">
+        <div class="psource-modal-header">
+            <h3><?php esc_html_e('Templates', 'newsletter') ?></h3>
+            <button class="psource-modal-close">&times;</button>
+        </div>
+        <div class="psource-modal-body">
+            <div class='tnpc-preset-container'>
 
         <?php if ($user_preset_list) { ?>
 
@@ -75,7 +81,7 @@ $templates = NewsletterComposer::instance()->get_templates();
 
         </div>
 
-
-
+            </div>
+        </div>
     </div>
-</div>
+</dialog>

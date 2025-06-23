@@ -1,10 +1,15 @@
-<div id="test-newsletter-modal" aria-hidden="true"  class="modal">
+<dialog id="test-newsletter-modal">
+    <div class="psource-modal-content">
+        <div class="psource-modal-header">
+            <h3><?php esc_html_e('Send Test', 'newsletter') ?></h3>
+            <button class="psource-modal-close">&times;</button>
+        </div>
+        <div class="psource-modal-body">
 
+            <div id="test-newsletter-message">
+            </div>
 
-    <div id="test-newsletter-message">
-    </div>
-
-    <div id="test-newsletter-form">
+            <div id="test-newsletter-form">
         <h4><?php _e("Send a test to", 'newsletter') ?></h4>
         <input name="options[test_email]" id="options-test_email" type="email" placeholder="<?php _e("Email", 'newsletter') ?>" id="test-newsletter-email">
         <input type="button" class="button-secondary" onclick="tnpc_test(true);return false;" value="<?php esc_attr_e("Send", 'newsletter') ?>">
@@ -29,7 +34,8 @@
             </p>
         </div>
 
+            </div>
+        </div>
     </div>
-
-</div>
+</dialog>
 

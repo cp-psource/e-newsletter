@@ -79,7 +79,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                         </div>
                     </td>
                     <td id="tnpc-subject-icons" style="white-space: nowrap">
-                        <a href="#subject-ideas-modal" rel="modal:open"><i class="far fa-lightbulb tnp-suggest-subject"></i></a>
+                        <a data-psource-modal-open="subject-ideas-modal"><i class="far fa-lightbulb tnp-suggest-subject"></i></a>
                         <?php do_action('newsletter_composer_subject'); ?>
                     </td>
                 </tr>
@@ -101,17 +101,17 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
             <div class="tnpb-actions">
 
-                <span class="button-primary psource-tooltip" tabindex="0" href="#templates-modal" rel="modal:open">
+                <span class="button-primary psource-tooltip" tabindex="0" data-psource-modal-open="templates-modal">
                     <i class="far fa-file"></i>
                     <span class="psource-tooltip-text"><?php esc_html_e('Templates', 'newsletter') ?></span>
                 </span>
 
-                <span class="button-primary psource-tooltip" tabindex="0" href="#tnpc-placeholders-modal" rel="modal:open">
+                <span class="button-primary psource-tooltip" tabindex="0" data-psource-modal-open="tnpc-placeholders-modal">
                     <i class="fas fa-user"></i>
                     <span class="psource-tooltip-text"><?php esc_html_e('Placeholders', 'newsletter') ?></span>
                 </span>
 
-                <span class="button-primary psource-tooltip" tabindex="0" href="#test-newsletter-modal" rel="modal:open">
+                <span class="button-primary psource-tooltip" tabindex="0" data-psource-modal-open="test-newsletter-modal">
                     <i class="fas fa-paper-plane"></i>
                     <span class="psource-tooltip-text"><?php esc_html_e('Test', 'newsletter') ?></span>
                 </span>
