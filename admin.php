@@ -144,6 +144,21 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
         $url = plugins_url('e-newsletter');
 
+        // SCHRITT 1: jQuery UI Sortable und Draggable explizit deregistrieren und blockieren
+        wp_deregister_script('jquery-ui-sortable');
+        wp_deregister_script('jquery-ui-draggable');
+        
+        // SCHRITT 2: Verhindere erneute Registrierung
+        add_action('wp_enqueue_scripts', function() {
+            wp_dequeue_script('jquery-ui-sortable');
+            wp_dequeue_script('jquery-ui-draggable');
+        }, 999);
+        
+        add_action('admin_enqueue_scripts', function() {
+            wp_dequeue_script('jquery-ui-sortable');
+            wp_dequeue_script('jquery-ui-draggable');
+        }, 1000);
+
         // Styles for the left side menu
         wp_enqueue_style('tnp-admin-global', $url . '/admin/css/global.css', [], NEWSLETTER_VERSION);
 

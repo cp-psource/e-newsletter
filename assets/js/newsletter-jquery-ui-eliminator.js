@@ -1,200 +1,185 @@
 /**
  * Newsletter jQuery UI ELIMINATOR - Production Version
  * 
- * ELIMI      // S       fu                }
-        
-        // Block-Icons mit nativer HTML5 API einrichten    
-        // Block-Icons mit nativer HTML5 API einrichtenisInitialized) {
-            return;
-        }
-        
-        // Block-Icons mit nativer HTML5 API einrichtennitCleanDragDrop() {
-        if (isInitialized) {
-            return;
-        }
-        
-        // Block-Icons mit nativer HTML5 API einrichtenisInitialized) {
-            return;
-        }
-        
-        // Block-Icons mit nativer HTML5 API einrichten: CLEAN DRAG&DROP SYSTEM (HTML5 NATIVE)
-    function initCleanDragDrop() {
-        if (isInitialized) {
-            return;
-        }
-        
-        // Block-Icons mit nativer HTML5 API einrichten initCleanDragDrop() {
-        if (isInitialized) {
-            return;
-        }Query UI komplett aus dem Newsletter-Plugin
+ * Eliminiert jQuery UI komplett aus dem Newsletter-Plugin
  * Ersetzt durch natives HTML5 Drag&Drop System
- * 
- * Version: 3.0.0 (Production)
- * Datum: 2024-12-19
  */
 
 (function($) {
     'use strict';
     
-    // GLOBALE VARIABLEN
-    let isInitialized = false;
     let blockDropInProgress = false;
+    let draggedBlockId = null;
+    let draggedElement = null;
+    let currentDropTarget = null;
+    let dropIndicator = null;
     let cleanupInterval = null;
     
-    // GLOBALE KOMPATIBILITÄTSVARIABLEN FÜR ANDERE SCRIPTS
-    window.tnp_nonce = window.tnp_nonce || newsletter_admin_vars.nonce || '';
-    window.ajaxurl = window.ajaxurl || newsletter_admin_vars.ajax_url || '';
+    // SCHRITT 1: SOFORTIGE JQUERY UI BLOCKIERUNG
+    function blockJQueryUICompletely() {
+        // WordPress-spezifische Blockierung
+        if (window.wp && window.wp.hooks) {
+            window.wp.hooks.addFilter('script_loader_tag', 'newsletter_block_jquery_ui', function(tag, handle) {
+                if (handle.includes('jquery-ui-sortable') || handle.includes('jquery-ui-draggable')) {
+                    return '<!-- jQuery UI ' + handle + ' blocked by Newsletter Plugin -->';
+                }
+                return tag;
+            });
+        }
+        
+        // jQuery UI Methoden deaktivieren
+        if (window.jQuery) {
+            if ($.fn.sortable) {
+                $.fn.sortable = function() { return this; };
+            }
+            if ($.fn.draggable) {
+                $.fn.draggable = function() { return this; };
+            }
+        }
+    }
     
-    // SCHRITT 1: SOFORTIGES BLOCKIEREN ALLER JQUERY UI FUNKTIONEN
-    function blockAllJQueryUI() {
-        // Alle jQuery UI Funktionen mit No-Op überschreiben
-        const jqueryUIFunctions = [
-            'draggable', 'sortable', 'droppable', 'resizable', 
-            'accordion', 'autocomplete', 'button', 'datepicker',
-            'dialog', 'menu', 'progressbar', 'selectmenu',
-            'slider', 'spinner', 'tabs', 'tooltip'
+    // Sofort blockieren
+    blockJQueryUICompletely();
+    
+    // SCHRITT 2: AGGRESSIVE BEREINIGUNG
+    function aggressiveCleanup() {
+        // Entferne alle jQuery UI CSS-Klassen
+        const uiSelectors = [
+            '[class*="ui-"]',
+            '.ui-sortable',
+            '.ui-draggable',
+            '.ui-droppable',
+            '.ui-sortable-handle',
+            '.ui-sortable-helper',
+            '.ui-sortable-placeholder'
         ];
         
-        jqueryUIFunctions.forEach(func => {
-            $.fn[func] = function(options) {
-                return this; // Chaining beibehalten
-            };
+        uiSelectors.forEach(selector => {
+            try {
+                document.querySelectorAll(selector).forEach(el => {
+                    const classes = el.className.split(' ').filter(cls => !cls.startsWith('ui-'));
+                    el.className = classes.join(' ');
+                });
+            } catch (e) {
+                // Ignoriere Fehler
+            }
         });
-        
-        // jQuery UI Widget Factory blockieren
-        if ($.widget) {
-            $.widget = function() {
-                return {};
-            };
-        }
-        
-        // Global jQuery UI blockieren (falls andere Plugins es laden)
-        if (window.jQuery && window.jQuery.ui) {
-            window.jQuery.ui = {
-                version: "BLOCKED",
-                mouse: function() { return {}; },
-                widget: function() { return {}; }
-            };
-        }
     }
     
-    // SCHRITT 2: AGGRESSIVE BEREINIGUNG ALLER UI-RESTE
-    function aggressiveCleanup() {
-        // Alle UI-Klassen entfernen
-        $('[class*="ui-"]').each(function() {
-            const element = this;
-            const classes = element.className.split(' ').filter(cls => !cls.startsWith('ui-'));
-            element.className = classes.join(' ');
-        });
-        
-        // Alle jQuery UI Data-Attribute entfernen
-        $('[data-ui-widget], [data-ui-draggable], [data-ui-sortable]').removeData();
-        
-        // Event-Handler von potentiell problematischen Elementen entfernen
-        $('.tnpb-block-icon, #tnpb-content, .tnpc-row-block').off('mousedown mouseup mousemove dragstart dragend');
-    }
-    
-    // SCHRITT 3: CLEAN DRAG&DROP SYSTEM (HTML5 NATIVE)
+    // SCHRITT 3: NATIVES DRAG&DROP SYSTEM
     function initCleanDragDrop() {
-        if (isInitialized) {
-            // System bereits initialisiert
-            return;
-        }
+        // Block-Icons mit nativer HTML5 API einrichten (Neue Blöcke aus Sidebar)
+        const blockIcons = document.querySelectorAll('.tnpb-block-icon');
         
-        console.log('� Initialisiere CLEAN HTML5 Drag&Drop System...');
-        
-        // Block-Icons mit nativer HTML5 API einrichten
-        document.querySelectorAll('.tnpb-block-icon').forEach(icon => {
-            // Entferne alle vorherigen Event-Handler
-            icon.removeAttribute('draggable');
-            
-            // Setze draggable neu
-            icon.setAttribute('draggable', 'true');
-            icon.style.cursor = 'move';
-            
-            // Clean Event-Handler hinzufügen
-            icon.addEventListener('dragstart', handleDragStart, false);
-            icon.addEventListener('dragend', handleDragEnd, false);
+        blockIcons.forEach((icon) => {
+            if (!icon.hasAttribute('data-drag-setup')) {
+                icon.removeAttribute('draggable');
+                icon.setAttribute('draggable', 'true');
+                icon.setAttribute('data-drag-setup', 'true');
+                icon.style.cursor = 'move';
+                
+                icon.addEventListener('dragstart', handleDragStartNewBlock, false);
+                icon.addEventListener('dragend', handleDragEnd, false);
+            }
         });
         
-        // Content-Bereich als saubere Drop-Zone
+        // Vorhandene Blöcke draggable machen (Sortierung)
+        const existingBlocks = document.querySelectorAll('.tnpc-row, .tnpc-row-block');
+        
+        existingBlocks.forEach(block => {
+            setupExistingBlockDragging(block);
+        });
+        
+        // Content-Bereich als Drop-Zone (nur einmal)
         const contentArea = document.getElementById('tnpb-content');
-        if (contentArea) {
-            // Alle vorherigen Event-Handler entfernen
-            contentArea.removeEventListener('dragover', handleDragOver);
-            contentArea.removeEventListener('drop', handleDrop);
+        
+        if (contentArea && !contentArea.hasAttribute('data-drop-setup')) {
+            contentArea.setAttribute('data-drop-setup', 'true');
             
-            // Clean Event-Handler hinzufügen
+            // Content-Area muss als Drop-Target erkannt werden
+            contentArea.style.minHeight = '200px';
+            
             contentArea.addEventListener('dragover', handleDragOver, false);
             contentArea.addEventListener('drop', handleDrop, false);
             contentArea.addEventListener('dragleave', handleDragLeave, false);
+            contentArea.addEventListener('dragenter', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
         }
         
-        isInitialized = true;
+        // Drop Here Box für leeren Content
+        updateDropHereBox();
     }
     
-    // SCHRITT 4: ERWEITERTE EVENT-HANDLER MIT POSITIONIERUNG
-    let draggedBlockId = null;
-    let draggedElement = null;
-    let dropIndicator = null;
-    let currentDropTarget = null;
+    // Setup für vorhandene Blöcke (Sortierung)
+    function setupExistingBlockDragging(block) {
+        if (!block.hasAttribute('data-drag-setup')) {
+            block.setAttribute('draggable', 'true');
+            block.setAttribute('data-drag-setup', 'true');
+            block.style.cursor = 'move';
+            
+            block.addEventListener('dragstart', handleDragStartExistingBlock, false);
+            block.addEventListener('dragend', handleDragEnd, false);
+        }
+    }
     
-    function handleDragStart(e) {
-        if (blockDropInProgress) {
-            e.preventDefault();
-            return false;
+    // DRAG&DROP EVENT-HANDLER
+    function handleDragStartNewBlock(e) {
+        // Neuer Block aus Sidebar
+        const blockIcon = e.target.closest('.tnpb-block-icon');
+        if (!blockIcon) return;
+        
+        draggedBlockId = blockIcon.getAttribute('data-id');
+        draggedElement = blockIcon;
+        
+        if (draggedBlockId) {
+            e.dataTransfer.setData('text/plain', draggedBlockId);
+            e.dataTransfer.setData('block-type', 'new');
+            e.dataTransfer.setData('block-id', draggedBlockId);
+            e.dataTransfer.effectAllowed = 'copy';
+            blockIcon.style.opacity = '0.6';
         }
         
-        draggedBlockId = this.dataset.id;
-        draggedElement = this;
-        
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', draggedBlockId);
-        
-        // Visual Feedback
-        this.style.opacity = '0.5';
-        
-        // Drop-Indikator erstellen
         createDropIndicator();
+        updateDropHereBox();
+    }
+    
+    function handleDragStartExistingBlock(e) {
+        // Vorhandener Block (Sortierung)
+        const blockElement = e.currentTarget;
         
-        // "Drop Here" Box hinzufügen wenn Content-Bereich leer ist
-        const contentArea = document.getElementById('tnpb-content');
-        if (contentArea && contentArea.querySelectorAll('.tnpc-row, .tnpc-row-block').length === 0) {
-            const dropHereBox = document.createElement('div');
-            dropHereBox.className = 'tnpc-drop-here';
-            dropHereBox.style.cssText = `
-                text-align: center;
-                padding: 40px 20px;
-                background: #f8f9fa;
-                border: 2px dashed #007cba;
-                border-radius: 8px;
-                color: #007cba;
-                font-size: 16px;
-                font-weight: 500;
-                margin: 20px 0;
-                transition: all 0.3s ease;
-            `;
-            dropHereBox.innerHTML = `
-                <i class="fa fa-arrow-down" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                Drag&Drop blocks here!
-            `;
-            contentArea.appendChild(dropHereBox);
+        // Bessere Block-ID-Extraktion
+        let blockId = blockElement.getAttribute('data-id');
+        if (!blockId) {
+            blockId = blockElement.querySelector('[data-id]')?.getAttribute('data-id');
         }
+        if (!blockId) {
+            // Fallback: Verwende innerHTML-Hash als temporäre ID
+            blockId = 'block-' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        draggedBlockId = blockId;
+        draggedElement = blockElement;
+        
+        e.dataTransfer.setData('text/plain', blockId);
+        e.dataTransfer.setData('block-type', 'existing');
+        e.dataTransfer.setData('block-html', blockElement.outerHTML);
+        e.dataTransfer.setData('block-id', blockId);
+        e.dataTransfer.effectAllowed = 'move';
+        blockElement.style.opacity = '0.6';
+        
+        createDropIndicator();
     }
     
     function handleDragEnd(e) {
-        // Visual Feedback zurücksetzen
         if (draggedElement) {
             draggedElement.style.opacity = '1';
         }
         
-        // Drop-Indikator entfernen
         removeDropIndicator();
-        
-        // "Drop Here" Box entfernen
         document.querySelectorAll('.tnpc-drop-here').forEach(el => el.remove());
         
-        // Cleanup
         draggedBlockId = null;
         draggedElement = null;
         currentDropTarget = null;
@@ -202,16 +187,15 @@
     
     function handleDragOver(e) {
         e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
+        e.stopPropagation();
+        e.dataTransfer.dropEffect = 'copy';
         
-        // EINFACHE LOGIK: Finde wo die Maus ist und zeige Indikator dort
         const contentArea = document.getElementById('tnpb-content');
         if (!contentArea) return;
         
         const rect = contentArea.getBoundingClientRect();
         const mouseY = e.clientY;
         
-        // Einfache Position basierend auf Maus-Y
         const position = {
             x: rect.left + 10,
             y: mouseY,
@@ -227,7 +211,6 @@
             const blockMiddle = blockRect.top + (blockRect.height / 2);
             
             if (mouseY < blockMiddle) {
-                // Vor diesem Block einfügen
                 position.element = block;
                 position.insertBefore = true;
                 position.y = blockRect.top - 10;
@@ -235,7 +218,6 @@
             }
         }
         
-        // Wenn kein Block gefunden, am Ende einfügen
         if (!position.element && blocks.length > 0) {
             const lastBlock = blocks[blocks.length - 1];
             const lastRect = lastBlock.getBoundingClientRect();
@@ -245,12 +227,10 @@
         }
         
         updateDropIndicator(position);
-        // Speichere Position für Drop
         window.currentDropPosition = position;
     }
     
     function handleDragLeave(e) {
-        // Nur verstecken wenn wir wirklich die Drop-Zone verlassen
         const contentArea = document.getElementById('tnpb-content');
         if (contentArea && !contentArea.contains(e.relatedTarget)) {
             hideDropIndicator();
@@ -261,20 +241,22 @@
         e.preventDefault();
         e.stopPropagation();
         
-        // Drop-Indikator verstecken
         hideDropIndicator();
         
         if (blockDropInProgress) {
             return false;
         }
         
-        const blockId = e.dataTransfer.getData('text/plain') || draggedBlockId;
+        const blockId = e.dataTransfer.getData('text/plain') || 
+                       e.dataTransfer.getData('block-id') || 
+                       draggedBlockId;
+        const blockType = e.dataTransfer.getData('block-type');
+        const blockHtml = e.dataTransfer.getData('block-html');
         
         if (!blockId) {
             return false;
         }
         
-        // Verwende die gespeicherte Position
         const position = window.currentDropPosition || {
             element: null,
             insertBefore: false,
@@ -285,17 +267,199 @@
         
         blockDropInProgress = true;
         
-        // Block sofort rendern
-        renderBlockAtPosition(blockId, position, function() {
-            blockDropInProgress = false;
-            draggedBlockId = null;
-            window.currentDropPosition = null;
-        });
+        // Unterschiedliche Behandlung für neue vs. bestehende Blöcke
+        if (blockType === 'existing' && draggedElement) {
+            // Sortierung: Block verschieben
+            handleExistingBlockSort(draggedElement, position, function() {
+                blockDropInProgress = false;
+                draggedBlockId = null;
+                window.currentDropPosition = null;
+            });
+        } else {
+            // Neuer Block: Rendern via AJAX
+            renderBlockAtPosition(blockId, position, function() {
+                blockDropInProgress = false;
+                draggedBlockId = null;
+                window.currentDropPosition = null;
+            });
+        }
         
         return true;
     }
     
-    // DROP-INDIKATOR UND EINFACHE INFOBOX FUNKTIONEN
+    // SORTIERUNG BESTEHENDER BLÖCKE
+    function handleExistingBlockSort(blockElement, position, callback) {
+        const contentArea = document.getElementById('tnpb-content');
+        if (!contentArea || !blockElement) {
+            if (callback) callback();
+            return;
+        }
+        
+        // Block temporär entfernen
+        const originalParent = blockElement.parentNode;
+        const originalNextSibling = blockElement.nextSibling;
+        blockElement.remove();
+        
+        try {
+            // An neuer Position einfügen
+            if (position && position.element) {
+                if (position.insertBefore) {
+                    position.element.parentNode.insertBefore(blockElement, position.element);
+                } else {
+                    position.element.parentNode.insertBefore(blockElement, position.element.nextSibling);
+                }
+            } else {
+                contentArea.appendChild(blockElement);
+            }
+            
+            // Block wieder draggable machen
+            setupExistingBlockDragging(blockElement);
+            
+        } catch (error) {
+            // Bei Fehler: Block an ursprüngliche Position zurück
+            if (originalParent) {
+                if (originalNextSibling) {
+                    originalParent.insertBefore(blockElement, originalNextSibling);
+                } else {
+                    originalParent.appendChild(blockElement);
+                }
+            }
+        }
+        
+        if (callback) callback();
+    }
+    
+    // BLOCK-RENDERING (nur für neue Blöcke)
+    function renderBlockAtPosition(blockId, position, callback) {
+        const contentArea = document.getElementById('tnpb-content');
+        if (!contentArea) {
+            if (callback) callback();
+            return;
+        }
+        
+        // Loading-Indikator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'tnp-block-loading';
+        loadingDiv.style.cssText = 'text-align: center; padding: 15px; background: #f8f9fa; border: 2px dashed #007cba; margin: 8px 0; border-radius: 4px;';
+        loadingDiv.innerHTML = '<i class="fa fa-spinner fa-spin" style="color: #007cba;"></i> <span style="margin-left: 8px; color: #007cba; font-weight: 500;">Block wird geladen...</span>';
+        
+        // An Position einfügen
+        if (position && position.element) {
+            if (position.insertBefore) {
+                position.element.parentNode.insertBefore(loadingDiv, position.element);
+            } else {
+                position.element.parentNode.insertBefore(loadingDiv, position.element.nextSibling);
+            }
+        } else {
+            contentArea.appendChild(loadingDiv);
+        }
+        
+        // AJAX-Request vorbereiten
+        const ajaxUrl = window.ajaxurl || '/wp-admin/admin-ajax.php';
+        const nonce = window.tnp_nonce || document.querySelector('input[name="_wpnonce"]')?.value || '';
+        
+        // Basis-Request-Daten
+        let requestData = {
+            action: 'tnpc_render',
+            id: blockId,
+            b: blockId,
+            full: 1,
+            context_type: window.tnp_context_type || 'composer',
+            _wpnonce: nonce
+        };
+        
+        // Versuche globale Optionen hinzuzufügen (falls vorhanden)
+        try {
+            if (typeof window.tnpc_add_global_options === 'function') {
+                const dataArray = [];
+                for (const key in requestData) {
+                    dataArray.push({name: key, value: requestData[key]});
+                }
+                window.tnpc_add_global_options(dataArray);
+                
+                // Daten zurück in Objekt konvertieren
+                requestData = {};
+                dataArray.forEach(item => {
+                    requestData[item.name] = item.value;
+                });
+            }
+        } catch (globalOptionsError) {
+            // Ignoriere Fehler bei globalen Optionen
+        }
+        
+        // AJAX-Request senden
+        $.ajax({
+            url: ajaxUrl,
+            type: 'POST',
+            data: requestData,
+            timeout: 15000,
+            dataType: 'html',
+            success: function(response) {
+                try {
+                    if (!response || response.trim() === '') {
+                        throw new Error('Leere Response vom Server');
+                    }
+                    
+                    const $newBlock = $(response);
+                    
+                    if ($newBlock.length === 0) {
+                        throw new Error('Keine gültigen Block-Elemente in Response');
+                    }
+                    
+                    $(loadingDiv).replaceWith($newBlock);
+                    
+                    // Block automatisch draggable machen
+                    $newBlock.each(function() {
+                        setupExistingBlockDragging(this);
+                    });
+                    
+                    // Original-Handler hinzufügen (falls vorhanden)
+                    try {
+                        if (typeof $newBlock.add_delete === 'function') {
+                            $newBlock.add_delete();
+                        }
+                        if (typeof $newBlock.add_block_edit === 'function') {
+                            $newBlock.add_block_edit();
+                        }
+                        if (typeof $newBlock.add_block_clone === 'function') {
+                            $newBlock.add_block_clone();
+                        }
+                    } catch (handlerError) {
+                        // Ignoriere Handler-Fehler
+                    }
+                    
+                    // Block-Edit automatisch öffnen
+                    if ($newBlock.hasClass('tnpc-row-block')) {
+                        const editButton = $newBlock.find('.tnpc-row-edit-block');
+                        if (editButton.length) {
+                            setTimeout(() => editButton.click(), 200);
+                        }
+                    }
+                    
+                    if (callback) callback();
+                } catch (error) {
+                    showBlockError(loadingDiv, 'Fehler beim Verarbeiten des Blocks: ' + error.message);
+                    if (callback) callback();
+                }
+            },
+            error: function(xhr, status, error) {
+                showBlockError(loadingDiv, `AJAX Fehler: ${status} - ${error}`);
+                if (callback) callback();
+            }
+        });
+    }
+    
+    function showBlockError(loadingElement, errorMessage) {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'padding: 15px; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin: 10px 0;';
+        errorDiv.innerHTML = `<strong>⚠️ ${errorMessage}</strong><br><small>Versuchen Sie es erneut oder kontaktieren Sie den Support.</small>`;
+        
+        if (loadingElement && loadingElement.parentNode) {
+            loadingElement.parentNode.replaceChild(errorDiv, loadingElement);
+        }
+    }
+    
+    // DROP-INDIKATOR
     function createDropIndicator() {
         if (!dropIndicator) {
             dropIndicator = document.createElement('div');
@@ -346,279 +510,42 @@
         dropIndicator.style.top = position.y + 'px';
         dropIndicator.style.width = position.width + 'px';
         
-        // Text vereinfachen - immer gleich
         dropIndicator.textContent = 'Block hier platzieren';
     }
     
-    // POSITIONS-BASIERTES BLOCK-RENDERING
-    function renderBlockAtPosition(blockId, position, callback) {
+    // DROP HERE BOX
+    function updateDropHereBox() {
         const contentArea = document.getElementById('tnpb-content');
-        if (!contentArea) {
-            if (callback) callback();
-            return;
-        }
-        
-        // Loading-Indikator an spezifischer Position
-        const loadingDiv = document.createElement('div');
-        loadingDiv.className = 'tnp-block-loading';
-        loadingDiv.style.cssText = 'text-align: center; padding: 15px; background: #f8f9fa; border: 2px dashed #007cba; margin: 8px 0; border-radius: 4px;';
-        loadingDiv.innerHTML = '<i class="fa fa-spinner fa-spin" style="color: #007cba;"></i> <span style="margin-left: 8px; color: #007cba; font-weight: 500;">Block wird geladen...</span>';
-        
-        // An korrekter Position einfügen
-        if (position && position.element) {
-            if (position.insertBefore) {
-                position.element.parentNode.insertBefore(loadingDiv, position.element);
-            } else {
-                position.element.parentNode.insertBefore(loadingDiv, position.element.nextSibling);
-            }
-        } else {
-            contentArea.appendChild(loadingDiv);
-        }
-        
-        // AJAX-Request mit Fallback-Prüfungen
-        const ajaxUrl = window.ajaxurl || '/wp-admin/admin-ajax.php';
-        const nonce = window.tnp_nonce || '';
-        
-        if (!ajaxUrl) {
-            showBlockError(loadingDiv, 'AJAX URL nicht verfügbar');
-            if (callback) callback();
-            return;
-        }
-        
-        const requestData = {
-            action: 'tnpc_render',
-            id: blockId,
-            b: blockId,
-            full: 1,
-            context_type: window.tnp_context_type || '',
-            _wpnonce: nonce
-        };
-        
-        // Debug: Zeige was gesendet wird
-        if (window.location.search.includes('debug=1')) {
-            console.log('Block-Rendering:', blockId, requestData);
-        }
-        
-        // Globale Optionen hinzufügen (wie im Original)
-        if (typeof window.tnpc_add_global_options === 'function') {
-            const dataArray = [];
-            for (const key in requestData) {
-                dataArray.push({name: key, value: requestData[key]});
-            }
-            window.tnpc_add_global_options(dataArray);
-            
-            // Daten zurück in Object konvertieren
-            const updatedData = {};
-            dataArray.forEach(item => {
-                updatedData[item.name] = item.value;
-            });
-            Object.assign(requestData, updatedData);
-        }
-        
-        $.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: requestData,
-            timeout: 10000,
-            dataType: 'html',
-            success: function(response) {
-                if (window.location.search.includes('debug=1')) {
-                    console.log('Block-Response:', response);
-                }
-                try {
-                    const $newBlock = $(response);
-                    $(loadingDiv).replaceWith($newBlock);
-                    
-                    // Original-Handler hinzufügen (wie im composer.js)
-                    if (typeof $newBlock.add_delete === 'function') {
-                        $newBlock.add_delete();
-                    }
-                    if (typeof $newBlock.add_block_edit === 'function') {
-                        $newBlock.add_block_edit();
-                    }
-                    if (typeof $newBlock.add_block_clone === 'function') {
-                        $newBlock.add_block_clone();
-                    }
-                    
-                    // Block-Edit automatisch öffnen (wie im Original)
-                    if ($newBlock.hasClass('tnpc-row-block')) {
-                        const editButton = $newBlock.find('.tnpc-row-edit-block');
-                        if (editButton.length) {
-                            editButton.click();
-                        }
-                    }
-                    
-                    setupCleanBlockHandlers($newBlock);
-                    makeBlockSortable($newBlock);
-                    if (callback) callback();
-                } catch (error) {
-                    if (window.location.search.includes('debug=1')) {
-                        console.error('Block-Processing Error:', error);
-                    }
-                    showBlockError(loadingDiv, 'Fehler beim Verarbeiten des Blocks');
-                    if (callback) callback();
-                }
-            },
-            error: function(xhr, status, error) {
-                if (window.location.search.includes('debug=1')) {
-                    console.error('AJAX Error:', {xhr, status, error, url: ajaxUrl, data: requestData});
-                }
-                showBlockError(loadingDiv, `AJAX Fehler: ${status}`);
-                if (callback) callback();
-            }
-        });
-    }
-    
-    // BLOCK SORTIERBAR MACHEN (HTML5 Native)
-    function makeBlockSortable($block) {
-        const blockElement = $block[0];
-        if (!blockElement) return;
-        
-        blockElement.setAttribute('draggable', 'true');
-        blockElement.style.cursor = 'move';
-        
-        blockElement.addEventListener('dragstart', function(e) {
-            if (blockDropInProgress) {
-                e.preventDefault();
-                return false;
-            }
-            
-            this.style.opacity = '0.5';
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.outerHTML);
-            e.dataTransfer.setData('application/x-tnp-block-sort', 'true');
-            this.classList.add('tnp-block-being-moved');
-            createDropIndicator();
-        });
-        
-        blockElement.addEventListener('dragend', function(e) {
-            this.style.opacity = '1';
-            this.classList.remove('tnp-block-being-moved');
-            removeDropIndicator();
-        });
-    }
-    
-    // CONTENT-BEREICH FÜR BLOCK-SORTIERUNG
-    function enhanceContentAreaForSorting() {
-        const contentArea = document.getElementById('tnpb-content');
-        if (!contentArea) return;
-        
-        contentArea.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            
-            const isBlockSort = e.dataTransfer.types.includes('application/x-tnp-block-sort');
-            if (isBlockSort) {
-                e.dataTransfer.dropEffect = 'move';
-                const dropPosition = calculateDropPosition(e);
-                updateDropIndicator(dropPosition);
-            }
-        });
-        
-        contentArea.addEventListener('drop', function(e) {
-            const isBlockSort = e.dataTransfer.types.includes('application/x-tnp-block-sort');
-            if (!isBlockSort) return;
-            
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const movingBlock = document.querySelector('.tnp-block-being-moved');
-            if (!movingBlock) return;
-            
-            const dropPosition = calculateDropPosition(e);
-            
-            if (dropPosition && dropPosition.element) {
-                if (dropPosition.insertBefore) {
-                    dropPosition.element.parentNode.insertBefore(movingBlock, dropPosition.element);
-                } else {
-                    dropPosition.element.parentNode.insertBefore(movingBlock, dropPosition.element.nextSibling);
-                }
-            } else {
-                this.appendChild(movingBlock);
-            }
-        });
-    }
-    
-    function showBlockError(loadingElement, errorMessage) {
-        const errorDiv = document.createElement('div');
-        errorDiv.style.cssText = 'padding: 15px; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin: 10px 0;';
-        errorDiv.innerHTML = `<strong>⚠️ ${errorMessage}</strong><br><small>Versuchen Sie es erneut oder kontaktieren Sie den Support.</small>`;
-        
-        if (loadingElement && loadingElement.parentNode) {
-            loadingElement.parentNode.replaceChild(errorDiv, loadingElement);
+        if (contentArea && contentArea.querySelectorAll('.tnpc-row, .tnpc-row-block').length === 0) {
+            const dropHereBox = document.createElement('div');
+            dropHereBox.className = 'tnpc-drop-here';
+            dropHereBox.style.cssText = `
+                text-align: center;
+                padding: 40px 20px;
+                background: #f8f9fa;
+                border: 2px dashed #007cba;
+                border-radius: 8px;
+                color: #007cba;
+                font-size: 16px;
+                font-weight: 500;
+                margin: 20px 0;
+                transition: all 0.3s ease;
+            `;
+            dropHereBox.innerHTML = `
+                <i class="fa fa-arrow-down" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                Drag&Drop blocks here!
+            `;
+            contentArea.appendChild(dropHereBox);
         }
     }
     
-    // ERWEITERTE BLOCK EVENT-HANDLER SETUP
-    function setupCleanBlockHandlers($block) {
-        try {
-            if (typeof $block.add_delete === 'function') {
-                $block.add_delete();
-            }
-            
-            if (typeof $block.add_block_edit === 'function') {
-                $block.add_block_edit();
-            }
-            
-            if (typeof $block.add_block_clone === 'function') {
-                $block.add_block_clone();
-            }
-            
-            makeBlockSortable($block);
-            
-            if ($block.hasClass('tnpc-row-block')) {
-                setTimeout(() => {
-                    const $editButton = $block.find('.tnpc-row-edit-block');
-                    if ($editButton.length > 0) {
-                        $editButton.trigger('click');
-                    }
-                }, 200);
-            }
-        } catch (error) {
-            // Stille Fehlerbehandlung
-        }
-    }
-    
-    // ERWEITERTE INITIALISIERUNG
-    function initCleanDragDrop() {
-        if (isInitialized) return;
-        
-        const blockIcons = document.querySelectorAll('.tnpb-block-icon');
-        
-        blockIcons.forEach(icon => {
-            icon.removeAttribute('draggable');
-            icon.setAttribute('draggable', 'true');
-            icon.style.cursor = 'move';
-            icon.addEventListener('dragstart', handleDragStart, false);
-            icon.addEventListener('dragend', handleDragEnd, false);
-        });
-        
-        const contentArea = document.getElementById('tnpb-content');
-        if (contentArea) {
-            contentArea.removeEventListener('dragover', handleDragOver);
-            contentArea.removeEventListener('drop', handleDrop);
-            contentArea.addEventListener('dragover', handleDragOver, false);
-            contentArea.addEventListener('drop', handleDrop, false);
-        }
-        
-        enhanceContentAreaForSorting();
-        
-        const existingBlocks = document.querySelectorAll('#tnpb-content .tnpc-row, #tnpb-content .tnpc-row-block');
-        existingBlocks.forEach(block => {
-            makeBlockSortable($(block));
-        });
-        
-        isInitialized = true;
-    }
-    
-    // SCHRITT 8: KONTINUIERLICHE BEREINIGUNG UND ÜBERWACHUNG
+    // KONTINUIERLICHE BEREINIGUNG
     function startContinuousCleanup() {
-        // Stoppe vorherigen Cleanup
         if (cleanupInterval) {
             clearInterval(cleanupInterval);
         }
         
         cleanupInterval = setInterval(() => {
-            // Neue UI-Klassen entfernen
             const uiElements = document.querySelectorAll('[class*="ui-"]');
             if (uiElements.length > 0) {
                 uiElements.forEach(el => {
@@ -626,33 +553,51 @@
                     el.className = classes.join(' ');
                 });
             }
+            
+            // Entferne jQuery UI Event-Handler
+            if (window.jQuery) {
+                $('.tnpc-row, .tnpc-row-block').off('.ui-sortable');
+                $('.tnpb-block-icon').off('.ui-draggable');
+            }
         }, 1000);
     }
     
-    // INITIALIZATION SEQUENCE
-    function initializeEliminator() {
-        blockAllJQueryUI();
+    // INITIALISIERUNG
+    $(document).ready(function() {
+        aggressiveCleanup();
+        initCleanDragDrop();
+        startContinuousCleanup();
         
-        $(document).ready(function() {
-            setTimeout(() => {
-                aggressiveCleanup();
-                
-                setTimeout(() => {
-                    initCleanDragDrop();
-                    
-                    setTimeout(() => {
-                        if (!isInitialized) {
-                            initCleanDragDrop();
+        // Bei dynamischen Inhalten (z.B. neuen Blöcken)
+        const observer = new MutationObserver(function(mutations) {
+            let shouldReinit = false;
+            
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            if (node.classList && (
+                                node.classList.contains('tnpc-row') || 
+                                node.classList.contains('tnpc-row-block') ||
+                                node.querySelector('.tnpc-row, .tnpc-row-block, .tnpb-block-icon')
+                            )) {
+                                shouldReinit = true;
+                            }
                         }
-                        startContinuousCleanup();
-                    }, 500);
-                }, 100);
-            }, 50);
+                    });
+                }
+            });
+            
+            if (shouldReinit) {
+                aggressiveCleanup();
+                initCleanDragDrop();
+            }
         });
-    }
-    
-    // SOFORTIGE INITIALISIERUNG
-    blockAllJQueryUI();
-    initializeEliminator();
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
     
 })(jQuery);
