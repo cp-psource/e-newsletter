@@ -204,27 +204,49 @@
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
         
-        // Position für Drop-Indikator berechnen
-        const dropPosition = calculateDropPosition(e);
-        updateDropIndicator(dropPosition);
-        
-        // Erweiterte Drop-Zone: auch Bereiche außerhalb des Content-Bereichs akzeptieren
+        // EINFACHE LOGIK: Finde wo die Maus ist und zeige Indikator dort
         const contentArea = document.getElementById('tnpb-content');
-        if (contentArea) {
-            const rect = contentArea.getBoundingClientRect();
-            const tolerance = 50; // 50px Toleranz außerhalb des Bereichs
+        if (!contentArea) return;
+        
+        const rect = contentArea.getBoundingClientRect();
+        const mouseY = e.clientY;
+        
+        // Einfache Position basierend auf Maus-Y
+        const position = {
+            x: rect.left + 10,
+            y: mouseY,
+            width: rect.width - 20,
+            element: null,
+            insertBefore: false
+        };
+        
+        // Finde nächsten Block
+        const blocks = contentArea.querySelectorAll('.tnpc-row, .tnpc-row-block');
+        for (let block of blocks) {
+            const blockRect = block.getBoundingClientRect();
+            const blockMiddle = blockRect.top + (blockRect.height / 2);
             
-            const isInExtendedZone = (
-                e.clientX >= (rect.left - tolerance) &&
-                e.clientX <= (rect.right + tolerance) &&
-                e.clientY >= (rect.top - tolerance) &&
-                e.clientY <= (rect.bottom + tolerance)
-            );
-            
-            if (isInExtendedZone) {
-                e.dataTransfer.dropEffect = 'move';
+            if (mouseY < blockMiddle) {
+                // Vor diesem Block einfügen
+                position.element = block;
+                position.insertBefore = true;
+                position.y = blockRect.top - 10;
+                break;
             }
         }
+        
+        // Wenn kein Block gefunden, am Ende einfügen
+        if (!position.element && blocks.length > 0) {
+            const lastBlock = blocks[blocks.length - 1];
+            const lastRect = lastBlock.getBoundingClientRect();
+            position.element = lastBlock;
+            position.insertBefore = false;
+            position.y = lastRect.bottom + 10;
+        }
+        
+        updateDropIndicator(position);
+        // Speichere Position für Drop
+        window.currentDropPosition = position;
     }
     
     function handleDragLeave(e) {
@@ -252,13 +274,22 @@
             return false;
         }
         
+        // Verwende die gespeicherte Position
+        const position = window.currentDropPosition || {
+            element: null,
+            insertBefore: false,
+            x: 0,
+            y: e.clientY,
+            width: 200
+        };
+        
         blockDropInProgress = true;
-        const position = calculateDropPosition(e);
         
         // Block sofort rendern
         renderBlockAtPosition(blockId, position, function() {
             blockDropInProgress = false;
             draggedBlockId = null;
+            window.currentDropPosition = null;
         });
         
         return true;
@@ -271,18 +302,21 @@
             dropIndicator.className = 'tnp-drop-indicator';
             dropIndicator.style.cssText = `
                 position: absolute;
-                background: #f8f9fa;
-                border: 2px dashed #007cba;
+                background: rgba(0, 124, 186, 0.9);
+                border: 2px solid #ffffff;
                 border-radius: 4px;
                 z-index: 1000;
                 display: none;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                color: #007cba;
+                color: white;
                 text-align: center;
                 font-size: 14px;
-                padding: 12px;
-                min-height: 20px;
+                font-weight: bold;
+                padding: 8px 16px;
+                min-height: 10px;
                 box-sizing: border-box;
+                box-shadow: 0 2px 8px rgba(0, 124, 186, 0.3);
+                pointer-events: none;
             `;
             dropIndicator.textContent = 'Block hier platzieren';
         }
@@ -314,83 +348,6 @@
         
         // Text vereinfachen - immer gleich
         dropIndicator.textContent = 'Block hier platzieren';
-    }
-    
-    // POSITION BERECHNUNG - BENUTZERFREUNDLICH MIT TOLERANZ
-    function calculateDropPosition(e) {
-        const contentArea = document.getElementById('tnpb-content');
-        if (!contentArea) return null;
-        
-        const rect = contentArea.getBoundingClientRect();
-        const existingBlocks = contentArea.querySelectorAll('.tnpc-row, .tnpc-row-block');
-        
-        let insertPosition = {
-            element: null,
-            insertBefore: false,
-            x: rect.left,
-            y: e.clientY,
-            width: rect.width - 20
-        };
-        
-        // Vor dem ersten Block einfügen (obere 40% des ersten Blocks)
-        if (existingBlocks.length > 0) {
-            const firstBlock = existingBlocks[0];
-            const firstRect = firstBlock.getBoundingClientRect();
-            const toleranceZone = firstRect.height * 0.4;
-            
-            if (e.clientY < (firstRect.top + toleranceZone)) {
-                insertPosition.element = firstBlock;
-                insertPosition.insertBefore = true;
-                insertPosition.y = firstRect.top - 10;
-                return insertPosition;
-            }
-        }
-        
-        // Zwischen Blöcken finden (30% Toleranz-Zonen)
-        for (let i = 0; i < existingBlocks.length; i++) {
-            const block = existingBlocks[i];
-            const blockRect = block.getBoundingClientRect();
-            const blockHeight = blockRect.height;
-            const toleranceZone = blockHeight * 0.3;
-            
-            // Oberer Bereich: einfügen VOR diesem Block
-            if (e.clientY >= (blockRect.top - toleranceZone) && 
-                e.clientY <= (blockRect.top + toleranceZone)) {
-                insertPosition.element = block;
-                insertPosition.insertBefore = true;
-                insertPosition.y = blockRect.top - 10;
-                break;
-            }
-            
-            // Unterer Bereich: einfügen NACH diesem Block
-            if (e.clientY >= (blockRect.bottom - toleranceZone) && 
-                e.clientY <= (blockRect.bottom + toleranceZone)) {
-                
-                const nextBlock = existingBlocks[i + 1];
-                if (nextBlock) {
-                    const nextRect = nextBlock.getBoundingClientRect();
-                    if (e.clientY > (nextRect.top - toleranceZone)) {
-                        continue;
-                    }
-                }
-                
-                insertPosition.element = block;
-                insertPosition.insertBefore = false;
-                insertPosition.y = blockRect.bottom + 10;
-                break;
-            }
-        }
-        
-        // Am Ende einfügen wenn keine Position gefunden
-        if (!insertPosition.element && existingBlocks.length > 0) {
-            const lastBlock = existingBlocks[existingBlocks.length - 1];
-            const lastRect = lastBlock.getBoundingClientRect();
-            insertPosition.y = lastRect.bottom + 10;
-        } else if (existingBlocks.length === 0) {
-            insertPosition.y = rect.top + 20;
-        }
-        
-        return insertPosition;
     }
     
     // POSITIONS-BASIERTES BLOCK-RENDERING
