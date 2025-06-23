@@ -183,15 +183,11 @@ function BuilderAreaHelper() {
     _overlayEl.style.height = '100%';
 
     this.lock = function () {
-        if (_overlayEl && _builderAreaEl && !_builderAreaEl.contains(_overlayEl)) {
-            _builderAreaEl.appendChild(_overlayEl);
-        }
+        _builderAreaEl.appendChild(_overlayEl);
     }
 
     this.unlock = function () {
-        if (_overlayEl && _overlayEl.parentNode === _builderAreaEl) {
-            _builderAreaEl.removeChild(_overlayEl);
-        }
+        _builderAreaEl.removeChild(_overlayEl);
     }
 
 }
@@ -200,11 +196,78 @@ let builderAreaHelper = new BuilderAreaHelper();
 
 function init_builder_area() {
 
-    // NATIVE HTML5 DRAG&DROP: Wird vom Newsletter Eliminator-Script übernommen
-    // JQUERY UI KOMPLETT ENTFERNT - Drag&Drop wird vom Eliminator-Script übernommen    
-    // jQuery UI Drag&Drop entfernt - Eliminator-Script übernimmt
-    
-    // Existierende Blöcke mit Event-Handlers einrichten
+    //Drag & Drop
+    jQuery("#tnpb-content").sortable({
+        revert: false,
+        placeholder: "tnpb-placeholder",
+        forcePlaceholderSize: true,
+        opacity: 0.6,
+        tolerance: "pointer",
+        helper: function (e) {
+            var helper = jQuery(document.getElementById("tnpb-sortable-helper")).clone();
+            return helper;
+        },
+        update: function (event, ui) {
+            if (ui.item.attr("id") === "tnpb-draggable-helper") {
+                loading_row = jQuery('<div style="text-align: center; padding: 20px; background-color: #d4d5d6; color: #52BE7F;"><i class="fa fa-cog fa-2x fa-spin" /></div>');
+                ui.item.before(loading_row);
+                ui.item.remove();
+                var data = new Array(
+                        {"name": 'action', "value": 'tnpc_render'},
+                        {"name": 'id', "value": ui.item.data("id")},
+                        {"name": 'b', "value": ui.item.data("id")},
+                        {"name": 'full', "value": 1},
+                        {"name": '_wpnonce', "value": tnp_nonce}
+                );
+
+                tnpc_add_global_options(data);
+
+                jQuery.post(ajaxurl, data, function (response) {
+
+                    var new_row = jQuery(response);
+//                    ui.item.before(new_row);
+//                    ui.item.remove();
+                    loading_row.before(new_row);
+                    loading_row.remove();
+                    new_row.add_delete();
+                    new_row.add_block_edit();
+                    new_row.add_block_clone();
+                    // new_row.find(".tnpc-row-edit").hover_edit();
+                    if (new_row.hasClass('tnpc-row-block')) {
+                        new_row.find(".tnpc-row-edit-block").click();
+                    }
+                }).fail(function () {
+                    alert("Block rendering failed.");
+                    loading_row.remove();
+                }).always(function () {
+                });
+            }
+        }
+    });
+
+    jQuery(".tnpb-block-icon").draggable({
+        connectToSortable: "#tnpb-content",
+
+        // Build the helper for dragging
+        helper: function (e) {
+            var helper = jQuery(document.getElementById("tnpb-draggable-helper")).clone();
+            // Do not uset .data() with jQuery
+            helper.attr("data-id", e.currentTarget.dataset.id);
+            helper.html(e.currentTarget.dataset.name);
+            return helper;
+        },
+        revert: false,
+        start: function () {
+            if (jQuery('.tnpc-row').length) {
+            } else {
+                jQuery('#tnpb-content').append('<div class="tnpc-drop-here">Drag&Drop blocks here!</div>');
+            }
+        },
+        stop: function (event, ui) {
+            jQuery('.tnpc-drop-here').remove();
+        }
+    });
+
     jQuery(".tnpc-row").add_delete();
     jQuery(".tnpc-row").add_block_edit();
     jQuery(".tnpc-row").add_block_clone();
