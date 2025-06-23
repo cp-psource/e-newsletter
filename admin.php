@@ -149,10 +149,11 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
         // Styles and scripts only for our admin pages
         if (self::is_admin_page()) {
+            wp_enqueue_script('jquery-ui-draggable');
             wp_enqueue_media();
 
-            wp_enqueue_style('psource-ui-draggable', $url . '/assets/psource-ui/draggable/psource-draggable.css', [], NEWSLETTER_VERSION);
-            wp_enqueue_script('psource-ui-draggable', $url . '/assets/psource-ui/draggable/psource-draggable.js', [], NEWSLETTER_VERSION, true);
+            //wp_enqueue_style('psource-ui-draggable', $url . '/assets/psource-ui/draggable/psource-draggable.css', [], NEWSLETTER_VERSION);
+            //wp_enqueue_script('psource-ui-draggable', $url . '/assets/psource-ui/draggable/psource-draggable.js', [], NEWSLETTER_VERSION, true);
 
             wp_enqueue_script('psource-ui-tabs', $url . '/assets/psource-ui/tabs/psource-tabs.js', ['jquery'], NEWSLETTER_VERSION, true);
             wp_enqueue_style('psource-ui-tabs', $url . '/assets/psource-ui/tabs/psource-tabs.css', [], NEWSLETTER_VERSION);

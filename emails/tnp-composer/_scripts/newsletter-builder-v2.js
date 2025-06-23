@@ -245,48 +245,27 @@ function init_builder_area() {
         }
     });
 
-    document.querySelectorAll(".tnpb-block-icon").forEach(function(element) {
-        new PSourceDraggable(element, {
-            connectToSortable: "#tnpb-content",
+    jQuery(".tnpb-block-icon").draggable({
+        connectToSortable: "#tnpb-content",
 
-            // Build the helper for dragging
-            helper: function (e) {
-                // Original Helper-Element holen und klonen
-                const originalHelper = document.getElementById("tnpb-draggable-helper");
-                const helper = originalHelper.cloneNode(true);
-                
-                // Attribute setzen (ohne jQuery)
-                helper.setAttribute("data-id", e.currentTarget.dataset.id);
-                helper.innerHTML = e.currentTarget.dataset.name;
-                
-                return helper;
-            },
-            
-            revert: false,
-            
-            // Start-Callback angepasst
-            start: function () {
-                // Prüfen ob .tnpc-row Elemente existieren
-                const existingRows = document.querySelectorAll('.tnpc-row');
-                if (existingRows.length === 0) {
-                    // Drop-Here Element hinzufügen
-                    const content = document.getElementById('tnpb-content');
-                    if (content) {
-                        const dropHere = document.createElement('div');
-                        dropHere.className = 'tnpc-drop-here';
-                        dropHere.innerHTML = 'Drag&Drop blocks here!';
-                        content.appendChild(dropHere);
-                    }
-                }
-            },
-            
-            // Stop-Callback angepasst
-            stop: function (event, ui) {
-                // Alle Drop-Here Elemente entfernen
-                const dropHereElements = document.querySelectorAll('.tnpc-drop-here');
-                dropHereElements.forEach(element => element.remove());
+        // Build the helper for dragging
+        helper: function (e) {
+            var helper = jQuery(document.getElementById("tnpb-draggable-helper")).clone();
+            // Do not uset .data() with jQuery
+            helper.attr("data-id", e.currentTarget.dataset.id);
+            helper.html(e.currentTarget.dataset.name);
+            return helper;
+        },
+        revert: false,
+        start: function () {
+            if (jQuery('.tnpc-row').length) {
+            } else {
+                jQuery('#tnpb-content').append('<div class="tnpc-drop-here">Drag&Drop blocks here!</div>');
             }
-        });
+        },
+        stop: function (event, ui) {
+            jQuery('.tnpc-drop-here').remove();
+        }
     });
 
     jQuery(".tnpc-row").add_delete();
