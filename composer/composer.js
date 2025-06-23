@@ -246,11 +246,15 @@ function BuilderAreaHelper() {
     _overlayEl.style.height = '100%';
 
     this.lock = function () {
-        _builderAreaEl.appendChild(_overlayEl);
+        if (_overlayEl && _builderAreaEl && !_builderAreaEl.contains(_overlayEl)) {
+            _builderAreaEl.appendChild(_overlayEl);
+        }
     }
 
     this.unlock = function () {
-        _builderAreaEl.removeChild(_overlayEl);
+        if (_overlayEl && _overlayEl.parentNode === _builderAreaEl) {
+            _builderAreaEl.removeChild(_overlayEl);
+        }
     }
 
 }
