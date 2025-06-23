@@ -103,14 +103,9 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                         <span class="psource-tooltip-text"><?php esc_html_e('Template', 'newsletter') ?></span>
                     </span>
 
-                    <span class="button-primary psource-tooltip" tabindex="0" href="#tnpc-placeholders" rel="modal:open">
+                    <span class="button-primary psource-tooltip" tabindex="0" data-psource-modal-open="tnpc-placeholders">
                         <i class="fas fa-user"></i>
                         <span class="psource-tooltip-text"><?php esc_html_e('Placeholders', 'newsletter') ?></span>
-                    </span>
-
-                    <span class="button-primary psource-tooltip" tabindex="0" href="#tnpc-attachment-modal" rel="modal:open">
-                        <i class="fas fa-paperclip"></i>
-                        <span class="psource-tooltip-text"><?php esc_html_e('Attachments', 'newsletter') ?></span>
                     </span>
 
                     <?php if ($show_test) { ?>
@@ -128,7 +123,6 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                 </div>
 
                 <?php include NEWSLETTER_DIR . '/emails/tnp-composer/modal/test-newsletter.php' ?>
-                <?php include NEWSLETTER_DIR . '/emails/tnp-composer/modal/attachment.php' ?>
 
             </div>
         <?php } ?>
@@ -234,19 +228,26 @@ wp_enqueue_script('tnp-composer', plugins_url('e-newsletter') . '/emails/tnp-com
 ?>
 
 <?php include NEWSLETTER_DIR . '/emails/subjects.php'; ?>
-<div id="tnpc-placeholders" style="display: none">
-    <h3><?php esc_html_e('Placeholders', 'newsletter') ?></h3>
-    <ul>
-        <li>{name} - <?php esc_html_e('First name', 'newsletter') ?></li>
-        <li>{surname} - <?php esc_html_e('Last name', 'newsletter') ?></li>
-        <li>{email} - <?php esc_html_e('Email', 'newsletter') ?></li>
-        <li>{profile_N} - <?php esc_html_e('Profile numner N with N=1, 2, 3, ...', 'newsletter') ?></li>
-        <li>{email_url} - <?php esc_html_e('Email online view', 'newsletter') ?></li>
-    </ul>
-    <p>
-        <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/" target="_blank">See the documentation</a>
-    </p>
-</div>
+<dialog id="tnpc-placeholders">
+    <div class="psource-modal-content">
+        <div class="psource-modal-header">
+            <h3><?php esc_html_e('Placeholders', 'newsletter') ?></h3>
+            <button class="psource-modal-close">&times;</button>
+        </div>
+        <div class="psource-modal-body">
+            <ul>
+                <li>{name} - <?php esc_html_e('First name', 'newsletter') ?></li>
+                <li>{surname} - <?php esc_html_e('Last name', 'newsletter') ?></li>
+                <li>{email} - <?php esc_html_e('Email', 'newsletter') ?></li>
+                <li>{profile_N} - <?php esc_html_e('Profile numner N with N=1, 2, 3, ...', 'newsletter') ?></li>
+                <li>{email_url} - <?php esc_html_e('Email online view', 'newsletter') ?></li>
+            </ul>
+            <p>
+                <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/" target="_blank">See the documentation</a>
+            </p>
+        </div>
+    </div>
+</dialog>
 
 <?php if (function_exists('wp_enqueue_editor')) wp_enqueue_editor(); ?>
 

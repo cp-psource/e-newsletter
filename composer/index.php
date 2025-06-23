@@ -111,11 +111,6 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                     <span class="psource-tooltip-text"><?php esc_html_e('Placeholders', 'newsletter') ?></span>
                 </span>
 
-                <span class="button-primary psource-tooltip" tabindex="0" href="#tnpc-attachment-modal" rel="modal:open">
-                    <i class="fas fa-paperclip"></i>
-                    <span class="psource-tooltip-text"><?php esc_html_e('Attachments', 'newsletter') ?></span>
-                </span>
-
                 <span class="button-primary psource-tooltip" tabindex="0" href="#test-newsletter-modal" rel="modal:open">
                     <i class="fas fa-paper-plane"></i>
                     <span class="psource-tooltip-text"><?php esc_html_e('Test', 'newsletter') ?></span>
@@ -228,7 +223,6 @@ wp_enqueue_script('tnp-composer', plugins_url('e-newsletter') . '/composer/compo
 ?>
 
 <?php include __DIR__ . '/modals/test.php' ?>
-<?php include __DIR__ . '/modals/attachment.php' ?>
 <?php include __DIR__ . '/modals/subjects.php'; ?>
 <?php include __DIR__ . '/modals/placeholders.php'; ?>
 <?php include __DIR__ . '/modals/templates.php'; ?>
